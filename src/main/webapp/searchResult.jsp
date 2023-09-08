@@ -11,19 +11,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="styleSheet" href="./test2.css">
+    <link rel="styleSheet" href="css/searchResult.css">
     <title>Document</title>
 </head>
 <body>
 <header>
     <nav class="navbar index-nav">
         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1"><img src="./css/icons/nest_eco_leaf.png" /> </span>
+            <span class="navbar-brand mb-0 h1"><img src="css/icons/nest_eco_leaf.png" /> </span>
             <span></span>
             <span>
-                    <button type="button" class=" btn1 btn-sm">로그인</button>
-                    <button type="button" class=" btn2 btn-sm">회원가입</button>
-                </span>
+                        <button type="button" class=" btn1 btn-sm">로그인</button>
+                        <button type="button" class=" btn2 btn-sm">회원가입</button>
+                    </span>
         </div>
     </nav>
 </header>
@@ -38,25 +38,34 @@
             <span class="switch-label" data-on="최신순" data-off="인기순"></span>
             <span class="switch-handle"></span>
         </label>
-        <!-- <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-        </div> -->
-        <!-- <label>
-            <input autocomplete="dkdk" value="dskf" role="switch" type="checkbox" />
-            <span>알람</span>
-          </label> -->
+
     </div>
     <div class="search-bar">
         <select class="book-select">
             <option class="book-option">국내도서</option>
             <option class="book-option">해외도서</option>
         </select>
-        <input placeholder="둘러보기" />
-        <img class="search-lens" src="./css/icons/search.png" />
+        <input class="search-input" placeholder="둘러보기" />
+        <img class="search-lens" src="./icons/search.png" />
+    </div>
+    <div class="search-keywords">
+        <ul>
+            <li>에세이</li>
+            <li>소설</li>
+            <li>만화</li>
+            <li>생활</li>
+            <li>학술논문</li>
+        </ul>
     </div>
     <div class="book-box">
-        <ul>
-            <li><div class="book-list"></div></li>
+        <ul class="book-ul list-group list-group-horizontal">
+            <li >
+                <div class="book-list">
+                    <img class="book-cover" src="./images/4.jpg" />
+                    <div class="book-title">나를 지키는 관계...</div>
+                    <div class="book-author">안젤라 센</div>
+                </div>
+            </li>
             <li><div class="book-list"></div></li>
             <li><div class="book-list"></div></li>
             <li><div class="book-list"></div></li>
@@ -67,6 +76,7 @@
         </ul>
     </div>
 </div>
+
 
 </body>
 </html>

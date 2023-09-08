@@ -1,17 +1,15 @@
 body {
     background-color: #F9F3F0;
-
 }
 
 .container{
-    position: relative;
-    margin-top: 80px;
-    /* top: 60%; */
-    /* left: 50%; */
-    /* transform: translate(-50%,-50%); */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     text-align: center;
-    width: 800px;
-    /* overflow: hidden; */
+
+
 }
 
 .index-nav{
@@ -36,10 +34,10 @@ body {
     height: 50px;
 }
 
-/* .container-fluid{
+.container-fluid{
     top: 50%;
     margin-top: -5px;
-} */
+}
 
 .search-bar{
     background-color: white;
@@ -47,10 +45,6 @@ body {
     border-radius: 10px;
     margin: 0 auto;
     /* margin-top: 50px; */
-}
-
-.search-input{
-    margin-left: 150px;
 }
 
 input{
@@ -72,6 +66,10 @@ select {
     margin-top: 10px;
 }
 
+input {
+    margin-left: 150px;
+}
+
 .search-lens{
     margin-left: 190px;
     margin-bottom: 3px;
@@ -79,102 +77,41 @@ select {
 
 .title{
     margin-left: 40px;
+
 }
 
 h1 {
-    font-family: Arial, Helvetica, sans-serif;
-    color: #056365;
-}
-
-.search-keywords{
-    margin-top: 10px;
-}
-
-.search-keywords > ul > li {
-    transition: text-shadow 0.3s ease-in-out;
-    margin: 0 20px;
-}
-
-.search-keywords > ul > li:hover{
-    cursor: pointer;
-    text-shadow: 5px 2px 4px rgba(78, 78, 78, 0.4);
-}
-
-.book-ul{
-    margin-left: 33px;
+    font-family: Arial, Helvetica, sans-serif
 }
 
 .book-box{
-    position: relative;
-    width: 800px;
-    margin-top: 30px;
-    /* margin: 0 auto; */
-    /* margin-top: 50px;
-    margin-left: 93px; */
-    /* justify-content: center; */
+    width: 620px;
+    margin: 0 auto;
+    margin-top: 50px;
 }
 
 .book-list{
-    position: relative;
-    background-color: #f1e3dc;
-    width: 115px;
-    height: 175px;
+    background-color: black;
+    width: 80px;
+    height: 120px;
     margin: 10px 30px;
-    border-radius: 5px;
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0); /* 초기 그림자 없음 */
-    transition: box-shadow 300ms ease-in-out, transform 300ms ease-in-out;
 
-}
-
-.book-list:hover{
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.15);
-    transition: box-shadow 300ms ease-in-out, transform 300ms ease-in-out;
 }
 
 ul{
-    list-style: none;
-
-}
-
-.book-box > ul{
-    list-style: none;
-    display: flex;
     text-align: center;
-    flex-wrap: wrap;
-    position: relative;
-    /* margin-right: 100px; */
 }
 
 li{
     display: inline-block;
 }
 
-.book-cover{
-    /* position: absolute; */
-    display: inline-block;
-    margin-top: 10px;
-    /* margin-right: 50px; */
-    width: 90px;
-    height: 130px;
-}
-
-.book-title{
-    font-size: 12px;
-    font-family: 'Noto Sans KR', sans-serif;
-}
-
-.book-author{
-    font-size: 10px;
-    font-family: 'Noto Sans KR', sans-serif;
-}
-
-
-/* 스위치 */
-
 .toggle{
     display: inline-block;
-    margin-left: 610px;
+    margin-left: 650px;
 }
+
+
 
 
 .container > .switch {
@@ -189,14 +126,14 @@ li{
     width: 56px;
     height: 20px;
     padding: 3px;
-    /* background-color: white; */
+    background-color: white;
     border-radius: 18px;
-    /* box-shadow: inset 0 -1px white, inset 0 1px 1px rgba(0, 0, 0, 0.05); */
+    box-shadow: inset 0 -1px white, inset 0 1px 1px rgba(0, 0, 0, 0.05);
     cursor: pointer;
-    /* background-image: -webkit-linear-gradient(top, #eeeeee, white 25px);
+    background-image: -webkit-linear-gradient(top, #eeeeee, white 25px);
     background-image: -moz-linear-gradient(top, #eeeeee, white 25px);
     background-image: -o-linear-gradient(top, #eeeeee, white 25px);
-    background-image: linear-gradient(to bottom, #eeeeee, white 25px); */
+    background-image: linear-gradient(to bottom, #eeeeee, white 25px);
 }
 
 .switch-input {
@@ -207,7 +144,7 @@ li{
 }
 
 .switch-label {
-    width: 65px;
+    width: 70px;
     position: relative;
     display: block;
     height: inherit;
@@ -251,7 +188,7 @@ li{
     opacity: 0;
 }
 .switch-input:checked ~ .switch-label {
-    background: #056365;
+    background: #47a8d8;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.2);
 }
 .switch-input:checked ~ .switch-label:before {
@@ -296,7 +233,7 @@ li{
     background-image: linear-gradient(to bottom, #eeeeee, white);
 }
 .switch-input:checked ~ .switch-handle {
-    left: 49px;
+    left: 54px;
     box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
 }
 
