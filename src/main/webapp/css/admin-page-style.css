@@ -22,14 +22,13 @@ h3 {
 
 hr {
   margin: 20px;
-
   border: black 1px solid;
 }
 
 .container {
   margin-top: 50px;
   width: 100%;
-  max-width: 970px;
+  min-width: 1340px;
 }
 
 /* 사이드바의 너비 높이를 변수로 지정 */
@@ -39,7 +38,6 @@ hr {
 }
 
 .side-bar {
-  position: fixed;
   background-color: #056365;
   width: var(--side-bar-width);
   min-height: var(--side-bar-height);
@@ -70,7 +68,7 @@ hr {
 .main-frame {
   background-color: #ffffff;
   width: inherit;
-  max-width: inherit;
+  min-width: inherit;
   border-radius: 5px;
   height: 100%;
   max-height: 665px;
@@ -91,6 +89,13 @@ hr {
   border-radius: 5px;
 }
 
+.search {
+  background-color: #ffffff;
+  border-style: none;
+  border-radius: 5px;
+  height: 30px;
+}
+
 .search-btn {
   width: 60px;
   height: 30px;
@@ -102,6 +107,7 @@ hr {
 
 .list-view {
   margin: 0 20px 0;
+  max-height: 650px;
 }
 
 .list-header {
@@ -110,7 +116,7 @@ hr {
 
 .table-header {
   width: 100%;
-  min-width: 100px;
+  min-width: 215px;
   min-height: 25px;
   background-color: #d9d9d9;
 }
@@ -120,18 +126,25 @@ hr {
 }
 
 .list-rows {
-  margin: 0;
+  margin-bottom: 5px;
   padding: 0;
   display: flex;
+  min-height: 25px;
 }
 
 .table-value {
   width: 100%;
-  min-width: 100px;
-  min-height: 25px;
+  min-width: 215px;
   text-align: center;
 }
 
 .form-state {
   display: flex;
+  justify-content: space-between;
+}
+
+.state-btn {
+  background-color: #71CB9F;
+  border-radius: 5px;
+  border-color: transparent;
 }
