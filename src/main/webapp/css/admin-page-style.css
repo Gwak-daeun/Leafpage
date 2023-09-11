@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  border-style: none;
 }
 
 ul li {
@@ -16,13 +17,41 @@ body {
   display: flex;
 }
 
-h3 {
-  padding: 20px 20px 0px;
-}
-
 hr {
   margin: 20px;
   border: black 1px solid;
+}
+
+textarea {
+  margin: 10px;
+  min-width: 400px;
+  border-style: none;
+  resize: none;
+  background-color: #f9f3f0;
+  border-radius: 5px;
+}
+
+textarea::placeholder {
+  text-align: center;
+}
+
+input[type="date"]::before {
+  content: attr(data-placeholder);
+  text-align: center;
+  width: 100%;
+}
+
+input[type="date"]:focus::before,
+input[type="date"]:valid::before {
+  display: none;
+}
+
+input[type="date"]::-webkit-datetime-edit-text,
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-year-field {
+  -webkit-appearance: none;
+  align-items: center;
 }
 
 .container {
@@ -38,11 +67,24 @@ hr {
 }
 
 .side-bar {
+  z-index: 1;
+  position: fixed;
   background-color: #056365;
   width: var(--side-bar-width);
   min-height: var(--side-bar-height);
-  transform: translate(calc(var(--side-bar-width) * -0.8), 0);
   transition: 0.5s;
+}
+
+@media (min-width: 1000px) {
+  .side-bar {
+    transform: translate(calc(var(--side-bar-width) * -0.8), 0);
+  }
+}
+
+@media (max-width: 1000px) {
+  .side-bar {
+    transform: translate(calc(var(--side-bar-width) * -0.9), 0);
+  }
 }
 
 /* 모든 메뉴의 a에 속성 값 부여 */
@@ -71,7 +113,7 @@ hr {
   min-width: inherit;
   border-radius: 5px;
   height: 100%;
-  max-height: 665px;
+  max-height: 700px;
 }
 
 .top {
@@ -79,6 +121,7 @@ hr {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: row-reverse;
 }
 
 .select-order {
@@ -94,6 +137,7 @@ hr {
   border-style: none;
   border-radius: 5px;
   height: 30px;
+  text-indent: 10%;
 }
 
 .search-btn {
@@ -105,13 +149,32 @@ hr {
   border-style: none;
 }
 
+.list-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 20px 0;
+  padding-top: 20px;
+}
+
 .list-view {
   margin: 0 20px 0;
-  max-height: 650px;
+  max-height: 600px;
 }
 
 .list-header {
   text-align: center;
+}
+
+.list-body {
+  max-height: 550px;
+  overflow-y: auto;
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
+}
+
+.list-body::-webkit-scrollbar {
+  display: none;
 }
 
 .table-header {
@@ -119,6 +182,7 @@ hr {
   min-width: 215px;
   min-height: 25px;
   background-color: #d9d9d9;
+  font-weight: bold;
 }
 
 .v-line {
@@ -140,11 +204,138 @@ hr {
 
 .form-state {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+}
+
+.select-user-state-modify {
+  text-align: center;
 }
 
 .state-btn {
-  background-color: #71CB9F;
+  background-color: #71cb9f;
   border-radius: 5px;
   border-color: transparent;
+  width: 100px;
+}
+
+.register-btn {
+  width: 100px;
+  height: 30px;
+  background-color: #056365;
+  color: #ffffff;
+  border-radius: 5px;
+  border-style: none;
+}
+
+.isbn {
+  color: #71cb9f;
+  cursor: pointer;
+}
+
+.isbn:hover {
+  background-color: #056365;
+  color: #ffffff;
+}
+
+.modal-left-div {
+  display: flex;
+  flex-direction: column;
+  margin: 100px;
+  align-items: center;
+}
+
+.filebox {
+  margin: 30px 0px;
+}
+
+.filebox label {
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #71cb9f;
+  display: inline-block;
+  height: 45px;
+  width: 180px;
+  vertical-align: middle;
+  text-align: center;
+  padding: 10px;
+  font-size: larger;
+}
+
+/* 파일 필드 숨기기 */
+.filebox input[type="file"] {
+  position: absolute;
+  overflow: hidden;
+  padding: 0;
+  width: 0;
+  height: 0;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+}
+
+@media (max-width: 1000px) {
+  .modal-dialog {
+    width: auto;
+    min-width: 800px;
+  }
+}
+
+.edit-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal-right-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.normal-input {
+  min-width: 400px;
+  min-height: 30px;
+  margin: 10px;
+  border-radius: 5px;
+  border-style: none;
+  background-color: #f9f3f0;
+  text-align: center;
+}
+
+.normal-input::placeholder {
+  text-align: center;
+}
+
+.book-intro {
+  max-height: 100px;
+}
+
+.book-chapter {
+  max-height: 150px;
+}
+
+.book-content {
+  max-height: 200px;
+}
+
+.remove-btn {
+  height: 45px;
+  width: 180px;
+  background-color: #ff8686;
+  border-radius: 5px;
+  font-size: larger;
+  border-style: none;
+  margin: 30px 0px;
+}
+
+.book-edit-btn {
+  height: 45px;
+  width: 180px;
+  font-size: larger;
+  margin: 30px 0px;
+  background-color: #056365;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+#image {
+  width: 290px;
+  height: 390px;
 }
