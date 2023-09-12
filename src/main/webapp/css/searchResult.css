@@ -1,18 +1,39 @@
+*::-webkit-scrollbar{
+    width: 8px;
+    height: 7px;
+}
+
+/* 스크롤바 막대 설정*/
+*::-webkit-scrollbar-thumb{
+    width: 18%;
+    background-color: rgba(5,99,101,0.8);
+    border-radius: 10px;
+}
+
+/* 스크롤바 뒷 배경 설정*/
+*::-webkit-scrollbar-track {
+    background-color: rgba(196, 228, 212, 0.5);
+    border-radius: 5px;
+}
 body {
     background-color: #F9F3F0;
-
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .container{
-    position: relative;
-    margin-top: 80px;
-    text-align: center;
-    min-width: 800px;
-    flex-direction: column;
+    justify-content: center; /* 가로 중앙 정렬 */
     align-items: center;
-    display: flex;
-    justify-content: center;
+    width: 850px;
+    min-width: 850px;
+    text-align: center;
+    margin-top: 100px;
 }
+
+.container-fluid{
+    top: 50%;
+    margin-top: -5px;
+}
+
 
 .index-nav{
     background-color: #056365;
@@ -37,15 +58,15 @@ body {
 }
 
 /* .container-fluid{
-  top: 50%;
-  margin-top: -5px;
+    top: 50%;
+    margin-top: -5px;
 } */
 
 .search-bar{
     background-color: white;
     width: 700px;
     border-radius: 10px;
-    margin: 0 auto;
+    margin: 5px auto;
     /* margin-top: 50px; */
 }
 
@@ -58,10 +79,6 @@ input{
     text-align: center;
 }
 
-select{
-    border-color: transparent;
-}
-
 .book-option:hover{
     background-color: #056365;
     color: white;
@@ -69,11 +86,13 @@ select{
 
 select {
     margin-left: 20px;
-    margin-top: 10px;
+    margin-top: 8px;
+    border-color: transparent;
+
 }
 
 .search-lens{
-    margin-left: 190px;
+    margin-left: 180px;
     margin-bottom: 3px;
 }
 
@@ -101,24 +120,21 @@ h1 {
 }
 
 .book-ul{
-    margin-left: 33px;
+    margin-left: 10px;
 }
 
 .book-box{
-    position: relative;
     width: 800px;
     margin-top: 30px;
-    /* margin: 0 auto; */
-    /* margin-top: 50px;
-    margin-left: 93px; */
-    /* justify-content: center; */
+    align-items: center;
+
 }
 
 .book-list{
     position: relative;
     background-color: #f1e3dc;
-    width: 115px;
-    height: 175px;
+    width: 125px;
+    height: 210px;
     margin: 10px 30px;
     border-radius: 5px;
     box-shadow: 0 0 0 rgba(0, 0, 0, 0); /* 초기 그림자 없음 */
@@ -137,12 +153,10 @@ ul{
 }
 
 .book-box > ul{
-    list-style: none;
     display: flex;
     text-align: center;
     flex-wrap: wrap;
-    position: relative;
-    /* margin-right: 100px; */
+
 }
 
 li{
@@ -154,19 +168,105 @@ li{
     display: inline-block;
     margin-top: 10px;
     /* margin-right: 50px; */
-    width: 90px;
-    height: 130px;
+    width: 108px;
+    height: 150px;
 }
 
 .book-title{
-    font-size: 12px;
-    font-family: 'Noto Sans KR', sans-serif;
+    margin-top: 4px;
+    font-size: 14px;
 }
 
 .book-author{
-    font-size: 10px;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 12px;
 }
+
+.modal-body{
+    overflow-y: scroll;
+    height: 750px;
+}
+
+.modal-footer{
+    justify-content: center;
+}
+
+.modal-close{
+    background-color: #056365;
+    border-radius: 5px;
+    border-color: transparent;
+    margin-right: 8px;
+    color: #F9F3F0;
+}
+
+.modal-xl{
+    width: 700px;
+}
+
+
+@media(max-height: 750px) {
+    .modal-body{
+        height: 530px;
+    }
+
+    .container{
+        margin-top: 10px;
+    }
+}
+
+@media(max-width: 390px){
+    .container{
+        justify-content: center; /* 가로 중앙 정렬 */
+        align-items: center;
+        width: 300px;
+        min-width: 300px;
+        text-align: center;
+        margin: 30px 0 0 13px;
+    }
+    .search-bar{
+        width: 310px;
+        /* padding-bottom: 5px; */
+    }
+    .book-select{
+        margin: 0px;
+    }
+    .search-input{
+        margin-left: 30px;
+        width: 120px;
+    }
+    .search-lens{
+        margin-left: 30px;
+        width: 30px;
+    }
+    .toggle{
+        margin-left: 240px !important;
+    }
+    .search-keywords > ul > li {
+        margin: 0 3px;
+        padding-left: 0;
+    }
+    .book-box{
+        width: 350px;
+        /* margin: 0px auto; */
+    }
+    .book-list {
+        width: 125px;
+        height: 210px;
+        margin: 3px 7px;
+    }
+    .book-ul{
+        padding-left: 5px;
+    }
+    .modal-content{
+        height: 600px;
+    }
+    .modal-xl{
+        width: 355px;
+    }
+    .show{
+        height: 800px;
+    }
+}
+
 
 
 /* 스위치 */
@@ -208,6 +308,7 @@ li{
 
 .switch-label {
     width: 65px;
+    margin-bottom: 10px;
     position: relative;
     display: block;
     height: inherit;
