@@ -30,478 +30,530 @@
           <input class="search" type="text" placeholder="검색어 입력" />
           <input class="search-btn" type="submit" value="검색" />
         </div>
-        <select class="select-order" name="order">
-          <option value="rentcount">대여 횟수 많은 유저</option>
-          <option value="recently">최근 가입한 유저</option>
+        <select id="select-order" name="order">
+          <option value="#rentcount">대여 횟수 많은 유저</option>
+          <option value="#recently">최근 가입한 유저</option>
         </select>
       </div>
     </form>
     <div class="main-frame">
-      <div class="list-title">
-        <h3>최근 가입한 유저</h3>
-      </div>
-      <hr />
-      <div class="list-view">
-        <div class="list-header">
-          <ul class="list-rows">
-            <li class="table-header">userID</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-header">가입일</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-header">이메일</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-header">전화번호</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-header">상태</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-header">상태 전환</li>
-          </ul>
+      <div id="rentcount" class="tab-contents">
+        <div class="list-title">
+          <h3>대여 횟수 많은 유저</h3>
         </div>
-        <div class="list-body">
-          <ul class="list-rows">
-            <li class="table-value">Donguk</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">23.09.23</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">Donguk@gmail.com</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">010-1234-5678</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">일반 회원</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">
-              <form class="form-state" action="user/state/modify.do?userId=1">
-                <select class="select-user-state-modify" name="state">
-                  <option value="black">블랙</option>
-                  <option value="dormant">휴면</option>
-                  <option value="delete">회원 삭제</option>
-                </select>
-                <input class="state-btn" type="submit" value="상태 저장" />
-              </form>
-            </li>
-          </ul>
-          <ul class="list-rows">
-            <li class="table-value">Donguk</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">23.09.23</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">Donguk@gmail.com</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">010-1234-5678</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">일반 회원</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">
-              <form class="form-state" action="user/state/modify.do?userId=1">
-                <select class="select-user-state-modify" name="state">
-                  <option value="black">블랙</option>
-                  <option value="dormant">휴면</option>
-                  <option value="delete">회원 삭제</option>
-                </select>
-                <input class="state-btn" type="submit" value="상태 저장" />
-              </form>
-            </li>
-          </ul>
-          <ul class="list-rows">
-            <li class="table-value">Donguk</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">23.09.23</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">Donguk@gmail.com</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">010-1234-5678</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">일반 회원</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">
-              <form class="form-state" action="user/state/modify.do?userId=1">
-                <select class="select-user-state-modify" name="state">
-                  <option value="black">블랙</option>
-                  <option value="dormant">휴면</option>
-                  <option value="delete">회원 삭제</option>
-                </select>
-                <input class="state-btn" type="submit" value="상태 저장" />
-              </form>
-            </li>
-          </ul>
-          <ul class="list-rows">
-            <li class="table-value">Donguk</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">23.09.23</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">Donguk@gmail.com</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">010-1234-5678</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">일반 회원</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">
-              <form class="form-state" action="user/state/modify.do?userId=1">
-                <select class="select-user-state-modify" name="state">
-                  <option value="black">블랙</option>
-                  <option value="dormant">휴면</option>
-                  <option value="delete">회원 삭제</option>
-                </select>
-                <input class="state-btn" type="submit" value="상태 저장" />
-              </form>
-            </li>
-          </ul>
-          <ul class="list-rows">
-            <li class="table-value">Donguk</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">23.09.23</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">Donguk@gmail.com</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">010-1234-5678</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">일반 회원</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">
-              <form class="form-state" action="user/state/modify.do?userId=1">
-                <select class="select-user-state-modify" name="state">
-                  <option value="black">블랙</option>
-                  <option value="dormant">휴면</option>
-                  <option value="delete">회원 삭제</option>
-                </select>
-                <input class="state-btn" type="submit" value="상태 저장" />
-              </form>
-            </li>
-          </ul>
-          <ul class="list-rows">
-            <li class="table-value">Donguk</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">23.09.23</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">Donguk@gmail.com</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">010-1234-5678</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">일반 회원</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">
-              <form class="form-state" action="user/state/modify.do?userId=1">
-                <select class="select-user-state-modify" name="state">
-                  <option value="black">블랙</option>
-                  <option value="dormant">휴면</option>
-                  <option value="delete">회원 삭제</option>
-                </select>
-                <input class="state-btn" type="submit" value="상태 저장" />
-              </form>
-            </li>
-          </ul>
-          <ul class="list-rows">
-            <li class="table-value">Donguk</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">23.09.23</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">Donguk@gmail.com</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">010-1234-5678</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">일반 회원</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">
-              <form class="form-state" action="user/state/modify.do?userId=1">
-                <select class="select-user-state-modify" name="state">
-                  <option value="black">블랙</option>
-                  <option value="dormant">휴면</option>
-                  <option value="delete">회원 삭제</option>
-                </select>
-                <input class="state-btn" type="submit" value="상태 저장" />
-              </form>
-            </li>
-          </ul>
-          <ul class="list-rows">
-            <li class="table-value">Donguk</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">23.09.23</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">Donguk@gmail.com</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">010-1234-5678</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">일반 회원</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">
-              <form class="form-state" action="user/state/modify.do?userId=1">
-                <select class="select-user-state-modify" name="state">
-                  <option value="black">블랙</option>
-                  <option value="dormant">휴면</option>
-                  <option value="delete">회원 삭제</option>
-                </select>
-                <input class="state-btn" type="submit" value="상태 저장" />
-              </form>
-            </li>
-          </ul>
-          <ul class="list-rows">
-            <li class="table-value">Donguk</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">23.09.23</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">Donguk@gmail.com</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">010-1234-5678</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">일반 회원</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">
-              <form class="form-state" action="user/state/modify.do?userId=1">
-                <select class="select-user-state-modify" name="state">
-                  <option value="black">블랙</option>
-                  <option value="dormant">휴면</option>
-                  <option value="delete">회원 삭제</option>
-                </select>
-                <input class="state-btn" type="submit" value="상태 저장" />
-              </form>
-            </li>
-          </ul>
-          <ul class="list-rows">
-            <li class="table-value">Donguk</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">23.09.23</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">Donguk@gmail.com</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">010-1234-5678</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">일반 회원</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">
-              <form class="form-state" action="user/state/modify.do?userId=1">
-                <select class="select-user-state-modify" name="state">
-                  <option value="black">블랙</option>
-                  <option value="dormant">휴면</option>
-                  <option value="delete">회원 삭제</option>
-                </select>
-                <input class="state-btn" type="submit" value="상태 저장" />
-              </form>
-            </li>
-          </ul>
-          <ul class="list-rows">
-            <li class="table-value">Donguk</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">23.09.23</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">Donguk@gmail.com</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">010-1234-5678</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">일반 회원</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">
-              <form class="form-state" action="user/state/modify.do?userId=1">
-                <select class="select-user-state-modify" name="state">
-                  <option value="black">블랙</option>
-                  <option value="dormant">휴면</option>
-                  <option value="delete">회원 삭제</option>
-                </select>
-                <input class="state-btn" type="submit" value="상태 저장" />
-              </form>
-            </li>
-          </ul>
-          <ul class="list-rows">
-            <li class="table-value">Donguk</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">23.09.23</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">Donguk@gmail.com</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">010-1234-5678</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">일반 회원</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">
-              <form class="form-state" action="user/state/modify.do?userId=1">
-                <select class="select-user-state-modify" name="state">
-                  <option value="black">블랙</option>
-                  <option value="dormant">휴면</option>
-                  <option value="delete">회원 삭제</option>
-                </select>
-                <input class="state-btn" type="submit" value="상태 저장" />
-              </form>
-            </li>
-          </ul>
-          <ul class="list-rows">
-            <li class="table-value">Donguk</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">23.09.23</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">Donguk@gmail.com</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">010-1234-5678</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">일반 회원</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">
-              <form class="form-state" action="user/state/modify.do?userId=1">
-                <select class="select-user-state-modify" name="state">
-                  <option value="black">블랙</option>
-                  <option value="dormant">휴면</option>
-                  <option value="delete">회원 삭제</option>
-                </select>
-                <input class="state-btn" type="submit" value="상태 저장" />
-              </form>
-            </li>
-          </ul>
-          <ul class="list-rows">
-            <li class="table-value">Donguk</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">23.09.23</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">Donguk@gmail.com</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">010-1234-5678</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">일반 회원</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">
-              <form class="form-state" action="user/state/modify.do?userId=1">
-                <select class="select-user-state-modify" name="state">
-                  <option value="black">블랙</option>
-                  <option value="dormant">휴면</option>
-                  <option value="delete">회원 삭제</option>
-                </select>
-                <input class="state-btn" type="submit" value="상태 저장" />
-              </form>
-            </li>
-          </ul>
-          <ul class="list-rows">
-            <li class="table-value">Donguk</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">23.09.23</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">Donguk@gmail.com</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">010-1234-5678</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">일반 회원</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">
-              <form class="form-state" action="user/state/modify.do?userId=1">
-                <select class="select-user-state-modify" name="state">
-                  <option value="black">블랙</option>
-                  <option value="dormant">휴면</option>
-                  <option value="delete">회원 삭제</option>
-                </select>
-                <input class="state-btn" type="submit" value="상태 저장" />
-              </form>
-            </li>
-          </ul>
-          <ul class="list-rows">
-            <li class="table-value">Donguk</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">23.09.23</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">Donguk@gmail.com</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">010-1234-5678</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">일반 회원</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">
-              <form class="form-state" action="user/state/modify.do?userId=1">
-                <select class="select-user-state-modify" name="state">
-                  <option value="black">블랙</option>
-                  <option value="dormant">휴면</option>
-                  <option value="delete">회원 삭제</option>
-                </select>
-                <input class="state-btn" type="submit" value="상태 저장" />
-              </form>
-            </li>
-          </ul>
-          <ul class="list-rows">
-            <li class="table-value">Donguk</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">23.09.23</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">Donguk@gmail.com</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">010-1234-5678</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">일반 회원</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">
-              <form class="form-state" action="user/state/modify.do?userId=1">
-                <select class="select-user-state-modify" name="state">
-                  <option value="black">블랙</option>
-                  <option value="dormant">휴면</option>
-                  <option value="delete">회원 삭제</option>
-                </select>
-                <input class="state-btn" type="submit" value="상태 저장" />
-              </form>
-            </li>
-          </ul>
-          <ul class="list-rows">
-            <li class="table-value">Donguk</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">23.09.23</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">Donguk@gmail.com</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">010-1234-5678</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">일반 회원</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">
-              <form class="form-state" action="user/state/modify.do?userId=1">
-                <select class="select-user-state-modify" name="state">
-                  <option value="black">블랙</option>
-                  <option value="dormant">휴면</option>
-                  <option value="delete">회원 삭제</option>
-                </select>
-                <input class="state-btn" type="submit" value="상태 저장" />
-              </form>
-            </li>
-          </ul>
-          <ul class="list-rows">
-            <li class="table-value">Donguk</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">23.09.23</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">Donguk@gmail.com</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">010-1234-5678</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">일반 회원</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">
-              <form class="form-state" action="user/state/modify.do?userId=1">
-                <select class="select-user-state-modify" name="state">
-                  <option value="black">블랙</option>
-                  <option value="dormant">휴면</option>
-                  <option value="delete">회원 삭제</option>
-                </select>
-                <input class="state-btn" type="submit" value="상태 저장" />
-              </form>
-            </li>
-          </ul>
-          <ul class="list-rows">
-            <li class="table-value">Donguk</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">23.09.23</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">Donguk@gmail.com</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">010-1234-5678</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">일반 회원</li>
-            <li><span class="v-line"></span></li>
-            <li class="table-value">
-              <form class="form-state" action="user/state/modify.do?userId=1">
-                <select class="select-user-state-modify" name="state">
-                  <option value="black">블랙</option>
-                  <option value="dormant">휴면</option>
-                  <option value="delete">회원 삭제</option>
-                </select>
-                <input class="state-btn" type="submit" value="상태 저장" />
-              </form>
-            </li>
-          </ul>
+        <hr />
+        <div class="list-view">
+          <div class="list-header">
+            <ul class="list-rows">
+              <li class="table-header">userID</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-header">가입일</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-header">이메일</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-header">전화번호</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-header">상태</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-header">상태 전환</li>
+            </ul>
+          </div>
+          <div class="list-body">
+            <ul class="list-rows">
+              <li class="table-value">Donguk</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">23.09.23</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">Donguk@gmail.com</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">010-1234-5678</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">일반 회원</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">
+                <form class="form-state" action="user/state/modify.do?userId=1">
+                  <select class="select-user-state-modify" name="state">
+                    <option value="black">블랙</option>
+                    <option value="dormant">휴면</option>
+                    <option value="delete">회원 삭제</option>
+                  </select>
+                  <input class="state-btn" type="submit" value="상태 저장" />
+                </form>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
+      <div id="recently" class="tab-contents">
+        <div class="list-title">
+          <h3>최근 가입한 유저</h3>
+        </div>
+        <hr />
+        <div class="list-view">
+          <div class="list-header">
+            <ul class="list-rows">
+              <li class="table-header">userID</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-header">가입일</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-header">이메일</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-header">전화번호</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-header">상태</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-header">상태 전환</li>
+            </ul>
+          </div>
+          <div class="list-body">
+            <ul class="list-rows">
+              <li class="table-value">Donguk</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">23.09.23</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">Donguk@gmail.com</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">010-1234-5678</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">일반 회원</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">
+                <form class="form-state" action="user/state/modify.do?userId=1">
+                  <select class="select-user-state-modify" name="state">
+                    <option value="black">블랙</option>
+                    <option value="dormant">휴면</option>
+                    <option value="delete">회원 삭제</option>
+                  </select>
+                  <input class="state-btn" type="submit" value="상태 저장" />
+                </form>
+              </li>
+            </ul>
+            <ul class="list-rows">
+              <li class="table-value">Donguk</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">23.09.23</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">Donguk@gmail.com</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">010-1234-5678</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">일반 회원</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">
+                <form class="form-state" action="user/state/modify.do?userId=1">
+                  <select class="select-user-state-modify" name="state">
+                    <option value="black">블랙</option>
+                    <option value="dormant">휴면</option>
+                    <option value="delete">회원 삭제</option>
+                  </select>
+                  <input class="state-btn" type="submit" value="상태 저장" />
+                </form>
+              </li>
+            </ul>
+            <ul class="list-rows">
+              <li class="table-value">Donguk</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">23.09.23</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">Donguk@gmail.com</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">010-1234-5678</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">일반 회원</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">
+                <form class="form-state" action="user/state/modify.do?userId=1">
+                  <select class="select-user-state-modify" name="state">
+                    <option value="black">블랙</option>
+                    <option value="dormant">휴면</option>
+                    <option value="delete">회원 삭제</option>
+                  </select>
+                  <input class="state-btn" type="submit" value="상태 저장" />
+                </form>
+              </li>
+            </ul>
+            <ul class="list-rows">
+              <li class="table-value">Donguk</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">23.09.23</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">Donguk@gmail.com</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">010-1234-5678</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">일반 회원</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">
+                <form class="form-state" action="user/state/modify.do?userId=1">
+                  <select class="select-user-state-modify" name="state">
+                    <option value="black">블랙</option>
+                    <option value="dormant">휴면</option>
+                    <option value="delete">회원 삭제</option>
+                  </select>
+                  <input class="state-btn" type="submit" value="상태 저장" />
+                </form>
+              </li>
+            </ul>
+            <ul class="list-rows">
+              <li class="table-value">Donguk</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">23.09.23</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">Donguk@gmail.com</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">010-1234-5678</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">일반 회원</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">
+                <form class="form-state" action="user/state/modify.do?userId=1">
+                  <select class="select-user-state-modify" name="state">
+                    <option value="black">블랙</option>
+                    <option value="dormant">휴면</option>
+                    <option value="delete">회원 삭제</option>
+                  </select>
+                  <input class="state-btn" type="submit" value="상태 저장" />
+                </form>
+              </li>
+            </ul>
+            <ul class="list-rows">
+              <li class="table-value">Donguk</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">23.09.23</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">Donguk@gmail.com</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">010-1234-5678</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">일반 회원</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">
+                <form class="form-state" action="user/state/modify.do?userId=1">
+                  <select class="select-user-state-modify" name="state">
+                    <option value="black">블랙</option>
+                    <option value="dormant">휴면</option>
+                    <option value="delete">회원 삭제</option>
+                  </select>
+                  <input class="state-btn" type="submit" value="상태 저장" />
+                </form>
+              </li>
+            </ul>
+            <ul class="list-rows">
+              <li class="table-value">Donguk</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">23.09.23</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">Donguk@gmail.com</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">010-1234-5678</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">일반 회원</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">
+                <form class="form-state" action="user/state/modify.do?userId=1">
+                  <select class="select-user-state-modify" name="state">
+                    <option value="black">블랙</option>
+                    <option value="dormant">휴면</option>
+                    <option value="delete">회원 삭제</option>
+                  </select>
+                  <input class="state-btn" type="submit" value="상태 저장" />
+                </form>
+              </li>
+            </ul>
+            <ul class="list-rows">
+              <li class="table-value">Donguk</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">23.09.23</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">Donguk@gmail.com</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">010-1234-5678</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">일반 회원</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">
+                <form class="form-state" action="user/state/modify.do?userId=1">
+                  <select class="select-user-state-modify" name="state">
+                    <option value="black">블랙</option>
+                    <option value="dormant">휴면</option>
+                    <option value="delete">회원 삭제</option>
+                  </select>
+                  <input class="state-btn" type="submit" value="상태 저장" />
+                </form>
+              </li>
+            </ul>
+            <ul class="list-rows">
+              <li class="table-value">Donguk</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">23.09.23</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">Donguk@gmail.com</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">010-1234-5678</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">일반 회원</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">
+                <form class="form-state" action="user/state/modify.do?userId=1">
+                  <select class="select-user-state-modify" name="state">
+                    <option value="black">블랙</option>
+                    <option value="dormant">휴면</option>
+                    <option value="delete">회원 삭제</option>
+                  </select>
+                  <input class="state-btn" type="submit" value="상태 저장" />
+                </form>
+              </li>
+            </ul>
+            <ul class="list-rows">
+              <li class="table-value">Donguk</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">23.09.23</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">Donguk@gmail.com</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">010-1234-5678</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">일반 회원</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">
+                <form class="form-state" action="user/state/modify.do?userId=1">
+                  <select class="select-user-state-modify" name="state">
+                    <option value="black">블랙</option>
+                    <option value="dormant">휴면</option>
+                    <option value="delete">회원 삭제</option>
+                  </select>
+                  <input class="state-btn" type="submit" value="상태 저장" />
+                </form>
+              </li>
+            </ul>
+            <ul class="list-rows">
+              <li class="table-value">Donguk</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">23.09.23</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">Donguk@gmail.com</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">010-1234-5678</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">일반 회원</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">
+                <form class="form-state" action="user/state/modify.do?userId=1">
+                  <select class="select-user-state-modify" name="state">
+                    <option value="black">블랙</option>
+                    <option value="dormant">휴면</option>
+                    <option value="delete">회원 삭제</option>
+                  </select>
+                  <input class="state-btn" type="submit" value="상태 저장" />
+                </form>
+              </li>
+            </ul>
+            <ul class="list-rows">
+              <li class="table-value">Donguk</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">23.09.23</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">Donguk@gmail.com</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">010-1234-5678</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">일반 회원</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">
+                <form class="form-state" action="user/state/modify.do?userId=1">
+                  <select class="select-user-state-modify" name="state">
+                    <option value="black">블랙</option>
+                    <option value="dormant">휴면</option>
+                    <option value="delete">회원 삭제</option>
+                  </select>
+                  <input class="state-btn" type="submit" value="상태 저장" />
+                </form>
+              </li>
+            </ul>
+            <ul class="list-rows">
+              <li class="table-value">Donguk</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">23.09.23</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">Donguk@gmail.com</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">010-1234-5678</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">일반 회원</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">
+                <form class="form-state" action="user/state/modify.do?userId=1">
+                  <select class="select-user-state-modify" name="state">
+                    <option value="black">블랙</option>
+                    <option value="dormant">휴면</option>
+                    <option value="delete">회원 삭제</option>
+                  </select>
+                  <input class="state-btn" type="submit" value="상태 저장" />
+                </form>
+              </li>
+            </ul>
+            <ul class="list-rows">
+              <li class="table-value">Donguk</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">23.09.23</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">Donguk@gmail.com</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">010-1234-5678</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">일반 회원</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">
+                <form class="form-state" action="user/state/modify.do?userId=1">
+                  <select class="select-user-state-modify" name="state">
+                    <option value="black">블랙</option>
+                    <option value="dormant">휴면</option>
+                    <option value="delete">회원 삭제</option>
+                  </select>
+                  <input class="state-btn" type="submit" value="상태 저장" />
+                </form>
+              </li>
+            </ul>
+            <ul class="list-rows">
+              <li class="table-value">Donguk</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">23.09.23</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">Donguk@gmail.com</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">010-1234-5678</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">일반 회원</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">
+                <form class="form-state" action="user/state/modify.do?userId=1">
+                  <select class="select-user-state-modify" name="state">
+                    <option value="black">블랙</option>
+                    <option value="dormant">휴면</option>
+                    <option value="delete">회원 삭제</option>
+                  </select>
+                  <input class="state-btn" type="submit" value="상태 저장" />
+                </form>
+              </li>
+            </ul>
+            <ul class="list-rows">
+              <li class="table-value">Donguk</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">23.09.23</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">Donguk@gmail.com</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">010-1234-5678</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">일반 회원</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">
+                <form class="form-state" action="user/state/modify.do?userId=1">
+                  <select class="select-user-state-modify" name="state">
+                    <option value="black">블랙</option>
+                    <option value="dormant">휴면</option>
+                    <option value="delete">회원 삭제</option>
+                  </select>
+                  <input class="state-btn" type="submit" value="상태 저장" />
+                </form>
+              </li>
+            </ul>
+            <ul class="list-rows">
+              <li class="table-value">Donguk</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">23.09.23</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">Donguk@gmail.com</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">010-1234-5678</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">일반 회원</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">
+                <form class="form-state" action="user/state/modify.do?userId=1">
+                  <select class="select-user-state-modify" name="state">
+                    <option value="black">블랙</option>
+                    <option value="dormant">휴면</option>
+                    <option value="delete">회원 삭제</option>
+                  </select>
+                  <input class="state-btn" type="submit" value="상태 저장" />
+                </form>
+              </li>
+            </ul>
+            <ul class="list-rows">
+              <li class="table-value">Donguk</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">23.09.23</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">Donguk@gmail.com</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">010-1234-5678</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">일반 회원</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">
+                <form class="form-state" action="user/state/modify.do?userId=1">
+                  <select class="select-user-state-modify" name="state">
+                    <option value="black">블랙</option>
+                    <option value="dormant">휴면</option>
+                    <option value="delete">회원 삭제</option>
+                  </select>
+                  <input class="state-btn" type="submit" value="상태 저장" />
+                </form>
+              </li>
+            </ul>
+            <ul class="list-rows">
+              <li class="table-value">Donguk</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">23.09.23</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">Donguk@gmail.com</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">010-1234-5678</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">일반 회원</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">
+                <form class="form-state" action="user/state/modify.do?userId=1">
+                  <select class="select-user-state-modify" name="state">
+                    <option value="black">블랙</option>
+                    <option value="dormant">휴면</option>
+                    <option value="delete">회원 삭제</option>
+                  </select>
+                  <input class="state-btn" type="submit" value="상태 저장" />
+                </form>
+              </li>
+            </ul>
+            <ul class="list-rows">
+              <li class="table-value">Donguk</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">23.09.23</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">Donguk@gmail.com</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">010-1234-5678</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">일반 회원</li>
+              <li><span class="v-line"></span></li>
+              <li class="table-value">
+                <form class="form-state" action="user/state/modify.do?userId=1">
+                  <select class="select-user-state-modify" name="state">
+                    <option value="black">블랙</option>
+                    <option value="dormant">휴면</option>
+                    <option value="delete">회원 삭제</option>
+                  </select>
+                  <input class="state-btn" type="submit" value="상태 저장" />
+                </form>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="/js/admin-management.js"></script>
 
 </html>

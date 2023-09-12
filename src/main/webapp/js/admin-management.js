@@ -1,5 +1,7 @@
 $(document).ready(function () {
   $("#image-upload").on("change", handleImgFileSelect);
+  $(".remove-btn").on("click", handleImgFileReset);
+  $("#select-order").on("change", changeTabMenu);
 });
 
 function handleImgFileSelect(e) {
@@ -13,7 +15,14 @@ function handleImgFileSelect(e) {
   reader.readAsDataURL(files[0]);
 }
 
-$(".remove-btn").on("click", function () {
+function handleImgFileReset() {
   $("#image").attr("src", "/css/icons/iconmonstr-book-26-240.png");
   $("#image-upload").val("");
-});
+}
+
+function changeTabMenu() {
+  let selectLink = $("#select-order").val();
+  $(".tab-contents").hide();
+  $(selectLink).show();
+  console.log(selectLink);
+}

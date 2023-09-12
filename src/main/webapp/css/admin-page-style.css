@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   border-style: none;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 ul li {
@@ -75,6 +76,14 @@ input[type="date"]::-webkit-datetime-edit-year-field {
   transition: 0.5s;
 }
 
+.side-bar > ul {
+  margin-top: 20px;
+}
+
+.side-bar > ul > li {
+  font-size: x-large;
+}
+
 @media (min-width: 1000px) {
   .side-bar {
     transform: translate(calc(var(--side-bar-width) * -0.8), 0);
@@ -122,14 +131,6 @@ input[type="date"]::-webkit-datetime-edit-year-field {
   justify-content: space-between;
   align-items: center;
   flex-direction: row-reverse;
-}
-
-.select-order {
-  height: 30px;
-  margin-left: 20px;
-  background-color: #eeeeee;
-  border-style: none;
-  border-radius: 5px;
 }
 
 .search {
@@ -240,7 +241,7 @@ input[type="date"]::-webkit-datetime-edit-year-field {
 .modal-left-div {
   display: flex;
   flex-direction: column;
-  margin: 100px;
+  margin: auto;
   align-items: center;
 }
 
@@ -287,6 +288,7 @@ input[type="date"]::-webkit-datetime-edit-year-field {
 .modal-right-div {
   display: flex;
   flex-direction: column;
+  margin: auto;
 }
 
 .normal-input {
@@ -335,7 +337,23 @@ input[type="date"]::-webkit-datetime-edit-year-field {
   border-radius: 5px;
 }
 
+#rentcount {
+  display: block;
+}
+
+#recently {
+  display: none;
+}
+
 #image {
   width: 290px;
   height: 390px;
+}
+
+#select-order {
+  height: 30px;
+  margin-left: 20px;
+  background-color: #eeeeee;
+  border-style: none;
+  border-radius: 5px;
 }
