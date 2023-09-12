@@ -206,6 +206,7 @@ input[type="date"]::-webkit-datetime-edit-year-field {
 .form-state {
   display: flex;
   justify-content: space-around;
+  height: 25px;
 }
 
 .select-user-state-modify {
@@ -216,7 +217,9 @@ input[type="date"]::-webkit-datetime-edit-year-field {
   background-color: #71cb9f;
   border-radius: 5px;
   border-color: transparent;
-  width: 100px;
+  font-size: small;
+  width: 50px;
+  height: 25px;
 }
 
 .register-btn {
