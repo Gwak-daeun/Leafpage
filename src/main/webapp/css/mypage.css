@@ -195,8 +195,13 @@ h5 {
     font-size: 15px;
 }
 
-.mp_container .card-text {
-    font-size: 10px;
+.mp_container .card-author {
+    font-size: 12px;
+    margin: 5px;
+}
+
+.mp_container .card-period {
+    font-size: 11px;
     margin: 5px;
 }
 

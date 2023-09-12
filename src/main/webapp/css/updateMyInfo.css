@@ -48,12 +48,15 @@ body {
     margin-right: 5px;
 }
 
-.btn3 {
+.my-info-form .btn3 {
     color: white;
     background-color: #056365;
     border-radius: 5px;
     border-color: transparent;
     margin-right: 5px;
+    &:hover {
+        background-color: #044b4d;
+    }
 }
 
 .navbar{
@@ -80,7 +83,7 @@ body {
     margin-bottom: 20px;
 }
 
-.form-control {
+.my-info-form .form-control {
     width: 100%;
     height: 50px;
 }
