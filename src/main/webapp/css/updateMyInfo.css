@@ -1,0 +1,135 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+*::-webkit-scrollbar{
+    width: 8px;
+    height: 7px;
+}
+
+/* 스크롤바 막대 설정*/
+*::-webkit-scrollbar-thumb{
+    width: 18%;
+    background-color: rgba(5,99,101,0.8);
+    border-radius: 10px;
+}
+
+/* 스크롤바 뒷 배경 설정*/
+*::-webkit-scrollbar-track {
+    background-color: rgba(196, 228, 212, 0.5);
+    border-radius: 5px;
+}
+
+h4 {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+body {
+    background-color: #F9F3F0;
+}
+
+.index-nav{
+    background-color: #056365;
+}
+
+.btn1{
+    background-color: #71CB9F;
+    border-radius: 5px;
+    border-color: transparent;
+}
+
+.btn2 {
+    background-color: #FDF3A7;
+    border-radius: 5px;
+    border-color: transparent;
+    margin-right: 5px;
+}
+
+.my-info-form .btn3 {
+    color: white;
+    background-color: #056365;
+    border-radius: 5px;
+    border-color: transparent;
+    margin-right: 5px;
+    &:hover {
+        background-color: #044b4d;
+    }
+}
+
+.navbar{
+    height: 50px;
+}
+
+.container-fluid{
+    top: 50%;
+    margin-top: -5px;
+}
+
+.umi_container {
+ display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.my-info-form {
+    margin-top: 40px;
+    width: 425px;
+}
+
+.my-info-form h4 {
+    margin-bottom: 20px;
+}
+
+.my-info-form .form-control {
+    width: 100%;
+    height: 50px;
+}
+
+.my-info-form .redtext {
+    color: #FF7C7C;
+    font-size: 12px;
+    margin:0;
+}
+
+.my-info-form .btn-flex-group {
+    display: flex;
+}
+.my-info-form input::placeholder {
+    color: #999999;
+}
+
+.my-info-form form button:nth-child(1) {
+    margin-right: auto;
+    width: 100px;
+    height: 40px;
+}
+
+.my-info-form form button:nth-child(2) {
+    margin-left: auto;
+    width: 100px;
+    height: 40px;
+}
+
+@media (max-width: 458px) {
+    .my-info-form {
+        width: 80%;
+    }
+    .my-info-form .form-control {
+        height: 35px;
+    }
+
+    .my-info-form .btn-flex-group button {
+        height: 35px;
+        font-size: 13px;
+        line-height: 13px;
+    }
+    .my-info-form h4 {
+        font-size: 20px;
+    }
+    .my-info-form input::placeholder {
+        font-size: 12px;
+    }
+}
