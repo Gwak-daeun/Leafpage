@@ -3,13 +3,29 @@ body {
 }
 
 .index-nav{
-        background-color: #056365;
+    background-color: #056365;
 }
 
 .btn1{
     background-color: #71CB9F;
+    border-radius: 5px;
+    border-color: transparent;
 }
 
 .btn2 {
     background-color: #FDF3A7;
+    border-radius: 5px;
+    border-color: transparent;
+    margin-right: 5px;
+}
+
+
+
+.navbar{
+    height: 50px;
+}
+
+.container-fluid{
+    top: 50%;
+    margin-top: -5px;
 }
