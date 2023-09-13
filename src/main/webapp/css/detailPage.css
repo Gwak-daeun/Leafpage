@@ -1,0 +1,208 @@
+body {
+    background-color: #F9F3F0;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.index-nav{
+    background-color: #066466;
+    color: white;
+    &:hover {
+        background-color: #044b4d;
+    }
+}
+
+.btn1{
+    background-color: #71CB9F;
+    border-radius: 5px;
+    border-color: transparent;
+    margin-right: 8px;
+}
+
+.btn2 {
+    background-color: #FDF3A7;
+    border-radius: 5px;
+    border-color: transparent;
+    margin-right: 5px;
+}
+
+
+.navbar{
+    height: 50px;
+}
+
+.container-fluid{
+    top: 50%;
+    margin-top: -5px;
+}
+
+
+
+*::-webkit-scrollbar{
+    width: 8px;
+    height: 7px;
+}
+
+/* 스크롤바 막대 설정*/
+*::-webkit-scrollbar-thumb{
+    width: 18%;
+    background-color: rgba(5,99,101,0.8);
+    border-radius: 10px;
+}
+
+/* 스크롤바 뒷 배경 설정*/
+*::-webkit-scrollbar-track {
+    background-color: rgba(196, 228, 212, 0.5);
+    border-radius: 5px;
+}
+/*==============================================*/
+section {
+    margin: 50px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.imgstyle {
+    border-radius: 20px;
+    width: 300px; 
+    height: 450px;
+}
+
+.preview {
+    background-color: #468B8C;
+    color: white;
+    &:hover {
+        background-color: #408385;
+        color: white;
+    }
+}
+
+.center {
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+h2 {
+    margin-top: 20px;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.mg {
+    margin: 40px 20px;
+}
+
+.modal-dialog{
+    margin-top: 300px;
+}
+
+.button {
+    width: 100px;
+}
+
+.btn:hover {
+
+}
+/*========================================*/
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.container {
+    justify-content: center;
+    max-width: 600px;
+    min-width: 300px;
+}
+
+.tabmenu {
+    min-width: 500px;
+    margin-top: 50px;
+    padding-bottom: 20px;
+    background-color: #f9f9f9;
+    margin: 0px;
+}
+
+.tab-button {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px;
+}
+
+.tab-button li {
+    float: left;
+    width: 25%;
+    background: #CEDEDD;
+    
+}
+
+.tab-button li a {
+    padding: 10px 0;
+    display: block;
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+  }
+
+.tab-button li.on {
+    background-color: #056365;
+    color: white;
+}
+
+.tab-button li.on a{
+    color: white;
+}
+
+.tab-content {
+    width: 100%;
+    height: 300px;
+    background-color: white;
+    display: none;
+}
+
+.tab-content.on {
+    display: block;
+}
+
+
+/* =================================== */
+
+
+@media screen and (max-width: 500px) {
+    section {
+        display: block;
+        margin: 0px;
+    }
+
+    .container {
+        padding: 0px;
+        width: 350px;
+    }
+
+    .mg {
+        margin: 0px;
+    }
+
+    .tabmenu {
+        width: 350px;
+        
+    }
+
+    .mg {
+        margin: 0px;
+    }
+
+
+}
+
+
+/* ===================================== */
+
