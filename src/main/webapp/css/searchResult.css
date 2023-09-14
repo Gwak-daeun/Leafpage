@@ -251,8 +251,8 @@ li{
     .book-list {
         width: 125px;
         height: 210px;
-        margin: 3px 7px;
-    }
+    margin: 3px 7px;
+}
     .book-ul{
         padding-left: 5px;
     }
@@ -264,6 +264,12 @@ li{
     }
     .show{
         height: 800px;
+    }
+    .btn1{
+        font-size: 12px;
+    }
+    .btn2{
+        font-size: 12px;
     }
 }
 
