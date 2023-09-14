@@ -132,4 +132,7 @@ body {
     .my-info-form input::placeholder {
         font-size: 12px;
     }
+    .container-fluid span button {
+        font-size: 12px;
+    }
 }
