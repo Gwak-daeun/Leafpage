@@ -302,4 +302,7 @@ h5 {
         height: 84%;
         padding: 15px;
     }
+    .container-fluid span button {
+        font-size: 12px;
+    }
 }

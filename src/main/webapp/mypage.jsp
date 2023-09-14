@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>LeafPage</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/mypage.css">
+    <link rel="stylesheet" href="css/mypage.css">
 </head>
 <body>
 <header>
     <nav class="navbar index-nav">
         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1"><img src="../css/icons/nest_eco_leaf.png" /> </span>
+            <span class="navbar-brand mb-0 h1"><img src="css/icons/nest_eco_leaf.png" /> </span>
             <span></span>
             <span>
             <button type="button" class="btn1 btn-sm" href="#">로그아웃</button>
@@ -65,7 +65,7 @@
                 <li>
                     <div class="card-layout">
                         <div class="card">
-                            <img src="../image/마주.png" class="card-img-top" alt="..." />
+                            <img src="image/마주.png" class="card-img-top" alt="..." />
                             <div class="card-body">
                                 <h5 class="card-title">마주</h5>
                                 <p class="card-author">최은미</p>
@@ -78,7 +78,7 @@
                 <li>
                     <div class="card-layout">
                     <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <img src="image/마주.png" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">마주</h5>
                             <p class="card-author">최은미</p>
@@ -91,7 +91,7 @@
                 <li>
                     <div class="card-layout">
                     <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <img src="image/마주.png" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">마주</h5>
                             <p class="card-author">최은미</p>
@@ -104,7 +104,7 @@
                 <li>
                     <div class="card-layout">
                     <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <img src="image/마주.png" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">마주</h5>
                             <p class="card-author">최은미</p>
@@ -117,7 +117,7 @@
                 <li>
                     <div class="card-layout">
                     <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <img src="image/마주.png" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">마주</h5>
                             <p class="card-author">최은미</p>
@@ -134,7 +134,7 @@
             <ul class="flex return_book">
                 <li>
                     <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <img src="image/마주.png" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">마주탭변</h5>
                             <p class="card-author">최은미</p>
@@ -144,7 +144,7 @@
                 </li>
                 <li>
                     <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <img src="image/마주.png" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">마주탭변</h5>
                             <p class="card-author">최은미</p>
@@ -154,7 +154,7 @@
                 </li>
                 <li>
                     <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <img src="image/마주.png" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">마주탭변</h5>
                             <p class="card-author">최은미</p>
@@ -164,7 +164,7 @@
                 </li>
                 <li>
                     <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <img src="image/마주.png" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">마주탭변</h5>
                             <p class="card-author">최은미</p>
@@ -174,7 +174,7 @@
                 </li>
                 <li>
                     <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <img src="image/마주.png" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">마주탭변</h5>
                             <p class="card-author">최은미</p>
@@ -184,7 +184,7 @@
                 </li>
                 <li>
                     <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <img src="image/마주.png" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">마주탭변</h5>
                             <p class="card-author">최은미</p>
@@ -194,7 +194,7 @@
                 </li>
                 <li>
                     <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <img src="image/마주.png" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">마주탭변</h5>
                             <p class="card-author">최은미</p>
@@ -204,7 +204,7 @@
                 </li>
                 <li>
                     <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <img src="image/마주.png" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">마주탭변</h5>
                             <p class="card-author">최은미</p>
@@ -214,7 +214,7 @@
                 </li>
                 <li>
                     <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <img src="image/마주.png" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <h5 class="card-title">마주탭변</h5>
                             <p class="card-author">최은미</p>
@@ -229,6 +229,6 @@
 
 <!-- 제이쿼리 자바스크립트 추가하기 -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
-<script src="../js/mypage.js"></script>
+<script src="js/mypage.js"></script>
 </body>
 </html>
