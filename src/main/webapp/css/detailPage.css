@@ -1,0 +1,422 @@
+body {
+    background-color: #F9F3F0;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.index-nav{
+    background-color: #066466;
+    color: white;
+}
+
+.btn1{
+    background-color: #71CB9F;
+    border-radius: 5px;
+    border-color: transparent;
+    margin-right: 8px;
+}
+
+.btn2 {
+    background-color: #FDF3A7;
+    border-radius: 5px;
+    border-color: transparent;
+    margin-right: 5px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar{
+    height: 50px;
+}
+
+.container-fluid{
+    top: 50%;
+    margin-top: -5px;
+}
+
+
+
+::-webkit-scrollbar{
+    width: 8px;
+    height: 7px;
+}
+
+/* 스크롤바 막대 설정*/
+::-webkit-scrollbar-thumb{
+    width: 18%;
+    background-color: rgba(5,99,101,0.8);
+    border-radius: 10px;
+}
+
+/* 스크롤바 뒷 배경 설정*/
+::-webkit-scrollbar-track {
+    background-color: rgba(196, 228, 212, 0.5);
+    border-radius: 5px;
+}
+/*==============================================*/
+section {
+    margin: 50px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.imgstyle {
+    border-radius: 20px;
+    width: 300px; 
+    height: 450px;
+}
+
+.rental {
+    background-color: #066466;
+    color: white;
+    &:hover {
+        background-color: #044b4d;
+        color: white;
+    }
+}
+
+.preview {
+    background-color: #468B8C;
+    color: white;
+    &:hover {
+        background-color: #408385;
+        color: white;
+    }
+}
+
+.center {
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+h2 {
+    margin-top: 20px;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.mg {
+    margin: 40px 20px;
+}
+
+.modal{
+    /* margin-top: var(--window-width) * 20; */
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-30%);
+}
+
+/* :root {
+    --window-width : 100vh;
+
+} */
+
+.button {
+    width: 100px;
+}
+
+.btn:hover {
+
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*========================================*/
+
+.container {
+    justify-content: center;
+
+}
+
+.tabmenu {
+    min-width: 430px;
+    max-width: 700px;
+    margin-top: 50px;
+    padding-bottom: 20px;
+    background-color: #f9f9f9;
+    margin: 0px;
+    padding: 0px;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.tab-button {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px;
+}
+
+.tab-button li {
+    float: left;
+    width: 25%;
+    background: #CEDEDD;
+
+}
+
+.tab-button li a {
+    padding: 10px 0;
+    display: block;
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+  }
+
+.tab-button li.on {
+    background-color: #056365;
+    color: white;
+}
+
+.tab-button li.on a{
+    color: white;
+}
+
+.tab-content {
+    padding : 30px;
+    width: 100%;
+    height: 520px;
+    background-color: white;
+    display: none;
+    border: solid 1px #c6d1d0;
+}
+
+
+.tab-content::-webkit-scrollbar-track {
+    background-color: rgba(0, 8, 212, 0.5);
+    border-radius: 5px;
+}
+
+.contexth {
+    height : 450px;
+    overflow-y: auto;
+}
+
+.tab-content.on {
+    display: block;
+}
+
+.modal-body, .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-footer button:nth-child(1) {
+    margin-right: 20px;
+}
+.form-footer button:nth-child(2) {
+    margin-left: 20px;
+}
+
+.enroll-right {
+    text-align: right;
+    margin-bottom: 10px;
+    margin-top: -10px;
+}
+
+.review-content .card {
+    width: 87%;
+    text-align: left;
+    background-color: #f8f5f3;
+}
+
+.review-content .card-title {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 0px ;
+    
+}
+
+.review-content .card-header {
+    background-color: #f8f5f3;
+    vertical-align: bottom;
+}
+
+.review-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding : 0px;
+    height: 460px;
+}
+
+.review-content li {
+    margin-bottom: 10px;
+    width: 100%;
+    display:flex;
+    justify-content: center;
+}
+.review-content .review-top-right {
+    margin:0;
+}
+
+.review-content .review-top-right p{
+    font-size: 13px;
+    vertical-align: bottom;
+    margin-bottom: 0px;
+    margin-top:10px;
+}
+
+.review-content .text-right {
+    text-align: right;
+}
+
+.review-content .text-right a {
+    color: red;
+    font-size: 12px;
+}
+ 
+.review-content .card-text {
+    font-size: 14px;
+}
+
+.review-content {
+    height : 450px;
+    overflow-y: auto;
+}
+
+.starR{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    color: transparent;
+    text-shadow: 0 0 0 #f0f0f0;
+    font-size: 1.8em;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+  
+  /* 별 이모지에 마우스 오버 시 */
+  .starR:hover {
+    text-shadow: 0 0 0 #ccc;
+  }
+  
+  /* 별 이모지를 클릭 후 class="on"이 되었을 경우 */
+  .starR.on{
+    text-shadow: 0 0 0 #ffbc00;
+  }
+
+
+/* =================================== */
+
+
+@media (max-width: 500px) {
+    .btn1 {
+        font-size: 12px;
+    }
+
+    .btn2{
+        font-size: 12px;
+    }
+
+    section {
+        display: block;
+        margin: 0px;
+    }
+
+    .imgstyle {
+        margin-top: 30px;
+        height: 300px;
+        width: 200px;
+    }
+
+    h2 {
+        margin-top: 0px;
+    }
+
+    .bottom-mg button {        
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .inline {
+        margin-top: 8px;
+    }
+
+    .center {
+        margin-top: 10px;
+        margin-bottom: 50px;
+    }
+    
+
+    .container {
+        padding: 0px;
+        justify-content: center;
+        display:flex;
+    }
+
+    .tab-button li a {
+        font-size: 12px;
+    }
+
+    .mg {
+        margin: 0px;
+    }
+
+    .tabmenu {
+        width: 95%;
+        min-width: 300px;
+    }
+
+    .contexth {
+        font-size: 13px;
+        line-height: 25px;
+    }
+
+    .mg {
+        margin: 0px;
+    }
+
+    .modal {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    .form-footer button:nth-child(1) {
+        margin-right: 10px;
+        height: 30px;
+        font-size: 12px;
+    }
+    .form-footer button:nth-child(2) {
+        margin-left: 10px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .review-content .card-title {
+        font-size: 14px;
+    }
+
+    .review-content .card-body {
+        font-size: 12px;
+    }
+
+    .review-content .card {
+        width: 90%;
+        text-align: left;
+        background-color: #f8f5f3;
+    }
+
+    
+
+}
+
+
+/* ===================================== */
+
