@@ -139,7 +139,7 @@ a {
 
 .container {
     justify-content: center;
-    
+    max-width: 700px;
 }
 
 .tabmenu {
