@@ -5,6 +5,24 @@
   font-family: "Noto Sans KR", sans-serif;
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+  height: 7px;
+}
+
+/* 스크롤바 막대 설정*/
+::-webkit-scrollbar-thumb {
+  width: 18%;
+  background-color: rgba(5, 99, 101, 0.8);
+  border-radius: 10px;
+}
+
+/* 스크롤바 뒷 배경 설정*/
+::-webkit-scrollbar-track {
+  background-color: rgba(196, 228, 212, 0.5);
+  border-radius: 5px;
+}
+
 ul li {
   list-style: none;
 }
@@ -244,7 +262,7 @@ input[type="date"]::-webkit-datetime-edit-year-field {
 .modal-left-div {
   display: flex;
   flex-direction: column;
-  margin: auto;
+  margin: auto 10px auto auto;
   align-items: center;
 }
 
@@ -291,7 +309,7 @@ input[type="date"]::-webkit-datetime-edit-year-field {
 .modal-right-div {
   display: flex;
   flex-direction: column;
-  margin: auto;
+  margin: auto auto auto 10px;
 }
 
 .normal-input {
@@ -327,7 +345,7 @@ input[type="date"]::-webkit-datetime-edit-year-field {
   border-radius: 5px;
   font-size: larger;
   border-style: none;
-  margin: 30px 0px;
+  margin: 10px 0px;
 }
 
 .book-edit-btn {
@@ -349,8 +367,8 @@ input[type="date"]::-webkit-datetime-edit-year-field {
 }
 
 #image {
-  width: 290px;
-  height: 390px;
+  width: 320px;
+  height: 444.44px;
 }
 
 #select-order {
