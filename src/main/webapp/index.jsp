@@ -15,7 +15,6 @@
     <div class="title">
         <h1>LeafPage</h1>
     </div>
-
     <div class="search-bar">
         <select class="book-select">
             <option class="book-option">국내도서</option>
