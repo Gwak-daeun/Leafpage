@@ -8,8 +8,8 @@
             url="jdbc:mysql://cloud.swdev.kr:4005/test1"
             username="user1"
             password="12345"
-            maxActive="50"
-            maxWait="5000"
+            maxTotal="20"
+            maxWaitMillis="3000"
     />
     <!-- maxWait : 커넥션이 없을 때 대기 시간 (1000 : 1초) 음수이면 무한 대기 -->
 </Context>

@@ -6,9 +6,9 @@
             <span class="navbar-brand mb-0 h1"><img src="css/icons/nest_eco_leaf.png" /> </span>
             <span></span>
             <span>
-                    <button type="button" class=" btn1 btn-sm">로그인</button>
-                    <button type="button" class=" btn2 btn-sm">회원가입</button>
-                </span>
+                    <a ><button type="button" class=" btn1 btn-sm" onclick="location.href='loginView.do'">로그인</button></a>
+                    <button type="button" class=" btn2 btn-sm" onclick="location.href='signupView.do'">회원가입</button>
+            </span>
         </div>
     </nav>
 </header>

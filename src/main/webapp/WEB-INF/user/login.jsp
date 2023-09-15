@@ -20,8 +20,8 @@
             <span class="navbar-brand mb-0 h1"><img src="../../css/icons/nest_eco_leaf.png" /> </span>
             <span></span>
             <span>
-                <button type="button" class=" btn2 btn-sm" >회원가입</button>
-                <button type="button" class=" btn1 btn-sm" >로그인</button>
+                <a href="signupView.do"><button type="button" class="btn2 btn-sm" >회원가입</button></a>
+                <a href="loginView.do"><button type="button" class="btn1 btn-sm " >로그인</button></a>
             </span>
         </div>
     </nav>
@@ -30,19 +30,18 @@
 
 <div class="main container-fluid">
     <h3>LeafPage</h3>
+    <form method="post" action="login.do">
+        <input class="idInput" name="userId" type="text" placeholder="ID">
 
-    <input class="idInput" type="text" placeholder="ID">
+        <input class="pwInput" name="userPassword" type="text" placeholder="Password">
+        <a class="findid" href="findId.jsp">아이디 찾기</a> <p>|</p> <a class="findpw" href="findPw.jsp">비밀번호 찾기</a>
 
-    <input class="pwInput" type="text" placeholder="Password">
-    <a class="findid" href="findId.jsp">아이디 찾기</a> <p>|</p> <a class="findpw" href="findPw.jsp">비밀번호 찾기</a>
+        <div class="form-floating">
+            <input type="submit"  class="login btn btn-success"  value="Login">
+        </div>
 
-    <div class="form-floating">
-        <input type="submit"  class="login btn btn-success"  value="Login">
-    </div>
-
-
-    <input type="button" class="signup" onclick="location.href='userSignup.jsp' ">
-
+        <input type="button" class="signup" onclick="location.href='userSignupView.do' ">
+    </form>
 </div>
 </body>
 </html>
