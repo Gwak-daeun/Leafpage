@@ -1,3 +1,10 @@
+<%@ page import="com.leafpage.dao.UserDAO" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="javax.sql.DataSource" %>
+<%@ page import="javax.naming.Context" %>
+<%@ page import="javax.naming.InitialContext" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -10,6 +17,29 @@
 </head>
 <body>
 <%@include file="./WEB-INF/component/header.jsp"%>
+
+<%
+    String SQL = "INSERT INTO connection_test VALUES (null, ?, 1, true)";
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    DataSource dataSource = null;
+    try {
+        Context init = new InitialContext();
+        dataSource = (DataSource)init.lookup("java:comp/env/jdbc/mysql");
+        conn = dataSource.getConnection();
+        pstmt = conn.prepareStatement(SQL);
+        pstmt.setString(1, "나들어왔엉!!!");
+        System.out.println(pstmt.executeUpdate());
+        pstmt.executeUpdate();  //executeUpdate : 실제로 영향을 받은 데이터의 개수 반환 => 성공한다면 1 반환됨
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {if(conn != null) conn.close();} catch (Exception e) {e.printStackTrace();}
+        try {if(pstmt != null) pstmt.close();} catch (Exception e) {e.printStackTrace();}
+        try {if(rs != null) rs.close();} catch (Exception e) {e.printStackTrace();}
+    }
+%>
 
 <div class="container">
     <div class="title">
