@@ -195,6 +195,13 @@ h5 {
     font-size: 15px;
 }
 
+.card-title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break:break-all
+}
+
 .mp_container .card-author {
     font-size: 12px;
     margin: 5px;
