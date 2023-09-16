@@ -33,8 +33,8 @@
                     <button class="btn rental" data-toggle="modal" href="#rental">대여하기</button>
                     <button class="btn preview">미리보기</button>   <%-- 로그인 해야 볼 수 있음--%>
 
-                    <img id="emptyH" style="width: 20px; margin-left: 5px;" src="/css/icons/empty.png" onclick="location.href='likeHeartEmpty.do'">
-                    <img id="fullH" style="width: 20px; margin-left: 5px;" src="/css/icons/full.png" onclick="location.href='likeHeartEmpty.do'">
+                    <img id="emptyH" style="width: 20px; margin-left: 5px;" src="/css/icons/empty.png" onclick="location.href='LikeHeart.do'">
+                    <img id="fullH" style="width: 20px; margin-left: 5px;" src="/css/icons/full.png" onclick="location.href='unlikeHeart.do'">
 
                     <!-- <i class="fa-solid fa-heart fa-xl" style="color: #d7443e;"></i> -->
                 </div>

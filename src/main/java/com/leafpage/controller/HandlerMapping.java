@@ -1,6 +1,6 @@
 package com.leafpage.controller;
 
-import com.leafpage.controller.user.LikeHeartEmptyController;
+import com.leafpage.controller.user.LikeEmptyHeartController;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +12,7 @@ public class HandlerMapping {
 
         mappings = new HashMap<>();
 
-        mappings.put("/likeHeartEmpty.do",new LikeHeartEmptyController());
+        mappings.put("/LikeHeart.do",new LikeEmptyHeartController());
 
     }
 
