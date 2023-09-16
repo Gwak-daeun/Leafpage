@@ -14,6 +14,11 @@ body {
     background-color: #f9f3f0;
 }
 
+a {
+    text-decoration-line: none;
+    color: black;
+}
+
 .index-nav {
     background-color: #056365;
 }

@@ -37,7 +37,7 @@
     <div class="top">
         <div class="top_box">
             <h5 class="top_box_title">Guest</h5>
-            <button type="button" class="btn1 btn-sm" href="#">내 정보 수정</button>
+          <button type="button" class="btn1 btn-sm"><a href="/myInfoView.do">내 정보 수정</a></button>
         </div>
         <div class="top_box">
             <h5 class="top_box_title">현재 대여 권수</h5>
