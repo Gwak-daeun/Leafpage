@@ -1,22 +1,17 @@
 package com.leafpage.dao;
 
-import com.leafpage.dto.BookDTO;
 import com.leafpage.dto.MypageBooksDTO;
+import com.leafpage.dto.MypageReturnedBooksDTO;
+import com.leafpage.dto.MypageTotalRentalDTO;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.List;
 
 public class BookDAO {
 
@@ -32,19 +27,21 @@ public class BookDAO {
         }
     }
 
-    public ArrayList<MypageBooksDTO> getUserBookInfo() throws IOException {
+    public ArrayList<MypageBooksDTO> getUserLendingBook() throws IOException {
 
         ArrayList<MypageBooksDTO> userBookList = null;
 
-        String SQL = "select r.rental_no as all_rentals, b.book_name, a.author_name, r.scheduled_return_date, r.rental_date\n" +
+        String SQL = "select r.rental_no as all_rentals, b.book_name, a.author_name, r.scheduled_return_date, r.rental_date, u.user_no\n" +
                 "from users u \n" +
                 "join book_rental r\n" +
                 "on u.user_no = r.user_no\n" +
                 "join books b\n" +
-                "on r.ISBN = b.ISBN\n" +
+                "on r.ISBN = b.ISBN \n" +
                 "join authors a\n" +
                 "on b.author_no = a.author_no\n" +
-                "where r.actual_return_date is null;";
+                "where u.user_no = 5\n" +
+                "and r.actual_return_date is null;";
+        //user_no는 이후 로그인 기능 붙였을 때 파라미터로 받아야 함
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -77,6 +74,89 @@ public class BookDAO {
         }
 
         return userBookList;
+    }
+
+    public int getTotalRentals() {
+        int userTotalRentals = 0;
+
+        String SQL = "select count(*) as rental_num\n" +
+                "from book_rental\n" +
+                "where book_rental.user_no = 5;";
+        //user_no는 이후 로그인 기능 붙였을 때 파라미터로 받아야 함
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+//        userTotalRentals = new ArrayList<>();
+        try {
+            conn = dataSource.getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                MypageTotalRentalDTO totalRentals = new MypageTotalRentalDTO(
+                        rs.getInt(1)
+                );
+                userTotalRentals = totalRentals.getRental_num();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {conn.close();}
+                if (pstmt != null) {pstmt.close();}
+                if (rs != null) {rs.close();}
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        return userTotalRentals;
+    }
+
+    public ArrayList<MypageReturnedBooksDTO> getUserReturnedBook() {
+        ArrayList<MypageReturnedBooksDTO> userReturnedBookList = null;
+
+        String SQL = "select  b.book_name, a.author_name, r.actual_return_date\n" +
+                "from users u \n" +
+                "join book_rental r\n" +
+                "on u.user_no = r.user_no\n" +
+                "join books b\n" +
+                "on r.ISBN = b.ISBN \n" +
+                "join authors a\n" +
+                "on b.author_no = a.author_no\n" +
+                "where u.user_no = 4\n" +
+                "and r.actual_return_date is not null;";
+        //user_no는 이후 로그인 기능 붙였을 때 파라미터로 받아야 함
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        userReturnedBookList = new ArrayList<>();
+        try {
+            conn = dataSource.getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                MypageReturnedBooksDTO books = new MypageReturnedBooksDTO(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3)
+                );
+                userReturnedBookList.add(books);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {conn.close();}
+                if (pstmt != null) {pstmt.close();}
+                if (rs != null) {rs.close();}
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        return userReturnedBookList;
     }
 
 }

@@ -45,7 +45,7 @@
         </div>
         <div class="top_box">
             <h5 class="top_box_title">전체 대여 권수</h5>
-            <p class="top_box_content">15</p>
+            <p class="top_box_content">${totalRentals}</p>
         </div>
     </div>
 
@@ -57,14 +57,14 @@
 
         <div class="bottom_content on">
             <ul class="flex rent_book">
-               <c:forEach var="books" items="${books}" begin="0" end="4" step="1">
+               <c:forEach var="book" items="${books}" begin="0" end="4" step="1">
                    <li>
                        <div class="card">
                             <img src="image/마주.png" class="card-img-top" alt="..." />
                               <div class="card-body">
-                                <h5 class="card-title">${books.book_name}</h5>
-                                <p class="card-author">${books.author_name}</p>
-                                <p class="card-period">${books.rental_date} ~ ${books.scheduled_return_date}</p>
+                                <h5 class="card-title">${book.book_name}</h5>
+                                <p class="card-author">${book.author_name}</p>
+                                <p class="card-period">${book.rental_date} ~ ${book.scheduled_return_date}</p>
                               </div>
                        </div>
                     <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
@@ -140,96 +140,109 @@
 
         <div class="bottom_content">
             <ul class="flex return_book">
-                <li>
-                    <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title">마주탭변</h5>
-                            <p class="card-author">최은미</p>
-                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
+                <c:forEach var="userReturnedBook" items="${userReturnedBooks}">
+                    <li>
+                        <div class="card">
+                            <img src="image/마주.png" class="card-img-top" alt="..." />
+                            <div class="card-body">
+                                <h5 class="card-title">${userReturnedBook.book_name}</h5>
+                                <p class="card-author">${userReturnedBook.author_name}</p>
+                                <p class="card-period">반납일 : ${userReturnedBook.actual_return_date}</p>
+                            </div>
                         </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title">마주탭변</h5>
-                            <p class="card-author">최은미</p>
-                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title">마주탭변</h5>
-                            <p class="card-author">최은미</p>
-                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title">마주탭변</h5>
-                            <p class="card-author">최은미</p>
-                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title">마주탭변</h5>
-                            <p class="card-author">최은미</p>
-                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title">마주탭변</h5>
-                            <p class="card-author">최은미</p>
-                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title">마주탭변</h5>
-                            <p class="card-author">최은미</p>
-                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title">마주탭변</h5>
-                            <p class="card-author">최은미</p>
-                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="card">
-                        <img src="../image/마주.png" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title">마주탭변</h5>
-                            <p class="card-author">최은미</p>
-                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
-                        </div>
-                    </div>
-                </li>
+                        <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
+                    </li>
+                </c:forEach>
+<%--                <li>--%>
+<%--                    <div class="card">--%>
+<%--                        <img src="../image/마주.png" class="card-img-top" alt="..." />--%>
+<%--                        <div class="card-body">--%>
+<%--                            <h5 class="card-title">마주탭변</h5>--%>
+<%--                            <p class="card-author">최은미</p>--%>
+<%--                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </li>--%>
+<%--                <li>--%>
+<%--                    <div class="card">--%>
+<%--                        <img src="../image/마주.png" class="card-img-top" alt="..." />--%>
+<%--                        <div class="card-body">--%>
+<%--                            <h5 class="card-title">마주탭변</h5>--%>
+<%--                            <p class="card-author">최은미</p>--%>
+<%--                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </li>--%>
+<%--                <li>--%>
+<%--                    <div class="card">--%>
+<%--                        <img src="../image/마주.png" class="card-img-top" alt="..." />--%>
+<%--                        <div class="card-body">--%>
+<%--                            <h5 class="card-title">마주탭변</h5>--%>
+<%--                            <p class="card-author">최은미</p>--%>
+<%--                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </li>--%>
+<%--                <li>--%>
+<%--                    <div class="card">--%>
+<%--                        <img src="../image/마주.png" class="card-img-top" alt="..." />--%>
+<%--                        <div class="card-body">--%>
+<%--                            <h5 class="card-title">마주탭변</h5>--%>
+<%--                            <p class="card-author">최은미</p>--%>
+<%--                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </li>--%>
+<%--                <li>--%>
+<%--                    <div class="card">--%>
+<%--                        <img src="../image/마주.png" class="card-img-top" alt="..." />--%>
+<%--                        <div class="card-body">--%>
+<%--                            <h5 class="card-title">마주탭변</h5>--%>
+<%--                            <p class="card-author">최은미</p>--%>
+<%--                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </li>--%>
+<%--                <li>--%>
+<%--                    <div class="card">--%>
+<%--                        <img src="../image/마주.png" class="card-img-top" alt="..." />--%>
+<%--                        <div class="card-body">--%>
+<%--                            <h5 class="card-title">마주탭변</h5>--%>
+<%--                            <p class="card-author">최은미</p>--%>
+<%--                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </li>--%>
+<%--                <li>--%>
+<%--                    <div class="card">--%>
+<%--                        <img src="../image/마주.png" class="card-img-top" alt="..." />--%>
+<%--                        <div class="card-body">--%>
+<%--                            <h5 class="card-title">마주탭변</h5>--%>
+<%--                            <p class="card-author">최은미</p>--%>
+<%--                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </li>--%>
+<%--                <li>--%>
+<%--                    <div class="card">--%>
+<%--                        <img src="../image/마주.png" class="card-img-top" alt="..." />--%>
+<%--                        <div class="card-body">--%>
+<%--                            <h5 class="card-title">마주탭변</h5>--%>
+<%--                            <p class="card-author">최은미</p>--%>
+<%--                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </li>--%>
+<%--                <li>--%>
+<%--                    <div class="card">--%>
+<%--                        <img src="../image/마주.png" class="card-img-top" alt="..." />--%>
+<%--                        <div class="card-body">--%>
+<%--                            <h5 class="card-title">마주탭변</h5>--%>
+<%--                            <p class="card-author">최은미</p>--%>
+<%--                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </li>--%>
             </ul>
         </div>
     </div>
