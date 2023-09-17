@@ -16,7 +16,7 @@ body {
 
 a {
     text-decoration-line: none;
-    color: white;
+    color: black;
 }
 
 .index-nav {
@@ -309,6 +309,35 @@ h5 {
     }
 }
 
+.modal-body{
+    overflow-y: scroll;
+    height: 750px;
+    white-space: pre-wrap;
+}
+
+.modal-footer{
+    justify-content: center;
+}
+
+.modal-close{
+    background-color: #056365;
+    border-radius: 5px;
+    border-color: transparent;
+    margin-right: 8px;
+    color: #F9F3F0;
+}
+
+.modal-xl{
+    width: 700px;
+}
+
+@media(max-height: 750px) {
+    .modal-body{
+        height: 530px;
+    }
+
+}
+
 @media (max-width: 400px) {
     .mp_container .bottom_content {
         height: 84%;
@@ -317,4 +346,16 @@ h5 {
     .container-fluid span button {
         font-size: 12px;
     }
+
+    .modal-content{
+        height: 600px;
+    }
+    .modal-xl{
+        width: 355px;
+    }
+    .show{
+        height: 800px;
+    }
 }
+
+

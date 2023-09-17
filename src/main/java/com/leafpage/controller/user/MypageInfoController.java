@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.awt.print.Book;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MypageInfoController implements Controller {
     @Override
@@ -18,6 +19,7 @@ public class MypageInfoController implements Controller {
 
         ArrayList<MypageBooksDTO> userBooks = new ArrayList<>();
         ArrayList<MypageReturnedBooksDTO> userReturnedBooks = new ArrayList<>();
+        List<String> bookText = new ArrayList<>();
 
         BookDAO bookDAO = new BookDAO();
 
@@ -29,6 +31,8 @@ public class MypageInfoController implements Controller {
 
         totalRentals = bookDAO.getTotalRentals();
 
+        bookText = bookDAO.getLendingBookContent();
+
         HttpSession session = request.getSession();
 
         session.setAttribute("books", userBooks);
@@ -36,6 +40,8 @@ public class MypageInfoController implements Controller {
         session.setAttribute("totalRentals", totalRentals);
 
         session.setAttribute("userReturnedBooks", userReturnedBooks);
+
+        session.setAttribute("bookText", bookText);
 
         return "mypage";
     }

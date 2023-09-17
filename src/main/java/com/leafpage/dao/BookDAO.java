@@ -8,10 +8,14 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BookDAO {
 
@@ -57,7 +61,8 @@ public class BookDAO {
                     rs.getString(2),
                     rs.getString(3),
                     rs.getString(4),
-                    rs.getString(5)
+                    rs.getString(5),
+                        rs.getString(6)
                 );
                 userBookList.add(books);
             }
@@ -157,6 +162,60 @@ public class BookDAO {
         }
 
         return userReturnedBookList;
+    }
+
+    public List<String> getLendingBookContent() throws IOException {
+
+        List<String> lines = Files.readAllLines(Paths.get("C:\\Users\\user\\Desktop\\book.txt"));
+
+        List<String> bookText = new ArrayList<>();
+
+        for (String line : lines) {
+            String word = line.replace("\\n", "<br>");
+            bookText.add(word);
+        }
+
+        return bookText;
+
+    }
+
+    public int saveBookScrollY(int modalY, int modalWidth, int rental_no) {
+
+        String SQL = "";
+
+        System.out.println("MODAL WIDTH: " + modalWidth);
+
+//        if (modalWidth == 321) {
+            SQL = "update book_rental set mobileY = ? where rental_no = 5;";
+//        }
+//        if (modalWidth > 321) {
+//            SQL = "update book_rental set pcY = ? where rental_no = 5;";
+//        }
+
+        System.out.println("SQL: " + SQL);
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+
+            conn = dataSource.getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setInt(1, modalY);
+            System.out.println("PSTMT : " + pstmt);
+            return pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) { conn.close();}
+                if (pstmt != null) { pstmt.close();}
+                if (rs != null) {rs.close();}
+            } catch (Exception e){e.printStackTrace();}
+        }
+        return -1;
     }
 
 }

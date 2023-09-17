@@ -14,4 +14,5 @@ public class MypageBooksDTO {
     String author_name;
     String scheduled_return_date;
     String rental_date;
+    String rental_no;
 }
