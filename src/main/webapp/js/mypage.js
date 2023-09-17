@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+        console.log("뷰어 너비는: " + viewerWidth);
+    console.log("Y축은 : " + viewerY);
+
     $(".bottom_tab > li").click(function () {
         let idx = $(this).index();
 
@@ -17,6 +20,11 @@ $(document).ready(function () {
         }
     });
 
+    $(".modal").on('shown.bs.modal', function () {
+        // 모달이 나타날 때 이벤트가 트리거됩니다.
+        $(this).find(".modal-body").scrollTop(viewerY);
+    });
+
     $("#closeBtn").click(function () {
 
         let modalY = $(".modal-body").scrollTop();
@@ -30,7 +38,7 @@ $(document).ready(function () {
             type: "POST",
             data: {
                 modalY : modalY,
-                 modalWidth: modalWidth
+                modalWidth: modalWidth
             },
             success: function (response) {
                 console.log("서버 응답: ", response);

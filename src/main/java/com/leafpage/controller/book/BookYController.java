@@ -23,9 +23,7 @@ public class BookYController implements Controller {
 
         int rental_no = 5; //나중에 파라미터 받아오는걸로 고쳐야 함
 
- int result = new BookDAO().saveBookScrollY(modalY, modalWidth, rental_no);
-
-        System.out.println("RESULT: " + result);
+        int result = new BookDAO().saveBookScrollY(modalY, modalWidth, rental_no);
 
         return "/myInfoView.do";
     }
