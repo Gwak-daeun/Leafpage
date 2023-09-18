@@ -7,10 +7,8 @@ import com.leafpage.dto.BookDTO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
-public class AdminBookDetileController implements Controller {
+public class AdminBookDetailController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String ISBN = request.getParameter("ISBN");

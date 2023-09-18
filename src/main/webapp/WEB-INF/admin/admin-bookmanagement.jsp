@@ -18,7 +18,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="editBook">도서 추가/수정/삭제</h1>
-                <form action="/books/remove?IBSN=?" method="post">
+                <form action="/books/remove?${book.IBSN}=?" method="post">
                     <button type="submit" class="btn btn-danger">도서 삭제</button>
                 </form>
             </div>
@@ -67,7 +67,7 @@
                 <h3>도서 현황</h3>
                 <!-- TODO: button class 추가 후 변경 -->
                 <!-- Button trigger modal -->
-                <button type="button" onclick="modalOn(`${book.ISBN}`)" class="register-btn openModalLink" data-bs-toggle="modal" data-bs-target="#editModal" >
+                <button type="button" onclick="modalOn()" class="register-btn openModalLink" data-bs-toggle="modal" data-bs-target="#editModal" >
                     도서 추가
                 </button>
             </div>
