@@ -5,6 +5,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">${book.book_name}</h1>
+                <button class="select-mode">모드</button>
             </div>
             <div class="modal-body">
                 <c:forEach var="text" items="${bookText}" >

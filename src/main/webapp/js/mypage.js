@@ -59,4 +59,17 @@ $(document).ready(function () {
         });
     });
 
+    $(".select-mode").click(function(){
+        $(".modal-content").toggleClass("dark-mode");
+
+        if ($(".modal-content").hasClass("dark-mode")) {
+            $(".modal-content").css("border-color", "#ffffff");
+        } else {
+            $(".modal-content").css("border-color", "#000000");
+        }
+
+    });
+
+
+
 });
