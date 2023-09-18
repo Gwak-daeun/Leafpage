@@ -12,7 +12,7 @@
 <%@include file="./WEB-INF/component/header.jsp"%>
 
 <%
-    response.sendRedirect("/detailPage.do?userNo=9&isbn=040501813-4");
+    response.sendRedirect("/LikeHeart.do?userNo=9&isbn=040501813-4");
 %>
 
 <div class="container">
