@@ -1,6 +1,6 @@
 package com.leafpage.controller;
 
-import com.leafpage.controller.admin.AdminBookDetileController;
+import com.leafpage.controller.admin.AdminBookDetailController;
 import com.leafpage.controller.admin.AdminBookEditController;
 import com.leafpage.controller.admin.AdminBookListController;
 
@@ -14,7 +14,7 @@ public class HandlerMapping {
 
         mappings = new HashMap<>();
         mappings.put("/booklistView.do", new AdminBookListController());
-        mappings.put("/getBook.do", new AdminBookDetileController());
+        mappings.put("/getBook.do", new AdminBookDetailController());
         mappings.put("/books/edit.do", new AdminBookEditController());
 
     }
