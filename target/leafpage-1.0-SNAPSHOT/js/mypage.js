@@ -1,10 +1,5 @@
 $(document).ready(function () {
 
-<<<<<<< Updated upstream
-=======
-
-
->>>>>>> Stashed changes
     $(".bottom_tab > li").click(function () {
         let idx = $(this).index();
 
@@ -22,8 +17,6 @@ $(document).ready(function () {
         }
     });
 
-<<<<<<< Updated upstream
-=======
     $(".modal").on('shown.bs.modal', function () {
 
         let modalWidth = $(".modal-body").width();
@@ -40,7 +33,7 @@ $(document).ready(function () {
 
     });
 
->>>>>>> Stashed changes
+
     $("#closeBtn").click(function () {
 
         let modalY = $(".modal-body").scrollTop();

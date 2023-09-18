@@ -53,13 +53,10 @@
         <div class="bottom_content on">
             <ul class="flex rent_book">
                <c:forEach var="book" items="${books}" begin="0" end="4" step="1" >
-                   <li>
-                       <div class="card" data-bs-toggle="modal" data-bs-target="#${book.rental_no}" >
-                            <img src="image/마주.png" class="card-img-top" alt="..." />
                    <li id="bookLi" data-bs-toggle="modal" data-bs-target="#${book.rental_no}">
                        <c:set var="dbViewerWidth" value="${book.modalWidth}"/>
                        <c:set var="viewerY" value="${book.pcY}"/>
-                       <div class="card" >
+                       <div class="card" class="card" data-bs-toggle="modal" data-bs-target="#${book.rental_no}" >
                             <img src="image/마주.png" class="card-img-top" alt="..." />
                            <c:if test="${book.modalWidth eq 321}">
                                <img class="device-icon" src="../css/icons/phone_iphone.png" />
@@ -75,23 +72,6 @@
                        </div>
                     <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
                    </li>
-
-                   <div class="modal fade" id="${book.rental_no}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                       <div class="modal-dialog modal-xl">
-                           <div class="modal-content">
-                               <div class="modal-header">
-                                   <h1 class="modal-title fs-5" id="staticBackdropLabel">${book.book_name}</h1>
-                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                               </div>
-                               <div class="modal-body">
-                                       ${bookText}
-                               </div>
-                               <div class="modal-footer">
-                                   <button id="closeBtn" type="button" class="modal-close" data-bs-dismiss="modal">여기까지 보기</button>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
 
                     <%--책 뷰어--%>
                    <%@include file="component/bookModal.jsp"%>
