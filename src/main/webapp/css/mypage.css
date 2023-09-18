@@ -309,10 +309,16 @@ h5 {
     }
 }
 
-.modal-body{
+.modal-content{
+    width: 700px;
+}
+
+.modal-body {
     overflow-y: scroll;
     height: 750px;
-    white-space: pre-wrap;
+    white-space: normal;
+    text-align: left;
+    line-height: 30px;
 }
 
 .modal-footer{
@@ -349,6 +355,7 @@ h5 {
 
     .modal-content{
         height: 600px;
+        width: 355px;
     }
     .modal-xl{
         width: 355px;

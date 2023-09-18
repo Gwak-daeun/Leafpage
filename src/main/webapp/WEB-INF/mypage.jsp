@@ -27,13 +27,6 @@
     </nav>
 </header>
 
-<a href="mypageInfo.do"><h4>요청보내자</h4></a>
-
-<%--<c:forEach var="books" items="${books}">--%>
-<%--    <div>--%>
-<%--        ${books.returned_book}--%>
-<%--    </div>--%>
-<%--</c:forEach>--%>
 
 <section class="mp_container">
     <div class="top">
@@ -60,9 +53,20 @@
         <div class="bottom_content on">
             <ul class="flex rent_book">
                <c:forEach var="book" items="${books}" begin="0" end="4" step="1" >
-                   <li data-bs-toggle="modal" data-bs-target="#${book.rental_no}">
+                   <li>
+                       <div class="card" data-bs-toggle="modal" data-bs-target="#${book.rental_no}" >
+                            <img src="image/마주.png" class="card-img-top" alt="..." />
+                   <li id="bookLi" data-bs-toggle="modal" data-bs-target="#${book.rental_no}">
+                       <c:set var="dbViewerWidth" value="${book.modalWidth}"/>
+                       <c:set var="viewerY" value="${book.pcY}"/>
                        <div class="card" >
                             <img src="image/마주.png" class="card-img-top" alt="..." />
+                           <c:if test="${book.modalWidth eq 321}">
+                               <img class="device-icon" src="../css/icons/phone_iphone.png" />
+                           </c:if>
+                           <c:if test="${book.modalWidth ne 321}">
+                               <img class="device-icon" src="../css/icons/desktop_windows.png" />
+                           </c:if>
                               <div class="card-body">
                                 <h5 class="card-title">${book.book_name}</h5>
                                 <p class="card-author">${book.author_name}</p>
@@ -88,6 +92,9 @@
                            </div>
                        </div>
                    </div>
+
+                    <%--책 뷰어--%>
+                   <%@include file="component/bookModal.jsp"%>
 
                </c:forEach>
 
@@ -270,6 +277,11 @@
     </div>
 </section>
 
+
+<script>
+    let dbViewerWidth = ${dbViewerWidth};
+    let viewerY = ${viewerY};
+</script>
 <!-- 제이쿼리 자바스크립트 추가하기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="../js/mypage.js"></script>

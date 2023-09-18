@@ -11,6 +11,10 @@
 <body>
 <%@include file="./WEB-INF/component/header.jsp"%>
 
+<%
+    response.sendRedirect("/mypageInfo.do");
+%>
+
 <div class="container">
     <div class="title">
         <h1>LeafPage</h1>

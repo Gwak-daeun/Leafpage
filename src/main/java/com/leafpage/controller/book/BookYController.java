@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
 public class BookYController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -19,7 +20,7 @@ public class BookYController implements Controller {
 
         int modalY = Integer.parseInt(strModalY);
 
-        int modalWidth = Integer.parseInt(strModalWidth);
+        int modalWidth = (int) Double.parseDouble(strModalWidth);
 
         int rental_no = 5; //나중에 파라미터 받아오는걸로 고쳐야 함
 
@@ -27,6 +28,6 @@ public class BookYController implements Controller {
 
         System.out.println("RESULT: " + result);
 
-        return "/myInfoView.do";
+        return "/mypageInfo.do";
     }
 }

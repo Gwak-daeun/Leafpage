@@ -27,6 +27,7 @@
     </nav>
 </header>
 
+<<<<<<< Updated upstream
 <a href="mypageInfo.do"><h4>요청보내자</h4></a>
 
 <%--<c:forEach var="books" items="${books}">--%>
@@ -35,6 +36,8 @@
 <%--    </div>--%>
 <%--</c:forEach>--%>
 
+=======
+>>>>>>> Stashed changes
 <section class="mp_container">
     <div class="top">
         <div class="top_box">
@@ -60,9 +63,23 @@
         <div class="bottom_content on">
             <ul class="flex rent_book">
                <c:forEach var="book" items="${books}" begin="0" end="4" step="1" >
+<<<<<<< Updated upstream
                    <li data-bs-toggle="modal" data-bs-target="#${book.rental_no}">
                        <div class="card" >
                             <img src="image/마주.png" class="card-img-top" alt="..." />
+=======
+                   <li id="bookLi" data-bs-toggle="modal" data-bs-target="#${book.rental_no}">
+                       <c:set var="dbViewerWidth" value="${book.modalWidth}"/>
+                       <c:set var="viewerY" value="${book.pcY}"/>
+                       <div class="card" >
+                            <img src="image/마주.png" class="card-img-top" alt="..." />
+                           <c:if test="${book.modalWidth eq 321}">
+                               <img class="device-icon" src="../css/icons/phone_iphone.png" />
+                           </c:if>
+                           <c:if test="${book.modalWidth ne 321}">
+                               <img class="device-icon" src="../css/icons/desktop_windows.png" />
+                           </c:if>
+>>>>>>> Stashed changes
                               <div class="card-body">
                                 <h5 class="card-title">${book.book_name}</h5>
                                 <p class="card-author">${book.author_name}</p>
@@ -72,6 +89,7 @@
                     <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
                    </li>
 
+<<<<<<< Updated upstream
                    <div class="modal fade" id="${book.rental_no}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                        <div class="modal-dialog modal-xl">
                            <div class="modal-content">
@@ -88,6 +106,10 @@
                            </div>
                        </div>
                    </div>
+=======
+                    <%--책 뷰어--%>
+                   <%@include file="component/bookModal.jsp"%>
+>>>>>>> Stashed changes
 
                </c:forEach>
 
@@ -270,6 +292,13 @@
     </div>
 </section>
 
+<<<<<<< Updated upstream
+=======
+<script>
+    let dbViewerWidth = ${dbViewerWidth};
+    let viewerY = ${viewerY};
+</script>
+>>>>>>> Stashed changes
 <!-- 제이쿼리 자바스크립트 추가하기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="../js/mypage.js"></script>

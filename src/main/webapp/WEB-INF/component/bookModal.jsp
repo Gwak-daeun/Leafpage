@@ -4,11 +4,13 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">당신을 지키는 관계가 먼저입니다</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">${book.book_name}</h1>
             </div>
             <div class="modal-body">
-                ${bookText}
+                <c:forEach var="text" items="${bookText}" >
+                    ${text}
+                        <br />
+                </c:forEach>
             </div>
             <div class="modal-footer">
                 <button id="closeBtn" type="button" class="modal-close" data-bs-dismiss="modal">여기까지 보기</button>

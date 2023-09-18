@@ -15,4 +15,7 @@ public class MypageBooksDTO {
     String scheduled_return_date;
     String rental_date;
     String rental_no;
+    int pcY;
+    int modalWidth;
+
 }

@@ -35,7 +35,8 @@ public class BookDAO {
 
         ArrayList<MypageBooksDTO> userBookList = null;
 
-        String SQL = "select r.rental_no as all_rentals, b.book_name, a.author_name, r.scheduled_return_date, r.rental_date, u.user_no\n" +
+
+        String SQL = "select r.rental_no as all_rentals, b.book_name, a.author_name, r.scheduled_return_date, r.rental_date, u.user_no, r.pcY, r.modalWidth \n" +
                 "from users u \n" +
                 "join book_rental r\n" +
                 "on u.user_no = r.user_no\n" +
@@ -62,7 +63,9 @@ public class BookDAO {
                     rs.getString(3),
                     rs.getString(4),
                     rs.getString(5),
-                        rs.getString(6)
+                    rs.getString(6),
+                    rs.getInt(7),
+                        rs.getInt(8)
                 );
                 userBookList.add(books);
             }
@@ -172,6 +175,10 @@ public class BookDAO {
 
         for (String line : lines) {
             String word = line.replace("\\n", "<br>");
+//            if (line.isEmpty()) {
+//                bookText.add("");
+//                continue;
+//            }
             bookText.add(word);
         }
 
@@ -181,16 +188,9 @@ public class BookDAO {
 
     public int saveBookScrollY(int modalY, int modalWidth, int rental_no) {
 
-        String SQL = "";
-
         System.out.println("MODAL WIDTH: " + modalWidth);
 
-//        if (modalWidth == 321) {
-            SQL = "update book_rental set mobileY = ? where rental_no = 5;";
-//        }
-//        if (modalWidth > 321) {
-//            SQL = "update book_rental set pcY = ? where rental_no = 5;";
-//        }
+       String  SQL = "update book_rental set pcY = ?, modalWidth = ? where rental_no = 5;";
 
         System.out.println("SQL: " + SQL);
 
