@@ -1,3 +1,5 @@
+
+//클릭으로 탭 메뉴 변경
 $(document).ready(function () {
   $(".tab-button > li").click(function () {
     console.log("dhfsldkjfs");
@@ -13,6 +15,7 @@ $(document).ready(function () {
   })
 });
 
+//하트 채워지고 비워지는 기능
 $(document).ready(function(){
   /*웹페이지 열었을 때*/
   $("#emptyH").show();
@@ -31,7 +34,9 @@ $(document).ready(function(){
   });
 });
 
+//
 
+//별점 표시
 $('.starRev span').click(function(){
   $(this).parent().children('span').removeClass('on');
   $(this).addClass('on').prevAll('span').addClass('on');
