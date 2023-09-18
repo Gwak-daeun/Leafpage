@@ -15,10 +15,9 @@ public class LikeEmptyHeartController implements Controller {
 
         System.out.println("좋아요 추가합니다");
 
-
         //1. 사용자 정보 입력 추출
-        long userNo = Long.parseLong(request.getParameter("userNo"));
-        String isbn = request.getParameter("isbn");
+        long userNo = Long.parseLong(request.getParameter("userNo").trim());
+        String isbn = request.getParameter("isbn").trim();
 
         //2. DB 연동 처리
         LikeyDAO likeyDAO = new LikeyDAO();
@@ -34,6 +33,6 @@ public class LikeEmptyHeartController implements Controller {
         session.setAttribute("heartClick", like);
         session.setAttribute("heartCount", heartCount);
 
-        return "detailPage";
+        return "detailPageView.do";
     }
 }
