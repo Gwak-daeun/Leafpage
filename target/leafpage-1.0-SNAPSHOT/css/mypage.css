@@ -19,6 +19,14 @@ a {
     color: black;
 }
 
+.device-icon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    margin-left: 120px;
+    margin-top: 5px;
+}
+
 .index-nav {
     background-color: #056365;
 }
@@ -186,7 +194,7 @@ h5 {
     background-color: #D7CEC9;
 }
 
-.mp_container .card img {
+.card-img-top {
     width: 70%;
     height: 70%;
     margin: 10px auto 10px;
