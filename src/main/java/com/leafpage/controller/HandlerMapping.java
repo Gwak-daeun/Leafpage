@@ -12,7 +12,9 @@ public class HandlerMapping {
 
         mappings = new HashMap<>();
 
-        mappings.put("/LikeHeart.do",new LikeEmptyHeartController());
+//        mappings.put("/LikeHeart.do",new LikeEmptyHeartController());
+        mappings.put("/detailPage.do",new LikeEmptyHeartController());
+
 
     }
 
