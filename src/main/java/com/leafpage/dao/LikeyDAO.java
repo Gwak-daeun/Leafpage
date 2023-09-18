@@ -3,6 +3,7 @@ package com.leafpage.dao;
 import ch.qos.logback.core.encoder.EchoEncoder;
 import com.leafpage.util.DBUtil;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +11,8 @@ import java.sql.ResultSet;
 public class LikeyDAO {
 
     private Connection conn = null;
+
+
 
     //하트 클릭할 때 데이터 추가
     public boolean like(Long userNo, String isbn) {
@@ -33,6 +36,7 @@ public class LikeyDAO {
 //        return -1;
         try {
             String SQL = "SELECT * FROM LIEKY WHERE userNo = ? AND ISBN = ?";
+            conn = DBUtil.getConnection();
             PreparedStatement pstmp = null;
             pstmp = conn.prepareStatement(SQL);
             pstmp.setLong(1, userNo);
@@ -41,7 +45,7 @@ public class LikeyDAO {
             rs = pstmp.executeQuery();
 
 
-            //하트 눌려있는 경우, 좋아요 취소
+            //하트 눌려있는 경우(데이터 있는 경우), 좋아요 취소
             if (rs.next()) {
                 String deleteSQL = "DELETE FROM LIKEY WHERE userNo = ? AND ISBN = ?";
                 PreparedStatement dlstmt = null;
@@ -66,7 +70,8 @@ public class LikeyDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-
+//            DBUtil.class();
+            
         }
         return false;
     }

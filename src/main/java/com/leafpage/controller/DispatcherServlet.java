@@ -37,6 +37,8 @@ public class DispatcherServlet extends HttpServlet {
             view = viewName;
         }
 
+        System.out.println(view);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher(view);
         dispatcher.forward(request, response);
     }
