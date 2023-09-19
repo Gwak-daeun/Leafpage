@@ -25,18 +25,7 @@ public class DispatcherServlet extends HttpServlet {
         Controller ctrl = handlerMapping.getController(path);
 
         String viewName = ctrl.handleRequest(request, response);
-
-        String view = null;
-        if (!viewName.contains(".do")) {
-            if (viewName.equals("index")) {
-                view = viewName + ".jsp";
-            } else {
-                view = viewResolver.getView(viewName);
-            }
-        } else {
-            view = viewName;
-        }
-
+        String view = viewResolver.getView(viewName);
         RequestDispatcher dispatcher = request.getRequestDispatcher(view);
         dispatcher.forward(request, response);
     }
