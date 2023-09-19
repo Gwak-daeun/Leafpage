@@ -2,8 +2,6 @@
 //클릭으로 탭 메뉴 변경
 $(document).ready(function () {
 
-    console.log("리뷰 번호 확인 : " + reviewNo);
-
 //하트 채워지고 비워지는 기능
     $("#emptyH").show();
     $("#fullH").hide();

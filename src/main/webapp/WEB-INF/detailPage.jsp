@@ -92,8 +92,8 @@
                                         </div>
 
                                         <div class="col-3 text-right">
-                                            <c:set var="reviewNo" value="${review.review_no}"/>
-                                            <button type="button" class="delete-button" data-reviewno="${reviewNo}">삭제</button>
+<%--                                            <c:set var="reviewNo" value="${review.review_no}"/>--%>
+                                            <a onclick="return confirm('삭제하시겠습니까?')" href="/removeReview.do?reviewNo=${review.review_no}">삭제</a>
                                         </div>
                                     </div>
                                 </div>
@@ -187,10 +187,6 @@
     </div>
 
 </div>
-
-<script>
-    let reviewNo = ${reviewNo}
-</script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" crossorigin="anonymous"></script>

@@ -1,6 +1,7 @@
 package com.leafpage.controller.book;
 
 import com.leafpage.controller.Controller;
+import com.leafpage.gwakdao.ReviewDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +16,9 @@ public class RemoveReviewController implements Controller {
 
         int reviewNo = Integer.parseInt(request.getParameter("reviewNo")) ;
 
-        if (reviewNo != 1) {
+       int result = new ReviewDAO().removeReview(reviewNo);
+
+        if (result != 1) {
             HttpSession session = request.getSession();
             session.setAttribute("error", "리뷰 삭제에 실패했어요.");
         }
