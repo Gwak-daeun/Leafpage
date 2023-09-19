@@ -14,7 +14,7 @@ public class DispatcherServlet extends HttpServlet {
     public void init() throws ServletException {
         handlerMapping = new HandlerMapping();
         viewResolver = new ViewResolver();
-        viewResolver.setPrefix("./WEB-INF/user/");
+        viewResolver.setPrefix("./WEB-INF/");
         viewResolver.setSuffix(".jsp");
     }
 
@@ -27,6 +27,7 @@ public class DispatcherServlet extends HttpServlet {
         String viewName = ctrl.handleRequest(request, response);
 
         String view = null;
+
         if (!viewName.contains(".do")) {
             if (viewName.equals("index")) {
                 view = viewName + ".jsp";
@@ -36,6 +37,7 @@ public class DispatcherServlet extends HttpServlet {
         } else {
             view = viewName;
         }
+
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(view);
         dispatcher.forward(request, response);

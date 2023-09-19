@@ -378,3 +378,18 @@ input[type="date"]::-webkit-datetime-edit-year-field {
   border-style: none;
   border-radius: 5px;
 }
+
+#editModale{
+  width: 1px;
+}
+
+.back{
+  opacity: 0.5;
+  z-index: 1;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: none
+}
+
