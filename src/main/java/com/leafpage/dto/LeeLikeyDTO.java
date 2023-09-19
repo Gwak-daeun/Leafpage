@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LikeyDTO {
+public class LeeLikeyDTO {
 
     Long userNo;
     String ISBN;

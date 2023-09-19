@@ -1,13 +1,13 @@
 package com.leafpage.controller.user;
 
 import com.leafpage.controller.Controller;
-import com.leafpage.dao.LikeyDAO;
+import com.leafpage.dao.LeeLikeyDAO;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class LikeEmptyHeartController implements Controller {
     @Override
@@ -18,20 +18,28 @@ public class LikeEmptyHeartController implements Controller {
         //1. 사용자 정보 입력 추출
         long userNo = Long.parseLong(request.getParameter("userNo").trim());
         String isbn = request.getParameter("isbn").trim();
+        System.out.println(userNo);
+        System.out.println(isbn);
 
         //2. DB 연동 처리
-        LikeyDAO likeyDAO = new LikeyDAO();
+        LeeLikeyDAO leeLikeyDAO = new LeeLikeyDAO();
 
-        boolean like = likeyDAO.like(userNo, isbn);
-        int heartCount = likeyDAO.likeCount(isbn);
+        boolean like = leeLikeyDAO.like(userNo, isbn);
+        System.out.println(like);
+        int heartCount = leeLikeyDAO.likeCount(isbn);
+        System.out.println(heartCount);
 
         //3. 화면 이동
 
         HttpSession session = request.getSession();
 
         //request정보 담기
-        session.setAttribute("heartClick", like);
-        session.setAttribute("heartCount", heartCount);
+        int likecheck = like ? 1 : 0;
+
+        PrintWriter out = response.getWriter();
+        out.print(likecheck);
+        out.print(heartCount);
+        out.close();
 
         return "detailPageView.do";
     }

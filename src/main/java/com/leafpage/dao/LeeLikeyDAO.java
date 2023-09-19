@@ -1,23 +1,23 @@
 package com.leafpage.dao;
 
-import ch.qos.logback.core.encoder.EchoEncoder;
 import com.leafpage.util.DBUtil;
 
-import javax.servlet.RequestDispatcher;
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class LikeyDAO {
+public class LeeLikeyDAO {
 
     private Connection conn = null;
-    private PreparedStatement pstmt = null;
+    PreparedStatement pstmp = null;
     private ResultSet rs = null;
     PreparedStatement dlstmt = null;
     PreparedStatement instmt = null;
 
-
+    public class likeStatus {
+        private boolean likeStatus;
+        private int likeCount;
+    }
 
     //하트 클릭할 때 데이터 추가
     public boolean like(Long userNo, String isbn) {
@@ -25,16 +25,17 @@ public class LikeyDAO {
         try {
             String SQL = "SELECT * FROM likey WHERE user_no = ? AND ISBN = ?";
             conn = DBUtil.getConnection();
-            PreparedStatement pstmp = null;
             pstmp = conn.prepareStatement(SQL);
             pstmp.setLong(1, userNo);
             pstmp.setString(2, isbn);
             ResultSet rs = null;
             rs = pstmp.executeQuery();
 
+            boolean likeStatus = rs.next();
+
 
             //하트 눌려있는 경우(데이터 있는 경우), 좋아요 취소
-            if (rs.next()) {
+            if (likeStatus) {
                 String deleteSQL = "DELETE FROM likey WHERE user_no = ? AND ISBN = ?";
 
                 dlstmt = conn.prepareStatement(deleteSQL);
@@ -58,7 +59,7 @@ public class LikeyDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            DBUtil.close(rs, pstmt, conn);
+            DBUtil.close(rs, pstmp, conn);
             DBUtil.close(null, dlstmt, null);
             DBUtil.close(null, instmt, null);
         }
@@ -67,25 +68,24 @@ public class LikeyDAO {
 
     //하트 수 세기(조회)
     public int likeCount(String isbn) {
-        int heartCount = 0;
-
-        String SQL = "SELECT COUNT(*) AS LIKECOUNT FROM likey WHERE ISBN = ?";
-
+        int likeCount = 0;
 
         try {
+            String SQL = "SELECT COUNT(*) AS LIKECOUNT FROM likey WHERE ISBN = ?";
+
             conn = DBUtil.getConnection();
-            pstmt = conn.prepareStatement(SQL);
-            pstmt.setString(1, isbn);
-            rs = pstmt.executeQuery();
+            pstmp = conn.prepareStatement(SQL);
+            pstmp.setString(1, isbn);
+            rs = pstmp.executeQuery();
 
             if(rs.next()) {
-                heartCount = rs.getInt("LIKECOUNT");
-                return heartCount;
+                likeCount = rs.getInt("LIKECOUNT");
+                return likeCount;
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            DBUtil.close(rs, pstmt, conn);
+            DBUtil.close(rs, pstmp, conn);
         }
         return -1;
     }

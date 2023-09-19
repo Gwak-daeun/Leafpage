@@ -34,8 +34,8 @@
                     <button class="btn rental" data-toggle="modal" href="#rental">대여하기</button>
                     <button class="btn preview">미리보기</button>   <%-- 로그인 해야 볼 수 있음--%>
 
-                    <img id="emptyH" style="width: 20px; margin-left: 5px;" src="/css/icons/empty.png" onclick="location.href='LikeHeart.do'">
-                    <img id="fullH" style="width: 20px; margin-left: 5px;" src="/css/icons/full.png" onclick="location.href='LikeHeart.do'">
+                    <img id="emptyH" style="width: 20px; margin-left: 5px;" src="/css/icons/empty.png" onclick="likeCheck()">
+                    <img id="fullH" style="width: 20px; margin-left: 5px;" src="/css/icons/full.png" onclick="likeCheck()">
                     ${ heartCount }
 <%--                    <i class="fa-solid fa-heart fa-xl" style="color: #d7443e;"></i>--%>
             </div>
@@ -316,7 +316,9 @@
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script src="js/detailPage.js"></script>
+
+
 </body>
 </html>
