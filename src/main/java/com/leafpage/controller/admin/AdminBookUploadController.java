@@ -50,7 +50,7 @@ public class AdminBookUploadController implements Controller  {
         MultipartRequest multi = new MultipartRequest(request, savePath, sizeLimit, "utf-8", new DefaultFileRenamePolicy());
 
         if (multi.getFilesystemName("bookimg")== (null)){
-            bookimg = "\\" + "iconmonstr-book-26-240";
+            bookimg = "iconmonstr-book-26-240.png";
         }else {
             bookimg = multi.getFilesystemName("bookimg");
         }
@@ -155,18 +155,6 @@ public class AdminBookUploadController implements Controller  {
 
 
        return null;
-    }
-
-    private String getFilename(Part part) {
-        String contentDisp = part.getHeader("content-disposition");
-        String[] split = contentDisp.split(";");
-        for (int i = 0; i < split.length; i++) {
-            String temp = split[i];
-            if (temp.trim().startsWith("filename")) {
-                return temp.substring(temp.indexOf("=") + 2, temp.length() - 1);
-            }
-        }
-        return "";
     }
 
 }
