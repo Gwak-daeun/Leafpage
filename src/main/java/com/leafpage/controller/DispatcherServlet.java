@@ -21,10 +21,13 @@ public class DispatcherServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
         String path = uri.substring(uri.lastIndexOf("/"));
+
         Controller ctrl = handlerMapping.getController(path);
+
         String viewName = ctrl.handleRequest(request, response);
         String view = viewResolver.getView(viewName);
         RequestDispatcher dispatcher = request.getRequestDispatcher(view);
         dispatcher.forward(request, response);
     }
+
 }

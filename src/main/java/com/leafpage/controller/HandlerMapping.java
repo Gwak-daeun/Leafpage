@@ -1,6 +1,8 @@
 package com.leafpage.controller;
 
 import com.leafpage.controller.user.*;
+import com.leafpage.controller.admin.*;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +11,17 @@ public class HandlerMapping {
     private Map<String, Controller> mappings;
 
     public HandlerMapping() {
+
         mappings = new HashMap<>();
+
+        mappings.put("/LikeHeart.do",new LikeEmptyHeartController());
+        mappings.put("/detailPageView.do", new DetailPageViewController());
+        mappings.put("/booklistView.do", new AdminBookListController());
+        mappings.put("/getBook.do", new AdminBookDetailController());
+        mappings.put("/bookupload.do", new AdminBookUploadController());
+        mappings.put("/remove.do", new AdminBookDeleteController());
+        mappings.put("/edit.do", new AdminBookEditController());
+
         mappings.put("/signupView.do", new SignupViewController());
         mappings.put("/signup.do", new SignupController());
         mappings.put("/loginView.do", new LoginViewController());
@@ -28,7 +40,6 @@ public class HandlerMapping {
     }
 
     public Controller getController(String path) {
-        System.out.println("mappingPath: "+mappings.get(path));
         return mappings.get(path);
     }
 }
