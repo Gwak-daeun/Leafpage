@@ -17,13 +17,13 @@ public class AdminBookDetailController implements Controller {
             BookDTO book = dao.detailBook(ISBN);
             System.out.println(book.getBookimgFullPath());
             request.setAttribute("book" ,book);
-            return "admin/bookmodaledit";
+            return "admin/bookmodal";
         }else{
             BookDTO book = dao.detailBook(ISBN);
             System.out.println(book.getBookimgFullPath());
             request.setAttribute("book" ,book);
 
-            return "admin/bookmodal";
+            return "admin/bookmodaledit";
         }
 
 
