@@ -12,12 +12,8 @@ public class LoginViewController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // 이미 로그인 중인지 확인한다.
-        String userId = null;
-        HttpSession session = request.getSession();
+        String userId = (String) request.getAttribute("userId");
 
-        if (session.getAttribute("userId") != null) {
-            userId = (String) session.getAttribute("userId");
-        }
         if (userId != null) {
             PrintWriter script = response.getWriter();
             script.println("<script>");

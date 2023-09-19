@@ -3,6 +3,7 @@ package com.leafpage.controller.user;
 import com.leafpage.controller.Controller;
 import com.leafpage.dao.UserDAO;
 import com.leafpage.dto.UserDTO;
+import com.leafpage.util.SHA256;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -66,7 +67,7 @@ public class SignupController implements Controller {
             }
 
             UserDAO userDAO = new UserDAO();
-            int result = userDAO.signup(new UserDTO(0, userId, userPassword, userEmail, userTel, "일반회원", "회원", userSecurityQuestion, userSecurityAnswer));
+            int result = userDAO.signup(new UserDTO(0, userId, SHA256.getSHA256(userPassword), userEmail, userTel, "일반회원", "회원", userSecurityQuestion, userSecurityAnswer, com.leafpage.util.SHA256.getSHA256(userEmail), false));
             if (result == -1) {
                 PrintWriter script = response.getWriter();
                 script.println("<script>");
@@ -77,9 +78,8 @@ public class SignupController implements Controller {
             } else {
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", userId);  //가입 성공 시 바로 로그인상태로
-                return "index";
+                return "sendEmail.do";
             }
-
         } else {
             PrintWriter script = response.getWriter();
             script.println("<script>");
@@ -88,6 +88,6 @@ public class SignupController implements Controller {
             script.println("</script>");
             script.close();
         }
-        return "index";
+        return "signupView.do";
     }
 }

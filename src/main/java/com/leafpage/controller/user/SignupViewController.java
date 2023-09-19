@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 public class SignupViewController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // 이미 로그인 중인지 확인한다.
+        // 이미 로그인 상태라면 뒤로가기
         String userId = null;
         HttpSession session = request.getSession();
 

@@ -17,4 +17,6 @@ public class UserDTO {
     private String userRole;
     private String userSecurityQuestion;
     private String userSecurityAnswer;
+    private String userEmailHash;
+    private boolean userEmailChecked;
 }
