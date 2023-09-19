@@ -11,10 +11,6 @@
 <body>
 <%@include file="./WEB-INF/component/header.jsp"%>
 
-<%
-    response.sendRedirect("/LikeHeart.do?userNo=9&isbn=040501813-4");
-%>
-
 <div class="container">
     <div class="title">
         <h1>LeafPage</h1>

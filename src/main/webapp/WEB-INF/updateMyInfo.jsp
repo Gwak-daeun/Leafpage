@@ -19,7 +19,7 @@
             <span class="navbar-brand mb-0 h1"><img src="../css/icons/nest_eco_leaf.png" /> </span>
             <span></span>
             <span>
-            <button type="button" class="btn1 btn-sm" href="#">로그아웃</button>
+            <button type="button" class="btn1 btn-sm" href="/myInfoView.do">로그아웃</button>
           </span>
         </div>
     </nav>

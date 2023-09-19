@@ -14,6 +14,40 @@ body {
     background-color: #f9f3f0;
 }
 
+a {
+    text-decoration-line: none;
+    color: black;
+}
+
+.modal-content.light-mode {
+    background-color: #e7e3e3;
+    color: #000000;
+}
+
+.modal-content.dark-mode {
+    background-color: #121212;
+    color: rgb(255, 255, 255);
+}
+
+.select-mode{
+    border-radius: 5px;
+    border-color: transparent;
+    margin-left: 90px;
+}
+
+.light-icon {
+    display: none;
+}
+
+
+.device-icon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    margin-left: 120px;
+    margin-top: 5px;
+}
+
 .index-nav {
     background-color: #056365;
 }
@@ -181,7 +215,7 @@ h5 {
     background-color: #D7CEC9;
 }
 
-.mp_container .card img {
+.card-img-top {
     width: 70%;
     height: 70%;
     margin: 10px auto 10px;
@@ -193,6 +227,13 @@ h5 {
 
 .mp_container .card-title {
     font-size: 15px;
+}
+
+.card-title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break:break-all
 }
 
 .mp_container .card-author {
@@ -297,6 +338,41 @@ h5 {
     }
 }
 
+.modal-content{
+    width: 700px;
+}
+
+.modal-body {
+    overflow-y: scroll;
+    height: 750px;
+    white-space: normal;
+    text-align: left;
+    line-height: 30px;
+}
+
+.modal-footer{
+    justify-content: center;
+}
+
+.modal-close{
+    background-color: #056365;
+    border-radius: 5px;
+    border-color: transparent;
+    margin-right: 8px;
+    color: #F9F3F0;
+}
+
+.modal-xl{
+    width: 700px;
+}
+
+@media(max-height: 750px) {
+    .modal-body{
+        height: 530px;
+    }
+
+}
+
 @media (max-width: 400px) {
     .mp_container .bottom_content {
         height: 84%;
@@ -305,4 +381,17 @@ h5 {
     .container-fluid span button {
         font-size: 12px;
     }
+
+    .modal-content{
+        height: 600px;
+        width: 355px;
+    }
+    .modal-xl{
+        width: 355px;
+    }
+    .show{
+        height: 800px;
+    }
 }
+
+
