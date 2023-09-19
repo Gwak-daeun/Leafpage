@@ -13,16 +13,19 @@ public class AdminBookDetailController implements Controller {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String ISBN = request.getParameter("ISBN");
         BookDAO dao = new BookDAO();
-        System.out.println("들어옴");
-        System.out.println(ISBN);
+        if(ISBN==null){
+            BookDTO book = dao.detailBook(ISBN);
+            System.out.println(book.getBookimgFullPath());
+            request.setAttribute("book" ,book);
+            return "admin/bookmodaledit";
+        }else{
+            BookDTO book = dao.detailBook(ISBN);
+            System.out.println(book.getBookimgFullPath());
+            request.setAttribute("book" ,book);
+
+            return "admin/bookmodal";
+        }
 
 
-        BookDTO dto = new BookDTO();
-        BookDTO book = dao.deleteBook(ISBN);
-        System.out.println(book.getBookcontent());
-        System.out.println("여기");
-        request.setAttribute("book" ,book);
-
-        return "admin/bookmodal";
     }
 }

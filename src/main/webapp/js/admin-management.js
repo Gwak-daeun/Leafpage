@@ -79,6 +79,31 @@ function closeModal() {
   $("#background_modal").css("display","none");
 }
 
+function modalOn(ISBN) {
+
+  $('.modal-backdrop').remove();
+  $("#background_modal").css("display","block");
+  // 모달 열기
+  /*$('#editModal').modal('show');*/
+
+  // 컨트롤러로부터 데이터 가져오기 (Ajax 요청)
+  $.ajax({
+    url: 'getBook.do', // 컨트롤러의 URL
+    type: 'get', // GET 또는 POST 요청
+    dataType: 'html', // 받아올 데이터 타입 (HTML 또는 원하는 형식)
+    async: false,
+    data: {ISBN: ISBN},
+
+    success: function (data) {
+      // 받아온 데이터를 모달 내용에 추가
+      $('.edit-container').html(data);
+    },
+    error: function (xhr, textStatus, errorThrown) {
+      // 에러 처리 코드
+      console.log('Error: ' + textStatus);
+    }
+  });
+}
 
 
 
