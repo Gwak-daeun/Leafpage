@@ -1,13 +1,9 @@
-package com.leafpage.dao;
-
-import com.leafpage.dto.UserDTO;
+package com.leafpage.gwakdao;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 public class UserDAO {
     private Connection conn = null;
