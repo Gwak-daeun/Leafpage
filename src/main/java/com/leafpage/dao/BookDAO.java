@@ -32,7 +32,7 @@ public class BookDAO {
         List<BookDTO> bookDTOList= new ArrayList<>();
         try {
             conn = dataSource.getConnection();
-            String sql ="SELECT b.isbn, b.book_name, b.book_publisher_name, b.book_author_name FROM books b where b.book_state = 0";
+            String sql ="SELECT b.isbn, b.book_name, b.book_publisher_name, b.book_author_name FROM books b";
             pstmt  = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
 
@@ -197,6 +197,66 @@ public class BookDAO {
         }
 
         return count;
+    }
+
+    public int updateBook(BookDTO dto){
+        Connection conn = null;
+        int count = 0;
+        try {
+            conn = dataSource.getConnection();
+            conn.setAutoCommit(false);
+
+
+            String sql ="UPDATE books SET  book_name = ?, book_author_name = ?, book_img = ?, book_info = ?, book_publisher_name = ?, book_pub_date = ?, book_content = ?, book_chapter = ? WHERE ISBN = ?";
+            pstmt  = conn.prepareStatement(sql);
+            pstmt.setString(1, dto.getBookname());
+            pstmt.setString(2, dto.getAuther());
+            pstmt.setString(3, dto.getBookimgFullPath());
+            pstmt.setString(4, dto.getBookinfo());
+            pstmt.setString(5, dto.getPublisher());
+            pstmt.setString(6, dto.getPubdate());
+            pstmt.setString(7, dto.getBookchapter());
+            pstmt.setString(8, dto.getBookcontent());
+            pstmt.setString(9, dto.getISBN());
+            count = pstmt.executeUpdate();
+            pstmt.close();
+            updateCategories(conn, dto);
+
+            conn.commit();
+            conn.close();
+
+        }catch (SQLException e){
+            System.out.println(new Object() {
+            }.getClass().getEnclosingMethod().getName());
+            System.out.println(e.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+        return count;
+
+    }
+
+
+    private void updateCategories(Connection conn, BookDTO dto ) {
+        List<String> categories = dto.getCategories();
+        int count = 0;
+        try {
+            String sql = "delete from book_category WHERE ISBN = ?;";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, dto.getISBN());
+            statement.executeUpdate();
+            statement.close();
+            insertCategories(conn, dto);
+
+
+        } catch (SQLException e) {
+            System.out.println(new Object() {
+            }.getClass().getEnclosingMethod().getName());
+            throw new RuntimeException(e);
+        }
     }
 
 }
