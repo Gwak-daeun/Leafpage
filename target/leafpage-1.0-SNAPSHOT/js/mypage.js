@@ -59,26 +59,6 @@ $(document).ready(function () {
         });
     });
 
-    // $(".card").click(function () {
-    //
-    //
-    //
-    //     $.ajax({
-    //         url: "/takeUserBookContent.do",
-    //         type: "POST",
-    //         data: {
-    //             userID: 2 // 나중에 파라미터로 수정해야 함
-    //         },
-    //         success: function (response) {
-    //
-    //
-    //
-    //         },
-    //         error: function (error) {
-    //
-    //         },
-    //     });
-    // });
 
     $(".select-mode").click(function(){
         $(".modal-content").toggleClass("dark-mode");
