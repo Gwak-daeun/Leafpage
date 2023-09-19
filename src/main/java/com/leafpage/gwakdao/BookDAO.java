@@ -1,13 +1,11 @@
 package com.leafpage.gwakdao;
 
-import com.leafpage.gwakdto.BookContentDTO;
-import com.leafpage.gwakdto.MypageBooksDTO;
-import com.leafpage.gwakdto.MypageReturnedBooksDTO;
-import com.leafpage.gwakdto.MypageTotalRentalDTO;
+import com.leafpage.gwakdto.*;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+import java.awt.print.Book;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -29,6 +27,45 @@ public class BookDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public BookDetailDTO getBookDetails(String ISBN) {
+
+//        ArrayList<BookDetailDTO> bookDetailList = new ArrayList<>();
+
+        BookDetailDTO bookDetailList = new BookDetailDTO();
+
+        String SQL = "select ISBN, book_name, book_author_name, book_img, book_info, book_publisher_name, book_pub_date, book_chapter\n" +
+                "from books\n" +
+                "where ISBN = ?;";
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = dataSource.getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1, ISBN);
+           rs = pstmt.executeQuery();
+            while (rs.next()) {
+                BookDetailDTO bookDetail = new BookDetailDTO(
+                    rs.getString(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6),
+                    rs.getString(7),
+                    rs.getString(8)
+                );
+                bookDetailList = bookDetail;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return bookDetailList;
     }
 
     public ArrayList<MypageBooksDTO> getUserLendingBook() throws IOException {

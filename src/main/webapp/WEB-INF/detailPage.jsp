@@ -27,9 +27,9 @@
         <div class="mg">
             <img src="image/bookcover.png" class="imgstyle">
             <div class="center">
-                <span class="inline"><h2>1%를 읽는 힘</h2></span>
-                <span >메르 저</span>
-                <div>카테고리 | 출판사 | 출판일</div>
+                <span class="inline">${bookDetail.book_name}</span>
+                <span >${bookDetail.book_author_name}</span>
+                <div>카테고리 | ${bookDetail.book_publisher_name} | 발행일: ${bookDetail.book_pub_date}</div>
                 <div class="bottom-mg inline">
                     <button class="btn rental" data-toggle="modal" href="#rental">대여하기</button>
                     <button class="btn preview">미리보기</button>   <%-- 로그인 해야 볼 수 있음--%>
@@ -50,48 +50,13 @@
                 <li><a href="#">저자의 책</a></li>
             </ul>
             <div class="tab-content on">
-                <div class="contexth">매일 하나씩 필명으로 올리는 글을 통해 시장을 바라보는 남다른 통찰력을 제공하며 많은 이들을 열광하게 한 메르의 첫 책이다.
-                    사건에 대한 단편적인 시선이 아닌 꼬리에 꼬리를 무는 생각 확장법을 통해 정보가 연결되고 숨은 기회를 찾는 새로운 시각을 만나보자.
-                    - 경제경영 MD 김상근
-                    매일 하나씩 필명으로 올리는 글을 통해 시장을 바라보는 남다른 통찰력을 제공하며 많은 이들을 열광하게 한 메르의 첫 책이다.
-                    사건에 대한 단편적인 시선이 아닌 꼬리에 꼬리를 무는 생각 확장법을 통해 정보가 연결되고 숨은 기회를 찾는 새로운 시각을 만나보자.
-                    - 경제경영 MD 김상근
-                    매일 하나씩 필명으로 올리는 글을 통해 시장을 바라보는 남다른 통찰력을 제공하며 많은 이들을 열광하게 한 메르의 첫 책이다.
-                    사건에 대한 단편적인 시선이 아닌 꼬리에 꼬리를 무는 생각 확장법을 통해 정보가 연결되고 숨은 기회를 찾는 새로운 시각을 만나보자.
-                    - 경제경영 MD 김상근
-                    매일 하나씩 필명으로 올리는 글을 통해 시장을 바라보는 남다른 통찰력을 제공하며 많은 이들을 열광하게 한 메르의 첫 책이다.
-                    사건에 대한 단편적인 시선이 아닌 꼬리에 꼬리를 무는 생각 확장법을 통해 정보가 연결되고 숨은 기회를 찾는 새로운 시각을 만나보자.
-                    - 경제경영 MD 김상근
-                    매일 하나씩 필명으로 올리는 글을 통해 시장을 바라보는 남다른 통찰력을 제공하며 많은 이들을 열광하게 한 메르의 첫 책이다.
-                    사건에 대한 단편적인 시선이 아닌 꼬리에 꼬리를 무는 생각 확장법을 통해 정보가 연결되고 숨은 기회를 찾는 새로운 시각을 만나보자.
-                    - 경제경영 MD 김상근
-                    
-                    매일 하나씩 필명으로 올리는 글을 통해 시장을 바라보는 남다른 통찰력을 제공하며 많은 이들을 열광하게 한 메르의 첫 책이다.
-                    사건에 대한 단편적인 시선이 아닌 꼬리에 꼬리를 무는 생각 확장법을 통해 정보가 연결되고 숨은 기회를 찾는 새로운 시각을 만나보자.
-                    - 경제경영 MD 김상근
-                    매일 하나씩 필명으로 올리는 글을 통해 시장을 바라보는 남다른 통찰력을 제공하며 많은 이들을 열광하게 한 메르의 첫 책이다.
-                    사건에 대한 단편적인 시선이 아닌 꼬리에 꼬리를 무는 생각 확장법을 통해 정보가 연결되고 숨은 기회를 찾는 새로운 시각을 만나보자.
-                    - 경제경영 MD 김상근
-
-                    매일 하나씩 필명으로 올리는 글을 통해 시장을 바라보는 남다른 통찰력을 제공하며 많은 이들을 열광하게 한 메르의 첫 책이다.
-                    사건에 대한 단편적인 시선이 아닌 꼬리에 꼬리를 무는 생각 확장법을 통해 정보가 연결되고 숨은 기회를 찾는 새로운 시각을 만나보자.
-                    - 경제경영 MD 김상근
-                
+                <div class="contexth">
+                ${bookDetail.book_info}
                 </div>
-
-
             </div>
             <div class="tab-content">
-                <div>목차
-                    프롤로그
-
-                    1장 오래된 시각과 새로운 해석
-
-                    01 반도체는 패권 국가 경쟁의 핵심키
-                    02 전기차와 배터리 전쟁의 미래
-                    03 OPEC 플러스와 미국이 싸우는 이유
-                    04 슈퍼 사이클을 준비하는 한국의 조선업
-                    ...
+                <div>
+                   ${bookDetail.book_chapter}
                 </div>
             </div>
             <div class="tab-content">
@@ -190,7 +155,7 @@
                                 </div>
                               </div>
                             </div>
-                          </div>
+                        </div>
                     </li>
                     <li>
                         <div class="card">
@@ -317,6 +282,6 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script src="js/detailPage.js"></script>
+<script src="../js/gwakDetailPage.js"></script>
 </body>
 </html>
