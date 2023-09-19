@@ -18,5 +18,7 @@ public class BookDTO {
     private String bookinfo;
     private String bookchapter;
     private String bookcontent;
+    private String bookimg;
+    private String bookimgFullPath;
 
 }

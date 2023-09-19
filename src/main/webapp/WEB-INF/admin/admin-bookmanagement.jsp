@@ -17,10 +17,8 @@
     <div class="modal-dialog modal-xl" >
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="editBook">도서 추가/수정/삭제</h1>
-                <form action="/books/remove?${book.IBSN}=?" method="post">
-                    <button type="submit" class="btn btn-danger">도서 삭제</button>
-                </form>
+                <h1 class="modal-title fs-5" id="editBook">도서 관리</h1>
+
             </div>
             <div class="modal-body">
                 <div class="modal-container">
@@ -90,7 +88,7 @@
                     <c:forEach var="book" items="${bookList}">
                         <ul class="list-rows">
                             <li class="table-value" >
-                                <a href="javascript:void(0)" onclick="modalOn(`${book.ISBN}`)" class="openModalLink" data-isbn="${book.ISBN}" data-bs-toggle="modal" data-bs-target="#editModal"><span class="isbn"> ${book.ISBN}</span></a></li>
+                                <a href="javascript:void(0)" onclick="modalOn(`${book.ISBN}`, )" class="openModalLink" data-isbn="${book.ISBN}" data-bs-toggle="modal" data-bs-target="#editModal"><span class="isbn"> ${book.ISBN}</span></a></li>
                             <li><span class="v-line"></span></li>
                             <li class="table-value">${book.bookname}</li>
                             <li><span class="v-line"></span></li>
