@@ -13,6 +13,16 @@ public class ViewResolver {
     }
 
     public String getView(String viewName) {
-        return prefix + viewName + suffix;
+        String view = null;
+        if (!viewName.contains(".do")) {
+            if (viewName.equals("index")) {
+                view = viewName + ".jsp";
+            } else {
+                view = prefix + viewName + suffix;
+            }
+        } else {
+            view = viewName;
+        }
+        return view;
     }
 }

@@ -13,17 +13,7 @@
     <link rel="stylesheet" href="../css/updateMyInfo.css">
 </head>
 <body>
-<header>
-    <nav class="navbar index-nav">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1"><img src="../css/icons/nest_eco_leaf.png" /> </span>
-            <span></span>
-            <span>
-            <button type="button" class="btn1 btn-sm" href="/myInfoView.do">로그아웃</button>
-          </span>
-        </div>
-    </nav>
-</header>
+<%@include file="./component/header.jsp"%>
 
 <section class="umi_container">
     <div class="my-info-form">

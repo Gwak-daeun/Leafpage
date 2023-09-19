@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -10,20 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>LeafPage</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/updateMyInfo.css">
+    <link rel="stylesheet" href="../../css/updateMyInfo.css">
 </head>
 <body>
-<header>
-    <nav class="navbar index-nav">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1"><img src="../css/icons/nest_eco_leaf.png" /> </span>
-            <span></span>
-            <span>
-            <button type="button" class="btn1 btn-sm" href="/myInfoView.do">로그아웃</button>
-          </span>
-        </div>
-    </nav>
-</header>
+<%@include file="../component/header.jsp"%>
 
 <section class="umi_container">
     <div class="my-info-form">

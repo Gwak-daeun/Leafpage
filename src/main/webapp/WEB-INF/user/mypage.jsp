@@ -14,25 +14,13 @@
 
 </head>
 <body>
-
-<header>
-    <nav class="navbar index-nav">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1"><img src="../css/icons/nest_eco_leaf.png" /> </span>
-            <span></span>
-            <span>
-            <button type="button" class="btn1 btn-sm" href="#">로그아웃</button>
-          </span>
-        </div>
-    </nav>
-</header>
-
+<%@include file="../component/header.jsp"%>
 
 <section class="mp_container">
     <div class="top">
         <div class="top_box">
             <h5 class="top_box_title">Guest</h5>
-          <button type="button" class="btn1 btn-sm"><a href="/myInfoView.do">내 정보 수정</a></button>
+          <button type="button" class="btn1 btn-sm"><a href="myInfoView.do">내 정보 수정</a></button>
         </div>
         <div class="top_box">
             <h5 class="top_box_title">현재 대여 권수</h5>
@@ -74,7 +62,7 @@
                    </li>
 
                     <%--책 뷰어--%>
-                   <%@include file="component/bookModal.jsp"%>
+                   <%@include file="../component/bookModal.jsp"%>
 
                </c:forEach>
 

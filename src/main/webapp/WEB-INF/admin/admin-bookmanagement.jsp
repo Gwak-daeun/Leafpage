@@ -12,6 +12,7 @@
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link rel="stylesheet" href="/css/admin-page-style.css" />
 </head>
+
 <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="editBook" aria-hidden="true">
     <div class="modal-dialog modal-xl" >
@@ -34,7 +35,6 @@
                 <button onclick="closeModal()" type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-dismiss="modal">Close</button>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -43,10 +43,10 @@
         <aside class="side-bar">
             <ul>
                 <li>
-                    <a href="/WEB-INF/admin/admin-usermanagement.jspmanagement.jsp">유저</a>
+                    <a href="/WEB-INF/admin/admin-usermanagement.jsp">유저</a>
                 </li>
                 <li>
-                    <a href="/WEB-INF/admin/admin-bookmanagement.html">도서</a>
+                    <a href="/WEB-INF/admin/admin-bookmanagement.jsp">도서</a>
                 </li>
             </ul>
         </aside>
@@ -116,6 +116,4 @@
     crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script src="/js/admin-management.js"></script>
-<script>
-</script>
 </html>

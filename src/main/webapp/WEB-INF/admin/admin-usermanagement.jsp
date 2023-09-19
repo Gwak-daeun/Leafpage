@@ -1,4 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,10 +15,10 @@
     <aside class="side-bar">
       <ul>
         <li>
-          <a href="/WEB-INF/admin/admin-usermanagement.html">유저</a>
+          <a href="/WEB-INF/admin/admin-usermanagement.jsp">유저</a>
         </li>
         <li>
-          <a href="/WEB-INF/admin/admin-bookmanagement.jspmanagement.jsp">도서</a>
+          <a href="/WEB-INF/admin/admin-bookmanagement.jsp">도서</a>
         </li>
       </ul>
     </aside>
