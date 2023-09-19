@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MypageReturnedBooksDTO {
     String book_name;
-    String author_name;
+    String book_author_name;
     String actual_return_date;
 }

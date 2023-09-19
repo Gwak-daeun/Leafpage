@@ -2,6 +2,7 @@ package com.leafpage.controller.user;
 
 import com.leafpage.controller.Controller;
 import com.leafpage.gwakdao.BookDAO;
+import com.leafpage.gwakdto.BookContentDTO;
 import com.leafpage.gwakdto.MypageBooksDTO;
 import com.leafpage.gwakdto.MypageReturnedBooksDTO;
 
@@ -18,7 +19,7 @@ public class MypageInfoController implements Controller {
 
         ArrayList<MypageBooksDTO> userBooks = new ArrayList<>();
         ArrayList<MypageReturnedBooksDTO> userReturnedBooks = new ArrayList<>();
-        List<String> bookText = new ArrayList<>();
+        List<BookContentDTO> bookText = new ArrayList<>();
 
         BookDAO bookDAO = new BookDAO();
 

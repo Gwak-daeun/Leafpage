@@ -54,19 +54,19 @@
             <ul class="flex rent_book">
                <c:forEach var="book" items="${books}" begin="0" end="4" step="1" >
                    <li id="bookLi" data-bs-toggle="modal" data-bs-target="#${book.rental_no}">
-                       <c:set var="dbViewerWidth" value="${book.modalWidth}"/>
-                       <c:set var="viewerY" value="${book.pcY}"/>
-                       <div class="card" class="card" data-bs-toggle="modal" data-bs-target="#${book.rental_no}" >
+                       <c:set var="dbViewerWidth" value="${book.modal_width}"/>
+                       <c:set var="viewerY" value="${book.scroll_y}"/>
+                       <div class="card" data-bs-toggle="modal" data-bs-target="#${book.rental_no}" >
                             <img src="image/마주.png" class="card-img-top" alt="..." />
-                           <c:if test="${book.modalWidth eq 321}">
+                           <c:if test="${book.modal_width eq 321}">
                                <img class="device-icon" src="../css/icons/phone_iphone.png" />
                            </c:if>
-                           <c:if test="${book.modalWidth ne 321}">
+                           <c:if test="${book.modal_width ne 321}">
                                <img class="device-icon" src="../css/icons/desktop_windows.png" />
                            </c:if>
                               <div class="card-body">
                                 <h5 class="card-title">${book.book_name}</h5>
-                                <p class="card-author">${book.author_name}</p>
+                                <p class="card-author">${book.book_author_name}</p>
                                 <p class="card-period">${book.rental_date} ~ ${book.scheduled_return_date}</p>
                               </div>
                        </div>
@@ -104,7 +104,7 @@
                             <img src="image/마주.png" class="card-img-top" alt="..." />
                             <div class="card-body">
                                 <h5 class="card-title">${userReturnedBook.book_name}</h5>
-                                <p class="card-author">${userReturnedBook.author_name}</p>
+                                <p class="card-author">${userReturnedBook.book_author_name}</p>
                                 <p class="card-period">반납일 : ${userReturnedBook.actual_return_date}</p>
                             </div>
                         </div>

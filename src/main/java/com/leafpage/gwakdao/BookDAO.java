@@ -1,5 +1,6 @@
 package com.leafpage.gwakdao;
 
+import com.leafpage.gwakdto.BookContentDTO;
 import com.leafpage.gwakdto.MypageBooksDTO;
 import com.leafpage.gwakdto.MypageReturnedBooksDTO;
 import com.leafpage.gwakdto.MypageTotalRentalDTO;
@@ -34,15 +35,13 @@ public class BookDAO {
 
         ArrayList<MypageBooksDTO> userBookList = null;
 
-        String SQL = "select r.rental_no as all_rentals, b.book_name, a.author_name, r.scheduled_return_date, r.rental_date, u.user_no, r.pcY, r.modalWidth \n" +
+        String SQL = "select r.rental_no as all_rentals, b.book_name, b.book_author_name, r.scheduled_return_date, r.rental_date, r.rental_no, r.scroll_y, r.modal_width \n" +
                 "from users u \n" +
                 "join book_rental r\n" +
                 "on u.user_no = r.user_no\n" +
                 "join books b\n" +
                 "on r.ISBN = b.ISBN \n" +
-                "join authors a\n" +
-                "on b.author_no = a.author_no\n" +
-                "where u.user_no = 5\n" +
+                "where u.user_no = 2\n" +
                 "and r.actual_return_date is null;";
         //user_no는 이후 로그인 기능 붙였을 때 파라미터로 받아야 함
 
@@ -87,7 +86,7 @@ public class BookDAO {
 
         String SQL = "select count(*) as rental_num\n" +
                 "from book_rental\n" +
-                "where book_rental.user_no = 5;";
+                "where book_rental.user_no = 2;";
         //user_no는 이후 로그인 기능 붙였을 때 파라미터로 받아야 함
 
         Connection conn = null;
@@ -122,15 +121,13 @@ public class BookDAO {
     public ArrayList<MypageReturnedBooksDTO> getUserReturnedBook() {
         ArrayList<MypageReturnedBooksDTO> userReturnedBookList = null;
 
-        String SQL = "select  b.book_name, a.author_name, r.actual_return_date\n" +
+        String SQL = "select b.book_name, b.book_author_name, r.actual_return_date\n" +
                 "from users u \n" +
                 "join book_rental r\n" +
                 "on u.user_no = r.user_no\n" +
                 "join books b\n" +
-                "on r.ISBN = b.ISBN \n" +
-                "join authors a\n" +
-                "on b.author_no = a.author_no\n" +
-                "where u.user_no = 4\n" +
+                "on r.ISBN = b.ISBN\n" +
+                "where u.user_no = 2\n" +
                 "and r.actual_return_date is not null;";
         //user_no는 이후 로그인 기능 붙였을 때 파라미터로 받아야 함
 
@@ -165,15 +162,52 @@ public class BookDAO {
         return userReturnedBookList;
     }
 
-    public List<String> getLendingBookContent() throws IOException {
+    public List<BookContentDTO> getLendingBookContent() throws IOException {
 
-        List<String> lines = Files.readAllLines(Paths.get("C:\\Users\\user\\Desktop\\book.txt"));
+        //txt파일 가져올 때
+//        List<String> lines = Files.readAllLines(Paths.get("C:\\Users\\user\\Desktop\\book.txt"));
+//
+//        List<String> bookText = new ArrayList<>();
+//
+//        for (String line : lines) {
+//            String word = line.replace("\\n", "<br>");
+//            bookText.add(word);
+//        }
 
-        List<String> bookText = new ArrayList<>();
 
-        for (String line : lines) {
-            String word = line.replace("\\n", "<br>");
-            bookText.add(word);
+        String SQL = "select books.book_content\n" +
+                "from books\n" +
+                "join book_rental\n" +
+                "on books.ISBN = book_rental.ISBN\n" +
+                "join users\n" +
+                "on users.user_no = book_rental.user_no\n" +
+                "where users.user_no = 2;";
+        //user_no는 이후 로그인 기능 붙였을 때 파라미터로 받아야 함
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<BookContentDTO> bookText = new ArrayList<>();
+        try {
+            conn = dataSource.getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                BookContentDTO books = new BookContentDTO(
+                    rs.getString(1)
+                );
+                bookText.add(books);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {conn.close();}
+                if (pstmt != null) {pstmt.close();}
+                if (rs != null) {rs.close();}
+            } catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
         return bookText;
@@ -186,12 +220,7 @@ public class BookDAO {
 
         System.out.println("MODAL WIDTH: " + modalWidth);
 
-//        if (modalWidth == 321) {
-            SQL = "update book_rental set mobileY = ? where rental_no = 5;";
-//        }
-//        if (modalWidth > 321) {
-//            SQL = "update book_rental set pcY = ? where rental_no = 5;";
-//        }
+        SQL = "update book_rental set scroll_y = ?, modal_width = ? where rental_no = 2;";
 
         System.out.println("SQL: " + SQL);
 
@@ -204,6 +233,7 @@ public class BookDAO {
             conn = dataSource.getConnection();
             pstmt = conn.prepareStatement(SQL);
             pstmt.setInt(1, modalY);
+            pstmt.setInt(2, modalWidth);
             System.out.println("PSTMT : " + pstmt);
             return pstmt.executeUpdate();
 

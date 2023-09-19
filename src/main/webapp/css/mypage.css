@@ -25,7 +25,7 @@ a {
 }
 
 .modal-content.dark-mode {
-    background-color: #4F4039;
+    background-color: #121212;
     color: rgb(255, 255, 255);
 }
 
@@ -33,7 +33,10 @@ a {
     border-radius: 5px;
     border-color: transparent;
     margin-left: 90px;
-    background-color: #F9F3F0;
+}
+
+.light-icon {
+    display: none;
 }
 
 

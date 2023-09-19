@@ -19,6 +19,27 @@ a {
     color: black;
 }
 
+.modal-content.light-mode {
+    background-color: #e7e3e3;
+    color: #000000;
+}
+
+.modal-content.dark-mode {
+    background-color: #121212;
+    color: rgb(255, 255, 255);
+}
+
+.select-mode{
+    border-radius: 5px;
+    border-color: transparent;
+    margin-left: 90px;
+}
+
+.light-icon {
+    display: none;
+}
+
+
 .device-icon {
     position: absolute;
     width: 20px;

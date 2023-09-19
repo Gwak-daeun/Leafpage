@@ -5,11 +5,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">${book.book_name}</h1>
-                <button class="select-mode">모드</button>
+                <a class="select-mode">
+                    <img class="light-icon" src="../css/icons/light_mode.png" />
+                    <img class="dark-icon" src="../css/icons/dark_mode.png" />
+                </a>
+<%--                <button class="select-mode">모드</button>--%>
             </div>
             <div class="modal-body">
                 <c:forEach var="text" items="${bookText}" >
-                    ${text}
+                    ${text.book_content}
                         <br />
                 </c:forEach>
             </div>
