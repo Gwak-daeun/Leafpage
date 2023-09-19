@@ -9,7 +9,7 @@ import java.io.IOException;
 public class AdminBookEditController implements Controller {
 
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+        System.out.println("나여기");
         return null;
     }
 }
