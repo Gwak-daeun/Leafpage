@@ -23,12 +23,15 @@ $(document).ready(function () {
 
         if (dbViewerWidth > modalWidth) { // 컴으로 보다가 모바일로 보려할 때
             $(this).find(".modal-body").scrollTop((viewerY * 666) / 321 );
+            console.log("작동1");
         }
         if (dbViewerWidth < modalWidth) { // 모바일로 보다가 컴으로 보려할 때
             $(this).find(".modal-body").scrollTop((viewerY * 321) / 666 );
+            console.log("작동2");
         }
         if (dbViewerWidth === modalWidth || viewerY === 0) { // 이전에 보던 기기랑 같은 기기로 볼 때
             $(this).find(".modal-body").scrollTop(viewerY);
+            console.log("작동3");
         }
 
     });

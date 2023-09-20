@@ -28,31 +28,24 @@ public class SignupController implements Controller {
 
             if(request.getParameter("userId") != null) {
                 userId = request.getParameter("userId");
-                System.out.println(userId);
             }
             if(request.getParameter("userPassword") != null) {
                 userPassword = request.getParameter("userPassword");
-                System.out.println(userPassword);
             }
             if(request.getParameter("userPasswordConfirm") != null) {
                 userPasswordConfirm = request.getParameter("userPasswordConfirm");
-                System.out.println(userPasswordConfirm);
             }
             if(request.getParameter("userEmail") != null) {
                 userEmail = request.getParameter("userEmail");
-                System.out.println(userEmail);
             }
             if(request.getParameter("userTel") != null) {
                 userTel = request.getParameter("userTel");
-                System.out.println(userTel);
             }
             if(request.getParameter("userSecurityQuestion") != null) {
                 userSecurityQuestion = request.getParameter("userSecurityQuestion");
-                System.out.println(userSecurityQuestion);
             }
             if(request.getParameter("userSecurityAnswer") != null) {
                 userSecurityAnswer = request.getParameter("userSecurityAnswer");
-                System.out.println(userSecurityAnswer);
             }
 
             if(userId == null || userPassword == null || userPasswordConfirm == null
@@ -66,12 +59,26 @@ public class SignupController implements Controller {
                 script.close();
             }
 
+//new UserDTO(0, userId, SHA256.getSHA256(userPassword), userEmail, userTel, "일반회원", "회원", userSecurityQuestion, userSecurityAnswer, com.leafpage.util.SHA256.getSHA256(userEmail), false)
             UserDAO userDAO = new UserDAO();
-            int result = userDAO.signup(new UserDTO(0, userId, SHA256.getSHA256(userPassword), userEmail, userTel, "일반회원", "회원", userSecurityQuestion, userSecurityAnswer, com.leafpage.util.SHA256.getSHA256(userEmail), false));
+            UserDTO userDTO = new UserDTO();
+            userDTO.setUserNo(0);
+            userDTO.setUserId(userId);
+            userDTO.setUserPassword(userPassword);
+            userDTO.setUserEmail(userEmail);
+            userDTO.setUserTel(userTel);
+            userDTO.setUserState("일반회원");
+            userDTO.setUserRole("회원");
+            userDTO.setUserSecurityQuestion(userSecurityQuestion);
+            userDTO.setUserSecurityAnswer(userSecurityAnswer);
+            userDTO.setUserEmailHash(SHA256.getSHA256(userEmail));
+            userDTO.setUserEmailChecked(false);
+
+            int result = userDAO.signup(userDTO);
             if (result == -1) {
                 PrintWriter script = response.getWriter();
                 script.println("<script>");
-                script.println("alert('이미 존재하는 아이디입니다.');");
+                script.println("alert('회원가입에 실패하였습니다.');");
                 script.println("history.back();");
                 script.println("</script>");
                 script.close();

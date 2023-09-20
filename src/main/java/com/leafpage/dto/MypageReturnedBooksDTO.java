@@ -1,4 +1,4 @@
-package com.leafpage.gwakdto;
+package com.leafpage.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

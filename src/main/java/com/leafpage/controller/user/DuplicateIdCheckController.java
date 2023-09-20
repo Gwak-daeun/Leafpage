@@ -3,6 +3,7 @@ package com.leafpage.controller.user;
 
 import com.leafpage.controller.Controller;
 import com.leafpage.dao.UserDAO;
+import com.leafpage.domain.user.Id;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
