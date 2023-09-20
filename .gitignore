@@ -224,3 +224,4 @@ buildNumber.properties
 # End of https://www.toptal.com/developers/gitignore/api/maven
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,java,intellij
+target/leafpage-1.0-SNAPSHOT/META-INF/MANIFEST.MF

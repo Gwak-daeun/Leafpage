@@ -31,7 +31,7 @@
                 <span >메르 저</span>
                 <div>카테고리 | 출판사 | 출판일</div>
                 <div class="bottom-mg inline">
-                    <button class="btn rental" data-toggle="modal" href="#rental">대여하기</button>
+                    <button class="btn rental" onclick="rent(${book.isbn})">대여하기</button>
                     <button class="btn preview">미리보기</button>   <%-- 로그인 해야 볼 수 있음--%>
 
                     <img id="emptyH" style="width: 20px; margin-left: 5px;" src="/css/icons/empty.png" onclick="location.href='LikeHeart.do'">
@@ -263,7 +263,7 @@
         <div class="modal-body">
             <div class="form-group">
                 <h3 class="modal-title" id="modal">대여에 성공했습니다!</h3>
-                <p>대여기간 2023-09-28</p>
+                <p class="scheduled-return-date"></p>
             </div>
 
             <div class="form-footer">
