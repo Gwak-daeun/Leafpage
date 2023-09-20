@@ -28,7 +28,7 @@
     <div class="book-box">
         <ul class="book-ul ">
             <li data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                <div class="book-list">
+                <div class="book-list" onclick="location.href='/detailPageView.do?userNo=9&isbn=040501813-4' ">
                     <img class="book-cover" src="./image/4.jpg" />
                     <div class="book-title">나를 지키는 관계...</div>
                     <div class="book-author">안젤라 센</div>

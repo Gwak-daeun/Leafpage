@@ -16,6 +16,18 @@
 <body>
 <%@include file="../component/header.jsp"%>
 
+<header>
+    <nav class="navbar index-nav">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1"><img src="../css/icons/nest_eco_leaf.png" /> </span>
+            <span></span>
+            <span>
+            <button type="button" class="btn1 btn-sm" href="#">로그아웃</button>
+          </span>
+        </div>
+    </nav>
+</header>
+
 <section class="mp_container">
     <div class="top">
         <div class="top_box">
@@ -29,6 +41,15 @@
         <div class="top_box">
             <h5 class="top_box_title">전체 대여 권수</h5>
             <p class="top_box_content">${totalRentals}</p>
+            <button type="button" class="btn1 btn-sm" href="#">내 정보 수정</button>
+        </div>
+        <div class="top_box">
+            <h5 class="top_box_title">현재 대여 권수</h5>
+            <p class="top_box_content">3/5</p>
+        </div>
+        <div class="top_box">
+            <h5 class="top_box_title">전체 대여 권수</h5>
+            <p class="top_box_content">15</p>
         </div>
     </div>
 
@@ -77,15 +98,169 @@
 <%--                                <p class="card-period">2023.08.31 ~ 2023.09.06</p>--%>
 <%--                            </div>--%>
 <%--                        </div>--%>
-<%--                        <button type="button" class="btn1 btn-sm" href="#">반납하기</button>--%>
-<%--                    </div>--%>
-<%--                </li>--%>
-
+    <%--       <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
+    <%--                    </li>--%>
+<%--                </c:forEach>--%>
+                <li>
+                    <div class="card-layout">
+                        <div class="card">
+                            <img src="../image/마주.png" class="card-img-top" alt="..." />
+                            <div class="card-body">
+                                <h5 class="card-title">마주</h5>
+                                <p class="card-author">최은미</p>
+                                <p class="card-period">2023.08.31 ~ 2023.09.06</p>
+                            </div>
+                        </div>
+                        <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
+                    </div>
+                </li>
+                <li>
+                    <div class="card-layout">
+                    <div class="card">
+                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">마주</h5>
+                            <p class="card-author">최은미</p>
+                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
+                    </div>
+                </li>
+                <li>
+                    <div class="card-layout">
+                    <div class="card">
+                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">마주</h5>
+                            <p class="card-author">최은미</p>
+                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
+                    </div>
+                </li>
+                <li>
+                    <div class="card-layout">
+                    <div class="card">
+                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">마주</h5>
+                            <p class="card-author">최은미</p>
+                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
+                    </div>
+                </li>
+                <li>
+                    <div class="card-layout">
+                    <div class="card">
+                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">마주</h5>
+                            <p class="card-author">최은미</p>
+                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
+                    </div>
+                </li>
             </ul>
         </div>
 
         <div class="bottom_content">
             <ul class="flex return_book">
+                <li>
+                    <div class="card">
+                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">마주탭변</h5>
+                            <p class="card-author">최은미</p>
+                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="card">
+                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">마주탭변</h5>
+                            <p class="card-author">최은미</p>
+                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="card">
+                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">마주탭변</h5>
+                            <p class="card-author">최은미</p>
+                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="card">
+                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">마주탭변</h5>
+                            <p class="card-author">최은미</p>
+                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="card">
+                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">마주탭변</h5>
+                            <p class="card-author">최은미</p>
+                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="card">
+                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">마주탭변</h5>
+                            <p class="card-author">최은미</p>
+                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="card">
+                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">마주탭변</h5>
+                            <p class="card-author">최은미</p>
+                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="card">
+                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">마주탭변</h5>
+                            <p class="card-author">최은미</p>
+                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="card">
+                        <img src="../image/마주.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">마주탭변</h5>
+                            <p class="card-author">최은미</p>
+                            <p class="card-period">2023.08.31 ~ 2023.09.06</p>
+                        </div>
+                    </div>
+                </li>
                 <c:forEach var="userReturnedBook" items="${userReturnedBooks}">
                     <li>
                         <div class="card">
@@ -121,7 +296,9 @@
 </script>
 <!-- 제이쿼리 자바스크립트 추가하기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="../js/mypage.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<!-- 제이쿼리 자바스크립트 추가하기 -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="../js/mypage.js"></script>
 </body>
 </html>
