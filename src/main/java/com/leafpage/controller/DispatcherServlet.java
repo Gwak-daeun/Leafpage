@@ -25,6 +25,9 @@ public class DispatcherServlet extends HttpServlet {
         Controller ctrl = handlerMapping.getController(path);
 
         String viewName = ctrl.handleRequest(request, response);
+        if (viewName.equals("none")) {
+            return;
+        }
         String view = viewResolver.getView(viewName);
         RequestDispatcher dispatcher = request.getRequestDispatcher(view);
         dispatcher.forward(request, response);

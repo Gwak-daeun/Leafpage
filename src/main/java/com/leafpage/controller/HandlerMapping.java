@@ -1,5 +1,6 @@
 package com.leafpage.controller;
 
+import com.leafpage.controller.rental.RentalController;
 import com.leafpage.controller.user.*;
 import com.leafpage.controller.admin.*;
 
@@ -37,6 +38,8 @@ public class HandlerMapping {
         mappings.put("/myPageView.do", new MyPageViewController());
         mappings.put("/successEmailCheckView.do", new SuccessEmailCheckViewController());
         mappings.put("/failEmailCheckView.do", new FailEmailCheckViewController());
+
+        mappings.put("/rentBook.do", new RentalController());
     }
 
     public Controller getController(String path) {

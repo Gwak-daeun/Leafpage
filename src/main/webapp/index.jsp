@@ -13,6 +13,11 @@
 <body>
 <%@include file="./WEB-INF/component/header.jsp"%>
 
+<%
+    response.sendRedirect("/LikeHeart.do?userNo=3&isbn=3333333333333");
+    session.setAttribute("userNo", 3L);
+%>
+
 <div class="container">
     <div class="title">
         <h1>LeafPage</h1>
