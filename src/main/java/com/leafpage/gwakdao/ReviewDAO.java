@@ -74,6 +74,12 @@ public class ReviewDAO {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (conn != null) {conn.close();}
+                if (pstmt != null) {pstmt.close();}
+                if (rs != null) {rs.close();}
+            } catch (Exception e){e.printStackTrace();}
         }
 
         return bookReviews;
@@ -96,6 +102,12 @@ public class ReviewDAO {
 
             e.printStackTrace();
 
+        }finally {
+            try {
+                if (conn != null) {conn.close();}
+                if (pstmt != null) {pstmt.close();}
+                if (rs != null) {rs.close();}
+            } catch (Exception e){e.printStackTrace();}
         }
 
         return -1;

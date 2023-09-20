@@ -53,10 +53,8 @@
         <div class="bottom_content on">
             <ul class="flex rent_book">
                <c:forEach var="book" items="${books}" begin="0" end="4" step="1" >
-                   <li id="bookLi" data-bs-toggle="modal" data-bs-target="#${book.rental_no}">
-                       <c:set var="dbViewerWidth" value="${book.modal_width}"/>
-                       <c:set var="viewerY" value="${book.scroll_y}"/>
-                       <div class="card" data-bs-toggle="modal" data-bs-target="#${book.rental_no}" >
+                   <li id="bookLi" >
+                       <div onclick="openViewer(${book.rental_no}, ${book.scroll_y}, ${book.modal_width})" class="card"  >
                             <img src="image/마주.png" class="card-img-top" alt="..." />
                            <c:if test="${book.modal_width eq 321}">
                                <img class="device-icon" src="../css/icons/phone_iphone.png" />
@@ -74,7 +72,29 @@
                    </li>
 
                     <%--책 뷰어--%>
-                   <%@include file="component/bookModal.jsp"%>
+                   <div class="modal fade" id="${book.rental_no}" aria-hidden="true">
+                       <div class="modal-dialog modal-xl">
+                           <div class="modal-content">
+                               <div class="modal-header">
+                                   <h1 class="modal-title fs-5" id="staticBackdropLabel">${book.book_name}</h1>
+                                   <a class="select-mode">
+                                       <img class="light-icon" src="../css/icons/light_mode.png" />
+                                       <img class="dark-icon" src="../css/icons/dark_mode.png" />
+                                   </a>
+                                       <%--                <button class="select-mode">모드</button>--%>
+                               </div>
+                               <div class="modal-body">
+                                   <c:forEach var="text" items="${bookText}" >
+                                       ${text.book_content}
+                                       <br />
+                                   </c:forEach>
+                               </div>
+                               <div class="modal-footer">
+                                   <button id="closeBtn" type="button" class="modal-close" data-bs-dismiss="modal">여기까지 보기</button>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
 
                </c:forEach>
 
@@ -127,13 +147,40 @@
 </section>
 
 
-<script>
-    let dbViewerWidth = ${dbViewerWidth};
-    let viewerY = ${viewerY};
-</script>
+
 <!-- 제이쿼리 자바스크립트 추가하기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="../js/mypage.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+<script>
+    function openViewer(rentalNo, dbScrollY, dbModalWidth) {
+
+        let modalBody = $(`#` + rentalNo).find(".modal-body"); // 해당 모달 창의 .modal-body 요소 선택
+
+        console.log("와이축 : ", dbScrollY, "폭 : ", dbModalWidth, ", 번호 : ", rentalNo);
+
+        $(`#` + rentalNo).modal('show');
+
+        $(`#` + rentalNo).on('shown.bs.modal', function () {
+            console.log("modalBody.width() : " + modalBody.width());
+
+            if (dbModalWidth === modalBody.width() || dbScrollY === 0) {
+                modalBody.scrollTop(dbScrollY);
+                console.log("작동3 : ", dbModalWidth);
+            }
+            if (dbModalWidth > modalBody.width()) {
+                modalBody.scrollTop((dbScrollY * 666) / 321 );
+                console.log("작동1 : ", dbModalWidth);
+            }
+            if (dbModalWidth < modalBody.width()) {
+                modalBody.scrollTop((dbScrollY * 321) / 666 );
+                console.log("작동2 : ", dbModalWidth);
+            }
+        });
+
+    }
+</script>
+
 </body>
 </html>

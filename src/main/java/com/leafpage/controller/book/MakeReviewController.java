@@ -31,10 +31,14 @@ public class MakeReviewController implements Controller {
 
         int result = new ReviewDAO().makeReview(userNum, ISBN, reviewDate, reviewContent, reviewRating);
 
+        HttpSession session = request.getSession();
+
         if (result != 1) {
-            HttpSession session = request.getSession();
             session.setAttribute("failed", "리뷰 등록에 실패했어요.");
+            return "/detailPageView.do";
         }
+
+        session.setAttribute("failed", "");
 
         return "/detailPageView.do";
     }

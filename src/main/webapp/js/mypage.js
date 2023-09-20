@@ -17,21 +17,44 @@ $(document).ready(function () {
         }
     });
 
-    $(".modal").on('shown.bs.modal', function () {
+    // $(".modal").on('shown.bs.modal', function () {
+    //
+    //     let modalWidth = $(".modal-body").width();
+    //
+    //     if (dbViewerWidth > modalWidth) { // 컴으로 보다가 모바일로 보려할 때
+    //         $(this).find(".modal-body").scrollTop((viewerY * 666) / 321 );
+    //         console.log("작동1 : ", dbViewerWidth);
+    //     }
+    //     if (dbViewerWidth < modalWidth) { // 모바일로 보다가 컴으로 보려할 때
+    //         $(this).find(".modal-body").scrollTop((viewerY * 321) / 666 );
+    //         console.log("작동2 : ", dbViewerWidth);
+    //     }
+    //     if (dbViewerWidth === modalWidth || viewerY === 0) { // 이전에 보던 기기랑 같은 기기로 볼 때
+    //         $(this).find(".modal-body").scrollTop(viewerY);
+    //         console.log("작동3 : ", dbViewerWidth);
+    //     }
+    //
+    // });
 
-        let modalWidth = $(".modal-body").width();
-
-        if (dbViewerWidth > modalWidth) { // 컴으로 보다가 모바일로 보려할 때
-            $(this).find(".modal-body").scrollTop((viewerY * 666) / 321 );
-        }
-        if (dbViewerWidth < modalWidth) { // 모바일로 보다가 컴으로 보려할 때
-            $(this).find(".modal-body").scrollTop((viewerY * 321) / 666 );
-        }
-        if (dbViewerWidth === modalWidth || viewerY === 0) { // 이전에 보던 기기랑 같은 기기로 볼 때
-            $(this).find(".modal-body").scrollTop(viewerY);
-        }
-
-    });
+    // function openViewer(dbScrollY, dbModalWidth) {
+    //
+    //     let comModalWidth = $(".modal-body").width();
+    //
+    //     console.log("와이축 : ", dbScrollY, "폭 : ", dbModalWidth);
+    //
+    //     if (dbModalWidth > comModalWidth) { // 컴으로 보다가 모바일로 보려할 때
+    //         $(this).find(".modal-body").scrollTop((dbScrollY * 666) / 321 );
+    //         console.log("작동1 : ", dbModalWidth);
+    //     }
+    //     if (dbModalWidth < comModalWidth) { // 모바일로 보다가 컴으로 보려할 때
+    //         $(this).find(".modal-body").scrollTop((dbScrollY * 321) / 666 );
+    //         console.log("작동2 : ", dbModalWidth);
+    //     }
+    //     if (dbModalWidth === comModalWidth || dbScrollY === 0) { // 이전에 보던 기기랑 같은 기기로 볼 때
+    //         $(this).find(".modal-body").scrollTop(dbScrollY);
+    //         console.log("작동3 : ", dbModalWidth);
+    //     }
+    // }
 
 
     $("#closeBtn").click(function () {
@@ -39,8 +62,6 @@ $(document).ready(function () {
         let modalY = $(".modal-body").scrollTop();
 
         let modalWidth = $(".modal-body").width();
-
-        console.log("Y축: " + modalY + "너비 : " + modalWidth);
 
         $.ajax({
             url: "/saveUserBookY.do",

@@ -16,4 +16,5 @@ public class BookDetailDTO {
     private String book_publisher_name;
     private String book_pub_date;
     private String book_chapter;
+    private String category_name;
 }

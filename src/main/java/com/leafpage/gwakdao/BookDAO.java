@@ -1,14 +1,9 @@
 package com.leafpage.gwakdao;
 
 import com.leafpage.gwakdto.*;
+import com.leafpage.util.DBUtil;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
-import java.awt.print.Book;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,33 +13,35 @@ import java.util.List;
 public class BookDAO {
 
     private Connection conn = null;
-    DataSource dataSource = null;
+    private PreparedStatement pstmt = null;
+    private ResultSet rs = null;
+    String SQL = "";
 
-    public BookDAO() {
-        try {
-            Context init = new InitialContext();
-            dataSource = (DataSource)init.lookup("java:comp/env/jdbc/mysql");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public BookDAO() {
+//        try {
+//            Context init = new InitialContext();
+//            DBUtil = (DBUtil)init.lookup("java:comp/env/jdbc/mysql");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public BookDetailDTO getBookDetails(String ISBN) {
 
-//        ArrayList<BookDetailDTO> bookDetailList = new ArrayList<>();
-
         BookDetailDTO bookDetailList = new BookDetailDTO();
 
-        String SQL = "select ISBN, book_name, book_author_name, book_img, book_info, book_publisher_name, book_pub_date, book_chapter\n" +
-                "from books\n" +
-                "where ISBN = ?;";
+        String SQL = "select b.ISBN, b.book_name, b.book_author_name, b.book_img, b.book_info, b.book_publisher_name, b.book_pub_date, b.book_chapter, c.category_name\n" +
+                "from books b\n" +
+                "join book_category c\n" +
+                "on b.ISBN = c.ISBN\n" +
+                "where b.ISBN = ?;";
 
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
         try {
-            conn = dataSource.getConnection();
+            conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
             pstmt.setString(1, ISBN);
            rs = pstmt.executeQuery();
@@ -57,15 +54,55 @@ public class BookDAO {
                     rs.getString(5),
                     rs.getString(6),
                     rs.getString(7),
-                    rs.getString(8)
+                    rs.getString(8),
+                    rs.getString(9)
                 );
                 bookDetailList = bookDetail;
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (conn != null) {conn.close();}
+                if (pstmt != null) {pstmt.close();}
+                if (rs != null) {rs.close();}
+            } catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
         return bookDetailList;
+    }
+
+    public BookAuthorNameDTO getAuthorName(String ISBN) {
+        
+        BookAuthorNameDTO bookAuthorNameDTO = new BookAuthorNameDTO();
+
+        SQL = "select book_author_name\n" +
+                "from books\n" +
+                "where ISBN = ?;";
+
+        try {
+
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1, ISBN);
+            rs = pstmt.executeQuery();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (conn != null) {conn.close();}
+                if (pstmt != null) {pstmt.close();}
+                if (rs != null) {rs.close();}
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        return bookAuthorNameDTO;
     }
 
     public ArrayList<MypageBooksDTO> getUserLendingBook() throws IOException {
@@ -87,7 +124,7 @@ public class BookDAO {
         ResultSet rs = null;
         userBookList = new ArrayList<>();
         try {
-            conn = dataSource.getConnection();
+            conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
             rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -131,7 +168,7 @@ public class BookDAO {
         ResultSet rs = null;
 //        userTotalRentals = new ArrayList<>();
         try {
-            conn = dataSource.getConnection();
+            conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
             rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -173,7 +210,7 @@ public class BookDAO {
         ResultSet rs = null;
         userReturnedBookList = new ArrayList<>();
         try {
-            conn = dataSource.getConnection();
+            conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
             rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -226,7 +263,7 @@ public class BookDAO {
         ResultSet rs = null;
         List<BookContentDTO> bookText = new ArrayList<>();
         try {
-            conn = dataSource.getConnection();
+            conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
             rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -267,7 +304,7 @@ public class BookDAO {
 
         try {
 
-            conn = dataSource.getConnection();
+            conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
             pstmt.setInt(1, modalY);
             pstmt.setInt(2, modalWidth);

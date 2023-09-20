@@ -24,13 +24,15 @@
     </nav>
 </header>
 <section>
+    <c:set var="errorMsg" value="${errorMsg}"/>
+    <c:set var="failed" value="${failed}"/>
     <div>
         <div class="mg">
             <img src="image/bookcover.png" class="imgstyle">
             <div class="center">
                 <span class="inline">${bookDetail.book_name}</span>
                 <span >${bookDetail.book_author_name}</span>
-                <div>카테고리 | ${bookDetail.book_publisher_name} | 발행일: ${bookDetail.book_pub_date}</div>
+                <div>${bookDetail.category_name} | ${bookDetail.book_publisher_name} | 발행일: ${bookDetail.book_pub_date}</div>
                 <div class="bottom-mg inline">
                     <button class="btn rental" data-toggle="modal" href="#rental">대여하기</button>
                     <button class="btn preview">미리보기</button>   <%-- 로그인 해야 볼 수 있음--%>
@@ -187,6 +189,11 @@
     </div>
 
 </div>
+
+<script>
+        let errorMsg = "${errorMsg}";
+        let failed = "${failed}";
+</script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" crossorigin="anonymous"></script>

@@ -12,16 +12,26 @@ public class RemoveReviewController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        System.out.println("CHECK : " + request.getParameter("reviewNo"));
+        int result = 0;
 
-        int reviewNo = Integer.parseInt(request.getParameter("reviewNo")) ;
-
-       int result = new ReviewDAO().removeReview(reviewNo);
-
-        if (result != 1) {
-            HttpSession session = request.getSession();
-            session.setAttribute("error", "리뷰 삭제에 실패했어요.");
+        try {
+            int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+             result = new ReviewDAO().removeReview(reviewNo);
+            // 정상적으로 변환된 경우에 수행할 작업
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            // 오류 처리: 숫자로 변환할 수 없는 경우
+            // 오류 메시지를 출력하거나 다른 조치를 취할 수 있음
         }
+
+        HttpSession session = request.getSession();
+
+        if (result == -1) {
+            session.setAttribute("errorMsg", "리뷰 삭제에 실패했어요.");
+            return "/detailPageView.do";
+        }
+
+        session.setAttribute("errorMsg", "");
 
         return "/detailPageView.do";
     }

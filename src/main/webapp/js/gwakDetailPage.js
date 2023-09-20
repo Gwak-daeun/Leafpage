@@ -2,6 +2,13 @@
 //클릭으로 탭 메뉴 변경
 $(document).ready(function () {
 
+    if (errorMsg == "리뷰 삭제에 실패했어요.") {
+        alert(errorMsg);
+    }
+    if (failed == "리뷰 등록에 실패했어요.") {
+        alert(failed);
+    }
+
 //하트 채워지고 비워지는 기능
     $("#emptyH").show();
     $("#fullH").hide();
@@ -57,11 +64,11 @@ $("#reviewRegister").click(function () {
     console.log("리뷰 내용 : ", reviewContent, ", 별점 : ", selectedRating);
 
     $.ajax({
-        type: 'POST', // 또는 'GET'에 따라 HTTP 메서드 선택
-        url: '/makeReview.do', // 여기에 서블릿 URL을 입력
+        type: 'POST',
+        url: '/makeReview.do',
         data: {
             rating: selectedRating,
-            content: reviewContent // textarea의 내용 추가
+            content: reviewContent
         },
         success: function(response) {
             alert('리뷰 등록에 성공했어요.');
@@ -74,28 +81,28 @@ $("#reviewRegister").click(function () {
 
 });
 
-    $(".delete-button").click(function () {
-
-        console.log("삭제 시작");
-        console.log("리뷰 번호 확인: " + reviewNo);
-
-        if (window.confirm("이 리뷰를 삭제하시겠어요?")) {
-            $.ajax({
-                type: "POST",
-                url: '/removeReview.do',
-                data: {
-                    reviewNo : reviewNo
-                },
-                success: function (response) {
-                    alert('리뷰 삭제 완료');
-                    location.reload();
-                },
-                error: function (error) {
-                    alert('리뷰 삭제 실패 - ' + error.message);
-                }
-            });
-        }
-    });
+    // $(".delete-button").click(function () {
+    //
+    //     console.log("삭제 시작");
+    //     console.log("리뷰 번호 확인: " + reviewNo);
+    //
+    //     if (window.confirm("이 리뷰를 삭제하시겠어요?")) {
+    //         $.ajax({
+    //             type: "POST",
+    //             url: '/removeReview.do',
+    //             data: {
+    //                 reviewNo : reviewNo
+    //             },
+    //             success: function (response) {
+    //                 alert('리뷰 삭제 완료');
+    //                 location.reload();
+    //             },
+    //             error: function (error) {
+    //                 alert('리뷰 삭제 실패 - ' + error.message);
+    //             }
+    //         });
+    //     }
+    // });
 
 $("#reviewClose").click(function () {
 
