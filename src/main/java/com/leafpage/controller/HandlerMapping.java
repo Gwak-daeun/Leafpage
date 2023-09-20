@@ -1,6 +1,9 @@
 package com.leafpage.controller;
 
 import com.leafpage.controller.book.BookYController;
+import com.leafpage.controller.book.DetailPageController;
+import com.leafpage.controller.book.MakeReviewController;
+import com.leafpage.controller.book.RemoveReviewController;
 import com.leafpage.controller.user.*;
 import com.leafpage.controller.admin.*;
 import com.leafpage.controller.user.View.*;
@@ -17,23 +20,18 @@ public class HandlerMapping {
         mappings = new HashMap<>();
 
         mappings.put("/LikeHeart.do",new LikeEmptyHeartController());
-        mappings.put("/detailPageView.do", new DetailPageViewController());
+        mappings.put("/detailPageView.do", new DetailPageController());
         mappings.put("/booklistView.do", new AdminBookListController());
         mappings.put("/getBook.do", new AdminBookDetailController());
         mappings.put("/books/edit.do", new AdminBookEditController());
         mappings.put("/mypageInfo.do", new MypageInfoController());
-        mappings.put("/myInfoView.do", new UserMypageInfoViewController());
         mappings.put("/saveUserBookY.do", new BookYController());
+        mappings.put("/makeReview.do", new MakeReviewController());
+        mappings.put("/removeReview.do", new RemoveReviewController());
 
-
-        mappings.put("/LikeHeart.do",new LikeEmptyHeartController());
-        mappings.put("/detailPageView.do", new DetailPageViewController());
-        mappings.put("/booklistView.do", new AdminBookListController());
-        mappings.put("/getBook.do", new AdminBookDetailController());
         mappings.put("/bookupload.do", new AdminBookUploadController());
         mappings.put("/remove.do", new AdminBookDeleteController());
         mappings.put("/edit.do", new AdminBookEditController());
-        mappings.put("/mypageInfo.do", new MypageInfoController());
 
         mappings.put("/signupView.do", new SignupViewController());
         mappings.put("/signup.do", new SignupController());
@@ -49,6 +47,10 @@ public class HandlerMapping {
         mappings.put("/myPageView.do", new MyPageViewController());
         mappings.put("/successEmailCheckView.do", new SuccessEmailCheckViewController());
         mappings.put("/failEmailCheckView.do", new FailEmailCheckViewController());
+
+
+
+
     }
 
     public Controller getController(String path) {
