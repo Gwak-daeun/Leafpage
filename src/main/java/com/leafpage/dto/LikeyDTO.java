@@ -13,5 +13,4 @@ public class LikeyDTO {
     Long userNo;
     String ISBN;
 
-
 }

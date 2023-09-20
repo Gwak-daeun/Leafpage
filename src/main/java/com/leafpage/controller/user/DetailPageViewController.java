@@ -9,6 +9,6 @@ import java.io.IOException;
 public class DetailPageViewController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        return "detailPage";
+        return "book/detailPage";
     }
 }
