@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/css/admin-page-style.css" />
 <form class="editform" action="/edit.do" method="post" enctype="multipart/form-data">
 <div class="modal-left-div">
-    <img src="${book.bookimgFullPath}"  id="image">
+    <img src="${book.bookImgFullPath}"  id="image">
     <div class="filebox">
         <label for="image-upload">이미지 수정</label>
         <input type="file" name="bookimg" id="image-upload" accept=".jpg, .png, .jpeg">
@@ -18,14 +18,14 @@
 
 <div class="modal-right-div" id = "modalContent">
     <input type="text" name="ISBN" class="normal-input" required aria-required="true" placeholder="ISBN" value="${book.ISBN}" readonly>
-    <input type="text" name="bookname" class="normal-input" required aria-required="true" placeholder="도서명" value="${book.bookname}">
-    <input type="text" name="auther" class="normal-input" required aria-required="true" placeholder="저자명" value="${book.auther}">
-    <input type="text" name="publisher" class="normal-input" required aria-required="true" placeholder="출판사" value="${book.publisher}">
-    <input type="date" name="pubdate" class="normal-input" required aria-required="true" data-placeholder="출판일" value="${book.pubdate}">
+    <input type="text" name="bookname" class="normal-input" required aria-required="true" placeholder="도서명" value="${book.bookName}">
+    <input type="text" name="auther" class="normal-input" required aria-required="true" placeholder="저자명" value="${book.bookAuthorName}">
+    <input type="text" name="publisher" class="normal-input" required aria-required="true" placeholder="출판사" value="${book.bookPublisherName}">
+    <input type="date" name="pubdate" class="normal-input" required aria-required="true" data-placeholder="출판일" value="${book.bookPubDate}">
     <input type="text" name="categories" class="normal-input" placeholder="카테고리" value="${book.categories}">
-    <textarea name="bookinfo" class="book-intro" cols="30" rows="10" required aria-required="true" placeholder="책 소개">${book.bookinfo}</textarea>
-    <textarea name="bookchapter" class="book-chapter" cols="30" rows="10" required aria-required="true" placeholder="책 목차">${book.bookchapter}</textarea>
-    <textarea name="bookcontent"  class="book-content" cols="30" rows="10" required aria-required="true" placeholder="책 내용">${book.bookcontent}</textarea>
+    <textarea name="bookinfo" class="book-intro" cols="30" rows="10" required aria-required="true" placeholder="책 소개">${book.bookInfo}</textarea>
+    <textarea name="bookchapter" class="book-chapter" cols="30" rows="10" required aria-required="true" placeholder="책 목차">${book.bookChapter}</textarea>
+    <textarea name="bookcontent"  class="book-content" cols="30" rows="10" required aria-required="true" placeholder="책 내용">${book.bookContent}</textarea>
 </div>
 </form>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"

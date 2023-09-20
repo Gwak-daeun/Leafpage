@@ -15,12 +15,12 @@ public class AdminBookDetailController implements Controller {
         BookDAO dao = new BookDAO();
         if(ISBN==null){
             BookDTO book = dao.detailBook(ISBN);
-            System.out.println(book.getBookimgFullPath());
+            System.out.println(book.getBookImgFullPath());
             request.setAttribute("book" ,book);
             return "admin/bookmodal";
         }else{
             BookDTO book = dao.detailBook(ISBN);
-            System.out.println(book.getBookimgFullPath());
+            System.out.println(book.getBookImgFullPath());
             request.setAttribute("book" ,book);
 
             return "admin/bookmodaledit";

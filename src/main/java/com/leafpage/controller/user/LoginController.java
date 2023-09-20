@@ -64,7 +64,7 @@ public class LoginController implements Controller {
 
             case 0:  // [0]관리자 로그인
                 session.setAttribute("userId", userId);
-                return "adminUserManagementView.do";
+                return "booklistView.do";
 
             case 1:  // [1]일반회원 로그인
                 session.setAttribute("userId", userId);

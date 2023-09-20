@@ -1,10 +1,10 @@
 package com.leafpage.controller.user;
 
 import com.leafpage.controller.Controller;
-import com.leafpage.gwakdao.BookDAO;
-import com.leafpage.gwakdto.BookContentDTO;
-import com.leafpage.gwakdto.MypageBooksDTO;
-import com.leafpage.gwakdto.MypageReturnedBooksDTO;
+import com.leafpage.dao.LikeyDAO;
+import com.leafpage.dto.BookContentDTO;
+import com.leafpage.dto.MypageBooksDTO;
+import com.leafpage.dto.MypageReturnedBooksDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +21,7 @@ public class MypageInfoController implements Controller {
         ArrayList<MypageReturnedBooksDTO> userReturnedBooks = new ArrayList<>();
         List<BookContentDTO> bookText = new ArrayList<>();
 
-        BookDAO bookDAO = new BookDAO();
+        LikeyDAO.BookDAO bookDAO = new LikeyDAO.BookDAO();
 
         int totalRentals = 0;
 
@@ -43,6 +43,6 @@ public class MypageInfoController implements Controller {
 
         session.setAttribute("bookText", bookText);
 
-        return "mypage";
+        return "/user/mypage";
     }
 }

@@ -8,17 +8,16 @@ import java.util.List;
 @Setter
 @Getter
 public class BookDTO {
-
     private String ISBN;
-    private String bookname;
-    private String auther;
-    private String publisher;
-    private String pubdate;
+    private String bookName;
+    private String bookAuthorName;
+    private String bookPublisherName;
+    private String bookPubDate;
     private List<String> categories;
-    private String bookinfo;
-    private String bookchapter;
-    private String bookcontent;
-    private String bookimg;
-    private String bookimgFullPath;
+    private String bookInfo;
+    private String bookChapter;
+    private String bookContent;
+    private String bookImg;
+    private String bookImgFullPath;
 
 }
