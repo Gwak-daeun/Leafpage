@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +25,7 @@
     </nav>
 </header>
 <section>
-    <div>
+    <div class="inline">
         <div class="mg">
             <img src="image/bookcover.png" class="imgstyle">
             <div class="center">
@@ -34,8 +36,16 @@
                     <button class="btn rental" data-toggle="modal" href="#rental">대여하기</button>
                     <button class="btn preview">미리보기</button>   <%-- 로그인 해야 볼 수 있음--%>
 
-                    <img id="emptyH" style="width: 20px; margin-left: 5px;" src="/css/icons/empty.png" onclick="location.href='LikeHeart.do'">
-                    <img id="fullH" style="width: 20px; margin-left: 5px;" src="/css/icons/full.png" onclick="location.href='LikeHeart.do'">
+<%--                    <c:if test="${heartSelect =='1'}">--%>
+<%--                        <img id="fullH" style="width: 20px; margin-left: 5px;" src="/css/icons/full.png" onclick="likeCheck()">--%>
+<%--                    </c:if>--%>
+<%--                    <c:if test="${heartSelect =='0'}">--%>
+<%--                        <img id="emptyH" style="width: 20px; margin-left: 5px;" src="/css/icons/empty.png" onclick="likeCheck()">--%>
+<%--                    </c:if>--%>
+<%--                    ${ heartCount }--%>
+                    <img id="fullH" style="width: 20px; margin-left: 5px;" src="/css/icons/full.png" onclick="likeCheck()">
+                    <img id="emptyH" style="width: 20px; margin-left: 5px;" src="/css/icons/empty.png" onclick="likeCheck()">
+
                     ${ heartCount }
 <%--                    <i class="fa-solid fa-heart fa-xl" style="color: #d7443e;"></i>--%>
             </div>
