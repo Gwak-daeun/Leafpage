@@ -10,10 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -123,16 +121,16 @@ public class AdminBookUploadController implements Controller  {
         BookDTO dto = new BookDTO();
 
         dto.setISBN(ISBN);
-        dto.setBookname(bookname);
-        dto.setAuther(auther);
-        dto.setPublisher(publisher);
-        dto.setPubdate(pubdate);
+        dto.setBookName(bookname);
+        dto.setBookAuthorName(auther);
+        dto.setBookPublisherName(publisher);
+        dto.setBookPubDate(pubdate);
         dto.setCategories(categorieslist);
-        dto.setBookinfo(bookinfo);
-        dto.setBookchapter(bookchapter);
-        dto.setBookcontent(bookcontent);
-        dto.setBookimg(bookimg);
-        dto.setBookimgFullPath(bookimgFullPath);
+        dto.setBookInfo(bookinfo);
+        dto.setBookChapter(bookchapter);
+        dto.setBookContent(bookcontent);
+        dto.setBookImg(bookimg);
+        dto.setBookImgFullPath(bookimgFullPath);
 
         int count = dao.uploadBook(dto);
         System.out.println(count);

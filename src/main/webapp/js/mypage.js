@@ -17,47 +17,35 @@ $(document).ready(function () {
         }
     });
 
-    $(".modal").on('shown.bs.modal', function () {
-
-        let modalWidth = $(".modal-body").width();
-
-        if (dbViewerWidth > modalWidth) { // 컴으로 보다가 모바일로 보려할 때
-            $(this).find(".modal-body").scrollTop((viewerY * 666) / 321 );
-        }
-        if (dbViewerWidth < modalWidth) { // 모바일로 보다가 컴으로 보려할 때
-            $(this).find(".modal-body").scrollTop((viewerY * 321) / 666 );
-        }
-        if (dbViewerWidth === modalWidth || viewerY === 0) { // 이전에 보던 기기랑 같은 기기로 볼 때
-            $(this).find(".modal-body").scrollTop(viewerY);
-        }
-
-    });
 
 
-    $("#closeBtn").click(function () {
-
-        let modalY = $(".modal-body").scrollTop();
-
-        let modalWidth = $(".modal-body").width();
-
-        console.log("Y축: " + modalY + "너비 : " + modalWidth);
-
-        $.ajax({
-            url: "/saveUserBookY.do",
-            type: "POST",
-            data: {
-                modalY : modalY,
-                 modalWidth: modalWidth
-            },
-            success: function (response) {
-                // console.log("서버 응답: ", response);
-                location.reload();
-            },
-            error: function (error) {
-                console.error("에러 발생: ", error);
-            }
-        });
-    });
+    // $("#closeBtn").click(function () {
+    //
+    //     let modalY = $(".modal-body").scrollTop();
+    //
+    //     let modalWidth = $(".modal-body").width();
+    //
+    //     let rentalNo =
+    //
+    //     console.log("Y축: " + modalY + "너비 : " + modalWidth);
+    //
+    //     $.ajax({
+    //         url: "/saveUserBookY.do",
+    //         type: "POST",
+    //         data: {
+    //             modalY : modalY,
+    //             modalWidth: modalWidth,
+    //             rentalNo : rentalNo
+    //         },
+    //         success: function (response) {
+    //             // console.log("서버 응답: ", response);
+    //             location.reload();
+    //         },
+    //         error: function (error) {
+    //             console.error("에러 발생: ", error);
+    //         }
+    //     });
+    // });
 
 
     $(".select-mode").click(function(){

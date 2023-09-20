@@ -1,5 +1,7 @@
 package com.leafpage.dao;
 
+import com.leafpage.domain.user.Id;
+import com.leafpage.domain.user.Password;
 import com.leafpage.dto.UserDTO;
 import com.leafpage.util.DBUtil;
 import com.leafpage.util.SHA256;
@@ -12,6 +14,8 @@ public class UserDAO {
     String loginSQL = "SELECT user_password, user_role, user_state FROM users WHERE user_id = ?";
     String signupSQL = "INSERT INTO users VALUES (NULL,?,?,?,?,?,?,?,?,?,false)";
     String findUserByIdSQL = "SELECT user_id FROM users WHERE user_id = ?";
+    String findUserByEmailSQL = "SELECT user_email FROM users WHERE user_email = ?";
+    String findUserByTelSQL = "SELECT user_tel FROM users WHERE user_tel = ?";
     String getUserEmailSQL = "SELECT user_email FROM users WHERE user_id = ?";
     String getUserEmailCheckedSQL = "SELECT user_email_checked FROM users WHERE user_id = ?";
     String setUserEmailCheckedSQL = "UPDATE users SET user_email_checked = true WHERE user_id = ?";
@@ -69,6 +73,7 @@ public class UserDAO {
         return -1;  // 회원가입 실패
     }
 
+    //아이디 중복확인
     public int findUserById(String userId) {
         try {
             conn = DBUtil.getConnection();
@@ -79,6 +84,46 @@ public class UserDAO {
                 return 1;  //아이디가 있다면
             } else {
                 return 0; //아이디가 없다면
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+        return -1;  //데이터베이스 오류
+    }
+
+    //이메일 중복확인
+    public int findUserByEmail(String userEmail) {
+        try {
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(findUserByEmailSQL);
+            pstmt.setString(1, userEmail);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return 1;  //이메일이 있다면
+            } else {
+                return 0; //이메일이 없다면
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+        return -1;  //데이터베이스 오류
+    }
+
+    //전화번호 중복확인
+    public int findUserByTel(String userTel) {
+        try {
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(findUserByTelSQL);
+            pstmt.setString(1, userTel);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return 1;  //전화번호가 있다면
+            } else {
+                return 0; //전화번호가 없다면
             }
         } catch (Exception e) {
             e.printStackTrace();

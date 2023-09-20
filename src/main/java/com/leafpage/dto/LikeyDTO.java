@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LikeyDTO {
-
     Long userNo;
     String ISBN;
-
 
 }
