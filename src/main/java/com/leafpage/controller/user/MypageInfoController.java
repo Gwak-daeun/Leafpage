@@ -1,8 +1,8 @@
 package com.leafpage.controller.user;
 
 import com.leafpage.controller.Controller;
-import com.leafpage.dao.LikeyDAO;
-import com.leafpage.dto.BookContentDTO;
+import com.leafpage.dao.BookDAO;
+import com.leafpage.dto.BookDTO;
 import com.leafpage.dto.MypageBooksDTO;
 import com.leafpage.dto.MypageReturnedBooksDTO;
 
@@ -17,11 +17,11 @@ public class MypageInfoController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        ArrayList<MypageBooksDTO> userBooks = new ArrayList<>();
-        ArrayList<MypageReturnedBooksDTO> userReturnedBooks = new ArrayList<>();
-        List<BookContentDTO> bookText = new ArrayList<>();
+        List<MypageBooksDTO> userBooks = new ArrayList<>();
+        List<MypageReturnedBooksDTO> userReturnedBooks = new ArrayList<>();
+        List<BookDTO> bookText = new ArrayList<>();
 
-        LikeyDAO.BookDAO bookDAO = new LikeyDAO.BookDAO();
+        BookDAO bookDAO = new BookDAO();
 
         int totalRentals = 0;
 
@@ -29,19 +29,19 @@ public class MypageInfoController implements Controller {
 
         userReturnedBooks = bookDAO.getUserReturnedBook();
 
-        totalRentals = bookDAO.getTotalRentals();
+//        totalRentals = bookDAO.getTotalRentals();
 
-        bookText = bookDAO.getLendingBookContent();
+//        bookText = bookDAO.getLendingBookContent();
 
         HttpSession session = request.getSession();
 
         session.setAttribute("books", userBooks);
 
-        session.setAttribute("totalRentals", totalRentals);
+//        session.setAttribute("totalRentals", totalRentals);
 
         session.setAttribute("userReturnedBooks", userReturnedBooks);
 
-        session.setAttribute("bookText", bookText);
+//        session.setAttribute("bookText", bookText);
 
         return "/user/mypage";
     }
