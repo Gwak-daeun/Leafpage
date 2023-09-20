@@ -59,7 +59,6 @@ function likeCheck() {
     });
 };
 
-//
 
 //별점 표시
 $('.starRev span').click(function(){
