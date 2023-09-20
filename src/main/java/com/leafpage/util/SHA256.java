@@ -3,7 +3,7 @@ package com.leafpage.util;
 import java.security.MessageDigest;
 
 public class SHA256 {
-    //input(Email)을 넣었을 때 해시값을 반환하는 메소드
+    //해시값을 반환하는 메소드
     public static String getSHA256 (String input) {
         StringBuffer result = new StringBuffer();
         try {

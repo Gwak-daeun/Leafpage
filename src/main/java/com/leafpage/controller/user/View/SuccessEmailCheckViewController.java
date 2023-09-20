@@ -1,4 +1,4 @@
-package com.leafpage.controller.user;
+package com.leafpage.controller.user.View;
 
 import com.leafpage.controller.Controller;
 
@@ -6,10 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class EmailResendViewController implements Controller {
+public class SuccessEmailCheckViewController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println("메일전송 페이지로 이동");
-        return "user/emailResend";
+        System.out.println("successEmailCheck.jsp로 이동");
+        return "user/successEmailCheck";
     }
 }

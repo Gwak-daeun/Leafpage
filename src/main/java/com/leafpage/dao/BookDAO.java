@@ -1,37 +1,25 @@
 package com.leafpage.dao;
 
 import com.leafpage.dto.BookDTO;
+import com.leafpage.util.DBUtil;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BookDAO {
-    DataSource dataSource = null;
-
     PreparedStatement pstmt = null;
-
     ResultSet rs = null;
+    Connection conn = null;
 
-    //생성자에서 DB연결 설정
-    public BookDAO() {
-        try {
-            Context init = new InitialContext();
-            dataSource = (DataSource)init.lookup("java:comp/env/jdbc/mysql");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
 
     public List<BookDTO> booklist(){
 
-        Connection conn = null;
+
         List<BookDTO> bookDTOList= new ArrayList<>();
         try {
-            conn = dataSource.getConnection();
+            conn = DBUtil.getConnection();
             String sql ="SELECT b.isbn, b.book_name, b.book_publisher_name, b.book_author_name FROM books b";
             pstmt  = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
@@ -39,21 +27,20 @@ public class BookDAO {
             while (rs.next()){
                 BookDTO bookDTO = new BookDTO();
                 bookDTO.setISBN(rs.getString("ISBN"));
-                bookDTO.setBookname(rs.getString("book_name"));
-                bookDTO.setPublisher(rs.getString("book_publisher_name"));
-                bookDTO.setAuther(rs.getString("book_author_name"));
+                bookDTO.setBookName(rs.getString("book_name"));
+                bookDTO.setBookPublisherName(rs.getString("book_publisher_name"));
+                bookDTO.setBookAuthorName(rs.getString("book_author_name"));
                 bookDTO.setCategories(findCategories(conn, bookDTO.getISBN()));
 
                 bookDTOList.add(bookDTO);
             }
-            pstmt.close();
-            conn.close();
+            DBUtil.close(rs ,pstmt, conn);
+
 
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
         return bookDTOList;
-
     }
 
     private List<String> findCategories(Connection conn, String isbn) {
@@ -62,7 +49,8 @@ public class BookDAO {
         try {
             String sql = "SELECT category_name " +
                     "FROM book_category where isbn = ?";
-            PreparedStatement statement = conn.prepareStatement(sql);
+            PreparedStatement statement;
+            statement = conn.prepareStatement(sql);
 
             statement.setString(1, isbn);
             ResultSet resultSet = statement.executeQuery();
@@ -79,30 +67,29 @@ public class BookDAO {
     }
 
     public int uploadBook(BookDTO dto){
-        Connection conn = null;
+
         int count = 0;
         try {
-            conn = dataSource.getConnection();
+            conn = DBUtil.getConnection();
             conn.setAutoCommit(false);
-
 
             String sql ="INSERT INTO books(ISBN, book_name, book_author_name, book_img, book_info, book_publisher_name, book_pub_date, book_upload_date, book_content, book_chapter, book_views, book_state)values (?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, 0, 0) ";
             pstmt  = conn.prepareStatement(sql);
             pstmt.setString(1, dto.getISBN());
-            pstmt.setString(2, dto.getBookname());
-            pstmt.setString(3, dto.getAuther());
-            pstmt.setString(4, dto.getBookimgFullPath());
-            pstmt.setString(5, dto.getBookinfo());
-            pstmt.setString(6, dto.getPublisher());
-            pstmt.setString(7, dto.getPubdate());
-            pstmt.setString(8, dto.getBookchapter());
-            pstmt.setString(9, dto.getBookcontent());
+            pstmt.setString(2, dto.getBookName());
+            pstmt.setString(3, dto.getBookAuthorName());
+            pstmt.setString(4, dto.getBookImgFullPath());
+            pstmt.setString(5, dto.getBookInfo());
+            pstmt.setString(6, dto.getBookPublisherName());
+            pstmt.setString(7, dto.getBookPubDate());
+            pstmt.setString(8, dto.getBookChapter());
+            pstmt.setString(9, dto.getBookContent());
             count = pstmt.executeUpdate();
             pstmt.close();
             insertCategories(conn, dto);
 
             conn.commit();
-            conn.close();
+            DBUtil.close(rs ,pstmt, conn);
 
         }catch (SQLException e){
             System.out.println(new Object() {
@@ -147,11 +134,11 @@ public class BookDAO {
 
     public BookDTO detailBook(String isbn){
 
-        Connection conn = null;
+
         BookDTO bookDTO = new BookDTO();
 
         try {
-            conn = dataSource.getConnection();
+            conn = DBUtil.getConnection();
             String sql ="SELECT b.isbn, b.book_name, b.book_publisher_name, b.book_author_name, b.book_pub_date, b.book_info, b.book_chapter, b.book_content, b.book_img FROM books b where b.isbn = ? ";
             pstmt  = conn.prepareStatement(sql);
 
@@ -160,18 +147,17 @@ public class BookDAO {
 
             if (rs.next()) {
                 bookDTO.setISBN(rs.getString("isbn"));
-                bookDTO.setBookname(rs.getString("book_name"));
-                bookDTO.setAuther(rs.getString("book_author_name"));
-                bookDTO.setPublisher(rs.getString("book_publisher_name"));
-                bookDTO.setPubdate(rs.getString("book_pub_date"));
+                bookDTO.setBookName(rs.getString("book_name"));
+                bookDTO.setBookAuthorName(rs.getString("book_author_name"));
+                bookDTO.setBookPublisherName(rs.getString("book_publisher_name"));
+                bookDTO.setBookPubDate(rs.getString("book_pub_date"));
                 bookDTO.setCategories(findCategories(conn, bookDTO.getISBN()));
-                bookDTO.setBookinfo(rs.getString("book_info"));
-                bookDTO.setBookchapter(rs.getString("book_chapter"));
-                bookDTO.setBookcontent(rs.getString("book_content"));
-                bookDTO.setBookimgFullPath(rs.getString("book_img"));
+                bookDTO.setBookInfo(rs.getString("book_info"));
+                bookDTO.setBookChapter(rs.getString("book_chapter"));
+                bookDTO.setBookContent(rs.getString("book_content"));
+                bookDTO.setBookImgFullPath(rs.getString("book_img"));
             }
-            pstmt.close();
-            conn.close();
+            DBUtil.close(rs ,pstmt, conn);
 
         }catch (SQLException e){
             System.out.println(e.getMessage());
@@ -181,16 +167,15 @@ public class BookDAO {
 
     public int bookDelete(BookDTO dto){
         int count = 0;
-        Connection conn = null;
+
         List<BookDTO> bookDTOList= new ArrayList<>();
         try {
-            conn = dataSource.getConnection();
+            conn = DBUtil.getConnection();
             String sql ="UPDATE books SET book_state = 1 WHERE ISBN = ?";
             pstmt  = conn.prepareStatement(sql);
             pstmt.setString(1, dto.getISBN());
             count = pstmt.executeUpdate();
-            pstmt.close();
-            conn.close();
+            DBUtil.close(rs ,pstmt, conn);
 
         }catch (SQLException e){
             System.out.println(e.getMessage());
@@ -200,31 +185,30 @@ public class BookDAO {
     }
 
     public int updateBook(BookDTO dto){
-        Connection conn = null;
+
         int count = 0;
         try {
-            conn = dataSource.getConnection();
+            conn = DBUtil.getConnection();
             conn.setAutoCommit(false);
 
 
             String sql ="UPDATE books SET  book_name = ?, book_author_name = ?, book_img = ?, book_info = ?, book_publisher_name = ?, book_pub_date = ?, book_content = ?, book_chapter = ? WHERE ISBN = ?";
             pstmt  = conn.prepareStatement(sql);
-            pstmt.setString(1, dto.getBookname());
-            pstmt.setString(2, dto.getAuther());
-            pstmt.setString(3, dto.getBookimgFullPath());
-            pstmt.setString(4, dto.getBookinfo());
-            pstmt.setString(5, dto.getPublisher());
-            pstmt.setString(6, dto.getPubdate());
-            pstmt.setString(7, dto.getBookchapter());
-            pstmt.setString(8, dto.getBookcontent());
+            pstmt.setString(1, dto.getBookName());
+            pstmt.setString(2, dto.getBookAuthorName());
+            pstmt.setString(3, dto.getBookImgFullPath());
+            pstmt.setString(4, dto.getBookInfo());
+            pstmt.setString(5, dto.getBookPublisherName());
+            pstmt.setString(6, dto.getBookPubDate());
+            pstmt.setString(7, dto.getBookChapter());
+            pstmt.setString(8, dto.getBookContent());
             pstmt.setString(9, dto.getISBN());
             count = pstmt.executeUpdate();
             pstmt.close();
             updateCategories(conn, dto);
 
             conn.commit();
-            conn.close();
-
+            DBUtil.close(rs ,pstmt, conn);
         }catch (SQLException e){
             System.out.println(new Object() {
             }.getClass().getEnclosingMethod().getName());
