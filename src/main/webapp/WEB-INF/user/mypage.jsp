@@ -1,26 +1,27 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>LeafPage</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          crossorigin="anonymous">
     <link rel="stylesheet" href="../css/mypage.css">
 
 </head>
 <body>
-<%@include file="../component/header.jsp"%>
+<%@include file="../component/header.jsp" %>
 
 <section class="mp_container">
     <div class="top">
         <div class="top_box">
             <h5 class="top_box_title">Guest</h5>
-          <button type="button" class="btn1 btn-sm"><a href="myInfoView.do">내 정보 수정</a></button>
+            <button type="button" class="btn1 btn-sm"><a href="myInfoView.do">내 정보 수정</a></button>
         </div>
         <div class="top_box">
             <h5 class="top_box_title">현재 대여 권수</h5>
@@ -56,10 +57,13 @@
                                 <p class="card-period">${book.rentalDate} ~ ${book.scheduledReturnDate}</p>
                               </div>
                        </div>
-                    <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
+                       <button type="button" class="btn1 btn-sm"
+                               onclick="returnCheck(`${book.bookName}`, ${book.rentalNo})">
+                           반납하기
+                       </button>
                    </li>
 
-                    <%--책 뷰어--%>
+                   <%--책 뷰어--%>
                    <div class="modal fade" id="${book.rentalNo}" aria-hidden="true">
                        <div class="modal-dialog modal-xl">
                            <div class="modal-content">
@@ -72,7 +76,7 @@
                                        <%--                <button class="select-mode">모드</button>--%>
                                </div>
                                <div class="modal-body">
-                                   ${book.bookContent}
+                                       ${book.bookContent}
                                </div>
                                <div class="modal-footer">
                                    <button onclick="sendY(${book.rentalNo})" id="closeBtn" type="button" class="modal-close" data-bs-dismiss="modal">여기까지 보기</button>
@@ -105,7 +109,6 @@
             </ul>
         </div>
     </div>
-</section>
 
 <script>
     function openViewer(rentalNo, dbScrollY, dbModalWidth) {
@@ -149,7 +152,7 @@
 
              modalWidth = Math.floor(modalBody.width());
 
-            console.log("Y축: " + modalY + "너비 : " + modalWidth, ", 유저 넘버 : ", rentalNo);
+        console.log("Y축: " + modalY + "너비 : " + modalWidth, ", 유저 넘버 : ", rentalNo);
 
         $.ajax({
             url: "/saveUserBookY.do",
@@ -174,6 +177,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="../js/mypage.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-
 </body>
 </html>
