@@ -110,15 +110,17 @@
 <script>
     function openViewer(rentalNo, dbScrollY, dbModalWidth) {
 
-        let modalBody = $(`#` + rentalNo).find(".modal-body"); // 해당 모달 창의 .modal-body 요소 선택
-
-        console.log("와이축 : ", dbScrollY, "폭 : ", dbModalWidth, ", 번호 : ", rentalNo);
-
         $(`#` + rentalNo).modal('show');
+
 
         $(`#` + rentalNo).on('shown.bs.modal', function () {
 
+            let modalBody = $(`#` + rentalNo).find(".modal-body"); // 해당 모달 창의 .modal-body 요소 선택
+
+            console.log("디비와이축 : ", dbScrollY, "디비폭 : ", dbModalWidth, ", 번호 : ", rentalNo);
+
             let truncatedWidth = Math.floor(modalBody.width());
+            console.log("현재 모달 폭 : ", truncatedWidth);
             if (dbModalWidth === truncatedWidth || dbScrollY === 0) {
                 modalBody.scrollTop(dbScrollY);
                 console.log("작동3 : ", dbModalWidth);
@@ -137,9 +139,15 @@
 
     function sendY(rentalNo) {
 
-        let modalY = $(".modal-body").scrollTop();
+        let modalY = 0;
 
-        let modalWidth = $(".modal-body").width();
+        let modalWidth = 0;
+
+        let modalBody = $(`#` + rentalNo).find(".modal-body");
+        
+             modalY = modalBody.scrollTop();
+
+             modalWidth = Math.floor(modalBody.width());
 
             console.log("Y축: " + modalY + "너비 : " + modalWidth, ", 유저 넘버 : ", rentalNo);
 

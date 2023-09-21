@@ -445,7 +445,7 @@ public class BookDAO {
             pstmt.setInt(1, modalY);
             pstmt.setInt(2, modalWidth);
             pstmt.setInt(3, rentalNo);
-
+            System.out.println("CHECK SAVE Y : " + pstmt);
             return pstmt.executeUpdate();
 
         } catch (Exception e) {
