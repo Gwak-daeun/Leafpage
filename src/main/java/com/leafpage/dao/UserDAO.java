@@ -25,8 +25,9 @@ public class UserDAO {
     String getUserEmailCheckedSQL = "SELECT user_email_checked FROM users WHERE user_id = ?";
     String getUserNoSQL = "SELECT user_no FROM users WHERE user_id = ?";
     String setUserEmailCheckedSQL = "UPDATE users SET user_email_checked = true WHERE user_id = ?";
-    String changeNewPasswordSQL = "UPDATE users SET user_password = ? WHERE (user_email = ? OR user_tel =?) AND (user_id = ?)";
+    String changeNewPasswordSQL = "UPDATE users SET user_password = ? WHERE user_id = ?";
     String setUserStateSQL = "UPDATE users SET user_state = ? WHERE user_id = ? AND user_password = ?";
+    String updateUserInfoSQL = "UPDATE users SET user_tel = ?, user_email=?, user_email_checked=false WHERE user_id = ?";
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
@@ -147,22 +148,19 @@ public class UserDAO {
     }
 
     //새 비밀번호 변경
-    public int changeNewPassword (String newPassword, String userEmail, String userTel, String userId) {
+    public int changeNewPassword (String newPassword, String userId) {
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(changeNewPasswordSQL);
             pstmt.setString(1, newPassword);
-            pstmt.setString(2, userEmail);
-            pstmt.setString(3, userTel);
-            pstmt.setString(4, userId);
-            pstmt.executeUpdate();
-            return 1;
+            pstmt.setString(2, userId);
+            return pstmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             DBUtil.close(rs, pstmt, conn);
         }
-        return 0;  // 데이터베이스 오류
+        return -1;  // 데이터베이스 오류
     }
 
     //이메일 중복확인
@@ -300,6 +298,22 @@ public class UserDAO {
             pstmt.setString(1, userState);
             pstmt.setString(2, userId);
             pstmt.setString(3, userPassword);
+            return pstmt.executeUpdate();  //성공하면 1, 실패하면 0
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+        return -1;  // 데이터베이스 오류
+    }
+
+    public int updateUserInfo(String userId, String userTel, String userEmail) {
+        try {
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(updateUserInfoSQL);
+            pstmt.setString(1, userTel);
+            pstmt.setString(2, userEmail);
+            pstmt.setString(3, userId);
             return pstmt.executeUpdate();  //성공하면 1, 실패하면 0
         } catch (Exception e) {
             e.printStackTrace();

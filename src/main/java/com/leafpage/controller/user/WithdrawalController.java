@@ -24,7 +24,7 @@ public class WithdrawalController implements Controller {
             String userId = (String)session.getAttribute("userId");
             int userWithdrawal = userDAO.setUserState(userId,passwordForWithdrawal,"탈퇴회원");
                 PrintWriter out = response.getWriter();
-                out.println(userWithdrawal);
+                out.print(userWithdrawal);
                 out.close();
         }
         return null;

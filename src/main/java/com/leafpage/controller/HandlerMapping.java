@@ -22,7 +22,7 @@ public class HandlerMapping {
         mappings.put("/getBook.do", new AdminBookDetailController());
         mappings.put("/books/edit.do", new AdminBookEditController());
         mappings.put("/mypageInfo.do", new MypageInfoController());
-        mappings.put("/myInfoView.do", new UserMypageInfoViewController());
+        mappings.put("/updateMyInfoView.do", new UpdateMypageInfoViewController());
         mappings.put("/saveUserBookY.do", new BookYController());
 
         mappings.put("/LikeHeart.do",new LikeEmptyHeartController());
@@ -48,7 +48,6 @@ public class HandlerMapping {
         mappings.put("/logout.do", new LogoutController());
         mappings.put("/loginCheck.do", new LoginCheckController());
         mappings.put("/emailResendView.do", new EmailResendViewController());
-        mappings.put("/myPageView.do", new MyPageViewController());
         mappings.put("/successEmailCheckView.do", new SuccessEmailCheckViewController());
         mappings.put("/failEmailCheckView.do", new FailEmailCheckViewController());
         mappings.put("/withdrawal.do", new WithdrawalController());

@@ -58,8 +58,6 @@ public class FindPwController implements Controller {
                 HttpSession session = request.getSession();
                 session.setAttribute("passwordChangeAccess", passwordChangeAccess);
                 session.setAttribute("inputIdForNewPw", inputId);
-                session.setAttribute("inputEmailForNewPw", inputEmail);
-                session.setAttribute("inputTelForNewPw", inputTel);
                 PrintWriter out = response.getWriter();
                 out.print(passwordChangeAccessButton);
                 out.close();

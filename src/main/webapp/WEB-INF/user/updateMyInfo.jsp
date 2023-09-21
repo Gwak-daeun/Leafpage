@@ -18,27 +18,34 @@
 <section class="umi_container">
     <div class="my-info-form">
         <h4>내 정보</h4>
-        <form method="post" action="updateUserInfo.do">
+        <form name="update_form" method="post" action="updateUserInfo.do">
             <div class="form-group  mt-3">
-                <input type="text" name="#" class="form-control" placeholder="아이디" value=${userId}>
+                <label for="current_user_id">아이디</label>
+                <input readonly type="text" id="current_user_id" name="current_user_id" class="form-control" placeholder="아이디" value="${userId}">
             </div>
             <div class="form-group mt-3">
-                <input type="number" name="#" class="form-control" placeholder="기존 전화번호" value="${userTel}">
+                <label for="current_user_tel">휴대전화번호</label>
+                <input type="number" id="current_user_tel" name="TelForUpdate" class="form-control" placeholder="기존 전화번호" value="${userTel}" data-user-tel="${userTel}">
+                <div id="checkSpan_for_tel_update"></div>
             </div>
+
             <div class="form-group mt-3">
-                <input type="email" name="#" class="form-control" placeholder="기존 이메일" value="${userEmail}">
+                <label for="current_user_email">이메일 주소</label>
+                <input type="email" id="current_user_email" name="EmailForUpdate" class="form-control" placeholder="기존 이메일" value="${userEmail}" data-user-email="${userEmail}">
+                <div id="checkSpan_for_email_update"></div>
             </div>
-            <div class="redtext">(* 이메일 변경 후 재 인증 필요)</div>
+
+            <div class="redtext"> 정보를 변경한 후에는 이메일 인증을 다시 진행해주세요. </div>
             <div class="form-group mt-3">
-                <input type="password" name="#" class="form-control" placeholder="현재 비밀번호">
+                <label for="password_for_update">정보를 변경하시려면 비밀번호를 입력하세요.</label>
+                <input type="password" id="password_for_update" name="passwordForUpdate" class="form-control" placeholder="현재 비밀번호">
             </div>
             <div class="btn-flex-group">
-                <button id='checkWithdrawal' data-bs-toggle='modal' data-bs-target='#withdrawalCheckModal' class='btn btn-danger mt-3'>탈퇴하기</button>
-                <button data-bs-toggle='modal' data-bs-target='#newPasswordModal' class='btn btn-success mt-3'>비밀번호 변경</button>
-                <button type="button" class="btn btn-success btn3 mt-3" >수정하기</button>
-                <a id='change_pw_btn' data-bs-toggle='modal' data-bs-target='#newPasswordModal' class='btn btn-success mx-1 mt-2'>비밀번호 변경</a>
+                <button type="button" class="btn btn-success btn3 mt-3" onclick="updateMyInfo()" >수정하기</button>
             </div>
         </form>
+        <button id='checkWithdrawal' data-bs-toggle='modal' data-bs-target='#withdrawalCheckModal' class='btn btn-danger mt-3'>탈퇴하기</button>
+        <button data-bs-toggle='modal' data-bs-target='#newPasswordModal' class='btn btn-success mt-3'>비밀번호<br>변경</button>
     </div>
 </section>
 
@@ -47,8 +54,9 @@
 
 <!-- 제이쿼리 자바스크립트 추가하기 -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="../../js/updateMyInfo.js"></script>
+<script type="text/javascript" src="../../js/findPw.js"></script>
 </body>
 </html>

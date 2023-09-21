@@ -1,14 +1,11 @@
 const passwordCheckRule = /^(?=.*?[a-z,A-Z])(?=.*?[0-9])(?=.*?[~?!@#$%^&*_-]).{8,}$/;
 
-let inputId = $("#inputId");
-let selectQuestion = $("#selectQuestion");
-let inputAnswer = $("#inputAnswer");
-let find_pw_btn = $("#find_pw_btn");
-let newPassword = $('#newPassword');
-let confirmNewPassword = $('#confirmNewPassword');
-let checkSpan = $('#checkSpan');
-
 function checkNullPw() {
+    let inputId = $("#inputId");
+    let selectQuestion = $("#selectQuestion");
+    let inputAnswer = $("#inputAnswer");
+    let find_pw_btn = $("#find_pw_btn");
+
     if(inputId.val() === '' || inputId.val() === null) {
         $(".checkSpan").remove();
         find_pw_btn.before("<span class='checkSpan' style='color:red'>※아이디를 입력해주세요.</span>")
@@ -86,6 +83,10 @@ function findPw(inputIdValue, inputEmailValue, inputTelValue, selectQuestionValu
 }
 
 function newPasswordCheck() {
+    let newPassword = $('#newPassword');
+    let confirmNewPassword = $('#confirmNewPassword');
+    let checkSpan = $('#checkSpan');
+
     if(newPassword.val() === '' || confirmNewPassword.val() === '') {
         console.log("※입력되지 않은 사항이 있습니다.");
         checkSpan.html("<span class='checkIdSpan' style='color:red'>※입력되지 않은 사항이 있습니다.</span>");
@@ -107,7 +108,7 @@ function newPasswordCheck() {
     }
     else {
         console.log("※새 비밀번호로 변경 중입니다.");
-        checkSpan.html("<span class='checkIdSpan' style='color:blue'>※새 비밀번호로 변경 중입니다.</span>");
         $("form[name=new_pw_form]").submit();
+        alert("비밀번호가 변경되었습니다.");
     }
 }

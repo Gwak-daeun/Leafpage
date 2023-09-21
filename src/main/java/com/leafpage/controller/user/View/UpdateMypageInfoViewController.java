@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class UserMypageInfoViewController implements Controller {
+public class UpdateMypageInfoViewController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         System.out.println("내정보수정으로 이동");
@@ -17,6 +17,6 @@ public class UserMypageInfoViewController implements Controller {
         String userId = (String)session.getAttribute("userId");
         session.setAttribute("userTel", userDAO.getUserTel(userId));
         session.setAttribute("userEmail", userDAO.getUserEmail(userId));
-        return "updateMyInfo";
+        return "user/updateMyInfo";
     }
 }

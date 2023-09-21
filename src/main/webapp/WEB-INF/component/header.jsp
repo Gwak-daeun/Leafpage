@@ -19,7 +19,7 @@
                     <a ><button type="button" class=" btn1 btn-sm" onclick="location.href='loginView.do'">로그인</button></a>
                 </c:if>
                 <c:if test="${userId != null}">
-                    <button type="button" class="btn2 btn-sm" onclick="location.href='myPageView.do'">마이페이지</button>
+                    <button type="button" class="btn2 btn-sm" onclick="location.href='mypageInfo.do'">마이페이지</button>
                     <button type="button" class="btn1 btn-sm" onclick="location.href='logout.do'">로그아웃</button>
                 </c:if>
             </span>
