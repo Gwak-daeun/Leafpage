@@ -17,23 +17,30 @@ public class BookDAO {
 
 
 
-    public List<BookDTO> booklist(){
+    public List<BookDTO> booklist(int pageNum, int amount){
 
 
         List<BookDTO> bookDTOList= new ArrayList<>();
         try {
             conn = DBUtil.getConnection();
-            String sql ="SELECT b.isbn, b.book_name, b.book_publisher_name, b.book_author_name FROM books b";
-            pstmt  = conn.prepareStatement(sql);
-            rs = pstmt.executeQuery();
+            String sql = "SELECT B.isbn, B.book_name, B.book_publisher_name, B.book_author_name " +
+                    "FROM (SELECT ROW_NUMBER() OVER (ORDER BY b.book_name) AS rn, b.isbn, b.book_name, b.book_publisher_name, b.book_author_name FROM books b) B " +
+                    "WHERE rn > ? AND rn <= ?";
 
+            pstmt  = conn.prepareStatement(sql);
+            System.out.println(pageNum);
+            System.out.println(amount);
+            pstmt.setInt(1, ((pageNum - 1)* amount));
+            pstmt.setInt(2, (pageNum * amount));
+            rs = pstmt.executeQuery();
             while (rs.next()){
                 BookDTO bookDTO = new BookDTO();
-                bookDTO.setISBN(rs.getString("ISBN"));
-                bookDTO.setBookName(rs.getString("bookName"));
+                bookDTO.setISBN(rs.getString("isbn"));
+                bookDTO.setBookName(rs.getString("book_name"));
                 bookDTO.setBookPublisherName(rs.getString("book_publisher_name"));
                 bookDTO.setBookAuthorName(rs.getString("book_author_name"));
                 bookDTO.setCategories(findCategories(conn, bookDTO.getISBN()));
+
 
                 bookDTOList.add(bookDTO);
             }
@@ -68,6 +75,33 @@ public class BookDAO {
         }
         return categories;
     }
+
+
+    public int  getTotal(){
+        int result  = 0;
+
+        try {
+            conn = DBUtil.getConnection();
+            String sql = "select count(*) as total from books";
+
+            pstmt = conn.prepareStatement(sql);
+
+            rs = pstmt.executeQuery();
+
+            if(rs.next()) {
+                result = rs.getInt("total");
+            }
+
+        DBUtil.close(rs ,pstmt, conn);
+
+
+    }catch (SQLException e){
+        System.out.println(e.getMessage());
+    }
+
+        return result ;
+    }
+
 
     public int uploadBook(BookDTO dto){
 
@@ -150,7 +184,7 @@ public class BookDAO {
 
             if (rs.next()) {
                 bookDTO.setISBN(rs.getString("isbn"));
-                bookDTO.setBookName(rs.getString("bookName"));
+                bookDTO.setBookName(rs.getString("book_name"));
                 bookDTO.setBookAuthorName(rs.getString("book_author_name"));
                 bookDTO.setBookPublisherName(rs.getString("book_publisher_name"));
                 bookDTO.setBookPubDate(rs.getString("book_pub_date"));

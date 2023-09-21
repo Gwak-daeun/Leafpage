@@ -43,10 +43,10 @@
         <aside class="side-bar">
             <ul>
                 <li>
-                    <a href="/WEB-INF/admin/admin-usermanagement.jsp">유저</a>
+                    <a href="/userlistview.do">유저</a>
                 </li>
                 <li>
-                    <a href="/WEB-INF/admin/admin-bookmanagement.jsp">도서</a>
+                    <a href="/booklistView.do">도서</a>
                 </li>
             </ul>
         </aside>
@@ -100,9 +100,41 @@
                                         #${category} </c:forEach></li>
                         </ul>
                         </c:forEach>
-
-
                 </div>
+            </div>
+            <hr />
+            <div class="list-footer">
+                <ul class="pagination justify-content-center">
+                    <c:choose>
+                    <c:when test="${pageDTO.prev }">
+                        <li class="page-item">
+                            <a class="page-link" href="booklistView.do?pageNum=${pageDTO.startPage - 1 }">이전</a>
+                        </li>
+                    </c:when>
+                        <c:otherwise>
+                        <li class="page-item disabled">
+                            <a class="page-link" href="booklistView.do?pageNum=${pageDTO.startPage - 1 }">이전</a>
+                        </li>
+                         </c:otherwise>
+                    </c:choose>
+                    <c:forEach var="num" begin="${pageDTO.startPage }" end="${pageDTO.endPage }">
+                        <li class="page-item">
+                            <a class="${pageDTO.pageNum eq num ? 'active' : '' } page-link" href="booklistView.do?pageNum=${num }">${num }</a>
+                        </li>
+                    </c:forEach>
+                    <c:choose>
+                    <c:when test="${pageDTO.next }">
+                        <li class="page-item">
+                            <a class="page-link" href="booklistView.do?pageNum=${pageDTO.endPage + 1 }">다음</a>
+                        </li>
+                    </c:when>
+                        <c:otherwise>
+                            <li class="page-item disabled">
+                                <a class="page-link" href="booklistView.do?pageNum=${pageDTO.endPage + 1 }">다음</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </ul>
             </div>
         </div>
     </div>

@@ -1,5 +1,3 @@
-
-//클릭으로 탭 메뉴 변경
 $(document).ready(function () {
 
     if (errorMsg === "리뷰 삭제에 실패했어요.") {
@@ -95,4 +93,43 @@ $(document).ready(function () {
 
     });
 
+    $('.rental').click(function () {
+        let now = new Date();
+        let scheduledReturnDate = new Date(now.setDate(now.getDate() + 7));
+
+        let year = scheduledReturnDate.getFullYear();
+        let month = scheduledReturnDate.getMonth() + 1;
+        let date = scheduledReturnDate.getDate();
+
+        $('.scheduled-return-date').text(`대여기한 : ${year}-${month}-${date}`);
+    });
+
 });
+
+// 도서 대여
+function rent(ISBN) {
+
+    $.ajax({
+        url: 'rentBook.do',
+        type: 'post',
+        dataType: 'text',
+        contentType: "application/x-www-form-urlencoded",
+        async: true,
+        data: {ISBN: ISBN},
+
+        success: function (data) {
+            console.log(data);
+            if (data === "overRentCount") {
+                alert("회원의 도서 대여 수가 5권입니다. 더 이상 대여하실 수 없습니다.");
+            } else if (data === "renting") {
+                alert("현재 대여 중인 도서입니다.");
+            } else {
+                $('#rental').modal('show');
+            }
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            // 에러 처리 코드
+            console.log('Error: ' + textStatus);
+        }
+    });
+}
