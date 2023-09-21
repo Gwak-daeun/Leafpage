@@ -318,7 +318,7 @@ public class BookDAO {
         return bookDetails;
     }
 
-    public List<MypageBooksDTO> getUserLendingBook() throws IOException {
+    public List<MypageBooksDTO> getUserLendingBook(int userNo) throws IOException {
 
         List<MypageBooksDTO> userBookList = new ArrayList<>();
 
@@ -328,13 +328,14 @@ public class BookDAO {
                 "on u.user_no = r.user_no\n" +
                 "join books b\n" +
                 "on r.ISBN = b.ISBN \n" +
-                "where u.user_no = 1\n" +
+                "where u.user_no = ?\n" +
                 "and r.actual_return_date is null;";
         //user_no는 이후 로그인 기능 붙였을 때 파라미터로 받아야 함
 
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
+            pstmt.setInt(1, userNo);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -387,7 +388,7 @@ public class BookDAO {
 //        return userTotalRentals;
 //    }
 
-    public List<MypageReturnedBooksDTO> getUserReturnedBook() {
+    public List<MypageReturnedBooksDTO> getUserReturnedBook(int userNo) {
 
         ArrayList<MypageReturnedBooksDTO> userReturnedBookList =  new ArrayList<>();
 
@@ -397,13 +398,14 @@ public class BookDAO {
                 "on u.user_no = r.user_no\n" +
                 "join books b\n" +
                 "on r.ISBN = b.ISBN\n" +
-                "where u.user_no = 2\n" +
+                "where u.user_no = ?\n" +
                 "and r.actual_return_date is not null;";
         //user_no는 이후 로그인 기능 붙였을 때 파라미터로 받아야 함
 
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
+            pstmt.setInt(1, userNo);
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 MypageReturnedBooksDTO books = new MypageReturnedBooksDTO(
@@ -479,7 +481,7 @@ public class BookDAO {
             pstmt.setInt(1, modalY);
             pstmt.setInt(2, modalWidth);
             pstmt.setInt(3, rentalNo);
-
+            System.out.println("CHECK SAVE Y : " + pstmt);
             return pstmt.executeUpdate();
 
         } catch (Exception e) {
