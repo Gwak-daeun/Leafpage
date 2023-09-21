@@ -40,40 +40,40 @@
                     <img id="emptyH" style="width: 20px; margin-left: 5px;" src="/css/icons/empty.png" onclick="location.href='LikeHeart.do'">
                     <img id="fullH" style="width: 20px; margin-left: 5px;" src="/css/icons/full.png" onclick="location.href='LikeHeart.do'">
                     ${ heartCount }
-<%--                    <i class="fa-solid fa-heart fa-xl" style="color: #d7443e;"></i>--%>
+                    <%--                    <i class="fa-solid fa-heart fa-xl" style="color: #d7443e;"></i>--%>
                 </div>
             </div>
         </div>
-    <div class="mg container">
-        <div class="tabmenu">
-            <ul class="tab-button">
-                <li class="on"><a href="#">책 소개</a></li>
-                <li><a href="#">목차 소개</a></li>
-                <li><a href="#">리뷰</a></li>
-                <li><a href="#">저자의 책</a></li>
-            </ul>
-            <div class="tab-content on">
-                <div class="contexth">
-                ${bookDetail.bookInfo}
+        <div class="mg container">
+            <div class="tabmenu">
+                <ul class="tab-button">
+                    <li class="on"><a href="#">책 소개</a></li>
+                    <li><a href="#">목차 소개</a></li>
+                    <li><a href="#">리뷰</a></li>
+                    <li><a href="#">저자의 책</a></li>
+                </ul>
+                <div class="tab-content on">
+                    <div class="contexth">
+                        ${bookDetail.bookInfo}
+                    </div>
                 </div>
-            </div>
-            <div class="tab-content">
-                <div>
-                   ${bookDetail.bookChapter}
+                <div class="tab-content">
+                    <div>
+                        ${bookDetail.bookChapter}
+                    </div>
                 </div>
-            </div>
-            <div class="tab-content">
-                <div class="enroll-right">
-                    <button class="btn rental " data-toggle="modal" href="#reviewenroll">등록하기</button>
-                </div>
-                <ul class="review-content">
-                    <c:forEach var="review" items="${reviews}">
-                        <li>
-                            <div class="card">
+                <div class="tab-content">
+                    <div class="enroll-right">
+                        <button class="btn rental " data-toggle="modal" href="#reviewenroll">등록하기</button>
+                    </div>
+                    <ul class="review-content">
+                        <c:forEach var="review" items="${reviews}">
+                            <li>
+                                <div class="card">
 
-                                <div class="card-header">
-                                    <div class="row">
-                                        <div class="card-title">
+                                    <div class="card-header">
+                                        <div class="row">
+                                            <div class="card-title">
                                             <span>
                                                 <c:if test="${review.reviewRating eq 5}">
                                                     <span class="star">⭐</span>
@@ -103,70 +103,70 @@
 
                                             </span>
 
-                                            <span class="review-top-right">
+                                                <span class="review-top-right">
                                                 <p>작성일&nbsp; ${review.reviewDate}</p>
                                             </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--강의명 밑 내용과 추천-->
+                                    <div class="card-body">
+
+                                        <p class="card-text">
+                                                ${review.reviewContent}
+                                        </p>
+                                        <div class="row">
+                                            <div class="col-9 text-left">
+                                            </div>
+
+                                            <div class="col-3 text-right">
+                                                    <%--                                            <c:set var="reviewNo" value="${review.review_no}"/>--%>
+                                                <a onclick="return confirm('삭제하시겠습니까?')" href="/removeReview.do?reviewNo=${review.reviewNo}">삭제</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!--강의명 밑 내용과 추천-->
-                                <div class="card-body">
+                            </li>
+                        </c:forEach>
+                    </ul>
 
-                                    <p class="card-text">
-                                        ${review.reviewContent}
-                                    </p>
-                                    <div class="row">
-                                        <div class="col-9 text-left">
-                                        </div>
 
-                                        <div class="col-3 text-right">
-<%--                                            <c:set var="reviewNo" value="${review.review_no}"/>--%>
-                                            <a onclick="return confirm('삭제하시겠습니까?')" href="/removeReview.do?reviewNo=${review.reviewNo}">삭제</a>
-                                        </div>
-                                    </div>
+                    <div>
+
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <ul class="book-ul ">
+                        <c:forEach var="sameAuthorBook" items="${sameAuthorBooks}">
+                            <li data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <div class="book-list">
+                                    <img class="book-cover" src="${sameAuthorBook.bookImg}" />
+                                    <div class="book-title">${sameAuthorBook.bookName}</div>
+                                    <div class="book-author"> ${sameAuthorBook.bookPublisherName}</div>
                                 </div>
-                            </div>
-                        </li>
-                    </c:forEach>
-                </ul>
-                
-                
-                <div>
-
+                            </li>
+                        </c:forEach>
+                    </ul>
                 </div>
             </div>
-            <div class="tab-content">
-                <ul class="book-ul ">
-                    <c:forEach var="sameAuthorBook" items="${sameAuthorBooks}">
-                    <li data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        <div class="book-list">
-                            <img class="book-cover" src="${sameAuthorBook.bookImg}" />
-                            <div class="book-title">${sameAuthorBook.bookName}</div>
-                            <div class="book-author"> ${sameAuthorBook.bookPublisherName}</div>
-                        </div>
-                    </li>
-                    </c:forEach>
-                </ul>
-            </div>
         </div>
-    </div>
 </section>
 
 <div class="modal fade show" id="rental" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content"> <!--모달 안에 들어가 있는 내용 정의-->
-        <div class="modal-body">
-            <div class="form-group">
-                <h3 class="modal-title" id="modal">대여에 성공했습니다!</h3>
-                <p class="scheduled-return-date"></p>
-            </div>
+        <div class="modal-content"> <!--모달 안에 들어가 있는 내용 정의-->
+            <div class="modal-body">
+                <div class="form-group">
+                    <h3 class="modal-title" id="modal">대여에 성공했습니다!</h3>
+                    <p class="scheduled-return-date"></p>
+                </div>
 
-            <div class="form-footer">
-                <button class="btn rental">바로보기</button>
-                <button class="btn preview"><a href="">도서목록</a></button>
+                <div class="form-footer">
+                    <button class="btn rental">바로보기</button>
+                    <button class="btn preview"><a href="">도서목록</a></button>
+                </div>
             </div>
         </div>
-      </div>
     </div>
 </div>
 
@@ -178,26 +178,26 @@
             </div>
             <div class="modal-body">
 
-                    <div class="form-group">
-                        <label>평점</label>
-                        <div class="starRev">
+                <div class="form-group">
+                    <label>평점</label>
+                    <div class="starRev">
                         <!-- 편의 상 가장 첫번째의 별은 기본으로 class="on"이 되게 설정해주었습니다. -->
-                            <span class="starR on">⭐</span>
-                            <span class="starR">⭐</span>
-                            <span class="starR">⭐</span>
-                            <span class="starR">⭐</span>
-                            <span class="starR">⭐</span>
-                        </div>
-
+                        <span class="starR on">⭐</span>
+                        <span class="starR">⭐</span>
+                        <span class="starR">⭐</span>
+                        <span class="starR">⭐</span>
+                        <span class="starR">⭐</span>
                     </div>
-                    <div class="form-group">
+
+                </div>
+                <div class="form-group">
                     <label>내용</label>
                     <textarea name="reviewContent" class="form-control" maxlength="2048" style="height: 180px"></textarea>
-                    </div>
-                  <div class="form-footer">
+                </div>
+                <div class="form-footer">
                     <button id="reviewClose" type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
                     <button id="reviewRegister" class="btn rental">등록하기</button>
-                  </div>
+                </div>
 
             </div>
         </div>
@@ -206,8 +206,8 @@
 </div>
 
 <script>
-        let errorMsg = "${errorMsg}";
-        let failed = "${failed}";
+    let errorMsg = "${errorMsg}";
+    let failed = "${failed}";
 </script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>

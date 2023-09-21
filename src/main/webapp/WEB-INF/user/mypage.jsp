@@ -41,33 +41,33 @@
 
         <div class="bottom_content on">
             <ul class="flex rent_book">
-               <c:forEach var="book" items="${books}" begin="0" end="4" step="1" >
-                   <li id="bookLi" >
-                       <div onclick="openViewer(${book.rentalNo}, ${book.scrollY}, ${book.modalWidth})" class="card" >
+                <c:forEach var="book" items="${books}" begin="0" end="4" step="1" >
+                    <li id="bookLi" >
+                        <div onclick="openViewer(${book.rentalNo}, ${book.scrollY}, ${book.modalWidth})" class="card" >
                             <img src="image/마주.png" class="card-img-top" alt="..." />
-                           <c:if test="${book.modalWidth eq 321}">
-                               <img class="device-icon" src="../css/icons/phone_iphone.png" />
-                           </c:if>
-                           <c:if test="${book.modalWidth ne 321}">
-                               <img class="device-icon" src="../css/icons/desktop_windows.png" />
-                           </c:if>
-                              <div class="card-body">
+                            <c:if test="${book.modalWidth eq 321}">
+                                <img class="device-icon" src="../css/icons/phone_iphone.png" />
+                            </c:if>
+                            <c:if test="${book.modalWidth ne 321}">
+                                <img class="device-icon" src="../css/icons/desktop_windows.png" />
+                            </c:if>
+                            <div class="card-body">
                                 <h5 class="card-title">${book.bookName}</h5>
                                 <p class="card-author">${book.bookAuthorName}</p>
                                 <p class="card-period">${book.rentalDate} ~ ${book.scheduledReturnDate}</p>
-                              </div>
-                       </div>
-                       <button type="button" class="btn1 btn-sm"
-                               onclick="returnCheck(`${book.bookName}`, ${book.rentalNo})">
-                           반납하기
-                       </button>
-                   </li>
+                            </div>
+                        </div>
+                        <button type="button" class="btn1 btn-sm"
+                                onclick="returnCheck(`${book.bookName}`, ${book.rentalNo})">
+                            반납하기
+                        </button>
+                    </li>
 
                     <%--책 뷰어--%>
-                   <%@include file="../component/bookModal.jsp"%>
+                    <%@include file="../component/bookModal.jsp"%>
 
 
-               </c:forEach>
+                </c:forEach>
 
             </ul>
         </div>
@@ -129,10 +129,10 @@
         let modalWidth = 0;
 
         let modalBody = $(`#` + rentalNo).find(".modal-body");
-        
-             modalY = modalBody.scrollTop();
 
-             modalWidth = Math.floor(modalBody.width());
+        modalY = modalBody.scrollTop();
+
+        modalWidth = Math.floor(modalBody.width());
 
         console.log("Y축: " + modalY + "너비 : " + modalWidth, ", 유저 넘버 : ", rentalNo);
 

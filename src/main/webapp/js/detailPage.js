@@ -8,18 +8,17 @@ $(document).ready(function () {
         alert(failed);
     }
 
-  $(".tab-button > li").click(function () {
-    console.log("dhfsldkjfs");
-    var idx = $(this).index();
+    $(".tab-button > li").click(function () {
+        var idx = $(this).index();
 
-    $(this).addClass("on").siblings().removeClass("on");
+        $(this).addClass("on").siblings().removeClass("on");
 
-    $(".tabmenu .tab-content")
-      .eq(idx)
-      .addClass("on")
-      .siblings(".tab-content")
-      .removeClass("on");
-  });
+        $(".tabmenu .tab-content")
+            .eq(idx)
+            .addClass("on")
+            .siblings(".tab-content")
+            .removeClass("on");
+    });
 
 
     //하트 채워지고 비워지는 기능

@@ -7,10 +7,6 @@ $(document).ready(function () {
         alert(failed);
     }
 
-//하트 채워지고 비워지는 기능
-    $("#emptyH").show();
-    $("#fullH").hide();
-
     /*emptyH을 클릭했을 때 fullH를 보여줌*/
     $("#emptyH").click(function(){
         $("#emptyH").hide();
