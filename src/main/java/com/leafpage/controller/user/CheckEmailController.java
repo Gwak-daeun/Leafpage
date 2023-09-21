@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Objects;
 
 public class CheckEmailController implements Controller {
     @Override
@@ -15,7 +14,6 @@ public class CheckEmailController implements Controller {
         String code = null;
         if(request.getParameter("code") != null) {
             code = request.getParameter("code");
-            System.out.println(code);
         }
 
         HttpSession session = request.getSession();

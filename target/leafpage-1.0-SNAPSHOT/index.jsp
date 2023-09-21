@@ -13,14 +13,8 @@
 <body>
 <%@include file="./WEB-INF/component/header.jsp"%>
 
-<%
-    response.sendRedirect("mypageInfo.do");
-    session.setAttribute("userNo", 1L);
-%>
-
 <div class="container">
     <div class="title">
-        <h1>LeafPage</h1>
         <h1>LeafPage</h1>
     </div>
     <div class="search-bar">
@@ -49,7 +43,6 @@
             <li><div class="book-list"></div></li>
         </ul>
     </div>
-    <button onclick="location.href='/booklistView.do' ">관리자</button>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>

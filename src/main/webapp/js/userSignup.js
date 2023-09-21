@@ -125,14 +125,13 @@ function signupCheck() {
     }
 
     let status = userId.attr('status'); //아이디 중복체크 상태
-    if(status == ""){
+    if(status === "" || status === null){
         alert("아이디 중복체크를 해주세요.");
         userId.focus();
-    }else if(status == "false"){
+    }else if(status === "false"){
         alert("다른 아이디를 입력해주세요.")
         userId.focus();
-    }else if(status == "true"){
-        //유효성검사의 포인트ㅠㅠㅠㅠㅠㅠㅠ우어어어어엉감격스렁워어어ㅓ어엉
+    }else if(status === "true"){
         console.log("수많은 난관을 뚫고 가입한 것을 축하드립니다.");
         alert("가입이 완료되었습니다. 잠시후 이메일에 인증하시면 서비스 이용이 가능합니다.")
         $("form[name=signup_form]").submit();

@@ -41,29 +41,35 @@ $(document).ready(function () {
     }
   });
 
-  $("#closeBtn").click(function () {
-    let modalY = $(".modal-body").scrollTop();
 
-    let modalWidth = $(".modal-body").width();
+    // $("#closeBtn").click(function () {
+    //
+    //     let modalY = $(".modal-body").scrollTop();
+    //
+    //     let modalWidth = $(".modal-body").width();
+    //
+    //     let rentalNo =
+    //
+    //     console.log("Y축: " + modalY + "너비 : " + modalWidth);
+    //
+    //     $.ajax({
+    //         url: "/saveUserBookY.do",
+    //         type: "POST",
+    //         data: {
+    //             modalY : modalY,
+    //             modalWidth: modalWidth,
+    //             rentalNo : rentalNo
+    //         },
+    //         success: function (response) {
+    //             // console.log("서버 응답: ", response);
+    //             location.reload();
+    //         },
+    //         error: function (error) {
+    //             console.error("에러 발생: ", error);
+    //         }
+    //     });
+    // });
 
-    console.log("Y축: " + modalY + "너비 : " + modalWidth);
-
-    $.ajax({
-      url: "/saveUserBookY.do",
-      type: "POST",
-      data: {
-        modalY: modalY,
-        modalWidth: modalWidth,
-      },
-      success: function (response) {
-        // console.log("서버 응답: ", response);
-        location.reload();
-      },
-      error: function (error) {
-        console.error("에러 발생: ", error);
-      },
-    });
-  });
 
   $(".select-mode").click(function () {
     $(".modal-content").toggleClass("dark-mode");
