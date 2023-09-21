@@ -14,101 +14,102 @@ $(document).ready(function () {
     $("#fullH").hide();
 
     /*emptyH을 클릭했을 때 fullH를 보여줌*/
-    $("#emptyH").click(function(){
+    $("#emptyH").click(function () {
         $("#emptyH").hide();
         $("#fullH").show();
     });
 
     /*fullH를 클릭했을 때 emptyH을 보여줌*/
-    $("#fullH").click(function(){
+    $("#fullH").click(function () {
         $("#emptyH").show();
         $("#fullH").hide();
     });
 
 
-$(".tab-button > li").click(function () {
-    var idx = $(this).index();
 
-    $(this).addClass("on").siblings().removeClass("on");
+    $(".tab-button > li").click(function () {
+        var idx = $(this).index();
 
-    $(".tabmenu .tab-content")
-        .eq(idx)
-        .addClass("on")
-        .siblings(".tab-content")
-        .removeClass("on");
-});
+        $(this).addClass("on").siblings().removeClass("on");
 
-
-//별점 표시
-$('.starRev span').click(function(){
-    $(this).parent().children('span').removeClass('on');
-    $(this).addClass('on').prevAll('span').addClass('on');
-});
-
-$('.stars .fa').click(function () {
-    $(this).addClass('active')
-    $(this).prevAll().addClass('active')
-    $(this).nextAll().removeClass('active')
-
-    let num = $(this).index()
-    let starRate = num + 1
-
-});
-
-$("#reviewRegister").click(function () {
-
-    var reviewContent = $('textarea[name="reviewContent"]').val();
-
-    var selectedRating = $('.starRev span.on').length;
-
-    console.log("리뷰 내용 : ", reviewContent, ", 별점 : ", selectedRating);
-
-    $.ajax({
-        type: 'POST',
-        url: '/makeReview.do',
-        data: {
-            rating: selectedRating,
-            content: reviewContent
-        },
-        success: function(response) {
-            alert('리뷰 등록에 성공했어요.');
-            location.reload();
-        },
-        error: function(error) {
-            alert('리뷰 등록에 실패했어요.' + error);
-        }
+        $(".tabmenu .tab-content")
+            .eq(idx)
+            .addClass("on")
+            .siblings(".tab-content")
+            .removeClass("on");
     });
 
-});
 
-    // $(".delete-button").click(function () {
-    //
-    //     console.log("삭제 시작");
-    //     console.log("리뷰 번호 확인: " + reviewNo);
-    //
-    //     if (window.confirm("이 리뷰를 삭제하시겠어요?")) {
-    //         $.ajax({
-    //             type: "POST",
-    //             url: '/removeReview.do',
-    //             data: {
-    //                 reviewNo : reviewNo
-    //             },
-    //             success: function (response) {
-    //                 alert('리뷰 삭제 완료');
-    //                 location.reload();
-    //             },
-    //             error: function (error) {
-    //                 alert('리뷰 삭제 실패 - ' + error.message);
-    //             }
-    //         });
-    //     }
-    // });
+    //별점 표시
+    $('.starRev span').click(function(){
+        $(this).parent().children('span').removeClass('on');
+        $(this).addClass('on').prevAll('span').addClass('on');
+    });
 
-$("#reviewClose").click(function () {
+    $('.stars .fa').click(function () {
+        $(this).addClass('active')
+        $(this).prevAll().addClass('active')
+        $(this).nextAll().removeClass('active')
 
-    $('textarea[name="reviewContent"]').val('');
-    $('.starRev span.on').removeClass('on');
+        let num = $(this).index()
+        let starRate = num + 1
 
-});
+    });
+
+    $("#reviewRegister").click(function () {
+
+        var reviewContent = $('textarea[name="reviewContent"]').val();
+
+        var selectedRating = $('.starRev span.on').length;
+
+        console.log("리뷰 내용 : ", reviewContent, ", 별점 : ", selectedRating);
+
+        $.ajax({
+            type: 'POST',
+            url: '/makeReview.do',
+            data: {
+                rating: selectedRating,
+                content: reviewContent
+            },
+            success: function(response) {
+                alert('리뷰 등록에 성공했어요.');
+                location.reload();
+            },
+            error: function(error) {
+                alert('리뷰 등록에 실패했어요.' + error);
+            }
+        });
+
+    });
+
+        // $(".delete-button").click(function () {
+        //
+        //     console.log("삭제 시작");
+        //     console.log("리뷰 번호 확인: " + reviewNo);
+        //
+        //     if (window.confirm("이 리뷰를 삭제하시겠어요?")) {
+        //         $.ajax({
+        //             type: "POST",
+        //             url: '/removeReview.do',
+        //             data: {
+        //                 reviewNo : reviewNo
+        //             },
+        //             success: function (response) {
+        //                 alert('리뷰 삭제 완료');
+        //                 location.reload();
+        //             },
+        //             error: function (error) {
+        //                 alert('리뷰 삭제 실패 - ' + error.message);
+        //             }
+        //         });
+        //     }
+        // });
+
+    $("#reviewClose").click(function () {
+
+        $('textarea[name="reviewContent"]').val('');
+        $('.starRev span.on').removeClass('on');
+
+    })
 
 });

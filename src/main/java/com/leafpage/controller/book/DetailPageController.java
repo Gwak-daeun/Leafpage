@@ -1,6 +1,7 @@
 package com.leafpage.controller.book;
 
 import com.leafpage.controller.Controller;
+import com.leafpage.dao.LeeLikeyDAO;
 import com.leafpage.dto.BookDTO;
 import com.leafpage.dao.BookDAO;
 import com.leafpage.dao.ReviewDAO;
@@ -16,17 +17,28 @@ public class DetailPageController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+        HttpSession session = request.getSession();
         String ISBN = "040501813854";
+        long userNo = (long) session.getAttribute("userNo");
+        String isbn = request.getParameter("isbn").trim();
+        System.out.println("userNo"+userNo);
 
         List<ReviewDTO>  reviews = new ReviewDAO().findReviews(ISBN);
 
         BookDTO bookDetail = new BookDAO().getBookDetails(ISBN);
 
-        HttpSession session = request.getSession();
+        LeeLikeyDAO leeLikeyDAO = new LeeLikeyDAO();
+        int checkLike = leeLikeyDAO.checkLike(userNo, isbn);
+        int heartCount = leeLikeyDAO.likeCount(isbn);
+        System.out.println("CHECKLIKE"+checkLike);
+
+
 
         session.setAttribute("bookDetail", bookDetail);
-
         session.setAttribute("reviews", reviews);
+
+        request.setAttribute("heartSelect", checkLike);
+        request.setAttribute("heartCount", heartCount);
 
         return "book/detailPage";
     }
