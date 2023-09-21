@@ -29,11 +29,14 @@
         <ul class="book-ul ">
             <c:forEach var="book" items="${mainBooks}">
             <li>
-                <div class="book-list">
-                    <img class="book-cover" src="${book.bookImg}" />
-                    <div class="book-title">${book.bookName}</div>
-                    <div class="book-author">${book.bookAuthorName}</div>
-                </div>
+                <a href="/detailPageView.do?isbn=${book.ISBN}">
+                    <div class="book-list">
+                        <img class="book-cover" src="${book.bookImg}" />
+                        <div class="book-title">${book.bookName}</div>
+                        <div class="book-author">${book.bookAuthorName}</div>
+                    </div>
+                </a>
+
             </li>
             </c:forEach>
         </ul>
