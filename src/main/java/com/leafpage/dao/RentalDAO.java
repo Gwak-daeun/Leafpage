@@ -16,7 +16,7 @@ public class RentalDAO {
     private static final String SELECT_RENTAL_COUNT =
             "SELECT COUNT(*) AS RENTAL_COUNT " +
                     "FROM book_rental " +
-                    "WHERE USER_NO = ?";
+                    "WHERE USER_NO = ? AND ACTUAL_RETUNR_DATE IS NULL";
 
     private static final String SELECT_RENTING_BOOK =
             "SELECT ACTUAL_RETURN_DATE FROM book_rental WHERE ISBN = ? AND ACTUAL_RETURN_DATE IS NULL";
@@ -26,9 +26,11 @@ public class RentalDAO {
                     "VALUES(?, ?, CURRENT_DATE, DATE_ADD(CURRENT_DATE, INTERVAL 6 DAY))";
 
     private static final String SELECT_NOT_YET_RETURNED_BOOK =
-            "SELECT ACTUAL_RETURN_DATE FROM book_rental WHERE USER_NO = ? AND ISBN = ? AND ACTUAL_RETURN_DATE IS NULL";
+            "SELECT ACTUAL_RETURN_DATE " +
+                    "FROM book_rental " +
+                    "WHERE USER_NO = ? AND RENTAL_NO = ? AND ACTUAL_RETURN_DATE IS NULL";
     private static final String UPDATE_RENTAL =
-            "UPDATE book_rental SET ACTUAL_RETURN_DATE = CURRENT_DATE WHERE USER_NO = ? AND ISBN = ?";
+            "UPDATE book_rental SET ACTUAL_RETURN_DATE = CURRENT_DATE WHERE USER_NO = ? AND RENTAL_NO = ?";
     private Connection connection = null;
     private PreparedStatement statement = null;
     private ResultSet resultSet = null;
@@ -101,7 +103,7 @@ public class RentalDAO {
 
             statement = connection.prepareStatement(UPDATE_RENTAL);
             statement.setLong(1, dto.getUserNo());
-            statement.setString(2, dto.getIsbn());
+            statement.setLong(2, dto.getRentalNo());
             statement.executeUpdate();
             log.debug("{}", statement);
 
@@ -121,8 +123,9 @@ public class RentalDAO {
 
             statement = connection.prepareStatement(SELECT_NOT_YET_RETURNED_BOOK);
             statement.setLong(1, dto.getUserNo());
-            statement.setString(2, dto.getIsbn());
+            statement.setLong(2, dto.getRentalNo());
             resultSet = statement.executeQuery();
+            log.debug("{}", statement);
 
             canReturn = resultSet.next();
         } catch (SQLException e) {

@@ -43,6 +43,6 @@ public class MypageInfoController implements Controller {
 
         session.setAttribute("bookText", bookText);
 
-        return "mypage";
+        return "user/mypage";
     }
 }

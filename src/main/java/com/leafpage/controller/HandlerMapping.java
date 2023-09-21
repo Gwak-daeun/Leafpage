@@ -1,6 +1,7 @@
 package com.leafpage.controller;
 
 import com.leafpage.controller.rental.RentalController;
+import com.leafpage.controller.rental.ReturnController;
 import com.leafpage.controller.user.*;
 import com.leafpage.controller.admin.*;
 
@@ -36,10 +37,13 @@ public class HandlerMapping {
         mappings.put("/loginCheck.do", new LoginCheckController());
         mappings.put("/emailResendView.do", new EmailResendViewController());
         mappings.put("/myPageView.do", new MyPageViewController());
+        mappings.put("/myInfoView.do", new UserMypageInfoViewController());
+        mappings.put("/mypageInfo.do", new MypageInfoController());
         mappings.put("/successEmailCheckView.do", new SuccessEmailCheckViewController());
         mappings.put("/failEmailCheckView.do", new FailEmailCheckViewController());
 
         mappings.put("/rentBook.do", new RentalController());
+        mappings.put("/returnBook.do", new ReturnController());
     }
 
     public Controller getController(String path) {
