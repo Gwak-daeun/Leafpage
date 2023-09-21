@@ -6,7 +6,10 @@ import com.leafpage.dto.MypageReturnedBooksDTO;
 import com.leafpage.util.DBUtil;
 
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,18 +19,17 @@ public class BookDAO {
     Connection conn = null;
 
 
+    public List<BookDTO> booklist() {
 
-    public List<BookDTO> booklist(){
 
-
-        List<BookDTO> bookDTOList= new ArrayList<>();
+        List<BookDTO> bookDTOList = new ArrayList<>();
         try {
             conn = DBUtil.getConnection();
-            String sql ="SELECT b.isbn, b.book_name, b.book_publisher_name, b.book_author_name FROM books b";
-            pstmt  = conn.prepareStatement(sql);
+            String sql = "SELECT b.isbn, b.book_name, b.book_publisher_name, b.book_author_name FROM books b";
+            pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 BookDTO bookDTO = new BookDTO();
                 bookDTO.setISBN(rs.getString("ISBN"));
                 bookDTO.setBookName(rs.getString("bookName"));
@@ -37,10 +39,10 @@ public class BookDAO {
 
                 bookDTOList.add(bookDTO);
             }
-            DBUtil.close(rs ,pstmt, conn);
+            DBUtil.close(rs, pstmt, conn);
 
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return bookDTOList;
@@ -69,15 +71,15 @@ public class BookDAO {
         return categories;
     }
 
-    public int uploadBook(BookDTO dto){
+    public int uploadBook(BookDTO dto) {
 
         int count = 0;
         try {
             conn = DBUtil.getConnection();
             conn.setAutoCommit(false);
 
-            String sql ="INSERT INTO books(ISBN, book_name, book_author_name, book_img, book_info, book_publisher_name, book_pub_date, book_upload_date, book_content, book_chapter, book_views, book_state)values (?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, 0, 0) ";
-            pstmt  = conn.prepareStatement(sql);
+            String sql = "INSERT INTO books(ISBN, book_name, book_author_name, book_img, book_info, book_publisher_name, book_pub_date, book_upload_date, book_content, book_chapter, book_views, book_state)values (?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, 0, 0) ";
+            pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, dto.getISBN());
             pstmt.setString(2, dto.getBookName());
             pstmt.setString(3, dto.getBookAuthorName());
@@ -92,9 +94,9 @@ public class BookDAO {
             insertCategories(conn, dto);
 
             conn.commit();
-            DBUtil.close(rs ,pstmt, conn);
+            DBUtil.close(rs, pstmt, conn);
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(new Object() {
             }.getClass().getEnclosingMethod().getName());
             System.out.println(e.getMessage());
@@ -109,7 +111,7 @@ public class BookDAO {
     }
 
 
-    private void insertCategories(Connection conn, BookDTO dto ) {
+    private void insertCategories(Connection conn, BookDTO dto) {
         List<String> categories = dto.getCategories();
         int count = 0;
         try {
@@ -135,15 +137,15 @@ public class BookDAO {
     }
 
 
-    public BookDTO detailBook(String isbn){
+    public BookDTO detailBook(String isbn) {
 
 
         BookDTO bookDTO = new BookDTO();
 
         try {
             conn = DBUtil.getConnection();
-            String sql ="SELECT b.isbn, b.book_name, b.book_publisher_name, b.book_author_name, b.book_pub_date, b.book_info, b.book_chapter, b.book_content, b.book_img FROM books b where b.isbn = ? ";
-            pstmt  = conn.prepareStatement(sql);
+            String sql = "SELECT b.isbn, b.book_name, b.book_publisher_name, b.book_author_name, b.book_pub_date, b.book_info, b.book_chapter, b.book_content, b.book_img FROM books b where b.isbn = ? ";
+            pstmt = conn.prepareStatement(sql);
 
             pstmt.setString(1, isbn);
             rs = pstmt.executeQuery();
@@ -160,42 +162,42 @@ public class BookDAO {
                 bookDTO.setBookContent(rs.getString("book_content"));
                 bookDTO.setBookImgFullPath(rs.getString("book_img"));
             }
-            DBUtil.close(rs ,pstmt, conn);
+            DBUtil.close(rs, pstmt, conn);
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return bookDTO;
     }
 
-    public int bookDelete(BookDTO dto){
+    public int bookDelete(BookDTO dto) {
         int count = 0;
 
-        List<BookDTO> bookDTOList= new ArrayList<>();
+        List<BookDTO> bookDTOList = new ArrayList<>();
         try {
             conn = DBUtil.getConnection();
-            String sql ="UPDATE books SET book_state = 1 WHERE ISBN = ?";
-            pstmt  = conn.prepareStatement(sql);
+            String sql = "UPDATE books SET book_state = 1 WHERE ISBN = ?";
+            pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, dto.getISBN());
             count = pstmt.executeUpdate();
-            DBUtil.close(rs ,pstmt, conn);
+            DBUtil.close(rs, pstmt, conn);
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
         return count;
     }
 
-    public int updateBook(BookDTO dto){
+    public int updateBook(BookDTO dto) {
 
         int count = 0;
         try {
             conn = DBUtil.getConnection();
             conn.setAutoCommit(false);
 
-            String sql ="UPDATE books SET  book_name = ?, book_author_name = ?, book_img = ?, book_info = ?, book_publisher_name = ?, book_pub_date = ?, book_content = ?, book_chapter = ? WHERE ISBN = ?";
-            pstmt  = conn.prepareStatement(sql);
+            String sql = "UPDATE books SET  book_name = ?, book_author_name = ?, book_img = ?, book_info = ?, book_publisher_name = ?, book_pub_date = ?, book_content = ?, book_chapter = ? WHERE ISBN = ?";
+            pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, dto.getBookName());
             pstmt.setString(2, dto.getBookAuthorName());
             pstmt.setString(3, dto.getBookImgFullPath());
@@ -210,8 +212,8 @@ public class BookDAO {
             updateCategories(conn, dto);
 
             conn.commit();
-            DBUtil.close(rs ,pstmt, conn);
-        }catch (SQLException e){
+            DBUtil.close(rs, pstmt, conn);
+        } catch (SQLException e) {
             System.out.println(new Object() {
             }.getClass().getEnclosingMethod().getName());
             System.out.println(e.getMessage());
@@ -226,7 +228,7 @@ public class BookDAO {
     }
 
 
-    private void updateCategories(Connection conn, BookDTO dto ) {
+    private void updateCategories(Connection conn, BookDTO dto) {
         List<String> categories = dto.getCategories();
         int count = 0;
         try {
@@ -305,16 +307,15 @@ public class BookDAO {
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                    MypageBooksDTO books = new MypageBooksDTO(
-                    rs.getString("book_name"),
-                    rs.getString("book_author_name"),
-                    rs.getString("scheduled_return_date"),
-                    rs.getString("rental_date"),
-                    rs.getString("rental_no"),
-                    rs.getInt("scroll_y"),
-                    rs.getInt("modal_width"),
-                    rs.getString("book_content")
-                );
+                MypageBooksDTO books = new MypageBooksDTO();
+                books.setBookName(rs.getString("book_name"));
+                books.setBookAuthorName(rs.getString("book_author_name"));
+                books.setScheduledReturnDate(rs.getString("scheduled_return_date"));
+                books.setRentalDate(rs.getString("rental_date"));
+                books.setRentalNo(rs.getString("rental_no"));
+                books.setScrollY(rs.getInt("scroll_y"));
+                books.setModalWidth(rs.getInt("modal_width"));
+                books.setBookContent(rs.getString("book_content"));
 
                 userBookList.add(books);
             }
@@ -356,7 +357,7 @@ public class BookDAO {
 
     public List<MypageReturnedBooksDTO> getUserReturnedBook(int userNo) {
 
-        ArrayList<MypageReturnedBooksDTO> userReturnedBookList =  new ArrayList<>();
+        ArrayList<MypageReturnedBooksDTO> userReturnedBookList = new ArrayList<>();
 
         String SQL = "select b.book_name, b.book_author_name, r.actual_return_date\n" +
                 "from users u \n" +
@@ -374,11 +375,10 @@ public class BookDAO {
             pstmt.setInt(1, userNo);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                MypageReturnedBooksDTO books = new MypageReturnedBooksDTO(
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3)
-                );
+                MypageReturnedBooksDTO books = new MypageReturnedBooksDTO();
+                books.setBookName(rs.getString(1));
+                books.setBookAuthorName(rs.getString(2));
+                books.setActualReturnDate(rs.getString(3));
                 userReturnedBookList.add(books);
             }
         } catch (Exception e) {
@@ -458,4 +458,19 @@ public class BookDAO {
         return -1;
     }
 
+    public void increaseView(String isbn) {
+        String SQL = "UPDATE books SET book_views = book_views + 1 WHERE ISBN = ?";
+
+        try {
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1, isbn);
+            pstmt.executeUpdate();
+            System.out.println(pstmt);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+    }
 }

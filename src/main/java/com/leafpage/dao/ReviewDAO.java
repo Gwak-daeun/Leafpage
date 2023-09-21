@@ -35,7 +35,7 @@ public class ReviewDAO {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             DBUtil.close(rs, pstmt, conn);
         }
 
@@ -58,19 +58,18 @@ public class ReviewDAO {
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                ReviewDTO review = new ReviewDTO(
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getInt(5)
-                );
+                ReviewDTO review = new ReviewDTO();
+                review.setReviewNo(rs.getString(1));
+                review.setISBN(rs.getString(2));
+                review.setReviewDate(rs.getString(3));
+                review.setReviewContent(rs.getString(4));
+                review.setReviewRating(rs.getInt(5));
                 bookReviews.add(review);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             DBUtil.close(rs, pstmt, conn);
         }
 
@@ -93,7 +92,7 @@ public class ReviewDAO {
         } catch (Exception e) {
             e.printStackTrace();
 
-        }finally {
+        } finally {
             DBUtil.close(rs, pstmt, conn);
         }
 

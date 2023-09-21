@@ -32,9 +32,6 @@ public class Tel {
         if (isInValidTel(userTel)) {
             throw new IllegalArgumentException("전화번호가 형식에 맞지 않습니다. 휴대전화번호를 입력해주세요.");
         }
-        if (isDuplicatedTel(userTel)) {
-            throw new IllegalArgumentException("이미 가입된 전화번호입니다. 다른 전화번호를 입력해주세요.");
-        }
     }
 
     private boolean isInValidTelMINLength(String userTel) {
@@ -54,10 +51,5 @@ public class Tel {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(userTel);
         return !matcher.matches();
-    }
-
-    //중복확인해야함
-    private boolean isDuplicatedTel(String userTel) {
-        return new UserDAO().findUserByEmail(userTel) == 1;
     }
 }

@@ -9,8 +9,6 @@ import java.util.List;
 
 @Setter
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
 public class BookDTO {
     private String ISBN;
     private String bookName;

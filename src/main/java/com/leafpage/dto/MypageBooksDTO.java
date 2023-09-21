@@ -1,12 +1,9 @@
 package com.leafpage.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Setter
+@Getter
 public class MypageBooksDTO {
 
     private String bookName;
@@ -17,5 +14,4 @@ public class MypageBooksDTO {
     private int scrollY;
     private int modalWidth;
     private String bookContent;
-
 }

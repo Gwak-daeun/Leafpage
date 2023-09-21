@@ -59,33 +59,61 @@ public class SignupController implements Controller {
                 script.close();
             }
 
+
 //new UserDTO(0, userId, SHA256.getSHA256(userPassword), userEmail, userTel, "일반회원", "회원", userSecurityQuestion, userSecurityAnswer, com.leafpage.util.SHA256.getSHA256(userEmail), false)
             UserDAO userDAO = new UserDAO();
             UserDTO userDTO = new UserDTO();
-            userDTO.setUserNo(0);
-            userDTO.setUserId(userId);
-            userDTO.setUserPassword(userPassword);
-            userDTO.setUserEmail(userEmail);
-            userDTO.setUserTel(userTel);
-            userDTO.setUserState("일반회원");
-            userDTO.setUserRole("회원");
-            userDTO.setUserSecurityQuestion(userSecurityQuestion);
-            userDTO.setUserSecurityAnswer(userSecurityAnswer);
-            userDTO.setUserEmailHash(SHA256.getSHA256(userEmail));
-            userDTO.setUserEmailChecked(false);
 
-            int result = userDAO.signup(userDTO);
-            if (result == -1) {
+            if(isDuplicateId(userId)) {
                 PrintWriter script = response.getWriter();
                 script.println("<script>");
-                script.println("alert('회원가입에 실패하였습니다.');");
+                script.println("alert('이미 가입된 아이디입니다.');");
                 script.println("history.back();");
                 script.println("</script>");
                 script.close();
-            } else {
-                HttpSession session = request.getSession();
-                session.setAttribute("userId", userId);  //가입 성공 시 바로 로그인상태로
-                return "sendEmail.do";
+            }
+            else if (isDuplicatedTel(userTel)) {
+                PrintWriter script = response.getWriter();
+                script.println("<script>");
+                script.println("alert('이미 가입된 전화번호입니다.');");
+                script.println("history.back();");
+                script.println("</script>");
+                script.close();
+            }
+            else if(isDuplicatedEmail(userEmail)) {
+                PrintWriter script = response.getWriter();
+                script.println("<script>");
+                script.println("alert('이미 가입된 이메일입니다.');");
+                script.println("history.back();");
+                script.println("</script>");
+                script.close();
+            }
+            else{
+                userDTO.setUserNo(0);
+                userDTO.setUserId(userId);
+                userDTO.setUserPassword(userPassword);
+                userDTO.setUserEmail(userEmail);
+                userDTO.setUserTel(userTel);
+                userDTO.setUserState("일반회원");
+                userDTO.setUserRole("회원");
+                userDTO.setUserSecurityQuestion(userSecurityQuestion);
+                userDTO.setUserSecurityAnswer(userSecurityAnswer);
+                userDTO.setUserEmailHash(SHA256.getSHA256(userEmail));
+                userDTO.setUserEmailChecked(false);
+
+                int result = userDAO.signup(userDTO);
+                if (result == -1) {
+                    PrintWriter script = response.getWriter();
+                    script.println("<script>");
+                    script.println("alert('회원가입에 실패하였습니다.');");
+                    script.println("history.back();");
+                    script.println("</script>");
+                    script.close();
+                } else {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("userId", userId);  //가입 성공 시 바로 로그인상태로
+                    return "sendEmail.do";
+                }
             }
         } else {
             PrintWriter script = response.getWriter();
@@ -96,5 +124,15 @@ public class SignupController implements Controller {
             script.close();
         }
         return "signupView.do";
+    }
+
+    private boolean isDuplicateId(String userId) {
+        return new UserDAO().findUserById(userId) == 1;
+    }
+    private boolean isDuplicatedTel(String userTel) {
+        return new UserDAO().findUserByEmail(userTel) == 1;
+    }
+    private boolean isDuplicatedEmail(String userEmail) {
+        return new UserDAO().findUserByEmail(userEmail) == 1;
     }
 }

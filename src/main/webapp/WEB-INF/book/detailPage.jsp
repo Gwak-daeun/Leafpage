@@ -34,7 +34,7 @@
                 <span >${bookDetail.bookAuthorName}</span>
                 <div>${bookDetail.categories} | ${bookDetail.bookPublisherName} | 발행일: ${bookDetail.bookPubDate}</div>
                 <div class="bottom-mg inline">
-                    <button class="btn rental" onclick="rent(${book.isbn})">대여하기</button>
+                    <button class="btn rental" onclick="rent(${bookDetail.ISBN})">대여하기</button>
                     <button class="btn preview">미리보기</button>   <%-- 로그인 해야 볼 수 있음--%>
 
                     <img id="emptyH" style="width: 20px; margin-left: 5px;" src="/css/icons/empty.png" onclick="location.href='LikeHeart.do'">
@@ -198,6 +198,6 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script src="../js/detailPage.js"></script>
+<script src="../../js/detailPage.js"></script>
 </body>
 </html>
