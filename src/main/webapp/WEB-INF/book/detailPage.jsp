@@ -131,9 +131,7 @@
                     </ul>
 
 
-                    <div>
 
-                    </div>
                 </div>
                 <div class="tab-content">
                     <ul class="book-ul ">

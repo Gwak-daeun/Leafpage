@@ -1,13 +1,10 @@
 package com.leafpage.dto;
 
 import com.leafpage.domain.user.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class UserDTO {
     private int userNo;
     private Id userId;
