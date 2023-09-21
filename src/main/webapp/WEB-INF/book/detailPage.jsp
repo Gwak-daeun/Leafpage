@@ -100,7 +100,6 @@
                                                 <c:if test="${review.reviewRating eq 1}">
                                                     <span class="star">⭐</span>
                                                 </c:if>
-
                                             </span>
 
                                             <span class="review-top-right">
@@ -129,11 +128,6 @@
                         </li>
                     </c:forEach>
                 </ul>
-                
-                
-                <div>
-
-                </div>
             </div>
             <div class="tab-content">
                 <ul class="book-ul ">

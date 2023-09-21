@@ -7,10 +7,8 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Setter
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@Setter
 public class BookDTO {
     private String ISBN;
     private String bookName;
