@@ -15,8 +15,8 @@ $(document).ready(function () {
   })
 });
 
-$("#emptyH").show();
-$("#fullH").hide();
+// $("#emptyH").show();
+// $("#fullH").hide();
 
 //하트 채워지고 비워지는 기능
 function likeCheck() {
@@ -34,8 +34,8 @@ function likeCheck() {
         success: function (data) {
             console.log(data);
 
-            $("#emptyH").show();
-            $("#fullH").hide();
+            // $("#emptyH").show();
+            // $("#fullH").hide();
             if (data == "1") {
                 $("#emptyH").hide();
                 $("#fullH").show();

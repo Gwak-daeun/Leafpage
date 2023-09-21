@@ -1,9 +1,8 @@
 package com.leafpage.controller.user;
 
 import com.leafpage.controller.Controller;
-import com.leafpage.dao.LikeyDAO;
+import com.leafpage.dao.LeeLikeyDAO;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -34,7 +33,7 @@ public class LikeEmptyHeartController implements Controller {
         String isbn = request.getParameter("isbn").trim();
 
         //2. DB 연동 처리
-        LikeyDAO likeyDAO = new LikeyDAO();
+        LeeLikeyDAO likeyDAO = new LeeLikeyDAO();
         PrintWriter out = response.getWriter();
 
         int checkLike = likeyDAO.checkLike(userNo, isbn);

@@ -1,15 +1,12 @@
 package com.leafpage.dao;
 
-import ch.qos.logback.core.encoder.EchoEncoder;
 import com.leafpage.util.DBUtil;
 
-import javax.servlet.RequestDispatcher;
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class LikeyDAO {
+public class LeeLikeyDAO {
 
     private Connection conn = null;
     private PreparedStatement pstmt = null;
