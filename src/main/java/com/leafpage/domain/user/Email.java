@@ -32,9 +32,6 @@ public class Email {
         if (isInValidEmail(userEmail)) {
             throw new IllegalArgumentException("이메일이 형식에 맞지 않습니다. 다른 이메일을 입력해주세요.");
         }
-        if(isDuplicatedEmail(userEmail)) {
-            throw new IllegalArgumentException("이미 가입된 이메일입니다. 다른 이메일을 입력해주세요.");
-        }
     }
 
     private boolean isInValidEmailMINLength(String userEmail) {
@@ -56,7 +53,4 @@ public class Email {
         return !matcher.matches();
     }
 
-    private boolean isDuplicatedEmail(String userEmail) {
-        return new UserDAO().findUserByEmail(userEmail) == 1;
-    }
 }

@@ -10,8 +10,10 @@ import java.util.List;
 public class State {
 
     List<String> validStates = new ArrayList<>(Arrays.asList(
-            "회원",
-            "관리자"
+            "일반회원",
+            "탈퇴회원",
+            "블랙회원",
+            "휴면회원"
     ));
 
     private final String userState;

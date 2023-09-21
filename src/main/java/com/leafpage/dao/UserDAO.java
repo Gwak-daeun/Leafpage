@@ -9,19 +9,24 @@ import com.leafpage.util.SHA256;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO {
     String loginSQL = "SELECT user_password, user_role, user_state FROM users WHERE user_id = ?";
-    String signupSQL = "INSERT INTO users VALUES (NULL,?,?,?,?,?,?,?,?,?,false)";
+    String signupSQL = "INSERT INTO users VALUES (NULL,?,?,?,?,?,?,?,?,?,false,NOW())";
     String findUserByIdSQL = "SELECT user_id FROM users WHERE user_id = ?";
     String findIdByEmailOrTelSQL = "SELECT user_id FROM users WHERE user_email = ? OR user_tel = ?";
     String findPwByEmailOrTelSQL = "SELECT user_security_question, user_security_answer FROM users WHERE (user_email = ? OR user_tel =?) AND (user_id = ?)";
     String findUserByEmailSQL = "SELECT user_email FROM users WHERE user_email = ?";
     String findUserByTelSQL = "SELECT user_tel FROM users WHERE user_tel = ?";
     String getUserEmailSQL = "SELECT user_email FROM users WHERE user_id = ?";
+    String getUserTelSQL = "SELECT user_tel FROM users WHERE user_id = ?";
     String getUserEmailCheckedSQL = "SELECT user_email_checked FROM users WHERE user_id = ?";
+    String getUserNoSQL = "SELECT user_no FROM users WHERE user_id = ?";
     String setUserEmailCheckedSQL = "UPDATE users SET user_email_checked = true WHERE user_id = ?";
-
+    String changeNewPasswordSQL = "UPDATE users SET user_password = ? WHERE (user_email = ? OR user_tel =?) AND (user_id = ?)";
+    String setUserStateSQL = "UPDATE users SET user_state = ? WHERE user_id = ? AND user_password = ?";
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
@@ -52,6 +57,8 @@ public class UserDAO {
         return -3;  // 데이터베이스 오류
     }
 
+
+    //회원가입
     public int signup(UserDTO user) {
         //no,id,pw,email,tel,state,role,securityq,securityan
         try {
@@ -139,7 +146,26 @@ public class UserDAO {
         return -2;  //error
     }
 
-        //이메일 중복확인
+    //새 비밀번호 변경
+    public int changeNewPassword (String newPassword, String userEmail, String userTel, String userId) {
+        try {
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(changeNewPasswordSQL);
+            pstmt.setString(1, newPassword);
+            pstmt.setString(2, userEmail);
+            pstmt.setString(3, userTel);
+            pstmt.setString(4, userId);
+            pstmt.executeUpdate();
+            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+        return 0;  // 데이터베이스 오류
+    }
+
+    //이메일 중복확인
     public int findUserByEmail(String userEmail) {
         try {
             conn = DBUtil.getConnection();
@@ -179,11 +205,28 @@ public class UserDAO {
         return -1;  //데이터베이스 오류
     }
 
+    // 사용자의 ID 값을 받아서 userTel을 반환
+    public String getUserTel(String userId) {
+        try {
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(getUserTelSQL);
+            pstmt.setString(1, userId);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+        return null;  // 데이터베이스 오류
+    }
+
     // 사용자의 ID 값을 받아서 userEmail을 반환
     public String getUserEmail(String userId) {
         try {
             conn = DBUtil.getConnection();
-            System.out.println("getUserEmail SQL문 안에 :"+userId);
             pstmt = conn.prepareStatement(getUserEmailSQL);
             pstmt.setString(1, userId);
             rs = pstmt.executeQuery();
@@ -216,6 +259,23 @@ public class UserDAO {
         return false;  // 데이터베이스 오류
     }
 
+    public int getUserNo (String userId) {
+        try {
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(getUserNoSQL);
+            pstmt.setString(1, userId);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+        return -1;  // 데이터베이스 오류
+    }
+
     //특정한 사용자의 Email 인증을 수행
     public boolean setUserEmailChecked (String userId) {
         try {
@@ -230,5 +290,22 @@ public class UserDAO {
             DBUtil.close(rs, pstmt, conn);
         }
         return false;  // 데이터베이스 오류
+    }
+
+    //    String setUserStateSQL = "UPDATE users SET user_state = ? WHERE user_id = ? AND user_password = ?";
+    public int setUserState(String userId, String userPassword, String userState) {
+        try {
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(setUserStateSQL);
+            pstmt.setString(1, userState);
+            pstmt.setString(2, userId);
+            pstmt.setString(3, userPassword);
+            return pstmt.executeUpdate();  //성공하면 1, 실패하면 0
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+        return -1;  // 데이터베이스 오류
     }
 }

@@ -1,6 +1,6 @@
 let find_id_btn = $("#find_id_btn");
 
-function checkNull() {
+function checkNullId() {
     foundId.hide();
     if (selectType.val() == "findByEmail") {
         if (inputEmail.val() == '' || inputEmail.val() == null) {

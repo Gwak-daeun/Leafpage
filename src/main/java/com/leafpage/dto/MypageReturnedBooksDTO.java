@@ -1,12 +1,11 @@
 package com.leafpage.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@NoArgsConstructor
+@Setter
+@Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class MypageReturnedBooksDTO {
     String book_name;
     String book_author_name;

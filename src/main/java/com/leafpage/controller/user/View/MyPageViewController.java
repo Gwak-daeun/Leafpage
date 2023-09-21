@@ -11,6 +11,7 @@ public class MyPageViewController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         System.out.println("마이페이지로 이동");
+
         return "user/mypage";
     }
 }

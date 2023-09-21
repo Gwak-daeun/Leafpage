@@ -32,7 +32,7 @@
     <div class="alert alert-success mt-4" role="alert" id="found_id"></div>
 
     <div class="form-floating mb-4">
-        <input type="button" id="find_id_btn" class="btn3 btn btn-success" value="아이디 찾기" onclick="checkNull()">
+        <input type="button" id="find_id_btn" class="btn3 btn btn-success" value="아이디 찾기" onclick="checkNullId()">
     </div>
 
 </form>

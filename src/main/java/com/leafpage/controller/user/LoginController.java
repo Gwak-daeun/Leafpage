@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 // 로그인 인증 처리를 담당하는 컨트롤러
 public class LoginController implements Controller {
@@ -36,6 +37,7 @@ public class LoginController implements Controller {
         UserDAO userDAO = new UserDAO();
         int result = userDAO.login(userId, userPassword);
         boolean userEmailChecked = userDAO.getUserEmailChecked(userId);
+        int userNo = userDAO.getUserNo(userId);
         PrintWriter script = response.getWriter();
         switch (result) {
             case -3:   //[-3]데이터베이스 오류
@@ -69,6 +71,7 @@ public class LoginController implements Controller {
             case 1:  // [1]일반회원 로그인
                 session.setAttribute("userId", userId);
                 session.setAttribute("userEmailChecked", userEmailChecked);
+                session.setAttribute("userNo", userNo);
                 return "index";
 
             case 2:  //[2]휴면회원 로그인
