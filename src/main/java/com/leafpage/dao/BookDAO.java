@@ -279,7 +279,7 @@ public class BookDAO {
         }
     }
 
-    public BookDTO getBookDetails(String ISBN) {
+    public BookDTO getBookDetails(String isbn) {
 
         BookDTO bookDetails = new BookDTO();
 
@@ -294,7 +294,7 @@ public class BookDAO {
             conn = DBUtil.getConnection();
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setString(1, ISBN);
+            pstmt.setString(1, isbn);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -318,6 +318,69 @@ public class BookDAO {
         return bookDetails;
     }
 
+    public List<BookDTO> findSameAuthorBooks(String isbn) {
+
+        List<BookDTO> sameAuthorBooks = new ArrayList<>();
+
+        String authorName = findAuthorName(isbn);
+
+        String SQL = "select book_name, book_img, book_publisher_name\n" +
+                    "from books\n" +
+                    "where book_author_name = ?;";
+
+        try {
+            conn = DBUtil.getConnection();
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1, authorName);
+            rs = pstmt.executeQuery();
+
+
+
+            while (rs.next()) {
+                BookDTO sameAuthorBook = new BookDTO();
+                sameAuthorBook.setBookName(rs.getString("book_name"));
+                sameAuthorBook.setBookImg(rs.getString("book_img"));
+                sameAuthorBook.setBookPublisherName(rs.getString("book_publisher_name"));
+                sameAuthorBooks.add(sameAuthorBook);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+
+        return sameAuthorBooks;
+    }
+
+    public String findAuthorName(String ISBN) {
+
+        String authorName = "";
+
+        String SQL = "select book_author_name \n" +
+                "from books\n" +
+                "where ISBN = ?;";
+
+        try {
+            conn = DBUtil.getConnection();
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1, ISBN);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                authorName = rs.getString("book_author_name");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+
+        return authorName;
+    }
+
     public List<MypageBooksDTO> getUserLendingBook(int userNo) throws IOException {
 
         List<MypageBooksDTO> userBookList = new ArrayList<>();
@@ -339,16 +402,14 @@ public class BookDAO {
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                    MypageBooksDTO books = new MypageBooksDTO(
-                    rs.getString("book_name"),
-                    rs.getString("book_author_name"),
-                    rs.getString("scheduled_return_date"),
-                    rs.getString("rental_date"),
-                    rs.getString("rental_no"),
-                    rs.getInt("scroll_y"),
-                    rs.getInt("modal_width"),
-                    rs.getString("book_content")
-                );
+                MypageBooksDTO books = new MypageBooksDTO();
+                books.setBookAuthorName(rs.getString("book_author_name"));
+                books.setScheduledReturnDate(rs.getString("scheduled_return_date"));
+                books.setRentalDate(rs.getString("rental_date"));
+                books.setRentalNo(rs.getString("rental_no"));
+                books.setScrollY(rs.getInt("scroll_y"));
+                books.setModalWidth(rs.getInt("modal_width"));
+                books.setBookContent(rs.getString("book_content"));
 
                 userBookList.add(books);
             }
@@ -360,33 +421,6 @@ public class BookDAO {
 
         return userBookList;
     }
-
-//    public int getTotalRentals() {
-//        int userTotalRentals = 0;
-//
-//        String SQL = "select count(*) as rental_num\n" +
-//                "from book_rental\n" +
-//                "where book_rental.user_no = 2;";
-//        //user_no는 이후 로그인 기능 붙였을 때 파라미터로 받아야 함
-//
-//        MypageBooksDTO mypageBooksDTO = new MypageBooksDTO();
-//
-//        try {
-//            conn = DBUtil.getConnection();
-//            pstmt = conn.prepareStatement(SQL);
-//            rs = pstmt.executeQuery();
-//            while (rs.next()) {
-//               mypageBooksDTO.setRentalNo(rs.getString("rental_num"));
-//               userTotalRentals = mypageBooksDTO.getAllRentals();
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            DBUtil.close(rs, pstmt, conn);
-//        }
-//
-//        return userTotalRentals;
-//    }
 
     public List<MypageReturnedBooksDTO> getUserReturnedBook(int userNo) {
 
@@ -408,11 +442,10 @@ public class BookDAO {
             pstmt.setInt(1, userNo);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                MypageReturnedBooksDTO books = new MypageReturnedBooksDTO(
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3)
-                );
+                MypageReturnedBooksDTO books = new MypageReturnedBooksDTO();
+                books.setBookName(rs.getString("book_name"));
+                books.setBookAuthorName(rs.getString("book_author_name"));
+                books.setActualReturnDate(rs.getString("actual_return_date"));
                 userReturnedBookList.add(books);
             }
         } catch (Exception e) {
@@ -424,58 +457,11 @@ public class BookDAO {
         return userReturnedBookList;
     }
 
-//    public List<BookDTO> getLendingBookContent() throws IOException {
-//
-//        //txt파일 가져올 때
-////        List<String> lines = Files.readAllLines(Paths.get("C:\\Users\\user\\Desktop\\book.txt"));
-////
-////        List<String> bookText = new ArrayList<>();
-////
-////        for (String line : lines) {
-////            String word = line.replace("\\n", "<br>");
-////            bookText.add(word);
-////        }
-//
-//        String SQL = "select books.book_content\n" +
-//                "from books\n" +
-//                "join book_rental\n" +
-//                "on books.ISBN = book_rental.ISBN\n" +
-//                "join users\n" +
-//                "on users.user_no = book_rental.user_no\n" +
-//                "where users.user_no = 2;";
-//        //user_no는 이후 로그인 기능 붙였을 때 파라미터로 받아야 함
-//
-//        List<BookDTO> bookText = new ArrayList<>();
-//
-//        try {
-//            conn = DBUtil.getConnection();
-//            pstmt = conn.prepareStatement(SQL);
-//            rs = pstmt.executeQuery();
-//            while (rs.next()) {
-//                bookText.setBookContent(rs.getString("book_content"));
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            DBUtil.close(rs, pstmt, conn);
-//        }
-//
-//        return bookText;
-//
-//    }
-
     public int saveBookScrollY(int modalY, int modalWidth, int rentalNo) {
 
-        String SQL = "";
-
-        System.out.println("MODAL WIDTH: " + modalWidth);
-
-        SQL = "update book_rental set scroll_y = ?, modal_width = ? where rental_no = ?;";
-
-        System.out.println("SCROLL_Y SAVE SQL: " + SQL);
+        String  SQL = "update book_rental set scroll_y = ?, modal_width = ? where rental_no = ?;";
 
         try {
-
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
             pstmt.setInt(1, modalY);
@@ -490,6 +476,40 @@ public class BookDAO {
             DBUtil.close(rs, pstmt, conn);
         }
         return -1;
+    }
+
+    public List<BookDTO> findMainBooks() {
+
+        List<BookDTO> mainBooks = new ArrayList<>();
+
+
+
+        String SQL = "select book_name, book_img, book_author_name, book_views\n" +
+                "from books\n" +
+                "order by book_views desc\n" +
+                "limit 8;";
+
+        try {
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                BookDTO bookDTO = new BookDTO();
+                bookDTO.setBookName(rs.getString("book_name"));
+                bookDTO.setBookImg(rs.getString("book_img"));
+                bookDTO.setBookAuthorName(rs.getString("book_author_name"));
+                mainBooks.add(bookDTO);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+
+        return mainBooks;
+
     }
 
 }

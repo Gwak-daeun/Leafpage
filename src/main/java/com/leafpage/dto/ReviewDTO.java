@@ -1,11 +1,9 @@
 package com.leafpage.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 public class ReviewDTO {
     private String reviewNo;
     private String ISBN;
