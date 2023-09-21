@@ -3,7 +3,6 @@ package com.leafpage.controller.user;
 import com.leafpage.controller.Controller;
 import com.leafpage.dao.LeeLikeyDAO;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -34,9 +33,8 @@ public class LikeEmptyHeartController implements Controller {
         String isbn = request.getParameter("isbn").trim();
 
         //2. DB 연동 처리
-
-        PrintWriter out = response.getWriter();
         LeeLikeyDAO leeLikeyDAO = new LeeLikeyDAO();
+        PrintWriter out = response.getWriter();
 
         int checkLike = leeLikeyDAO.checkLike(userNo, isbn);
         if(checkLike == 1) {
@@ -54,7 +52,7 @@ public class LikeEmptyHeartController implements Controller {
                 out.close();
             }
         }
-        
+
         int like = leeLikeyDAO.checkLike(userNo, isbn);
         System.out.println(like);
         int heartCount = leeLikeyDAO.likeCount(isbn);

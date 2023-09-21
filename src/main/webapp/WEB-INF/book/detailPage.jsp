@@ -36,13 +36,14 @@
                     <button class="btn rental" data-toggle="modal" href="#rental">대여하기</button>
                     <button class="btn preview">미리보기</button>   <%-- 로그인 해야 볼 수 있음--%>
 
-<%--                    <c:if test="${heartSelect =='1'}">--%>
+<%--                    <c:if test="${heartSelect =='1'}" var="">--%>
 <%--                        <img id="fullH" style="width: 20px; margin-left: 5px;" src="/css/icons/full.png" onclick="likeCheck()">--%>
 <%--                    </c:if>--%>
-<%--                    <c:if test="${heartSelect =='0'}">--%>
+<%--                    <c:if test="${heartSelect =='0'}" var="">--%>
 <%--                        <img id="emptyH" style="width: 20px; margin-left: 5px;" src="/css/icons/empty.png" onclick="likeCheck()">--%>
 <%--                    </c:if>--%>
 <%--                    ${ heartCount }--%>
+
                     <img id="fullH" style="width: 20px; margin-left: 5px;" src="/css/icons/full.png" onclick="likeCheck()">
                     <img id="emptyH" style="width: 20px; margin-left: 5px;" src="/css/icons/empty.png" onclick="likeCheck()">
 
