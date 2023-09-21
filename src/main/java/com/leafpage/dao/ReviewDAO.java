@@ -69,7 +69,7 @@ public class ReviewDAO {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             DBUtil.close(rs, pstmt, conn);
         }
 
@@ -92,7 +92,7 @@ public class ReviewDAO {
         } catch (Exception e) {
             e.printStackTrace();
 
-        }finally {
+        } finally {
             DBUtil.close(rs, pstmt, conn);
         }
 
