@@ -19,29 +19,21 @@ public class MypageInfoController implements Controller {
 
         List<MypageBooksDTO> userBooks = new ArrayList<>();
         List<MypageReturnedBooksDTO> userReturnedBooks = new ArrayList<>();
-        List<BookDTO> bookText = new ArrayList<>();
 
         BookDAO bookDAO = new BookDAO();
 
-        int totalRentals = 0;
+        int userNo = 1;
 
-        userBooks = bookDAO.getUserLendingBook();
+        userBooks = bookDAO.getUserLendingBook(userNo);
 
-        userReturnedBooks = bookDAO.getUserReturnedBook();
+        userReturnedBooks = bookDAO.getUserReturnedBook(userNo);
 
-//        totalRentals = bookDAO.getTotalRentals();
-
-//        bookText = bookDAO.getLendingBookContent();
 
         HttpSession session = request.getSession();
 
         session.setAttribute("books", userBooks);
 
-//        session.setAttribute("totalRentals", totalRentals);
-
         session.setAttribute("userReturnedBooks", userReturnedBooks);
-
-//        session.setAttribute("bookText", bookText);
 
         return "/user/mypage";
     }
