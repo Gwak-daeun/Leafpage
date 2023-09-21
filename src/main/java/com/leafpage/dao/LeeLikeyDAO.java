@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 public class LeeLikeyDAO {
 
     private Connection conn = null;
-    private PreparedStatement pstmt = null;
+    PreparedStatement pstmp = null;
     private ResultSet rs = null;
     PreparedStatement dlstmt = null;
     PreparedStatement instmt = null;
@@ -23,10 +23,11 @@ public class LeeLikeyDAO {
 
         try {
             conn = DBUtil.getConnection();
-            pstmt = conn.prepareStatement(SQL);
-            pstmt.setLong(1, userNo);
-            pstmt.setString(2, isbn);
-            rs = pstmt.executeQuery();
+            pstmp = conn.prepareStatement(SQL);
+            pstmp.setLong(1, userNo);
+            pstmp.setString(2, isbn);
+            ResultSet rs = null;
+            rs = pstmp.executeQuery();
 
             if(rs.next()) {
                 return 1;           //값이 있으면 1 반환
@@ -35,7 +36,7 @@ public class LeeLikeyDAO {
             e.printStackTrace();
         }
         finally {
-            DBUtil.close(rs, pstmt, conn);
+            DBUtil.close(rs, pstmp, conn);
         }
         return 0;
     }
@@ -55,7 +56,7 @@ public class LeeLikeyDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            DBUtil.close(rs, pstmt, conn);
+            DBUtil.close(rs, pstmp, conn);
         }
         return 0;
     }
@@ -76,7 +77,9 @@ public class LeeLikeyDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            DBUtil.close(rs, pstmt, conn);
+            DBUtil.close(rs, pstmp, conn);
+            DBUtil.close(null, dlstmt, null);
+            DBUtil.close(null, instmt, null);
         }
         return 0;
     }
@@ -126,9 +129,9 @@ public class LeeLikeyDAO {
 
         try {
             conn = DBUtil.getConnection();
-            pstmt = conn.prepareStatement(SQL);
-            pstmt.setString(1, isbn);
-            rs = pstmt.executeQuery();
+            pstmp = conn.prepareStatement(SQL);
+            pstmp.setString(1, isbn);
+            rs = pstmp.executeQuery();
 
             if(rs.next()) {
                 heartCount = rs.getInt("LIKECOUNT");
@@ -137,7 +140,7 @@ public class LeeLikeyDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            DBUtil.close(rs, pstmt, conn);
+            DBUtil.close(rs, pstmp, conn);
         }
         return -1;
     }

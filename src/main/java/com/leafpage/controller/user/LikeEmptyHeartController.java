@@ -33,19 +33,19 @@ public class LikeEmptyHeartController implements Controller {
         String isbn = request.getParameter("isbn").trim();
 
         //2. DB 연동 처리
-        LeeLikeyDAO likeyDAO = new LeeLikeyDAO();
+        LeeLikeyDAO leeLikeyDAO = new LeeLikeyDAO();
         PrintWriter out = response.getWriter();
 
-        int checkLike = likeyDAO.checkLike(userNo, isbn);
+        int checkLike = leeLikeyDAO.checkLike(userNo, isbn);
         if(checkLike == 1) {
-            int deleteLike = likeyDAO.deleteLike(userNo,isbn);
+            int deleteLike = leeLikeyDAO.deleteLike(userNo,isbn);
             if(deleteLike == 1) {
                 System.out.println("좋아요 삭제");
                 out.print(0);
                 out.close();
             }
         } else {
-            int insertLike = likeyDAO.insertLike(userNo,isbn);
+            int insertLike = leeLikeyDAO.insertLike(userNo,isbn);
             if(insertLike == 1) {
                 System.out.println("좋아요 추가");
                 out.print(1);
@@ -53,8 +53,10 @@ public class LikeEmptyHeartController implements Controller {
             }
         }
 
-        int heartCount = likeyDAO.likeCount(isbn);
-
+        int like = leeLikeyDAO.checkLike(userNo, isbn);
+        System.out.println(like);
+        int heartCount = leeLikeyDAO.likeCount(isbn);
+        System.out.println(heartCount);
 
         //3. 화면 이동
 

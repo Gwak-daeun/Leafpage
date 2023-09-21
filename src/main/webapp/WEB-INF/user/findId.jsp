@@ -1,11 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 2023-09-11
-  Time: 오후 2:48
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 
 <!DOCTYPE html>
@@ -17,18 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-<header>
-    <nav class="navbar index-nav">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1"><img src="../../css/icons/nest_eco_leaf.png" /> </span>
-            <span></span>
-            <span>
-                <button type="button" class=" btn2 btn-sm">회원가입</button>
-                <button type="button" class=" btn1 btn-sm">로그인</button>
-            </span>
-        </div>
-    </nav>
-</header>
+<%@include file="../component/header.jsp"%>
 
 
 <div class="main container-fluid">
