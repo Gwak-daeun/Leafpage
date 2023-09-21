@@ -26,8 +26,8 @@ public class LeeLikeyDAO {
             pstmp = conn.prepareStatement(SQL);
             pstmp.setLong(1, userNo);
             pstmp.setString(2, isbn);
-            ResultSet rs = null;
             rs = pstmp.executeQuery();
+            System.out.println(rs);
 
             if(rs.next()) {
                 return 1;           //값이 있으면 1 반환
@@ -83,42 +83,6 @@ public class LeeLikeyDAO {
         }
         return 0;
     }
-
-
-//    public boolean like(Long userNo, String isbn) {
-//
-//
-////            if(rs.next()) {return 1;}
-////            else {return 0;};
-//            //rs.next() 존재하면 1, 존재하지 않으면 0
-//            //하트 눌려있는 경우(데이터 있는 경우), 좋아요 취소
-//            if (rs.next()) {
-//
-//
-//
-//
-//                return false;
-//
-//            } else {
-//                //하트 비어있는 경우, 좋아요 추가
-//                String insertSQL = "INSERT INTO likey VALUES (?, ?)";    //040501813-4
-//
-//                instmt = conn.prepareStatement(insertSQL);
-//                instmt.setLong(1, userNo);
-//                instmt.setString(2, isbn);
-//                instmt.executeUpdate();
-//
-//                return true;
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            DBUtil.close(rs, pstmt, conn);
-//            DBUtil.close(null, dlstmt, null);
-//            DBUtil.close(null, instmt, null);
-//        }
-//        return false;
-//    }
 
     //하트 수 세기(조회)
     public int likeCount(String isbn) {

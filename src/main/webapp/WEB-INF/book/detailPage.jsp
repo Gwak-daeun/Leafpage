@@ -7,7 +7,7 @@
 <head>
     <title>LeafPage</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/detailPage.css">
+    <link rel="stylesheet" href="../../css/detailPage.css">
     <meta name="viewport" content="width=device-width">
     <script src="https://kit.fontawesome.com/1db70bd877.js" crossorigin="anonymous"></script>
 </head>
@@ -38,22 +38,17 @@
                     <button class="btn rental" data-toggle="modal" href="#rental">대여하기</button>
                     <button class="btn preview">미리보기</button>   <%-- 로그인 해야 볼 수 있음--%>
 
-<%--                    <c:if test="${heartSelect =='1'}" var="">--%>
-<%--                        <img id="fullH" style="width: 20px; margin-left: 5px;" src="/css/icons/full.png" onclick="likeCheck()">--%>
-<%--                    </c:if>--%>
-<%--                    <c:if test="${heartSelect =='0'}" var="">--%>
-<%--                        <img id="emptyH" style="width: 20px; margin-left: 5px;" src="/css/icons/empty.png" onclick="likeCheck()">--%>
-<%--                    </c:if>--%>
-<%--                    ${ heartCount }--%>
-
-                    <img id="fullH" style="width: 20px; margin-left: 5px;" src="/css/icons/full.png" onclick="likeCheck()">
-                    <img id="emptyH" style="width: 20px; margin-left: 5px;" src="/css/icons/empty.png" onclick="likeCheck()">
-
+                    <c:if test="${heartSelect == 1}">
+                        <img id="fullH" style="width: 20px; margin-left: 5px;" src="../../css/icons/full.png" onclick="likeCheck()">
+                    </c:if>
+                    <c:if test="${heartSelect == 0}">
+                        <img id="emptyH" style="width: 20px; margin-left: 5px;" src="<c:url value="/css/icons/empty.png"/>" onclick="likeCheck()">
+                    </c:if>
                     ${ heartCount }
-<%--                    <i class="fa-solid fa-heart fa-xl" style="color: #d7443e;"></i>--%>
+
+                </div>
             </div>
         </div>
-    </div>
     <div class="mg container">
         <div class="tabmenu">
             <ul class="tab-button">
@@ -84,12 +79,12 @@
                                 <div class="card-header">
                                     <div class="row">
                                         <div class="card-title">
-                                    <span>
-                                        ${review.reviewRating}
-                                    </span>
+                                            <span>
+                                                ${review.reviewRating}
+                                            </span>
                                             <span class="review-top-right">
-                                        <p>작성일&nbsp; ${review.reviewDate}</p>
-                                    </span>
+                                                <p>작성일&nbsp; ${review.reviewDate}</p>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -113,20 +108,12 @@
                         </li>
                     </c:forEach>
                 </ul>
-                
-                
-                <div>
-                    <!-- 기대가 많이 됩니다
-                    내용 평점5점   편집/디자인 평점5점 | f******n | 2023-08-28
-                    원문주소 : https://blog.yes24.com/document/18479433
-
-                    블로그에 글 몇개만 읽어만봐도 이책의 구매이유는 분명합니다 -->
-                </div>
             </div>
             <div class="tab-content">
                 <div>리더의 용기, 성공의 문을 여는 마스터키...</div>
             </div>
         </div>
+    </div>
     </div>
 </section>
 
@@ -210,7 +197,6 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script src="../js/gwakDetailPage.js"></script>
 <script src="js/detailPage.js"></script>
 </body>
 </html>
