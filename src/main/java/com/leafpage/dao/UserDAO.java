@@ -14,6 +14,8 @@ public class UserDAO {
     String loginSQL = "SELECT user_password, user_role, user_state FROM users WHERE user_id = ?";
     String signupSQL = "INSERT INTO users VALUES (NULL,?,?,?,?,?,?,?,?,?,false)";
     String findUserByIdSQL = "SELECT user_id FROM users WHERE user_id = ?";
+    String findIdByEmailOrTelSQL = "SELECT user_id FROM users WHERE user_email = ? OR user_tel = ?";
+    String findPwByEmailOrTelSQL = "SELECT user_security_question, user_security_answer FROM users WHERE (user_email = ? OR user_tel =?) AND (user_id = ?)";
     String findUserByEmailSQL = "SELECT user_email FROM users WHERE user_email = ?";
     String findUserByTelSQL = "SELECT user_tel FROM users WHERE user_tel = ?";
     String getUserEmailSQL = "SELECT user_email FROM users WHERE user_id = ?";
@@ -93,7 +95,51 @@ public class UserDAO {
         return -1;  //데이터베이스 오류
     }
 
-    //이메일 중복확인
+    //아이디찾기
+    public String findIdByEmailOrTel(String inputEmail, String inputTel) {
+        try {
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(findIdByEmailOrTelSQL);
+            pstmt.setString(1, inputEmail);
+            pstmt.setString(2, inputTel);
+            rs = pstmt.executeQuery();
+            System.out.println(rs.next());
+            return rs.getString(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+        return null;
+    }
+
+    //비밀번호찾기
+    public int findPwByEmailOrTel(String inputId, String inputEmail, String inputTel, String selectQuestion, String inputAnswer) {
+        try {
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(findPwByEmailOrTelSQL);
+            pstmt.setString(1, inputEmail);
+            pstmt.setString(2, inputTel);
+            pstmt.setString(3, inputId);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                if (rs.getString(1).equals(selectQuestion) && rs.getString(2).equals(inputAnswer)) {
+                    return 1;  //OK! 통과!
+                } else {
+                    return 0;  // 정보는 있는 사용자인데 질문,대답이 틀림
+                }
+            } else {
+                return -1;  // 조회되지 않는 사용자
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+        return -2;  //error
+    }
+
+        //이메일 중복확인
     public int findUserByEmail(String userEmail) {
         try {
             conn = DBUtil.getConnection();

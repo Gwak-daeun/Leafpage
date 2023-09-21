@@ -35,6 +35,10 @@ public class HandlerMapping {
         mappings.put("/edit.do", new AdminBookEditController());
         mappings.put("/mypageInfo.do", new MypageInfoController());
 
+        mappings.put("/findIdView.do", new FindIdViewController());
+        mappings.put("/findPwView.do", new FindPwViewController());
+        mappings.put("/findPw.do", new FindPwController());
+        mappings.put("/findId.do", new FindIdController());
         mappings.put("/signupView.do", new SignupViewController());
         mappings.put("/signup.do", new SignupController());
         mappings.put("/loginView.do", new LoginViewController());
@@ -49,6 +53,7 @@ public class HandlerMapping {
         mappings.put("/myPageView.do", new MyPageViewController());
         mappings.put("/successEmailCheckView.do", new SuccessEmailCheckViewController());
         mappings.put("/failEmailCheckView.do", new FailEmailCheckViewController());
+        mappings.put("/withDrawal.do", new WithdrawalController());
     }
 
     public Controller getController(String path) {

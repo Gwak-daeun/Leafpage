@@ -39,8 +39,8 @@
             </div>
             <div class="redtext">(* 이메일 변경 후 재 인증 필요)</div>
             <div class="btn-flex-group">
-                <button class="btn btn-danger mt-3" href="#">탈퇴하기</button>
-                <button type="submit" class="btn btn-success btn3 mt-3">수정하기</button>
+                <button class="btn btn-danger mt-3" href="withDrawal.do">탈퇴하기</button>
+                <button type="button" class="btn btn-success btn3 mt-3">수정하기</button>
             </div>
         </form>
     </div>
