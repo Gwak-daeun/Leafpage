@@ -42,7 +42,7 @@ public class ReviewDAO {
         return -1;
     }
 
-    public List<ReviewDTO> findReviews(String ISBN) {
+    public List<ReviewDTO> findReviews(String isbn) {
 
         List<ReviewDTO> bookReviews = new ArrayList<>();
 
@@ -54,7 +54,7 @@ public class ReviewDAO {
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setString(1, ISBN);
+            pstmt.setString(1, isbn);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {

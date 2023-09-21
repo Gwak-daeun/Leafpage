@@ -27,7 +27,7 @@
             <p class="top_box_content">${books.size()}/5</p>
         </div>
         <div class="top_box">
-            <h5 class="top_box_title">전체 대여 권수</h5>
+            <h5 class="top_box_title">누적 대여 권수</h5>
             <p class="top_box_content">${books.size() + userReturnedBooks.size()}</p>
         </div>
     </div>
@@ -60,26 +60,8 @@
                    </li>
 
                     <%--책 뷰어--%>
-                   <div class="modal fade" id="${book.rentalNo}" aria-hidden="true">
-                       <div class="modal-dialog modal-xl">
-                           <div class="modal-content">
-                               <div class="modal-header">
-                                   <h1 class="modal-title fs-5" id="staticBackdropLabel">${book.bookName}</h1>
-                                   <a class="select-mode">
-                                       <img class="light-icon" src="../css/icons/light_mode.png" />
-                                       <img class="dark-icon" src="../css/icons/dark_mode.png" />
-                                   </a>
-                                       <%--                <button class="select-mode">모드</button>--%>
-                               </div>
-                               <div class="modal-body">
-                                   ${book.bookContent}
-                               </div>
-                               <div class="modal-footer">
-                                   <button onclick="sendY(${book.rentalNo})" id="closeBtn" type="button" class="modal-close" data-bs-dismiss="modal">여기까지 보기</button>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
+                   <%@include file="../component/bookModal.jsp"%>
+
 
                </c:forEach>
 
@@ -98,7 +80,6 @@
                                 <p class="card-period">반납일 : ${userReturnedBook.actualReturnDate}</p>
                             </div>
                         </div>
-                        <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
                     </li>
                 </c:forEach>
 

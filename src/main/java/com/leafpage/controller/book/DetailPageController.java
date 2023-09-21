@@ -16,17 +16,21 @@ public class DetailPageController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        String ISBN = "040501813854";
+        String isbn = "1010101010101";
 
-        List<ReviewDTO>  reviews = new ReviewDAO().findReviews(ISBN);
+        BookDAO bookDAO = new BookDAO();
 
-        BookDTO bookDetail = new BookDAO().getBookDetails(ISBN);
+        List<ReviewDTO>  reviews = new ReviewDAO().findReviews(isbn);
 
-        HttpSession session = request.getSession();
+        List<BookDTO> sameAuthorBooks = bookDAO.findSameAuthorBooks(isbn);
 
-        session.setAttribute("bookDetail", bookDetail);
+        BookDTO bookDetail = bookDAO.getBookDetails(isbn);
 
-        session.setAttribute("reviews", reviews);
+        request.setAttribute("bookDetail", bookDetail);
+
+        request.setAttribute("reviews", reviews);
+
+        request.setAttribute("sameAuthorBooks", sameAuthorBooks);
 
         return "book/detailPage";
     }

@@ -6,7 +6,7 @@
 <head>
     <title>LeafPage</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/detailPage.css">
+    <link rel="stylesheet" href="../../css/detailPage.css">
     <meta name="viewport" content="width=device-width">
     <script src="https://kit.fontawesome.com/1db70bd877.js" crossorigin="anonymous"></script>
 </head>
@@ -41,9 +41,9 @@
                     <img id="fullH" style="width: 20px; margin-left: 5px;" src="/css/icons/full.png" onclick="location.href='LikeHeart.do'">
                     ${ heartCount }
 <%--                    <i class="fa-solid fa-heart fa-xl" style="color: #d7443e;"></i>--%>
+                </div>
             </div>
         </div>
-    </div>
     <div class="mg container">
         <div class="tabmenu">
             <ul class="tab-button">
@@ -74,12 +74,38 @@
                                 <div class="card-header">
                                     <div class="row">
                                         <div class="card-title">
-                                    <span>
-                                        ${review.reviewRating}
-                                    </span>
+                                            <span>
+                                                <c:if test="${review.reviewRating eq 5}">
+                                                    <span class="star">⭐</span>
+                                                    <span class="star">⭐</span>
+                                                    <span class="star">⭐</span>
+                                                    <span class="star">⭐</span>
+                                                    <span class="star">⭐</span>
+                                                </c:if>
+                                                <c:if test="${review.reviewRating eq 4}">
+                                                    <span class="star">⭐</span>
+                                                    <span class="star">⭐</span>
+                                                    <span class="star">⭐</span>
+                                                    <span class="star">⭐</span>
+                                                </c:if>
+                                                <c:if test="${review.reviewRating eq 3}">
+                                                    <span class="star">⭐</span>
+                                                    <span class="star">⭐</span>
+                                                    <span class="star">⭐</span>
+                                                </c:if>
+                                                <c:if test="${review.reviewRating eq 2}">
+                                                    <span class="star">⭐</span>
+                                                    <span class="star">⭐</span>
+                                                </c:if>
+                                                <c:if test="${review.reviewRating eq 1}">
+                                                    <span class="star">⭐</span>
+                                                </c:if>
+
+                                            </span>
+
                                             <span class="review-top-right">
-                                        <p>작성일&nbsp; ${review.reviewDate}</p>
-                                    </span>
+                                                <p>작성일&nbsp; ${review.reviewDate}</p>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -106,37 +132,26 @@
                 
                 
                 <div>
-                    <!-- 기대가 많이 됩니다
-                    내용 평점5점   편집/디자인 평점5점 | f******n | 2023-08-28
-                    원문주소 : https://blog.yes24.com/document/18479433
 
-                    블로그에 글 몇개만 읽어만봐도 이책의 구매이유는 분명합니다 -->
                 </div>
             </div>
             <div class="tab-content">
-                <div>리더의 용기, 성공의 문을 여는 마스터키...</div>
+                <ul class="book-ul ">
+                    <c:forEach var="sameAuthorBook" items="${sameAuthorBooks}">
+                    <li data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <div class="book-list">
+                            <img class="book-cover" src="${sameAuthorBook.bookImg}" />
+                            <div class="book-title">${sameAuthorBook.bookName}</div>
+                            <div class="book-author"> ${sameAuthorBook.bookPublisherName}</div>
+                        </div>
+                    </li>
+                    </c:forEach>
+                </ul>
             </div>
         </div>
     </div>
 </section>
 
-<!-- <div class="modal fade show" id="rental" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div>
-                    <h3 class="modal-title" id="modal">대여에 성공했습니다!</h3>
-                    <p>대여기간 2023-09-28</p>
-                </div>
-
-                <div>
-                    <button class="btn rental">바로보기</button>
-                    <button class="btn preview"><a href="">도서목록</a></button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 <div class="modal fade show" id="rental" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content"> <!--모달 안에 들어가 있는 내용 정의-->
@@ -198,6 +213,6 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script src="../js/gwakDetailPage.js"></script>
+<script src="../../js/detailPage.js"></script>
 </body>
 </html>
