@@ -221,7 +221,7 @@ li{
     .search-lens{
         margin-left: 30px;
         width: 30px;
-        cursor: pointer !important;
+        cursor: pointer;
     }
 
     .toggle{
