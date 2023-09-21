@@ -14,5 +14,4 @@ public class MypageBooksDTO {
     private int scrollY;
     private int modalWidth;
     private String bookContent;
-
 }

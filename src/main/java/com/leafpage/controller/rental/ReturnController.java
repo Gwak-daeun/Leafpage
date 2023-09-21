@@ -38,6 +38,7 @@ public class ReturnController implements Controller {
             writer.print("ReturnFail");
             log.debug("반납에 실패했습니다.");
         }
-        return "mypageInfo.do";
+        writer.close();
+        return "none";
     }
 }

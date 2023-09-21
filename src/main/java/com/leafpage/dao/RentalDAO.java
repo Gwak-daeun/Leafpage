@@ -16,7 +16,7 @@ public class RentalDAO {
     private static final String SELECT_RENTAL_COUNT =
             "SELECT COUNT(*) AS RENTAL_COUNT " +
                     "FROM book_rental " +
-                    "WHERE USER_NO = ? AND ACTUAL_RETUNR_DATE IS NULL";
+                    "WHERE USER_NO = ? AND ACTUAL_RETURN_DATE IS NULL";
 
     private static final String SELECT_RENTING_BOOK =
             "SELECT ACTUAL_RETURN_DATE FROM book_rental WHERE ISBN = ? AND ACTUAL_RETURN_DATE IS NULL";

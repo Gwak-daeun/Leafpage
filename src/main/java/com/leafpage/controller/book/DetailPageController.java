@@ -16,7 +16,7 @@ public class DetailPageController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        String isbn = "1010101010101";
+        String isbn = request.getParameter("isbn");
 
         BookDAO bookDAO = new BookDAO();
 

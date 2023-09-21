@@ -59,6 +59,7 @@ public class SignupController implements Controller {
                 script.close();
             }
 
+
 //new UserDTO(0, userId, SHA256.getSHA256(userPassword), userEmail, userTel, "일반회원", "회원", userSecurityQuestion, userSecurityAnswer, com.leafpage.util.SHA256.getSHA256(userEmail), false)
             UserDAO userDAO = new UserDAO();
             UserDTO userDTO = new UserDTO();
