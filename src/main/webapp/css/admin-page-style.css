@@ -195,6 +195,9 @@ input[type="date"]::-webkit-datetime-edit-year-field {
 .list-body::-webkit-scrollbar {
   display: none;
 }
+.list-footer{
+
+}
 
 .table-header {
   width: 100%;

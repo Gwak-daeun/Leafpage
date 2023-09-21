@@ -28,6 +28,7 @@ public class HandlerMapping {
         mappings.put("/saveUserBookY.do", new BookYController());
         mappings.put("/makeReview.do", new MakeReviewController());
         mappings.put("/removeReview.do", new RemoveReviewController());
+        mappings.put("/userlistview.do", new AdminUserListController());
 
         mappings.put("/bookupload.do", new AdminBookUploadController());
         mappings.put("/remove.do", new AdminBookDeleteController());
