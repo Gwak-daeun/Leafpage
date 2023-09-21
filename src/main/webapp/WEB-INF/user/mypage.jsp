@@ -28,7 +28,7 @@
         </div>
         <div class="top_box">
             <h5 class="top_box_title">전체 대여 권수</h5>
-            <p class="top_box_content">${books.size()}</p>
+            <p class="top_box_content">${books.size() + userReturnedBooks.size()}</p>
         </div>
     </div>
 
@@ -117,21 +117,21 @@
 
             let modalBody = $(`#` + rentalNo).find(".modal-body"); // 해당 모달 창의 .modal-body 요소 선택
 
-            console.log("디비와이축 : ", dbScrollY, "디비폭 : ", dbModalWidth, ", 번호 : ", rentalNo);
-
             let truncatedWidth = Math.floor(modalBody.width());
+
             console.log("현재 모달 폭 : ", truncatedWidth);
+
             if (dbModalWidth === truncatedWidth || dbScrollY === 0) {
                 modalBody.scrollTop(dbScrollY);
-                console.log("작동3 : ", dbModalWidth);
+                console.log("동일한 디바이스 작동 : ", dbModalWidth);
             }
             if (dbModalWidth > truncatedWidth) {
                 modalBody.scrollTop((dbScrollY * 666) / 321 );
-                console.log("작동1 : ", dbModalWidth);
+                console.log("컴에서 모바일로 디바이스 변경 : ", dbModalWidth);
             }
             if (dbModalWidth < truncatedWidth) {
                 modalBody.scrollTop((dbScrollY * 321) / 666 );
-                console.log("작동2 : ", dbModalWidth);
+                console.log("모바일에서 컴으로 디바이스 변경 : ", dbModalWidth);
             }
         });
     }

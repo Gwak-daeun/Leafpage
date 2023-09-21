@@ -26,8 +26,6 @@ public class BookYController implements Controller {
 
         int modalWidth = (int) Double.parseDouble(strModalWidth);
 
-        int rental_no = 5; //나중에 파라미터 받아오는걸로 고쳐야 함
-
         int result = new BookDAO().saveBookScrollY(modalY, modalWidth, rentalNo);
 
         return "mypageInfo.do";
