@@ -1,4 +1,4 @@
-package com.leafpage.controller.user;
+package com.leafpage.controller.user.View;
 
 import com.leafpage.controller.Controller;
 

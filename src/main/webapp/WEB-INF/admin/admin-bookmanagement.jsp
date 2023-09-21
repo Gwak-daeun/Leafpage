@@ -90,11 +90,11 @@
                             <li class="table-value" >
                                 <a href="javascript:void(0)" onclick="modalOn(`${book.ISBN}`, )" class="openModalLink" data-isbn="${book.ISBN}" data-bs-toggle="modal" data-bs-target="#editModal"><span class="isbn"> ${book.ISBN}</span></a></li>
                             <li><span class="v-line"></span></li>
-                            <li class="table-value">${book.bookname}</li>
+                            <li class="table-value">${book.bookName}</li>
                             <li><span class="v-line"></span></li>
-                            <li class="table-value">${book.auther}</li>
+                            <li class="table-value">${book.bookAuthorName}</li>
                             <li><span class="v-line"></span></li>
-                            <li class="table-value">${book.publisher}</li>
+                            <li class="table-value">${book.bookPublisherName}</li>
                             <li><span class="v-line"></span></li>
                             <li class="table-value"><c:forEach var="category" items="${book.categories}">
                                         #${category} </c:forEach></li>

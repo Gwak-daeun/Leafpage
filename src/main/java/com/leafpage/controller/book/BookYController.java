@@ -1,7 +1,8 @@
 package com.leafpage.controller.book;
 
 import com.leafpage.controller.Controller;
-import com.leafpage.gwakdao.BookDAO;
+import com.leafpage.dao.BookDAO;
+import com.leafpage.dao.LikeyDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,14 +19,17 @@ public class BookYController implements Controller {
 
         String strModalWidth = request.getParameter("modalWidth");
 
-        int modalY = Integer.parseInt(strModalY);
+        int rentalNo = Integer.parseInt(request.getParameter("rentalNo"));
+
+        double doubleModalY = Double.parseDouble(strModalY);
+        int modalY = (int) doubleModalY;
 
         int modalWidth = (int) Double.parseDouble(strModalWidth);
 
         int rental_no = 5; //나중에 파라미터 받아오는걸로 고쳐야 함
 
-        int result = new BookDAO().saveBookScrollY(modalY, modalWidth, rental_no);
+        int result = new BookDAO().saveBookScrollY(modalY, modalWidth, rentalNo);
 
-        return "/mypageInfo.do";
+        return "mypageInfo.do";
     }
 }

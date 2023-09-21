@@ -35,7 +35,7 @@ public class AdminBookEditController implements Controller {
         String bookimg = null;
 
 
-        String savePath = "C:\\Users\\user\\Desktop\\beanstalk\\Leafpage\\src\\main\\webapp\\image";
+        String savePath = "C:\\Users\\user\\Leafpage\\src\\main\\webapp\\image";
         String dbPath = "\\image";
 
         int sizeLimit = 1024 * 1024 * 15;
@@ -108,22 +108,21 @@ public class AdminBookEditController implements Controller {
             }
         }
 
-
         System.out.println(bookimgFullPath);
 
         BookDTO dto = new BookDTO();
 
         dto.setISBN(ISBN);
-        dto.setBookname(bookname);
-        dto.setAuther(auther);
-        dto.setPublisher(publisher);
-        dto.setPubdate(pubdate);
+        dto.setBookName(bookname);
+        dto.setBookAuthorName(auther);
+        dto.setBookPublisherName(publisher);
+        dto.setBookPubDate(pubdate);
         dto.setCategories(categorieslist);
-        dto.setBookinfo(bookinfo);
-        dto.setBookchapter(bookchapter);
-        dto.setBookcontent(bookcontent);
-        dto.setBookimg(bookimg);
-        dto.setBookimgFullPath(bookimgFullPath);
+        dto.setBookInfo(bookinfo);
+        dto.setBookChapter(bookchapter);
+        dto.setBookContent(bookcontent);
+        dto.setBookImg(bookimg);
+        dto.setBookImgFullPath(bookimgFullPath);
 
         int count = dao.updateBook(dto);
         System.out.println(count);
@@ -143,7 +142,6 @@ public class AdminBookEditController implements Controller {
             out.println("history.back()");
             out.println("</script>");
         }
-
 
         return null;
     }
