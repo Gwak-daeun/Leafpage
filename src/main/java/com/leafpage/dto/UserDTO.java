@@ -1,13 +1,10 @@
 package com.leafpage.dto;
 
 import com.leafpage.domain.user.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class UserDTO {
     private int userNo;
     private Id userId;
@@ -20,6 +17,7 @@ public class UserDTO {
     private String userSecurityAnswer;
     private String userEmailHash;
     private boolean userEmailChecked;
+    private String userJoiningDate;
 
     public String getUserId() {
         return userId.getUserId();
@@ -76,4 +74,6 @@ public class UserDTO {
     public void setUserRole(String userRole) {
         this.userRole = new Role(userRole);
     }
+
+
 }
