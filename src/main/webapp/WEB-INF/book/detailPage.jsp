@@ -1,50 +1,43 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
     <title>LeafPage</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="../../css/detailPage.css">
-    <meta name="viewport" content="width=device-width">
     <script src="https://kit.fontawesome.com/1db70bd877.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<header>
-    <nav class="navbar index-nav">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1"><img src="css/icons/nest_eco_leaf.png" /> </span>
-            <span></span>
-            <span>
-                <button type="button" class=" btn2 btn-sm">회원가입</button>
-                <button type="button" class=" btn1 btn-sm">로그인</button>
-            </span>
-        </div>
-    </nav>
-</header>
+<%@include file="../component/header.jsp"%>
+
 <section>
     <c:set var="errorMsg" value="${errorMsg}"/>
     <c:set var="failed" value="${failed}"/>
     <div class="inline">
-        <div class="mg">
+        <div class="mg big-book">
             <img src="image/bookcover.png" class="imgstyle">
             <div class="center">
-                <span class="inline">${bookDetail.bookName}</span>
+                <span class="in-block"><h2>${bookDetail.bookName}</h2></span>
                 <span >${bookDetail.bookAuthorName}</span>
-                <div>${bookDetail.categories} | ${bookDetail.bookPublisherName} | 발행일: ${bookDetail.bookPubDate}</div>
+                <div class="small">${bookDetail.categories} | ${bookDetail.bookPublisherName} | 발행일: ${bookDetail.bookPubDate}</div>
                 <div class="bottom-mg inline">
                     <button class="btn rental" onclick="rent(${bookDetail.ISBN})">대여하기</button>
                     <button class="btn preview">미리보기</button>   <%-- 로그인 해야 볼 수 있음--%>
 
                     <c:if test="${heartSelect == 1}">
-                        <img id="fullH" style="width: 20px; margin-left: 5px;" src="../../css/icons/full.png" onclick="likeCheck()">
+                        <img id="fullH" style="width: 20px; height: 20px; margin-left: 5px;" src="../../css/icons/full.png" onclick="likeCheck()">
                     </c:if>
                     <c:if test="${heartSelect == 0}">
-                        <img id="emptyH" style="width: 20px; margin-left: 5px;" src="<c:url value="/css/icons/empty.png"/>" onclick="likeCheck()">
+                        <img id="emptyH" style="width: 20px; height: 20px; margin-left: 5px;" src="<c:url value="/css/icons/empty.png"/>" onclick="likeCheck()">
                     </c:if>
-                    ${ heartCount }
-                    <%--                    <i class="fa-solid fa-heart fa-xl" style="color: #d7443e;"></i>--%>
+                    <span style="margin-top: 10px">${ heartCount }</span>
+
                 </div>
             </div>
         </div>
@@ -62,7 +55,7 @@
                     </div>
                 </div>
                 <div class="tab-content">
-                    <div>
+                    <div class="contexth">
                         ${bookDetail.bookChapter}
                     </div>
                 </div>
@@ -74,40 +67,13 @@
                         <c:forEach var="review" items="${reviews}">
                             <li>
                                 <div class="card">
-
                                     <div class="card-header">
                                         <div class="row">
                                             <div class="card-title">
                                             <span>
-                                                <c:if test="${review.reviewRating eq 5}">
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                </c:if>
-                                                <c:if test="${review.reviewRating eq 4}">
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                </c:if>
-                                                <c:if test="${review.reviewRating eq 3}">
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                </c:if>
-                                                <c:if test="${review.reviewRating eq 2}">
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                </c:if>
-                                                <c:if test="${review.reviewRating eq 1}">
-                                                    <span class="star">⭐</span>
-                                                </c:if>
-
+                                                ${review.reviewRating}
                                             </span>
-
-                                                <span class="review-top-right">
+                                            <span class="review-top-right">
                                                 <p>작성일&nbsp; ${review.reviewDate}</p>
                                             </span>
                                             </div>
@@ -115,16 +81,14 @@
                                     </div>
                                     <!--강의명 밑 내용과 추천-->
                                     <div class="card-body">
-
                                         <p class="card-text">
-                                                ${review.reviewContent}
+                                            ${review.reviewContent}
                                         </p>
                                         <div class="row">
                                             <div class="col-9 text-left">
                                             </div>
 
                                             <div class="col-3 text-right">
-                                                    <%--                                            <c:set var="reviewNo" value="${review.review_no}"/>--%>
                                                 <a onclick="return confirm('삭제하시겠습니까?')" href="/removeReview.do?reviewNo=${review.reviewNo}">삭제</a>
                                             </div>
                                         </div>
@@ -133,12 +97,9 @@
                             </li>
                         </c:forEach>
                     </ul>
-
-
-
                 </div>
                 <div class="tab-content">
-                    <ul class="book-ul ">
+                    <ul class="contexth">
                         <c:forEach var="sameAuthorBook" items="${sameAuthorBooks}">
                             <li data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                 <a href="/detailPageView.do?isbn=${sameAuthorBook.ISBN}">
@@ -149,6 +110,7 @@
                                     </div>
                                 </a>
                             </li>
+
                         </c:forEach>
                     </ul>
                 </div>
@@ -196,12 +158,14 @@
                 </div>
                 <div class="form-group">
                     <label>내용</label>
-                    <textarea name="reviewContent" class="form-control" maxlength="2048" style="height: 180px"></textarea>
-                </div>
-                <div class="form-footer">
+                    <textarea name="reviewContent" class="form-control" maxlength="2048" style="height: 180px">
+
+                    </textarea>
+                  </div>
+                  <div class="form-footer">
                     <button id="reviewClose" type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
                     <button id="reviewRegister" class="btn rental">등록하기</button>
-                </div>
+                  </div>
 
             </div>
         </div>

@@ -23,7 +23,7 @@ public class DetailPageController implements Controller {
         String isbn = request.getParameter("isbn");
 
         BookDAO bookDAO = new BookDAO();
-
+        BookDTO bookDetail = new BookDAO().getBookDetails(isbn);
         List<ReviewDTO>  reviews = new ReviewDAO().findReviews(isbn);
 
         List<BookDTO> sameAuthorBooks = bookDAO.findSameAuthorBooks(isbn);
@@ -32,9 +32,6 @@ public class DetailPageController implements Controller {
         int checkLike = leeLikeyDAO.checkLike(userNo, isbn);
         int heartCount = leeLikeyDAO.likeCount(isbn);
         System.out.println("CHECKLIKE"+checkLike);
-
-
-        BookDTO bookDetail = bookDAO.getBookDetails(isbn);
 
         request.setAttribute("bookDetail", bookDetail);
 
