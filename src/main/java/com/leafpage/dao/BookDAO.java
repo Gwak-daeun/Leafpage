@@ -574,23 +574,29 @@ public class BookDAO {
         return books;
     }
 
-    public List<BookDTO> SortBooks(String sortWord, String searchSelect, String searchKeyword, String genre) {
+    public List<BookDTO> SortBooks(String sortWord, String searchSelect, String searchKeyword, String genre, String page) {
 
         List<BookDTO> books = new ArrayList<>();
 
-        String SQL = "select ISBN, book_name, book_img, book_publisher_name\n" +
-                "from books \n" +
-                "where book_state = 0\n ";
+        String SQL = "select books.ISBN, book_name, book_img, book_publisher_name\n" +
+                "from books\n" +
+                "join book_category\n" +
+                "on book_category.ISBN = books.ISBN\n" +
+                "where book_state = 0 \n";
+
+        if (!genre.isEmpty()) {
+            SQL += "and book_category.category_name LIKE ?";
+        }
 
         if (searchSelect.equals("출판사")) {
 
             SQL += "and book_publisher_name LIKE ?\n";
 
             if (sortWord.equals("인기순")) {
-                SQL += "order by book_views desc;";
+                SQL += "order by book_views desc\n";
             }
             if (sortWord.equals("최신순")) {
-                SQL += "order by book_upload_date desc;";
+                SQL += "order by book_upload_date desc\n";
             }
         }
         if (searchSelect.equals("제목")) {
@@ -598,10 +604,10 @@ public class BookDAO {
             SQL += "and book_name LIKE ?\n";
 
             if (sortWord.equals("인기순")) {
-                SQL += "order by book_views desc;";
+                SQL += "order by book_views desc\n";
             }
             if (sortWord.equals("최신순")) {
-                SQL += "order by book_upload_date desc;";
+                SQL += "order by book_upload_date desc\n";
             }
         }
         if (searchSelect.equals("작가")) {
@@ -609,10 +615,10 @@ public class BookDAO {
             SQL += "and book_author_name LIKE ?\n";
 
             if (sortWord.equals("인기순")) {
-                SQL += "order by book_views desc;";
+                SQL += "order by book_views desc\n";
             }
             if (sortWord.equals("최신순")) {
-                SQL += "order by book_upload_date desc;";
+                SQL += "order by book_upload_date desc\n";
             }
         }
         if (searchSelect.equals("전체")) {
@@ -621,17 +627,44 @@ public class BookDAO {
 
             if (sortWord.equals("인기순")) {
                 System.out.println("CHECK CHECK");
-                SQL += "order by book_views desc;";
+                SQL += "order by book_views desc\n";
             }
             if (sortWord.equals("최신순")) {
-                SQL += "order by book_upload_date desc;";
+                SQL += "order by book_upload_date desc\n";
             }
         }
+
+        SQL += "limit ?, ?;";
+
+        int pageNum = 0;
+
+        try {
+            pageNum = Integer.parseInt(page);
+            // pageNum을 사용한 나머지 코드
+        } catch (NumberFormatException e) {
+            // 예외 처리 코드
+            e.printStackTrace(); // 예외 정보 출력
+            // 또는 다른 대체 처리
+        }
+
+        System.out.println("CHECK PAGE NUM : " + pageNum);
 
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setString(1, "%" + searchKeyword + "%");
+
+            if (genre.isEmpty()){
+                pstmt.setString(1, "%" + searchKeyword + "%");
+                pstmt.setInt(2, pageNum);
+                pstmt.setInt(3, pageNum + 12);
+            }
+            if (!genre.isEmpty()) {
+                pstmt.setString(1, "%" + genre + "%");
+                pstmt.setString(2, "%" + searchKeyword + "%");
+                pstmt.setInt(3, pageNum);
+                pstmt.setInt(4, pageNum + 12);
+            }
+
             System.out.println("CHECK SEARCH QUERY : " + pstmt);
             rs = pstmt.executeQuery();
 

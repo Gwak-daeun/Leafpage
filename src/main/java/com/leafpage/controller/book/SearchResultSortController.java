@@ -24,15 +24,25 @@ public class SearchResultSortController implements Controller {
 
         if (!request.getParameter("genre").isEmpty()) {
             genre = request.getParameter("genre");
+            request.setAttribute("genre", genre);
+        }
+
+        String page = "0";
+
+        if (request.getParameter("page") != null) {
+            page = request.getParameter("page");
+            request.setAttribute("page", page);
         }
 
         System.out.println("CHECK SORTWORD : " + sortWord);
 
-        List<BookDTO> books = new BookDAO().SortBooks(sortWord, searchSelect, searchKeyword, genre);
+        List<BookDTO> books = new BookDAO().SortBooks(sortWord, searchSelect, searchKeyword, genre, page);
 
         request.setAttribute("books", books);
 
         request.setAttribute("searchSelect", searchSelect);
+
+        request.setAttribute("sortWord", sortWord);
 
         return "book/searchResult";
     }

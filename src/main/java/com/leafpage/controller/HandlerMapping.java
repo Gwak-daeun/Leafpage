@@ -21,6 +21,7 @@ public class HandlerMapping {
         mappings.put("/search.do", new SearchController());
         mappings.put("/searchResult.do", new SearchResultViewController());
         mappings.put("/sortBooks.do", new SearchResultSortController());
+        mappings.put("/bookScroll.do", new BookScrollController());
 
         mappings.put("/indexInfo.do", new IndexController());
         mappings.put("/LikeHeart.do",new LikeHeartController());

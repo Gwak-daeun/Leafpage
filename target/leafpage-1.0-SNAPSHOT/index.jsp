@@ -25,7 +25,7 @@
                 <option value="제목" class="book-option">제목</option>
                 <option value="작가" class="book-option">작가</option>
             </select>
-            <input id="search" name="searchKeyword" class="search-input" placeholder="둘러보기" />
+            <input type="text" id="search" name="searchKeyword" class="search-input" placeholder="둘러보기" />
             <button type="submit" style="border: none; background: none; padding: 0; cursor: pointer;">
                 <img id="searchLens" class="search-lens" src="./css/icons/search.png" />
             </button>

@@ -12,15 +12,20 @@
 </head>
 <body>
 <%@include file="../component/header.jsp"%>
+<c:set var="searchKeyword" value="${searchKeyword}"/>
+<c:set var="searchSelect" value="${searchSelect}"/>
+<c:set var="genre" value="${genre}"/>
+<c:set var="page" value="${page}"/>
+<c:set var="sortWord" value="${sortWord}"/>
 
 <div class="container">
     <div class="title">
         <h1>LeafPage</h1>
     </div>
-    <form method="get" action="sortBooks.do">
+    <form method="get" action="search.do">
         <div class="toggle">
-            <a href="/sortBooks.do?sortWord=최신순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=${genre}"><div id="btn1">최신순</div></a>
-            <a href="/sortBooks.do?sortWord=인기순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=${genre}"><div id="btn2">인기순</div></a>
+            <a href="/sortBooks.do?sortWord=최신순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=${genre}"><div id="select1">최신순</div></a>
+            <a href="/sortBooks.do?sortWord=인기순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=${genre}"><div id="select2">인기순</div></a>
         </div>
         <div class="search-bar">
             <select id="selectBox" name="searchSelect" class="book-select">
@@ -29,21 +34,21 @@
                 <option value="제목" class="book-option">제목</option>
                 <option value="작가" class="book-option">작가</option>
             </select>
-            <input value="${searchKeyword}" class="search-input" placeholder="둘러보기" />
+            <input type="text" id="search" name="searchKeyword" value="${searchKeyword}" class="search-input" placeholder="둘러보기" />
             <img class="search-lens" src="../../css/icons/search.png" />
         </div>
     </form>
     <div class="search-keywords">
         <ul>
-            <li> <a href="/sortBooks.do?sortWord=최신순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=에세이">에세이</a></li>
+            <li><a href="/sortBooks.do?sortWord=최신순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=에세이">에세이</a></li>
             <li><a href="/sortBooks.do?sortWord=최신순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=소설">소설</a></li>
             <li><a href="/sortBooks.do?sortWord=최신순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=만화">만화</a></li>
             <li><a href="/sortBooks.do?sortWord=최신순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=생활">생활</a></li>
-            <li> <a href="/sortBooks.do?sortWord=최신순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=학술논문">학술논문</a></li>
+            <li><a href="/sortBooks.do?sortWord=최신순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=학술논문">학술논문</a></li>
         </ul>
     </div>
     <div class="book-box">
-        <ul class="book-ul list-group list-group-horizontal">
+        <ul id="searchResultUl" class="book-ul list-group list-group-horizontal">
             <c:forEach var="searchBook" items="${books}">
                 <li>
                     <a href="/detailPageView.do?isbn=${searchBook.ISBN}">
@@ -62,7 +67,16 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script></body>
+<script>
+    let searchKeyword = "${searchKeyword}";
+    let searchSelect = "${searchSelect}";
+    let genre = "${genre}";
+    let page = "${page}";
+    let sortWord = "${sortWord}";
+</script>
 
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script></body>
+<script src="../js/searchResult.js"></script>
 </body>
 </html>

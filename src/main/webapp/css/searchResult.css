@@ -16,7 +16,7 @@
     border-radius: 5px;
 }
 
-#btn1 {
+#select1 {
     /*float: left;*/
     position: absolute;
     width: 50px;
@@ -26,19 +26,19 @@
     box-shadow: 1px 1px 1px black;
     transition-duration: 0.3s;
     display: inline-block;
-    margin-left: 530px;
+    margin-left: 540px;
     font-size: 13px;
     margin-top: 3px;
     color: white;
 }
 
-#btn1:active {
+#select1:active {
     /*margin-left: 5px;*/
     /*margin-top: 5px;*/
     box-shadow: none;
 }
 
-#btn2 {
+#select2 {
     /*float: left;*/
     width: 50px;
     height: 20px;
@@ -52,7 +52,7 @@
     color: white;
 }
 
-#btn2:active {
+#select2:active {
     /*margin-left: 5px;*/
     /*margin-top: 5px;*/
     box-shadow: none;
@@ -287,9 +287,6 @@ li{
         margin-left: 30px;
         width: 30px;
     }
-    .toggle{
-        margin-left: 240px !important;
-    }
     .search-keywords > ul > li {
         margin: 0 3px;
         padding-left: 0;
@@ -302,7 +299,7 @@ li{
         width: 125px;
         height: 210px;
     margin: 3px 7px;
-}
+    }
     .book-ul{
         padding-left: 5px;
     }
@@ -321,4 +318,11 @@ li{
     .btn2{
         font-size: 12px;
     }
+    #select1{
+        margin-left: 225px;
+    }
+    #select2{
+        margin-left: 170px;
+    }
+
 }
