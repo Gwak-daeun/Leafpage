@@ -1,6 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,23 +12,13 @@
     <script src="https://kit.fontawesome.com/1db70bd877.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<header>
-    <nav class="navbar index-nav">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1"><img src="css/icons/nest_eco_leaf.png" /> </span>
-            <span></span>
-            <span>
-                <button type="button" class=" btn2 btn-sm">회원가입</button>
-                <button type="button" class=" btn1 btn-sm">로그인</button>
-            </span>
-        </div>
-    </nav>
-</header>
+<%@include file="../component/header.jsp"%>
+
 <section>
     <c:set var="errorMsg" value="${errorMsg}"/>
     <c:set var="failed" value="${failed}"/>
     <div class="inline">
-        <div class="mg">
+        <div class="mg big-book">
             <img src="image/bookcover.png" class="imgstyle">
             <div class="center">
                 <span class="inline">${bookDetail.bookName}</span>
@@ -44,7 +35,7 @@
                         <img id="emptyH" style="width: 20px; margin-left: 5px;" src="<c:url value="/css/icons/empty.png"/>" onclick="likeCheck()">
                     </c:if>
                     ${ heartCount }
-                    <%--                    <i class="fa-solid fa-heart fa-xl" style="color: #d7443e;"></i>--%>
+
                 </div>
             </div>
         </div>
@@ -106,15 +97,14 @@
                                                 </c:if>
 
                                             </span>
-
-                                                <span class="review-top-right">
+                                            <span class="review-top-right">
                                                 <p>작성일&nbsp; ${review.reviewDate}</p>
                                             </span>
-                                            </div>
                                         </div>
                                     </div>
-                                    <!--강의명 밑 내용과 추천-->
-                                    <div class="card-body">
+                                </div>
+                                <!--강의명 밑 내용과 추천-->
+                                <div class="card-body">
 
                                         <p class="card-text">
                                                 ${review.reviewContent}

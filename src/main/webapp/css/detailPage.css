@@ -157,7 +157,7 @@ h2 {
 }
 
 .inline {
-    display: inline-block;
+    display: inline-flex;
 }
 
 .mg {
@@ -196,6 +196,10 @@ a {
 
 /*========================================*/
 
+.big-book {
+    width: 400px;
+}
+
 .container {
     display: flex;
     justify-content: center;
@@ -203,8 +207,7 @@ a {
 }
 
 .tabmenu {
-    min-width: 430px;
-    max-width: 700px;
+    width: 700px;
     margin-top: 50px;
     padding-bottom: 20px;
     background-color: #f9f9f9;
@@ -244,7 +247,7 @@ a {
 
 .tab-content {
     padding : 30px;
-    width: 100%;
+    width: auto;
     height: 520px;
     background-color: white;
     display: none;
@@ -344,7 +347,7 @@ a {
 }
 
 .starR{
-    display: inline-block;
+    display: inline-flex;
     width: 30px;
     height: 30px;
     color: transparent;
@@ -367,6 +370,11 @@ a {
 
 /* =================================== */
 
+@media (min-width: 501px) and (max-width: 1180px){
+    .tabmenu {
+        width: 430px;
+    }
+}
 
 @media (max-width: 500px) {
     .btn1 {
@@ -399,6 +407,7 @@ a {
 
     .inline {
         margin-top: 8px;
+        display: block;
     }
 
     .center {

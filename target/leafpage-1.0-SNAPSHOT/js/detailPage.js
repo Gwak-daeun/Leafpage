@@ -1,6 +1,18 @@
 
 //클릭으로 탭 메뉴 변경
 $(document).ready(function () {
+  $(".tab-button > li").click(function (e) {
+       e.preventDefault();       //스크롤 방지
+       var idx = $(this).index();
+
+       $(this).addClass("on").siblings().removeClass("on");
+
+      $(".tabmenu .tab-content")
+          .eq(idx)
+          .addClass("on")
+          .siblings(".tab-content")
+          .removeClass("on");
+    });
 
     if (errorMsg === "리뷰 삭제에 실패했어요.") {
         alert(errorMsg);
@@ -8,22 +20,6 @@ $(document).ready(function () {
     if (failed === "리뷰 등록에 실패했어요.") {
         alert(failed);
     }
-
-    $(".tab-button > li").click(function () {
-        var idx = $(this).index();
-
-        $(this).addClass("on").siblings().removeClass("on");
-
-        $(".tabmenu .tab-content")
-            .eq(idx)
-            .addClass("on")
-            .siblings(".tab-content")
-            .removeClass("on");
-    });
-
-
-// $("#emptyH").show();
-// $("#fullH").hide();
 
 //하트 채워지고 비워지는 기능
 function likeCheck() {
@@ -49,6 +45,7 @@ function likeCheck() {
     });
 
 }
+
 
 
 //별점 표시
