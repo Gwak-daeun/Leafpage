@@ -488,7 +488,7 @@ public class BookDAO {
 
 
 
-        String SQL = "select book_name, book_img, book_author_name, book_views\n" +
+        String SQL = "select ISBN , book_name, book_img, book_author_name, book_views\n" +
                 "from books\n" +
                 "order by book_views desc\n" +
                 "limit 8;";
@@ -503,6 +503,7 @@ public class BookDAO {
                 bookDTO.setBookName(rs.getString("book_name"));
                 bookDTO.setBookImg(rs.getString("book_img"));
                 bookDTO.setBookAuthorName(rs.getString("book_author_name"));
+                bookDTO.setISBN(rs.getString("ISBN"));
                 mainBooks.add(bookDTO);
             }
 
