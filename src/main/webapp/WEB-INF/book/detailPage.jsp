@@ -166,8 +166,8 @@
                 </div>
 
                 <div class="form-footer">
-                    <button class="btn rental">바로보기</button>
-                    <button class="btn preview"><a href="">도서목록</a></button>
+                    <button class="btn my-page" onclick="location.href='mypageInfo.do'">마이페이지로 이동</button>
+                    <button class="btn close" onclick="closeRentalModal()">돌아가기</button>
                 </div>
             </div>
         </div>
