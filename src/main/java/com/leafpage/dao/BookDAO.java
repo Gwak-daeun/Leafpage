@@ -517,4 +517,140 @@ public class BookDAO {
         return mainBooks;
 
     }
+
+    public List<BookDTO> searchBooks(String searchSelect, String searchKeyword) {
+
+        List<BookDTO> books = new ArrayList<>();
+
+        String SQL = "";
+
+        if (searchSelect.equals("출판사")) {
+            SQL = "select ISBN, book_name, book_img, book_publisher_name\n" +
+                    "from books\n" +
+                    "where book_publisher_name LIKE ?\n" +
+                    "and book_state = 0;";
+        }
+        if (searchSelect.equals("제목")) {
+            SQL = "select ISBN, book_name, book_img, book_publisher_name\n" +
+                    "from books\n" +
+                    "where book_name LIKE ?\n" +
+                    "and book_state = 0;";
+        }
+        if (searchSelect.equals("작가")) {
+            SQL = "select ISBN, book_name, book_img, book_publisher_name\n" +
+                    "from books\n" +
+                    "where book_author_name LIKE ?\n" +
+                    "and book_state = 0;";
+        }
+        if (searchSelect.equals("전체")) {
+            SQL = "select ISBN, book_name, book_img, book_publisher_name\n" +
+                    "from books\n" +
+                    "where concat(book_publisher_name, book_name, book_author_name) LIKE ?\n" +
+                    "and book_state = 0;";
+        }
+
+        try {
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1, "%" + searchKeyword + "%");
+            System.out.println("CHECK SEARCH QUERY : " + pstmt);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                BookDTO bookDTO = new BookDTO();
+                bookDTO.setISBN(rs.getString("ISBN"));
+                bookDTO.setBookName(rs.getString("book_name"));
+                bookDTO.setBookImg(rs.getString("book_img"));
+                bookDTO.setBookPublisherName(rs.getString("book_publisher_name"));
+                books.add(bookDTO);
+            }
+
+        }  catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+
+        return books;
+    }
+
+    public List<BookDTO> SortBooks(String sortWord, String searchSelect, String searchKeyword, String genre) {
+
+        List<BookDTO> books = new ArrayList<>();
+
+        String SQL = "select ISBN, book_name, book_img, book_publisher_name\n" +
+                "from books \n" +
+                "where book_state = 0\n ";
+
+        if (searchSelect.equals("출판사")) {
+
+            SQL += "and book_publisher_name LIKE ?\n";
+
+            if (sortWord.equals("인기순")) {
+                SQL += "order by book_views desc;";
+            }
+            if (sortWord.equals("최신순")) {
+                SQL += "order by book_upload_date desc;";
+            }
+        }
+        if (searchSelect.equals("제목")) {
+
+            SQL += "and book_name LIKE ?\n";
+
+            if (sortWord.equals("인기순")) {
+                SQL += "order by book_views desc;";
+            }
+            if (sortWord.equals("최신순")) {
+                SQL += "order by book_upload_date desc;";
+            }
+        }
+        if (searchSelect.equals("작가")) {
+
+            SQL += "and book_author_name LIKE ?\n";
+
+            if (sortWord.equals("인기순")) {
+                SQL += "order by book_views desc;";
+            }
+            if (sortWord.equals("최신순")) {
+                SQL += "order by book_upload_date desc;";
+            }
+        }
+        if (searchSelect.equals("전체")) {
+
+            SQL += "and concat(book_publisher_name, book_name, book_author_name) LIKE ?\n";
+
+            if (sortWord.equals("인기순")) {
+                System.out.println("CHECK CHECK");
+                SQL += "order by book_views desc;";
+            }
+            if (sortWord.equals("최신순")) {
+                SQL += "order by book_upload_date desc;";
+            }
+        }
+
+        try {
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1, "%" + searchKeyword + "%");
+            System.out.println("CHECK SEARCH QUERY : " + pstmt);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                BookDTO bookDTO = new BookDTO();
+                bookDTO.setISBN(rs.getString("ISBN"));
+                bookDTO.setBookName(rs.getString("book_name"));
+                bookDTO.setBookImg(rs.getString("book_img"));
+                bookDTO.setBookPublisherName(rs.getString("book_publisher_name"));
+                books.add(bookDTO);
+            }
+
+        }  catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+
+
+        return books;
+    }
 }
