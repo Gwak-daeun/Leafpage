@@ -10,10 +10,8 @@ import java.util.List;
 public class Role {
 
     List<String> validRoles = new ArrayList<>(Arrays.asList(
-            "일반회원",
-            "탈퇴회원",
-            "블랙회원",
-            "휴면회원"
+            "회원",
+            "관리자"
     ));
 
     private final String userRole;

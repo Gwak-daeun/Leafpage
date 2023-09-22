@@ -3,6 +3,65 @@ body {
     font-family: 'Noto Sans KR', sans-serif;
 }
 
+
+
+.book-list{
+    position: relative;
+    background-color: #f1e3dc;
+    width: fit-content;
+    height: 210px;
+    margin: 10px 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0); /* 초기 그림자 없음 */
+    transition: box-shadow 300ms ease-in-out, transform 300ms ease-in-out;
+
+}
+
+.book-list:hover{
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 300ms ease-in-out, transform 300ms ease-in-out;
+}
+
+ul{
+    list-style: none;
+    display: flex;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.book-box > ul{
+    display: flex;
+    text-align: center;
+    flex-wrap: wrap;
+
+}
+
+li{
+    display: inline-block;
+}
+
+.book-cover{
+    /* position: absolute; */
+    display: inline-block;
+    margin-top: 10px;
+    /* margin-right: 50px; */
+    width: 108px;
+    height: 150px;
+}
+
+.book-title{
+    margin-top: 4px;
+    font-size: 14px;
+}
+
+.book-author{
+    font-size: 12px;
+}
+
+
+
+
+
 .index-nav{
     background-color: #066466;
     color: white;
@@ -24,7 +83,7 @@ body {
 
 a {
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 .navbar{
@@ -193,10 +252,10 @@ a {
 }
 
 
-.tab-content::-webkit-scrollbar-track {
-    background-color: rgba(0, 8, 212, 0.5);
-    border-radius: 5px;
-}
+/*.tab-content::-webkit-scrollbar-track {*/
+/*    background-color: rgba(0, 8, 212, 0.5);*/
+/*    border-radius: 5px;*/
+/*}*/
 
 .contexth {
     height : 450px;
@@ -227,7 +286,7 @@ a {
 }
 
 .review-content .card {
-    width: 87%;
+    width: 350px;
     text-align: left;
     background-color: #f8f5f3;
 }
@@ -246,15 +305,12 @@ a {
 
 .review-content {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding : 0px;
-    height: 460px;
+    overflow-y: scroll;
 }
 
 .review-content li {
     margin-bottom: 10px;
-    width: 100%;
+    width: 460px;
     display:flex;
     justify-content: center;
 }

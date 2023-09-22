@@ -42,7 +42,7 @@ public class ReviewDAO {
         return -1;
     }
 
-    public List<ReviewDTO> findReviews(String ISBN) {
+    public List<ReviewDTO> findReviews(String isbn) {
 
         List<ReviewDTO> bookReviews = new ArrayList<>();
 
@@ -54,23 +54,22 @@ public class ReviewDAO {
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setString(1, ISBN);
+            pstmt.setString(1, isbn);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                ReviewDTO review = new ReviewDTO(
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getInt(5)
-                );
+                ReviewDTO review = new ReviewDTO();
+                review.setReviewNo(rs.getString("review_no"));
+                review.setISBN(rs.getString("ISBN"));
+                review.setReviewDate(rs.getString("review_date"));
+                review.setReviewContent(rs.getString("review_content"));
+                review.setReviewRating(rs.getInt("review_rating"));
                 bookReviews.add(review);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             DBUtil.close(rs, pstmt, conn);
         }
 
@@ -93,7 +92,7 @@ public class ReviewDAO {
         } catch (Exception e) {
             e.printStackTrace();
 
-        }finally {
+        } finally {
             DBUtil.close(rs, pstmt, conn);
         }
 

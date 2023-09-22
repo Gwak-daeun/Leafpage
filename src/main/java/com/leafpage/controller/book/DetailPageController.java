@@ -18,14 +18,15 @@ public class DetailPageController implements Controller {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         HttpSession session = request.getSession();
-        String ISBN = "040501813854";
         long userNo = (long) session.getAttribute("userNo");
-        String isbn = request.getParameter("isbn").trim();
         System.out.println("userNo"+userNo);
+        String isbn = request.getParameter("isbn");
 
-        List<ReviewDTO>  reviews = new ReviewDAO().findReviews(ISBN);
+        BookDAO bookDAO = new BookDAO();
 
-        BookDTO bookDetail = new BookDAO().getBookDetails(ISBN);
+        List<ReviewDTO>  reviews = new ReviewDAO().findReviews(isbn);
+
+        List<BookDTO> sameAuthorBooks = bookDAO.findSameAuthorBooks(isbn);
 
         LeeLikeyDAO leeLikeyDAO = new LeeLikeyDAO();
         int checkLike = leeLikeyDAO.checkLike(userNo, isbn);
@@ -33,9 +34,13 @@ public class DetailPageController implements Controller {
         System.out.println("CHECKLIKE"+checkLike);
 
 
+        BookDTO bookDetail = bookDAO.getBookDetails(isbn);
 
-        session.setAttribute("bookDetail", bookDetail);
-        session.setAttribute("reviews", reviews);
+        request.setAttribute("bookDetail", bookDetail);
+
+        request.setAttribute("reviews", reviews);
+
+        request.setAttribute("sameAuthorBooks", sameAuthorBooks);
 
         request.setAttribute("heartSelect", checkLike);
         request.setAttribute("heartCount", heartCount);
