@@ -67,3 +67,64 @@ function returnBook(bookName, rentalNo) {
         },
     });
 }
+
+function openViewer(rentalNo, dbScrollY, dbModalWidth) {
+
+    $(`#` + rentalNo).modal('show');
+
+
+    $(`#` + rentalNo).on('shown.bs.modal', function () {
+
+        let modalBody = $(`#` + rentalNo).find(".modal-body"); // 해당 모달 창의 .modal-body 요소 선택
+
+        let truncatedWidth = Math.floor(modalBody.width());
+
+        console.log("현재 모달 폭 : ", truncatedWidth);
+
+        if (dbModalWidth === truncatedWidth || dbScrollY === 0) {
+            modalBody.scrollTop(dbScrollY);
+            console.log("동일한 디바이스 작동 : ", dbModalWidth);
+        }
+        if (dbModalWidth > truncatedWidth) {
+            modalBody.scrollTop((dbScrollY * 666) / 321 );
+            console.log("컴에서 모바일로 디바이스 변경 : ", dbModalWidth);
+        }
+        if (dbModalWidth < truncatedWidth) {
+            modalBody.scrollTop((dbScrollY * 321) / 666 );
+            console.log("모바일에서 컴으로 디바이스 변경 : ", dbModalWidth);
+        }
+    });
+}
+
+
+function sendY(rentalNo) {
+
+    let modalY = 0;
+
+    let modalWidth = 0;
+
+    let modalBody = $(`#` + rentalNo).find(".modal-body");
+
+    modalY = modalBody.scrollTop();
+
+    modalWidth = Math.floor(modalBody.width());
+
+    console.log("Y축: " + modalY + "너비 : " + modalWidth, ", 유저 넘버 : ", rentalNo);
+
+    $.ajax({
+        url: "/saveUserBookY.do",
+        type: "POST",
+        data: {
+            modalY : modalY,
+            modalWidth: modalWidth,
+            rentalNo : rentalNo
+        },
+        success: function (response) {
+            // console.log("서버 응답: ", response);
+            location.reload();
+        },
+        error: function (error) {
+            console.error("에러 발생: ", error);
+        }
+    });
+}

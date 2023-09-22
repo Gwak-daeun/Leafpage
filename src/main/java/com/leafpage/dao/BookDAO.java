@@ -327,7 +327,7 @@ public class BookDAO {
 
         String authorName = findAuthorName(isbn);
 
-        String SQL = "select book_name, book_img, book_publisher_name\n" +
+        String SQL = "select ISBN, book_name, book_img, book_publisher_name\n" +
                     "from books\n" +
                     "where book_author_name = ?;";
 
@@ -345,6 +345,7 @@ public class BookDAO {
                 sameAuthorBook.setBookName(rs.getString("book_name"));
                 sameAuthorBook.setBookImg(rs.getString("book_img"));
                 sameAuthorBook.setBookPublisherName(rs.getString("book_publisher_name"));
+                sameAuthorBook.setISBN(rs.getString("ISBN"));
                 sameAuthorBooks.add(sameAuthorBook);
             }
 
