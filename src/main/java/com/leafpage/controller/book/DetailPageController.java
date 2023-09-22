@@ -23,7 +23,6 @@ public class DetailPageController implements Controller {
         String isbn = request.getParameter("isbn");
 
         BookDAO bookDAO = new BookDAO();
-
         List<ReviewDTO>  reviews = new ReviewDAO().findReviews(isbn);
 
         List<BookDTO> sameAuthorBooks = bookDAO.findSameAuthorBooks(isbn);

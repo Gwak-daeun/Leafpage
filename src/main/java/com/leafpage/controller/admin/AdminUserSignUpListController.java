@@ -12,10 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class AdminUserListController implements Controller {
+public class AdminUserSignUpListController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
         int pageNum = 1;
         int amount = 10;
 
@@ -25,7 +24,7 @@ public class AdminUserListController implements Controller {
         }
         UserDAO dao =new UserDAO();
 
-        List<UserDTO> userList = dao.userrentelList(pageNum, amount);
+        List<UserDTO> userList = dao.userList(pageNum, amount);
         int total = dao.getTotal();
 
         AdminBookListPageDTO pageDTO = new AdminBookListPageDTO();
@@ -40,6 +39,6 @@ public class AdminUserListController implements Controller {
         request.setAttribute("userList" ,userList);
 
 
-        return "admin/admin-usermanagementrentallist";
+        return "admin/admin-usermanagement";
     }
 }

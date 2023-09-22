@@ -31,8 +31,6 @@ public class BookDAO {
                     "WHERE rn > ? AND rn <= ?";
 
             pstmt  = conn.prepareStatement(sql);
-            System.out.println(pageNum);
-            System.out.println(amount);
             pstmt.setInt(1, ((pageNum - 1)* amount));
             pstmt.setInt(2, (pageNum * amount));
             rs = pstmt.executeQuery();
@@ -517,4 +515,67 @@ public class BookDAO {
         return mainBooks;
 
     }
+    public List<BookDTO> booksearchlist(int pageNum, int amount, String keyword){
+
+
+        List<BookDTO> bookDTOList= new ArrayList<>();
+        try {
+            conn = DBUtil.getConnection();
+            String sql = " SELECT B.isbn, B.book_name, B.book_publisher_name, B.book_author_name " +
+                    "FROM (SELECT ROW_NUMBER() OVER (ORDER BY book_name) AS rn, isbn, book_name,book_author_name, book_publisher_name " +
+                    "from books WHERE concat(isbn, book_name, book_author_name, book_publisher_name ) LIKE ? ) B WHERE rn > ? AND rn <= ?;";
+
+            pstmt  = conn.prepareStatement(sql);
+            pstmt.setString(1,"%" + keyword + "%");
+            pstmt.setInt(2, ((pageNum - 1)* amount));
+            pstmt.setInt(3, (pageNum * amount));
+            rs = pstmt.executeQuery();
+            while (rs.next()){
+                BookDTO bookDTO = new BookDTO();
+                bookDTO.setISBN(rs.getString("isbn"));
+                bookDTO.setBookName(rs.getString("book_name"));
+                bookDTO.setBookPublisherName(rs.getString("book_publisher_name"));
+                bookDTO.setBookAuthorName(rs.getString("book_author_name"));
+                bookDTO.setCategories(findCategories(conn, bookDTO.getISBN()));
+
+
+                bookDTOList.add(bookDTO);
+            }
+            DBUtil.close(rs ,pstmt, conn);
+
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return bookDTOList;
+    }
+
+    public int  getsearchTotal(String keyword){
+        int result  = 0;
+
+        try {
+            conn = DBUtil.getConnection();
+            String sql = "SELECT count(*) as total" +
+                    " FROM (SELECT ROW_NUMBER() OVER (ORDER BY book_name) AS rn, isbn, book_name,book_author_name, book_publisher_name " +
+                    "from books WHERE concat(isbn, book_name, book_author_name, book_publisher_name ) LIKE ? ) B;";
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,"%" + keyword + "%");
+
+            rs = pstmt.executeQuery();
+
+            if(rs.next()) {
+                result = rs.getInt("total");
+            }
+
+            DBUtil.close(rs ,pstmt, conn);
+
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        return result ;
+    }
+
 }

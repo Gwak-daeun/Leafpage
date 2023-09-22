@@ -32,10 +32,13 @@ public class HandlerMapping {
         mappings.put("/makeReview.do", new MakeReviewController());
         mappings.put("/removeReview.do", new RemoveReviewController());
         mappings.put("/userlistview.do", new AdminUserListController());
-
+        mappings.put("/userlistsignupView.do", new AdminUserSignUpListController());
+        mappings.put("/userstatechange.do", new AdminUserStateChangeController());
         mappings.put("/bookupload.do", new AdminBookUploadController());
         mappings.put("/remove.do", new AdminBookDeleteController());
         mappings.put("/edit.do", new AdminBookEditController());
+        mappings.put("/adminbooksearch.do", new AdminBookSearchListController());
+        mappings.put("/adminusersearch.do", new AdminUserSearchListController());
 
         mappings.put("/signupView.do", new SignupViewController());
         mappings.put("/signup.do", new SignupController());
