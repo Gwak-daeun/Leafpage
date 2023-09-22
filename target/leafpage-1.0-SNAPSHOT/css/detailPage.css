@@ -243,10 +243,14 @@ a {
 .tab-content {
     padding : 30px;
     width: auto;
-    height: 520px;
+    height: 560px;
     background-color: white;
     display: none;
     border: solid 1px #c6d1d0;
+}
+
+.context-box {
+    height: 530px;
 }
 
 
@@ -256,7 +260,7 @@ a {
 /*}*/
 
 .contexth {
-    height : 450px;
+    height : 480px;
     overflow-y: auto;
 }
 

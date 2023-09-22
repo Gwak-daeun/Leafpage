@@ -23,7 +23,7 @@
         <div class="mg big-book">
             <img src="image/bookcover.png" class="imgstyle">
             <div class="center">
-                <span class="inline"><h2>${bookDetail.bookName}</h2></span>
+                <span class="in-block"><h2>${bookDetail.bookName}</h2></span>
                 <span >${bookDetail.bookAuthorName}</span>
                 <div class="small">${bookDetail.categories} | ${bookDetail.bookPublisherName} | 발행일: ${bookDetail.bookPubDate}</div>
                 <div class="bottom-mg inline">
@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div class="tab-content">
-                    <div>
+                    <div class="contexth">
                         ${bookDetail.bookChapter}
                     </div>
                 </div>
@@ -67,56 +67,28 @@
                         <c:forEach var="review" items="${reviews}">
                             <li>
                                 <div class="card">
-
                                     <div class="card-header">
                                         <div class="row">
                                             <div class="card-title">
                                             <span>
-                                                <c:if test="${review.reviewRating eq 5}">
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                </c:if>
-                                                <c:if test="${review.reviewRating eq 4}">
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                </c:if>
-                                                <c:if test="${review.reviewRating eq 3}">
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                </c:if>
-                                                <c:if test="${review.reviewRating eq 2}">
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                </c:if>
-                                                <c:if test="${review.reviewRating eq 1}">
-                                                    <span class="star">⭐</span>
-                                                </c:if>
-
+                                                ${review.reviewRating}
                                             </span>
                                             <span class="review-top-right">
                                                 <p>작성일&nbsp; ${review.reviewDate}</p>
                                             </span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!--강의명 밑 내용과 추천-->
-                                <div class="card-body">
-
+                                    <!--강의명 밑 내용과 추천-->
+                                    <div class="card-body">
                                         <p class="card-text">
-                                                ${review.reviewContent}
+                                            ${review.reviewContent}
                                         </p>
                                         <div class="row">
                                             <div class="col-9 text-left">
                                             </div>
 
                                             <div class="col-3 text-right">
-                                                    <%--                                            <c:set var="reviewNo" value="${review.review_no}"/>--%>
                                                 <a onclick="return confirm('삭제하시겠습니까?')" href="/removeReview.do?reviewNo=${review.reviewNo}">삭제</a>
                                             </div>
                                         </div>
@@ -125,12 +97,9 @@
                             </li>
                         </c:forEach>
                     </ul>
-
-
-
                 </div>
                 <div class="tab-content">
-                    <ul class="book-ul ">
+                    <ul class="contexth">
                         <c:forEach var="sameAuthorBook" items="${sameAuthorBooks}">
                             <li data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                 <a href="/detailPageView.do?isbn=${sameAuthorBook.ISBN}">
@@ -141,6 +110,7 @@
                                     </div>
                                 </a>
                             </li>
+
                         </c:forEach>
                     </ul>
                 </div>
@@ -188,12 +158,14 @@
                 </div>
                 <div class="form-group">
                     <label>내용</label>
-                    <textarea name="reviewContent" class="form-control" maxlength="2048" style="height: 180px"></textarea>
-                </div>
-                <div class="form-footer">
+                    <textarea name="reviewContent" class="form-control" maxlength="2048" style="height: 180px">
+
+                    </textarea>
+                  </div>
+                  <div class="form-footer">
                     <button id="reviewClose" type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
                     <button id="reviewRegister" class="btn rental">등록하기</button>
-                </div>
+                  </div>
 
             </div>
         </div>
