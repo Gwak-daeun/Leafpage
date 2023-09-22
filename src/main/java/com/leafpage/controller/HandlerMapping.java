@@ -22,8 +22,7 @@ public class HandlerMapping {
         mappings = new HashMap<>();
 
         mappings.put("/indexInfo.do", new IndexController());
-
-        mappings.put("/LikeHeart.do",new LikeEmptyHeartController());
+        mappings.put("/LikeHeart.do",new LikeHeartController());
         mappings.put("/detailPageView.do", new DetailPageController());
         mappings.put("/booklistView.do", new AdminBookListController());
         mappings.put("/getBook.do", new AdminBookDetailController());
