@@ -32,9 +32,6 @@ public class Id {
         if (isInValidIdMAXLength(userId)) {
             throw new IllegalArgumentException("아이디가 너무 깁니다. 다른 아이디를 입력해주세요.");
         }
-        if(isDuplicateId(userId)) {
-            throw new IllegalArgumentException("이미 가입된 아이디입니다. 다른 아이디를 입력해주세요.");
-        }
     }
 
     private boolean isBlank(String userId) {
@@ -54,9 +51,5 @@ public class Id {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(userId);
         return !matcher.matches();
-    }
-
-    private boolean isDuplicateId(String userId) {
-        return new UserDAO().findUserById(userId) == 1;
     }
 }

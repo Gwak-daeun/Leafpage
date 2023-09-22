@@ -9,13 +9,13 @@ import com.leafpage.util.ListPageUtil;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-public class AdminUserListController implements Controller {
+public class AdminUserSearchListController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
         int pageNum = 1;
         int amount = 10;
 
@@ -23,10 +23,26 @@ public class AdminUserListController implements Controller {
         if(request.getParameter("pageNum") != null) {
             pageNum = Integer.parseInt(request.getParameter("pageNum"));
         }
+
+        String keyword = request.getParameter("keyword");
+        HttpSession session = request.getSession();
+
+        if(keyword == null || keyword.isEmpty() && session.getAttribute("keyword") != null){
+            keyword = (String) session.getAttribute("keyword");
+        }
+
+        if(keyword.isEmpty() && session.getAttribute("keyword") == null){
+            return "userlistview.do";
+        }
+
+        else {
+            session.setAttribute("keyword", keyword);
+        }
+
         UserDAO dao =new UserDAO();
 
-        List<UserDTO> userList = dao.userrentelList(pageNum, amount);
-        int total = dao.getTotal();
+        List<UserDTO> userList = dao.userSearchList(pageNum, amount, keyword);
+        int total = dao.getSearchTotal(keyword);
 
         AdminBookListPageDTO pageDTO = new AdminBookListPageDTO();
         pageDTO.setPageNum(pageNum);
@@ -40,6 +56,6 @@ public class AdminUserListController implements Controller {
         request.setAttribute("userList" ,userList);
 
 
-        return "admin/admin-usermanagementrentallist";
+        return "admin/admin-usermanagementsearchlist";
     }
 }

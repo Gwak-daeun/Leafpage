@@ -52,10 +52,10 @@
         </aside>
     </aside>
     <div class="container">
-        <form action="books.do" method="post">
+        <form action="adminbooksearch.do" method="post">
             <div class="top">
                 <div class="float-end">
-                    <input class="search" type="text" placeholder="검색어 입력" />
+                    <input class="search" name="keyword" type="text" placeholder="검색어 입력" />
                     <input class="search-btn" type="submit" value="검색" />
                 </div>
             </div>
