@@ -17,6 +17,7 @@ public class UserDTO {
     private String userSecurityAnswer;
     private String userEmailHash;
     private boolean userEmailChecked;
+    private String userJoiningDate;
 
     public String getUserId() {
         return userId.getUserId();
@@ -73,4 +74,6 @@ public class UserDTO {
     public void setUserRole(String userRole) {
         this.userRole = new Role(userRole);
     }
+
+
 }
