@@ -5,10 +5,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
     <title>LeafPage</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="../../css/detailPage.css">
-    <meta name="viewport" content="width=device-width">
     <script src="https://kit.fontawesome.com/1db70bd877.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -21,20 +23,20 @@
         <div class="mg big-book">
             <img src="image/bookcover.png" class="imgstyle">
             <div class="center">
-                <span class="inline">${bookDetail.bookName}</span>
+                <span class="inline"><h2>${bookDetail.bookName}</h2></span>
                 <span >${bookDetail.bookAuthorName}</span>
-                <div>${bookDetail.categories} | ${bookDetail.bookPublisherName} | 발행일: ${bookDetail.bookPubDate}</div>
+                <div class="small">${bookDetail.categories} | ${bookDetail.bookPublisherName} | 발행일: ${bookDetail.bookPubDate}</div>
                 <div class="bottom-mg inline">
                     <button class="btn rental" data-toggle="modal" href="#rental">대여하기</button>
                     <button class="btn preview">미리보기</button>   <%-- 로그인 해야 볼 수 있음--%>
 
                     <c:if test="${heartSelect == 1}">
-                        <img id="fullH" style="width: 20px; margin-left: 5px;" src="../../css/icons/full.png" onclick="likeCheck()">
+                        <img id="fullH" style="width: 20px; height: 20px; margin-left: 5px;" src="../../css/icons/full.png" onclick="likeCheck()">
                     </c:if>
                     <c:if test="${heartSelect == 0}">
-                        <img id="emptyH" style="width: 20px; margin-left: 5px;" src="<c:url value="/css/icons/empty.png"/>" onclick="likeCheck()">
+                        <img id="emptyH" style="width: 20px; height: 20px; margin-left: 5px;" src="<c:url value="/css/icons/empty.png"/>" onclick="likeCheck()">
                     </c:if>
-                    ${ heartCount }
+                    <span style="margin-top: 10px">${ heartCount }</span>
 
                 </div>
             </div>
