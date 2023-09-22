@@ -10,18 +10,9 @@
     <script src="https://kit.fontawesome.com/1db70bd877.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<header>
-    <nav class="navbar index-nav">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1"><img src="css/icons/nest_eco_leaf.png" /> </span>
-            <span></span>
-            <span>
-                <button type="button" class=" btn2 btn-sm">회원가입</button>
-                <button type="button" class=" btn1 btn-sm">로그인</button>
-            </span>
-        </div>
-    </nav>
-</header>
+
+<%@include file="../component/header.jsp"%>
+
 <section>
     <div>
         <div class="mg">
@@ -317,6 +308,7 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script src="js/detailPage.js"></script>
+<script src="../../js/detailPage.js"></script>
+<script src="../../js/alertMsg.js"></script>
 </body>
 </html>

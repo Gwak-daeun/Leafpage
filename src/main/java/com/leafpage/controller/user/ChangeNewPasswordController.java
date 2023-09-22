@@ -14,7 +14,9 @@ import java.io.PrintWriter;
 public class ChangeNewPasswordController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        System.out.println("changeNewPasswordController진입 새로운비밀번호:"+request.getParameter("newPassword"));
+        System.out.println("changeNewPasswordController진입");
+        System.out.println("새로운비밀번호:"+request.getParameter("newPassword"));
+
         int changePasswordSuccess = 0;
         Password newPassword = null;
         if(request.getParameter("newPassword")!=null) {
@@ -41,14 +43,16 @@ public class ChangeNewPasswordController implements Controller {
 
             if (changePasswordSuccess == 1) {
                 System.out.println("비밀번호 변경에 성공하였습니다.");
+                session.setAttribute("msg", "비밀번호 변경에 성공하였습니다.");
             }
             if (changePasswordSuccess == 0) {
                 System.out.println("비밀번호 변경에 실패하였습니다.");
+                session.setAttribute("msg", "[Error] 유효하지 않은 접근입니다.");
             }
         } else {
             System.out.println("오류가 발생했습니다.");
         }
-        return "index";
+        return "findPwView.do";
     }
 }
 

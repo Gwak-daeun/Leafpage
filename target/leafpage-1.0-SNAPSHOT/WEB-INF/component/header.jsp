@@ -26,3 +26,5 @@
         </div>
     </nav>
 </header>
+
+<input type="hidden" id="msg" value="${msg}">

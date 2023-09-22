@@ -48,7 +48,7 @@ function findId(inputEmailValue, inputTelValue) {
             foundId.show();
         },
         error: function(e){
-            alert("오류가 발생했습니다.");
+            location.href='findIdView.do';
         }
     });
 }

@@ -11,6 +11,7 @@
 </head>
 
 <body>
+<input type="hidden" id="msg" value="${msg}">
   <aside>
     <aside class="side-bar">
       <ul>

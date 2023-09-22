@@ -26,8 +26,9 @@ public class UserDAO {
     String getUserNoSQL = "SELECT user_no FROM users WHERE user_id = ?";
     String setUserEmailCheckedSQL = "UPDATE users SET user_email_checked = true WHERE user_id = ?";
     String changeNewPasswordSQL = "UPDATE users SET user_password = ? WHERE user_id = ?";
-    String setUserStateSQL = "UPDATE users SET user_state = ? WHERE user_id = ? AND user_password = ?";
-    String updateUserInfoSQL = "UPDATE users SET user_tel = ?, user_email=?, user_email_checked=false WHERE user_id = ?";
+    String setUserStateWithdrawalSQL = "UPDATE users SET user_state = ?, user_tel = null, user_email = null, user_email_checked = false WHERE user_id = ? AND user_password = ?";
+    String setUserStateInactiveSQL = "UPDATE users SET user_state = ?, user_email_checked = false WHERE user_id = ?";
+    String updateUserInfoSQL = "UPDATE users SET user_tel = ?, user_email=?, user_email_checked=false WHERE user_id = ? AND user_password = ?";
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
@@ -257,6 +258,7 @@ public class UserDAO {
         return false;  // 데이터베이스 오류
     }
 
+    //회원번호 가져오기
     public int getUserNo (String userId) {
         try {
             conn = DBUtil.getConnection();
@@ -290,11 +292,11 @@ public class UserDAO {
         return false;  // 데이터베이스 오류
     }
 
-    //    String setUserStateSQL = "UPDATE users SET user_state = ? WHERE user_id = ? AND user_password = ?";
-    public int setUserState(String userId, String userPassword, String userState) {
+    //탈퇴하기
+    public int setUserStateWithdrawal(String userId, String userPassword, String userState) {
         try {
             conn = DBUtil.getConnection();
-            pstmt = conn.prepareStatement(setUserStateSQL);
+            pstmt = conn.prepareStatement(setUserStateWithdrawalSQL);
             pstmt.setString(1, userState);
             pstmt.setString(2, userId);
             pstmt.setString(3, userPassword);
@@ -307,13 +309,31 @@ public class UserDAO {
         return -1;  // 데이터베이스 오류
     }
 
-    public int updateUserInfo(String userId, String userTel, String userEmail) {
+    //휴면기능
+    public int setUserStateInactive(String userId, String userState) {
+        try {
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(setUserStateInactiveSQL);
+            pstmt.setString(1, userState);
+            pstmt.setString(2, userId);
+            return pstmt.executeUpdate();  //성공하면 1, 실패하면 0
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+        return -1;  // 데이터베이스 오류
+    }
+
+    //내 정보 수정
+    public int updateUserInfo(String userId, String userTel, String userEmail, String userPassword) {
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(updateUserInfoSQL);
             pstmt.setString(1, userTel);
             pstmt.setString(2, userEmail);
             pstmt.setString(3, userId);
+            pstmt.setString(4, userPassword);
             return pstmt.executeUpdate();  //성공하면 1, 실패하면 0
         } catch (Exception e) {
             e.printStackTrace();

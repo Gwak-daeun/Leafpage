@@ -29,7 +29,6 @@ function checkNullPw() {
             return false;
         } else {
             $(".checkSpan").remove();
-            console.log("이메일로 검사");
             findPw(inputId.val(), inputEmail.val(), null, selectQuestion.val(), inputAnswer.val());
         }
     }
@@ -41,7 +40,6 @@ function checkNullPw() {
             return false;
         } else {
             $(".checkSpan").remove();
-            console.log("전화번호로 검사");
             findPw(inputId.val(),null, inputTel.val(), selectQuestion.val(), inputAnswer.val());
         }
     }
@@ -109,6 +107,5 @@ function newPasswordCheck() {
     else {
         console.log("※새 비밀번호로 변경 중입니다.");
         $("form[name=new_pw_form]").submit();
-        alert("비밀번호가 변경되었습니다.");
     }
 }

@@ -7,6 +7,7 @@ import com.leafpage.dao.UserDAO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -25,13 +26,10 @@ public class FindIdController implements Controller {
             inputTel = request.getParameter("inputTel");
         }
 
+        HttpSession session = request.getSession();
         if(inputEmail == null && inputTel == null) {
-            PrintWriter script = response.getWriter();
-            script.println("<script>");
-            script.println("alert('이메일이나 전화번호를 입력해주세요.');");
-            script.println("history.back();");
-            script.println("</script>");
-            script.close();
+            session.setAttribute("msg","[Error] 비정상적인 접근입니다.");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "비정상적인 접근입니다.");
         } else {
             String foundUserId = new UserDAO().findIdByEmailOrTel(inputEmail, inputTel);
             System.out.println("##" + foundUserId);

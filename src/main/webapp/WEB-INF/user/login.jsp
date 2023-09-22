@@ -27,5 +27,6 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 <script src="../../js/login.js"></script>
+<script type="text/javascript" src="../../js/alertMsg.js"></script>
 </body>
 </html>

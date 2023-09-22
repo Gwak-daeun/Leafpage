@@ -16,6 +16,8 @@ public class HandlerMapping {
 
         mappings = new HashMap<>();
 
+        mappings.put("/clearMsg.do", new ClearMsgController());
+
         mappings.put("/LikeHeart.do",new LikeEmptyHeartController());
         mappings.put("/detailPageView.do", new DetailPageViewController());
         mappings.put("/booklistView.do", new AdminBookListController());
@@ -53,6 +55,7 @@ public class HandlerMapping {
         mappings.put("/withdrawal.do", new WithdrawalController());
         mappings.put("/changeNewPassword.do", new ChangeNewPasswordController());
         mappings.put("/updateUserInfo.do", new UpdateUserInfoController());
+        mappings.put("/inactive.do", new InactiveController());
     }
 
     public Controller getController(String path) {

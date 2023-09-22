@@ -13,6 +13,7 @@ public class ViewResolver {
     }
 
     public String getView(String viewName) {
+
         String view = null;
         if (!viewName.contains(".do")) {
             if (viewName.equals("index")) {
@@ -25,4 +26,6 @@ public class ViewResolver {
         }
         return view;
     }
+
+
 }
