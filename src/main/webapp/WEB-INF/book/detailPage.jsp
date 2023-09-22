@@ -12,18 +12,8 @@
     <script src="https://kit.fontawesome.com/1db70bd877.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<header>
-    <nav class="navbar index-nav">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1"><img src="css/icons/nest_eco_leaf.png" /> </span>
-            <span></span>
-            <span>
-                <button type="button" class=" btn2 btn-sm">회원가입</button>
-                <button type="button" class=" btn1 btn-sm">로그인</button>
-            </span>
-        </div>
-    </nav>
-</header>
+<%@include file="../component/header.jsp"%>
+
 <section>
     <c:set var="errorMsg" value="${errorMsg}"/>
     <c:set var="failed" value="${failed}"/>

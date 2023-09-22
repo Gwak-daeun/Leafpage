@@ -148,8 +148,7 @@ a {
 }
 
 .tabmenu {
-    min-width: 430px;
-    max-width: 700px;
+    width: 700px;
     margin-top: 50px;
     padding-bottom: 20px;
     background-color: #f9f9f9;
@@ -189,7 +188,7 @@ a {
 
 .tab-content {
     padding : 30px;
-    width: 100%;
+    width: auto;
     height: 520px;
     background-color: white;
     display: none;
@@ -315,6 +314,11 @@ a {
 
 /* =================================== */
 
+@media (min-width: 501px) and (max-width: 1180px){
+    .tabmenu {
+        width: 430px;
+    }
+}
 
 @media (max-width: 500px) {
     .btn1 {
@@ -347,6 +351,7 @@ a {
 
     .inline {
         margin-top: 8px;
+        display: block;
     }
 
     .center {

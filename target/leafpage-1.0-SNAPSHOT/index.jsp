@@ -27,20 +27,18 @@
     </div>
     <div class="book-box">
         <ul class="book-ul ">
-            <li data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                <div class="book-list">
-                    <img class="book-cover" src="./image/4.jpg" />
-                    <div class="book-title">나를 지키는 관계...</div>
-                    <div class="book-author">안젤라 센</div>
-                </div>
+            <c:forEach var="book" items="${mainBooks}">
+            <li>
+                <a href="/detailPageView.do?userNo=1&isbn=${book.ISBN}">
+                    <div class="book-list">
+                        <img class="book-cover" src="${book.bookImg}" />
+                        <div class="book-title">${book.bookName}</div>
+                        <div class="book-author">${book.bookAuthorName}</div>
+                    </div>
+                </a>
+
             </li>
-            <li><div class="book-list"></div></li>
-            <li><div class="book-list"></div></li>
-            <li><div class="book-list"></div></li>
-            <li><div class="book-list"></div></li>
-            <li><div class="book-list"></div></li>
-            <li><div class="book-list"></div></li>
-            <li><div class="book-list"></div></li>
+            </c:forEach>
         </ul>
     </div>
 </div>
