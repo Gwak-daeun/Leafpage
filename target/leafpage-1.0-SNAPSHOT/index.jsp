@@ -13,6 +13,10 @@
 <body>
 <%@include file="./WEB-INF/component/header.jsp"%>
 
+<%
+    session.setAttribute("userNo", 1L);
+%>
+
 <div class="container">
     <div class="title">
         <h1>LeafPage</h1>
