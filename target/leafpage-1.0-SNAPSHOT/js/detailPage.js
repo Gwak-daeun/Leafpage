@@ -1,18 +1,10 @@
 
 //클릭으로 탭 메뉴 변경
 $(document).ready(function () {
+  $(".tab-button > li").click(function () {
+    var idx = $(this).index();
 
-    if (errorMsg === "리뷰 삭제에 실패했어요.") {
-        alert(errorMsg);
-    }
-    if (failed === "리뷰 등록에 실패했어요.") {
-        alert(failed);
-    }
-
-    $(".tab-button > li").click(function () {
-        var idx = $(this).index();
-
-        $(this).addClass("on").siblings().removeClass("on");
+    $(this).addClass("on").siblings().removeClass("on");
 
         $(".tabmenu .tab-content")
             .eq(idx)
@@ -21,9 +13,12 @@ $(document).ready(function () {
             .removeClass("on");
     });
 
-
-// $("#emptyH").show();
-// $("#fullH").hide();
+    if (errorMsg === "리뷰 삭제에 실패했어요.") {
+        alert(errorMsg);
+    }
+    if (failed === "리뷰 등록에 실패했어요.") {
+        alert(failed);
+    }
 
 //하트 채워지고 비워지는 기능
 function likeCheck() {
@@ -55,6 +50,7 @@ function likeCheck() {
     $('.starRev span').click(function(){
         $(this).parent().children('span').removeClass('on');
         $(this).addClass('on').prevAll('span').addClass('on');
+        return false;
     });
 
     $('.stars .fa').click(function () {
@@ -148,4 +144,8 @@ function rent(ISBN) {
             console.log('Error: ' + textStatus);
         }
     });
+}
+
+function closeRentalModal() {
+    $('#rental').modal('hide');
 }
