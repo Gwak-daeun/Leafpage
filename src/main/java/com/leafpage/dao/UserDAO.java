@@ -1,7 +1,5 @@
 package com.leafpage.dao;
 
-import com.leafpage.domain.user.Id;
-import com.leafpage.domain.user.Password;
 import com.leafpage.dto.UserDTO;
 import com.leafpage.util.DBUtil;
 import com.leafpage.util.SHA256;
@@ -9,6 +7,7 @@ import com.leafpage.util.SHA256;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -342,4 +341,309 @@ public class UserDAO {
         }
         return -1;  // 데이터베이스 오류
     }
+
+    public List<UserDTO> userList(int pageNum, int amount){
+        List<UserDTO> userDTOList= new ArrayList<>();
+        try {
+            conn = DBUtil.getConnection();
+            String sql = " select U.user_id, U.user_joining_date, U.user_email, U.user_tel, U.user_state " +
+                    "from (SELECT ROW_NUMBER() OVER (ORDER BY user_joining_date) " +
+                    "AS rn, u.user_id, u.user_joining_date, u.user_email, u.user_tel, u.user_state " +
+                    "from users u) U " +
+                    "WHERE rn > ? AND rn <= ?;";
+
+            pstmt  = conn.prepareStatement(sql);
+            pstmt.setInt(1, ((pageNum - 1)* amount));
+            pstmt.setInt(2, (pageNum * amount));
+            rs = pstmt.executeQuery();
+            while (rs.next()){
+                UserDTO UserDTO = new UserDTO();
+                UserDTO.setUserId(rs.getString("user_id"));
+                UserDTO.setUserJoiningDate(rs.getString("user_joining_date"));
+                UserDTO.setUserEmail(rs.getString("user_email"));
+                UserDTO.setUserTel(rs.getString("user_tel"));
+                UserDTO.setUserState(rs.getString("user_state"));
+                userDTOList.add(UserDTO);
+            }
+            DBUtil.close(rs ,pstmt, conn);
+
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return userDTOList;
+
+    }
+
+    public List<UserDTO> userrentelList(int pageNum, int amount){
+        List<UserDTO> userDTOList= new ArrayList<>();
+        try {
+            conn = DBUtil.getConnection();
+            String sql = "SELECT U.user_id, U.user_joining_date, U.user_email, U.user_tel, U.user_state\n" +
+                    "FROM (\n" +
+                    "    SELECT ROW_NUMBER() OVER (ORDER BY COALESCE(rentalcount, 0) DESC) AS rn,\n" +
+                    "           COALESCE(rentalcount, 0) as rentalcount,\n" +
+                    "           user_id,\n" +
+                    "           user_joining_date,\n" +
+                    "           user_email,\n" +
+                    "           user_tel,\n" +
+                    "           user_state\n" +
+                    "    FROM (\n" +
+                    "        SELECT COALESCE(b.rental_count, 0) AS rentalcount,\n" +
+                    "               u.user_id,\n" +
+                    "               u.user_joining_date,\n" +
+                    "               u.user_email,\n" +
+                    "               u.user_tel,\n" +
+                    "               u.user_state\n" +
+                    "        FROM users u\n" +
+                    "        LEFT JOIN (\n" +
+                    "            SELECT user_no, COUNT(*) AS rental_count\n" +
+                    "            FROM book_rental\n" +
+                    "            GROUP BY user_no\n" +
+                    "        ) b ON u.user_no = b.user_no\n" +
+                    "    ) U1\n" +
+                    ") U\n" +
+                    "WHERE rn > ? AND rn <= ?";
+
+            pstmt  = conn.prepareStatement(sql);
+            pstmt.setInt(1, ((pageNum - 1)* amount));
+            pstmt.setInt(2, (pageNum * amount));
+            rs = pstmt.executeQuery();
+            while (rs.next()){
+                UserDTO UserDTO = new UserDTO();
+                UserDTO.setUserId(rs.getString("user_id"));
+                UserDTO.setUserJoiningDate(rs.getString("user_joining_date"));
+                UserDTO.setUserEmail(rs.getString("user_email"));
+                UserDTO.setUserTel(rs.getString("user_tel"));
+                UserDTO.setUserState(rs.getString("user_state"));
+                userDTOList.add(UserDTO);
+            }
+            DBUtil.close(rs ,pstmt, conn);
+
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return userDTOList;
+
+    }
+
+    public int  getTotal(){
+        int result  = 0;
+
+        try {
+            conn = DBUtil.getConnection();
+            String sql = "select count(*) as total from users";
+
+            pstmt = conn.prepareStatement(sql);
+
+            rs = pstmt.executeQuery();
+
+            if(rs.next()) {
+                result = rs.getInt("total");
+            }
+
+            DBUtil.close(rs ,pstmt, conn);
+
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        return result ;
+    }
+
+    public int  stateUpDate(UserDTO dto){
+        int result  = 0;
+        String state = null;
+
+
+        try {
+            conn = DBUtil.getConnection();
+            String sql = "UPDATE users SET user_state = ? WHERE user_id = ?  ";
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, dto.getUserState());
+            pstmt.setString(2,dto.getUserId());
+            pstmt.executeUpdate();
+
+
+
+
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }finally {
+            DBUtil.close(rs ,pstmt, conn);
+        }
+
+        return result ;
+    }
+
+    public int  deletesearchUser(UserDTO dto){
+        int result  = 0;
+        try {
+            conn = DBUtil.getConnection();
+            String sql = "select user_no from users where user_id = ? ";
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1,dto.getUserId());
+                 rs = pstmt.executeQuery();
+                 if(rs.next()) {
+                     dto.setUserNo(rs.getInt("user_no"));
+                 }
+
+
+            deleteLikeyUser(conn,dto);
+            deleteReviewsUser(conn,dto);
+            deleteRentalUser(conn,dto);
+            deleteUser(conn,dto);
+
+
+
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        } finally {
+            DBUtil.close(rs ,pstmt, conn);
+        }
+
+        return result ;
+    }
+
+
+    public void  deleteLikeyUser(Connection conn, UserDTO dto){
+        int result  = 0;
+        try {
+            String sql = "DELETE FROM likey WHERE  user_no = ? ";
+
+                pstmt = this.conn.prepareStatement(sql);
+                pstmt.setInt(1,dto.getUserNo());
+                pstmt.executeUpdate();
+
+
+
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public void  deleteReviewsUser(Connection conn, UserDTO dto){
+        try {
+            this.conn = DBUtil.getConnection();
+            String sql = "DELETE FROM reviews WHERE  user_no = ?";
+
+                pstmt = this.conn.prepareStatement(sql);
+                pstmt.setInt(1,dto.getUserNo());
+                pstmt.executeUpdate();
+
+
+
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public void  deleteRentalUser(Connection conn, UserDTO dto){
+        int result  = 0;
+        try {
+            this.conn = DBUtil.getConnection();
+            String sql = "DELETE FROM book_rental WHERE  user_no = ? ";
+
+                pstmt = this.conn.prepareStatement(sql);
+                pstmt.setInt(1,dto.getUserNo());
+                pstmt.executeUpdate();
+
+
+
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+    }
+    public void  deleteUser(Connection conn, UserDTO dto){
+        int result  = 0;
+        try {
+            this.conn = DBUtil.getConnection();
+            String sql = "DELETE FROM users WHERE  user_no = ? ";
+
+                pstmt = this.conn.prepareStatement(sql);
+                pstmt.setInt(1,dto.getUserNo());
+                pstmt.executeUpdate();
+
+
+
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public List<UserDTO> userSearchList(int pageNum, int amount, String keyword){
+        List<UserDTO> userDTOList= new ArrayList<>();
+        try {
+            conn = DBUtil.getConnection();
+            String sql ="  SELECT B.user_id, B.user_joining_date, B.user_email, B.user_tel, B.user_state" +
+                    " FROM (SELECT ROW_NUMBER() OVER (ORDER BY user_joining_date) AS rn, user_id, user_joining_date, user_email, user_tel, user_state" +
+                    " from users " +
+                    " where concat(user_id, user_email, user_tel) LIKE ? ) B" +
+                    " WHERE rn > ? AND rn <= ? ";
+
+            pstmt  = conn.prepareStatement(sql);
+            pstmt.setString(1, "%" + keyword + "%");
+            pstmt.setInt(2, ((pageNum - 1)* amount));
+            pstmt.setInt(3, (pageNum * amount));
+            rs = pstmt.executeQuery();
+            while (rs.next()){
+                UserDTO UserDTO = new UserDTO();
+                UserDTO.setUserId(rs.getString("user_id"));
+                UserDTO.setUserJoiningDate(rs.getString("user_joining_date"));
+                UserDTO.setUserEmail(rs.getString("user_email"));
+                UserDTO.setUserTel(rs.getString("user_tel"));
+                UserDTO.setUserState(rs.getString("user_state"));
+                userDTOList.add(UserDTO);
+            }
+            DBUtil.close(rs ,pstmt, conn);
+
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return userDTOList;
+
+    }
+
+    public int  getSearchTotal(String keyword){
+        int result  = 0;
+
+        try {
+            conn = DBUtil.getConnection();
+            String sql = "  SELECT count(*) as total" +
+                    " FROM (SELECT ROW_NUMBER() OVER (ORDER BY user_joining_date) AS rn, user_id, user_joining_date, user_email, user_tel, user_state" +
+                    " from users " +
+                    " where concat(user_id, user_email, user_tel) LIKE ? ) B";
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, "%" + keyword + "%");
+
+            rs = pstmt.executeQuery();
+
+            if(rs.next()) {
+                result = rs.getInt("total");
+            }
+
+            DBUtil.close(rs ,pstmt, conn);
+
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        return result ;
+    }
+
 }

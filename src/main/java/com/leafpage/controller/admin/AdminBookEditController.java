@@ -35,7 +35,7 @@ public class AdminBookEditController implements Controller {
         String bookimg = null;
 
 
-        String savePath = "C:\\Users\\user\\Leafpage\\src\\main\\webapp\\image";
+        String savePath = "C:\\Users\\user\\Desktop\\beanstalk\\Leafpage\\src\\main\\webapp\\image";
         String dbPath = "\\image";
 
         int sizeLimit = 1024 * 1024 * 15;

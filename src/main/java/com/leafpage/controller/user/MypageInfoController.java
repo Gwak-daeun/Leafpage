@@ -1,8 +1,8 @@
 package com.leafpage.controller.user;
 
 import com.leafpage.controller.Controller;
-import com.leafpage.dao.LikeyDAO;
-import com.leafpage.dto.BookContentDTO;
+import com.leafpage.dao.BookDAO;
+import com.leafpage.dto.BookDTO;
 import com.leafpage.dto.MypageBooksDTO;
 import com.leafpage.dto.MypageReturnedBooksDTO;
 
@@ -17,31 +17,21 @@ public class MypageInfoController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        ArrayList<MypageBooksDTO> userBooks = new ArrayList<>();
-        ArrayList<MypageReturnedBooksDTO> userReturnedBooks = new ArrayList<>();
-        List<BookContentDTO> bookText = new ArrayList<>();
+        List<MypageBooksDTO> userBooks = new ArrayList<>();
+        List<MypageReturnedBooksDTO> userReturnedBooks = new ArrayList<>();
 
-        LikeyDAO.BookDAO bookDAO = new LikeyDAO.BookDAO();
+        BookDAO bookDAO = new BookDAO();
 
-        int totalRentals = 0;
+        //Todo: 이후 로그인한 유저에서 받아오는 파라미터 값으로 바꿔야 함
+        int userNo = 1;
 
-        userBooks = bookDAO.getUserLendingBook();
+        userBooks = bookDAO.getUserLendingBook(userNo);
 
-        userReturnedBooks = bookDAO.getUserReturnedBook();
+        userReturnedBooks = bookDAO.getUserReturnedBook(userNo);
 
-        totalRentals = bookDAO.getTotalRentals();
+        request.setAttribute("books", userBooks);
 
-        bookText = bookDAO.getLendingBookContent();
-
-        HttpSession session = request.getSession();
-
-        session.setAttribute("books", userBooks);
-
-        session.setAttribute("totalRentals", totalRentals);
-
-        session.setAttribute("userReturnedBooks", userReturnedBooks);
-
-        session.setAttribute("bookText", bookText);
+        request.setAttribute("userReturnedBooks", userReturnedBooks);
 
         return "/user/mypage";
     }

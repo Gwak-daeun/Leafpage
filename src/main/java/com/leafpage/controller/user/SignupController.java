@@ -59,7 +59,6 @@ public class SignupController implements Controller {
         UserDAO userDAO = new UserDAO();
         UserDTO userDTO = new UserDTO();
 
-
         if (isDuplicateId(userId)) {
             jsonResponse.put("duplicateIdError", "이미 가입된 아이디가 있습니다.");
         } else if (isDuplicatedTel(userTel)) {

@@ -45,6 +45,4 @@ public class Id {
         Matcher matcher = pattern.matcher(userId);
         return !matcher.matches();
     }
-
-
 }

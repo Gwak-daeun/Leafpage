@@ -3,8 +3,8 @@ package com.leafpage.dto;
 import com.leafpage.domain.user.*;
 import lombok.*;
 
-@Setter
 @Getter
+@Setter
 public class UserDTO {
     private int userNo;
     private Id userId;
@@ -74,4 +74,6 @@ public class UserDTO {
     public void setUserRole(String userRole) {
         this.userRole = new Role(userRole);
     }
+
+
 }

@@ -3,12 +3,9 @@ package com.leafpage.dto;
 import lombok.*;
 
 
-@Setter
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
-public class LikeyDTO {
+@Setter
+public class LeeLikeyDTO {
     Long userNo;
     String ISBN;
-
 }

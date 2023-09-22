@@ -52,5 +52,4 @@ public class Email {
         Matcher matcher = pattern.matcher(userEmail);
         return !matcher.matches();
     }
-
 }

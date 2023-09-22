@@ -1,8 +1,11 @@
 package com.leafpage.controller;
 
-import javax.servlet.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 // DispatcherServlet : 브라우저의 모든 요청(*.do)을 받는 프런트 컨트롤러
@@ -25,7 +28,14 @@ public class DispatcherServlet extends HttpServlet {
         Controller ctrl = handlerMapping.getController(path);
 
         String viewName = ctrl.handleRequest(request, response);
+
+        if (viewName.equals("none")) {
+            return;
+        }
+
         String view = viewResolver.getView(viewName);
+        System.out.println(view);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher(view);
         dispatcher.forward(request, response);
     }
