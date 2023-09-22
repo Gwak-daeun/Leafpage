@@ -22,18 +22,16 @@ public class MypageInfoController implements Controller {
 
         BookDAO bookDAO = new BookDAO();
 
+        //Todo: 이후 로그인한 유저에서 받아오는 파라미터 값으로 바꿔야 함
         int userNo = 1;
 
         userBooks = bookDAO.getUserLendingBook(userNo);
 
         userReturnedBooks = bookDAO.getUserReturnedBook(userNo);
 
+        request.setAttribute("books", userBooks);
 
-        HttpSession session = request.getSession();
-
-        session.setAttribute("books", userBooks);
-
-        session.setAttribute("userReturnedBooks", userReturnedBooks);
+        request.setAttribute("userReturnedBooks", userReturnedBooks);
 
         return "/user/mypage";
     }

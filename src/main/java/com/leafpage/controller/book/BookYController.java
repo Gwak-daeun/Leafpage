@@ -2,7 +2,6 @@ package com.leafpage.controller.book;
 
 import com.leafpage.controller.Controller;
 import com.leafpage.dao.BookDAO;
-import com.leafpage.dao.LikeyDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
