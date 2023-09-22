@@ -42,8 +42,6 @@ public class RentalController implements Controller {
         } else {
             log.debug("도서 대여 시작");
             rentalDAO.rentBook(dto);
-            BookDAO bookDAO = new BookDAO();
-            bookDAO.increaseView(isbn);
         }
         writer.close();
 
