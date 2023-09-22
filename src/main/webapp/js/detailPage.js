@@ -148,3 +148,7 @@ function rent(ISBN) {
         }
     });
 }
+
+function closeRentalModal() {
+    $('#rental').modal('hide');
+}

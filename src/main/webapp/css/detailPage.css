@@ -118,7 +118,7 @@ section {
     height: 450px;
 }
 
-.rental {
+.rental, .my-page {
     background-color: #066466;
     color: white;
     &:hover {
@@ -127,7 +127,7 @@ section {
     }
 }
 
-.preview {
+.preview, .close {
     background-color: #468B8C;
     color: white;
     &:hover {
