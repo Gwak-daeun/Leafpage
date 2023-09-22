@@ -28,7 +28,7 @@
     <c:set var="errorMsg" value="${errorMsg}"/>
     <c:set var="failed" value="${failed}"/>
     <div class="inline">
-        <div class="mg">
+        <div class="mg big-book">
             <img src="image/bookcover.png" class="imgstyle">
             <div class="center">
                 <span class="inline">${bookDetail.bookName}</span>
@@ -53,9 +53,9 @@
         <div class="tabmenu">
             <ul class="tab-button">
                 <li class="on"><a href="#">책 소개</a></li>
-                <li><a href="#">목차 소개</a></li>
-                <li><a href="#">리뷰</a></li>
-                <li><a href="#">저자의 책</a></li>
+                <li><a href="">목차 소개</a></li>
+                <li><a href="">리뷰</a></li>
+                <li><a href="">저자의 책</a></li>
             </ul>
             <div class="tab-content on">
                 <div class="contexth">
@@ -99,7 +99,6 @@
                                         </div>
 
                                         <div class="col-3 text-right">
-<%--                                            <c:set var="reviewNo" value="${review.review_no}"/>--%>
                                             <a onclick="return confirm('삭제하시겠습니까?')" href="/removeReview.do?reviewNo=${review.reviewNo}">삭제</a>
                                         </div>
                                     </div>
@@ -117,23 +116,6 @@
     </div>
 </section>
 
-<!-- <div class="modal fade show" id="rental" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div>
-                    <h3 class="modal-title" id="modal">대여에 성공했습니다!</h3>
-                    <p>대여기간 2023-09-28</p>
-                </div>
-
-                <div>
-                    <button class="btn rental">바로보기</button>
-                    <button class="btn preview"><a href="">도서목록</a></button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 <div class="modal fade show" id="rental" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content"> <!--모달 안에 들어가 있는 내용 정의-->

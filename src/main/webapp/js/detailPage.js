@@ -1,8 +1,8 @@
 
 //클릭으로 탭 메뉴 변경
 $(document).ready(function () {
-  $(".tab-button > li").click(function () {
-    console.log("dhfsldkjfs");
+  $(".tab-button > li").click(function (e) {
+      e.preventDefault();
     var idx = $(this).index();
 
     $(this).addClass("on").siblings().removeClass("on");
@@ -12,6 +12,7 @@ $(document).ready(function () {
       .addClass("on")
       .siblings(".tab-content")
       .removeClass("on");
+
   })
 });
 

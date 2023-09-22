@@ -98,7 +98,7 @@ h2 {
 }
 
 .inline {
-    display: inline-block;
+    display: inline-flex;
 }
 
 .mg {
@@ -136,6 +136,10 @@ a {
 }
 
 /*========================================*/
+
+.big-book {
+    width: 400px;
+}
 
 .container {
     display: flex;
@@ -288,7 +292,7 @@ a {
 }
 
 .starR{
-    display: inline-block;
+    display: inline-flex;
     width: 30px;
     height: 30px;
     color: transparent;
