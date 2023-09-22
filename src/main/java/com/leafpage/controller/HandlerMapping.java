@@ -55,6 +55,7 @@ public class HandlerMapping {
 
         mappings.put("/rentBook.do", new RentalController());
         mappings.put("/returnBook.do", new ReturnController());
+        mappings.put("/notFoundPageView.do", new NotFoundPageViewController());
     }
 
     public Controller getController(String path) {

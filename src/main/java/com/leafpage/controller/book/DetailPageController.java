@@ -18,7 +18,7 @@ public class DetailPageController implements Controller {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         HttpSession session = request.getSession();
-        long userNo = (long) session.getAttribute("userNo");
+        Long userNo = (Long) session.getAttribute("userNo");
         System.out.println("userNo"+userNo);
         String isbn = request.getParameter("isbn");
 
@@ -35,6 +35,10 @@ public class DetailPageController implements Controller {
 
 
         BookDTO bookDetail = bookDAO.getBookDetails(isbn);
+
+        if (bookDetail.getISBN() == null) {
+            return "notFoundPageView.do";
+        }
 
         request.setAttribute("bookDetail", bookDetail);
 

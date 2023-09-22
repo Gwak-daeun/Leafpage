@@ -4,7 +4,7 @@
 <header>
     <nav class="navbar index-nav">
         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1"><img src="css/icons/nest_eco_leaf.png" onclick="location.href='index.jsp'"/> </span>
+            <span class="navbar-brand mb-0 h1"><img src="css/icons/nest_eco_leaf.png" onclick="location.href='/indexInfo.do'"/> </span>
             <span>
                 <c:if test="${userId != null}">
                     <span>${userId}님, 환영합니다.</span>
