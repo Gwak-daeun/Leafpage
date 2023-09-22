@@ -67,18 +67,8 @@ li{
     color: white;
 }
 
-.btn1{
-    background-color: #71CB9F;
-    border-radius: 5px;
-    border-color: transparent;
-    margin-right: 8px;
-}
-
-.btn2 {
-    background-color: #FDF3A7;
-    border-radius: 5px;
-    border-color: transparent;
-    margin-right: 5px;
+.btn {
+    margin-right: 7px;
 }
 
 a {
@@ -146,6 +136,11 @@ section {
     }
 }
 
+img {
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
 .center {
     justify-content: center;
     align-items: center;
@@ -172,10 +167,10 @@ h2 {
     transform:translate(-50%,-30%);
 }
 
-/* :root {
-    --window-width : 100vh;
-
-} */
+.small {
+    font-size: 13px;
+    margin-bottom: 7px;
+}
 
 .button {
     width: 100px;
@@ -196,9 +191,9 @@ a {
 
 /*========================================*/
 
-.big-book {
-    width: 400px;
-}
+/*.big-book {*/
+/*    width: 300px;*/
+/*}*/
 
 .container {
     display: flex;
@@ -275,10 +270,18 @@ a {
     align-items: center;
 }
 
+.form-control {
+    width: 300px;
+    height: 6.25em;
+    resize: none;
+}
+
 .form-footer button:nth-child(1) {
+    margin-top: 8px;
     margin-right: 20px;
 }
 .form-footer button:nth-child(2) {
+    margin-top: 8px;
     margin-left: 20px;
 }
 
@@ -403,6 +406,7 @@ a {
     .bottom-mg button {        
         height: 30px;
         font-size: 12px;
+        margin-right: 10px;
     }
 
     .inline {
@@ -414,6 +418,8 @@ a {
         margin-top: 10px;
         margin-bottom: 50px;
     }
+
+
     
 
     .container {
