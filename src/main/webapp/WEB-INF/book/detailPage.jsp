@@ -137,11 +137,13 @@
                     <ul class="book-ul ">
                         <c:forEach var="sameAuthorBook" items="${sameAuthorBooks}">
                             <li data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                <div class="book-list">
-                                    <img class="book-cover" src="${sameAuthorBook.bookImg}" />
-                                    <div class="book-title">${sameAuthorBook.bookName}</div>
-                                    <div class="book-author"> ${sameAuthorBook.bookPublisherName}</div>
-                                </div>
+                                <a href="/detailPageView.do?isbn=${sameAuthorBook.ISBN}">
+                                    <div class="book-list">
+                                        <img class="book-cover" src="${sameAuthorBook.bookImg}" />
+                                        <div class="book-title">${sameAuthorBook.bookName}</div>
+                                        <div class="book-author"> ${sameAuthorBook.bookPublisherName}</div>
+                                    </div>
+                                </a>
                             </li>
                         </c:forEach>
                     </ul>

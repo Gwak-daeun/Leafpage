@@ -21,6 +21,11 @@ body {
     font-family: 'Noto Sans KR', sans-serif;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
 .container-fluid{
     top: 50%;
     margin-top: -5px;
