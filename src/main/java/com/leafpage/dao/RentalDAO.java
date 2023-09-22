@@ -25,6 +25,9 @@ public class RentalDAO {
             "INSERT INTO book_rental(USER_NO, ISBN, RENTAL_DATE, SCHEDULED_RETURN_DATE) " +
                     "VALUES(?, ?, CURRENT_DATE, DATE_ADD(CURRENT_DATE, INTERVAL 6 DAY))";
 
+    private static final String UPDATE_INCREASE_VIEW_COUNT =
+            "UPDATE books SET book_views = book_views + 1 WHERE ISBN = ?";
+
     private static final String SELECT_NOT_YET_RETURNED_BOOK =
             "SELECT ACTUAL_RETURN_DATE " +
                     "FROM book_rental " +
@@ -45,6 +48,8 @@ public class RentalDAO {
             statement.executeUpdate();
             log.debug("{}", statement);
 
+            increaseView(dto.getIsbn());
+
             connection.commit();
         } catch (SQLException e) {
             String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
@@ -52,6 +57,13 @@ public class RentalDAO {
         } finally {
             DBUtil.close(resultSet, statement, connection);
         }
+    }
+
+    private void increaseView(String isbn) throws SQLException {
+        statement = connection.prepareStatement(UPDATE_INCREASE_VIEW_COUNT);
+        statement.setString(1, isbn);
+        statement.executeUpdate();
+        log.debug("{}", statement);
     }
 
     public int findRentalCount(RentalDTO dto) {

@@ -515,20 +515,4 @@ public class BookDAO {
         return mainBooks;
 
     }
-
-    public void increaseView(String isbn) {
-        String SQL = "UPDATE books SET book_views = book_views + 1 WHERE ISBN = ?";
-
-        try {
-            conn = DBUtil.getConnection();
-            pstmt = conn.prepareStatement(SQL);
-            pstmt.setString(1, isbn);
-            pstmt.executeUpdate();
-            System.out.println(pstmt);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBUtil.close(rs, pstmt, conn);
-        }
-    }
 }
