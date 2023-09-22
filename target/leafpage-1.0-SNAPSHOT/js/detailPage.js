@@ -1,3 +1,4 @@
+//클릭으로 탭 메뉴 변경
 $(document).ready(function () {
 
     if (errorMsg === "리뷰 삭제에 실패했어요.") {
@@ -6,19 +7,6 @@ $(document).ready(function () {
     if (failed === "리뷰 등록에 실패했어요.") {
         alert(failed);
     }
-
-    /*emptyH을 클릭했을 때 fullH를 보여줌*/
-    $("#emptyH").click(function(){
-        $("#emptyH").hide();
-        $("#fullH").show();
-    });
-
-    /*fullH를 클릭했을 때 emptyH을 보여줌*/
-    $("#fullH").click(function(){
-        $("#emptyH").show();
-        $("#fullH").hide();
-    });
-
 
     $(".tab-button > li").click(function () {
         var idx = $(this).index();
@@ -33,10 +21,25 @@ $(document).ready(function () {
     });
 
 
+    //하트 채워지고 비워지는 기능
+    /*emptyH을 클릭했을 때 fullH를 보여줌*/
+    $("#emptyH").click(function(){
+        $("#emptyH").hide();
+        $("#fullH").show();
+    });
+
+    /*fullH를 클릭했을 때 emptyH을 보여줌*/
+    $("#fullH").click(function(){
+        $("#emptyH").show();
+        $("#fullH").hide();
+    });
+
+
 //별점 표시
     $('.starRev span').click(function(){
         $(this).parent().children('span').removeClass('on');
         $(this).addClass('on').prevAll('span').addClass('on');
+        return false;
     });
 
     $('.stars .fa').click(function () {
@@ -89,6 +92,7 @@ $(document).ready(function () {
 
     });
 
+
     $('.rental').click(function () {
         let now = new Date();
         let scheduledReturnDate = new Date(now.setDate(now.getDate() + 7));
@@ -99,6 +103,7 @@ $(document).ready(function () {
 
         $('.scheduled-return-date').text(`대여기한 : ${year}-${month}-${date}`);
     });
+
 
 });
 
