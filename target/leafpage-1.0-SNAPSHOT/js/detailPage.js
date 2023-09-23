@@ -20,22 +20,6 @@ $(document).ready(function () {
         alert(failed);
     }
 
-//하트 채워지고 비워지는 기능
-function likeCheck() {
-
-    /*웹페이지 열었을 때*/
-    $.ajax({
-        url: "LikeHeart.do",
-        type: 'POST',
-        async: true,
-        dataType: 'text',
-        data: {
-            userNo: '1',
-            isbn: '040501813854',
-        },
-        success: function (data) {
-            console.log(data);
-
 
     //별점 표시
     $('.starRev span').click(function(){
@@ -110,7 +94,7 @@ function likeCheck() {
 });
 
 //하트 채워지고 비워지는 기능
-function likeCheck() {
+function likeCheck(userNo, isbn) {
 
     /*웹페이지 열었을 때*/
     $.ajax({
@@ -119,8 +103,8 @@ function likeCheck() {
         async: true,
         dataType: 'text',
         data: {
-            userNo: '4',
-            isbn: '040501813854',
+            userNo: userNo,
+            isbn: isbn,
         },
         success: function (data) {
             console.log(data);

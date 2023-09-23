@@ -31,10 +31,10 @@
                     <button class="btn preview">미리보기</button>   <%-- 로그인 해야 볼 수 있음--%>
 
                     <c:if test="${heartSelect == 1}">
-                        <img id="fullH" style="width: 20px; height: 20px; margin-left: 5px;" src="../../css/icons/full.png" onclick="likeCheck()">
+                        <img id="fullH" style="width: 20px; margin-left: 5px;" src="../../css/icons/full.png" onclick="likeCheck(${userNo}, ${bookDetail.ISBN})">
                     </c:if>
                     <c:if test="${heartSelect == 0}">
-                        <img id="emptyH" style="width: 20px; height: 20px; margin-left: 5px;" src="<c:url value="/css/icons/empty.png"/>" onclick="likeCheck()">
+                        <img id="emptyH" style="width: 20px; margin-left: 5px;" src="<c:url value="/css/icons/empty.png"/>" onclick="likeCheck(${userNo}, ${bookDetail.ISBN})">
                     </c:if>
                     <span style="margin-top: 10px">${ heartCount }</span>
 
@@ -110,7 +110,6 @@
                                     </div>
                                 </a>
                             </li>
-
                         </c:forEach>
                     </ul>
                 </div>
@@ -123,7 +122,7 @@
         <div class="modal-content"> <!--모달 안에 들어가 있는 내용 정의-->
             <div class="modal-body">
                 <div class="form-group">
-                    <h3 class="modal-title" id="modal">대여에 성공했습니다!</h3>
+                    <h3 class="modal-title">대여에 성공했습니다!</h3>
                     <p class="scheduled-return-date"></p>
                 </div>
 
@@ -140,7 +139,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal">리뷰 작성</h5>
+                <h5 class="modal-title">리뷰 작성</h5>
             </div>
             <div class="modal-body">
 
