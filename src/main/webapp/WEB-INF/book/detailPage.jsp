@@ -31,10 +31,10 @@
                     <button class="btn preview">미리보기</button>   <%-- 로그인 해야 볼 수 있음--%>
 
                     <c:if test="${heartSelect == 1}">
-                        <img id="fullH" style="width: 20px; height: 20px; margin-left: 5px;" src="../../css/icons/full.png" onclick="likeCheck()">
+                        <img id="fullH" style="width: 20px; height: 20px; margin-left: 5px; cursor: pointer;" src="../../css/icons/full.png" onclick="likeCheck()">
                     </c:if>
                     <c:if test="${heartSelect == 0}">
-                        <img id="emptyH" style="width: 20px; height: 20px; margin-left: 5px;" src="<c:url value="/css/icons/empty.png"/>" onclick="likeCheck()">
+                        <img id="emptyH" style="width: 20px; height: 20px; margin-left: 5px; cursor: pointer;" src="<c:url value="/css/icons/empty.png"/>" onclick="likeCheck()">
                     </c:if>
                     <span style="margin-top: 10px">${ heartCount }</span>
 

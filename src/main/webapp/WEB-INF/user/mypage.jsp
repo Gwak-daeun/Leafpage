@@ -40,6 +40,34 @@
 
         <div class="bottom_content on">
             <ul class="flex rent_book">
+
+                <li class="listH">
+                    <div class="card">
+                        <img src="image/마주.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">dfsdfsdfsf</h5>
+                            <p class="card-author">dfsdfsdfsf</p>
+                            <p class="card-period">반납일 : dfsdfsdfsf</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn1 btn-sm">
+                        반납하기
+                    </button>
+                </li>
+                <li class="listH">
+                    <div class="card">
+                        <img src="image/마주.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">dfsdfsdfsf</h5>
+                            <p class="card-author">dfsdfsdfsf</p>
+                            <p class="card-period">반납일 : dfsdfsdfsf</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn1 btn-sm">
+                        반납하기
+                    </button>
+                </li>
+
                <c:forEach var="book" items="${books}" begin="0" end="4" step="1" >
                    <li id="bookLi" >
                        <div onclick="openViewer(${book.rentalNo}, ${book.scrollY}, ${book.modalWidth})" class="card" >
