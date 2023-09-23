@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="/css/admin-page-style.css" />
 </head>
 <body>
+<input type="hidden" id="msg" value="${msg}">
   <aside>
     <aside class="side-bar">
       <ul>

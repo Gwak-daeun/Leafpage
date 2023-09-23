@@ -18,12 +18,26 @@ public class CheckEmailController implements Controller {
 
         HttpSession session = request.getSession();
         String userId  = (String)session.getAttribute("userId");
+        if(userId == null) {
+            userId = (String) session.getAttribute("inactiveIdForActive");
+            System.out.println("check:"+userId);
+        }
 
         UserDAO userDAO = new UserDAO();
         String userEmail = userDAO.getUserEmail(userId);
         boolean isRight = new SHA256().getSHA256(userEmail).equals(code);
         if (isRight) {
             userDAO.setUserEmailChecked(userId);
+            if(session.getAttribute("inactiveIdForActive") != null) {
+                int userInactive = userDAO.setUserStateInactive(userId, "일반회원");
+                if (userInactive == 1) {
+                    session.setAttribute("msg", "휴면상태가 정상적으로 해제되었습니다. 다시 로그인하여 주십시오.");
+                    return "loginView.do";
+                } else {
+                    session.setAttribute("msg", "[Error] 휴면상태 해제 중 오류가 발생하였습니다.");
+                    return "index";
+                }
+            }
             session.setAttribute("userEmailChecked", userDAO.getUserEmailChecked(userId));
             return "successEmailCheckView.do";
         } else {
