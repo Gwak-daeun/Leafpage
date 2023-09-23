@@ -7,7 +7,7 @@ $(document).ready(function () {
 
     $(window).scroll(function () {
 
-        console.log("page : ", page);
+        console.log("현재 offset : ", page, ", 브라우저 page : ", curPage);
 
         let scrollTop = $(window).scrollTop();
         let windowsHeight = $(window).height();
@@ -15,12 +15,12 @@ $(document).ready(function () {
         let isBottom = scrollTop + windowsHeight + 10 >= documentHeight;
 
         if(isBottom) {
-            console.log("바닥이야");
-            if (curPage >= page) {
-                console.log("안해");
+            console.log("y축 바닥에 도달함");
+            if (curPage >= page){
+                console.log("이미 db의 데이터를 다 뿌린 상태. 데이터 요청하지 않음")
                 return false;
             } else {
-                console.log("작동해");
+                console.log("스크롤 데이터 요청");
                 curPage += 12;
                 loadMoreData();
             }
@@ -52,7 +52,6 @@ function loadMoreData() {
             console.log("성공 : " , data.books);
 
             if (data.books.length > 0) {
-                console.log("작동 확인");
                 // 데이터를 HTML에 추가
                 const $dataList = $('#searchResultUl');
                 data.books.forEach(item => {

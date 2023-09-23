@@ -32,8 +32,6 @@ public class SearchController implements Controller {
 
         request.setAttribute("page", 12);
 
-        System.out.println("SEARCH TO RESULT : " + books);
-
         return "book/searchResult";
     }
 }

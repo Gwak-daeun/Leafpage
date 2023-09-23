@@ -340,8 +340,6 @@ public class BookDAO {
             pstmt.setString(1, authorName);
             rs = pstmt.executeQuery();
 
-
-
             while (rs.next()) {
                 BookDTO sameAuthorBook = new BookDTO();
                 sameAuthorBook.setBookName(rs.getString("book_name"));
@@ -474,7 +472,7 @@ public class BookDAO {
             pstmt.setInt(1, modalY);
             pstmt.setInt(2, modalWidth);
             pstmt.setInt(3, rentalNo);
-            System.out.println("CHECK SAVE Y : " + pstmt);
+            log.debug("CHECK SAVE Y : {} " + pstmt);
             return pstmt.executeUpdate();
 
         } catch (Exception e) {
@@ -547,7 +545,6 @@ public class BookDAO {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
             pstmt.setString(1, "%" + searchKeyword + "%");
-//            System.out.println("CHECK SEARCH QUERY : " + pstmt);
             log.debug("CHECK SEARCH QUERY : {}", pstmt);
             rs = pstmt.executeQuery();
 
@@ -597,9 +594,6 @@ public class BookDAO {
             else  {
                 SQL += SQLDate;
             }
-//            if (sortWord.equals("최신순")) {
-//                SQL += SQLDate;
-//            }
         }
         if (searchSelect.equals("제목")) {
 
@@ -656,7 +650,7 @@ public class BookDAO {
 //                pstmt.setInt(4, pageNum);
             }
 
-            System.out.println("CHECK SEARCH RESULT QUERY : " + pstmt);
+            log.debug("CHECK SEARCH RESULT QUERY : {} " + pstmt);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -673,7 +667,7 @@ public class BookDAO {
         } finally {
             DBUtil.close(rs, pstmt, conn);
         }
-        System.out.println("END OF SORT : " + books);
+        log.debug("END OF SORT : {} " + books);
         return books;
     }
 }

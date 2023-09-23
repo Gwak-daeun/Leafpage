@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.leafpage.controller.Controller;
 import com.leafpage.dao.BookDAO;
 import com.leafpage.dto.BookDTO;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 public class BookScrollController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -46,14 +48,9 @@ public class BookScrollController implements Controller {
 
         }
 
-        System.out.println("CHECK SORTWORD : " + sortWord);
-        System.out.println("CHECK SEARCH RESULT PAGE : " + pageNum);
+        log.debug("CHECK SCOLL PAGE : {} " + pageNum);
 
         List<BookDTO> books = new BookDAO().sortBooks(sortWord, searchSelect, searchKeyword, genre, pageNum);
-
-//        request.setAttribute("page", pageNum + 12);
-
-        System.out.println("CHECK CHECK CHECK : " + books);
 
         request.setAttribute("books", books);
 
