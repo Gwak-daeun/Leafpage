@@ -29,20 +29,34 @@ public class SearchResultSortController implements Controller {
 
         String page = "0";
 
+        int pageNum = 0;
+
         if (request.getParameter("page") != null) {
             page = request.getParameter("page");
-            request.setAttribute("page", page);
+
+            try {
+                pageNum = Integer.parseInt(page) + 12;
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+
         }
 
-        System.out.println("CHECK SORTWORD : " + sortWord);
+        System.out.println("CHECK SEARCH RESULT PAGE : " + page);
 
-        List<BookDTO> books = new BookDAO().SortBooks(sortWord, searchSelect, searchKeyword, genre, page);
+        List<BookDTO> books = new BookDAO().sortBooks(sortWord, searchSelect, searchKeyword, genre, pageNum);
+
+        request.setAttribute("page", pageNum + 12);
 
         request.setAttribute("books", books);
 
         request.setAttribute("searchSelect", searchSelect);
 
         request.setAttribute("sortWord", sortWord);
+
+        request.setAttribute("searchKeyword", searchKeyword);
+
+        response.setContentType("application/json");
 
         return "book/searchResult";
     }

@@ -18,15 +18,19 @@ public class SearchController implements Controller {
 
         String searchKeyword = request.getParameter("searchKeyword");
 
+        String page = "0";
+
         System.out.println("CHECK KEYWORDS: " + searchSelect + searchKeyword);
 
-        List<BookDTO> books = new BookDAO().searchBooks(searchSelect, searchKeyword);
+        List<BookDTO> books = new BookDAO().searchBooks(searchSelect, searchKeyword, page);
 
         request.setAttribute("books", books);
 
         request.setAttribute("searchSelect", searchSelect);
 
         request.setAttribute("searchKeyword", searchKeyword);
+
+        request.setAttribute("page", 12);
 
         System.out.println("SEARCH TO RESULT : " + books);
 

@@ -4,6 +4,7 @@ import com.leafpage.dto.BookDTO;
 import com.leafpage.dto.MypageBooksDTO;
 import com.leafpage.dto.MypageReturnedBooksDTO;
 import com.leafpage.util.DBUtil;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -13,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public class BookDAO {
     PreparedStatement pstmt = null;
     ResultSet rs = null;
@@ -518,42 +520,35 @@ public class BookDAO {
 
     }
 
-    public List<BookDTO> searchBooks(String searchSelect, String searchKeyword) {
+    public List<BookDTO> searchBooks(String searchSelect, String searchKeyword, String page) {
 
         List<BookDTO> books = new ArrayList<>();
 
-        String SQL = "";
+        String SQL = "select ISBN, book_name, book_img, book_author_name, book_views, book_upload_date\n" +
+                "from books\n" +
+                "where book_state = 0\n";
 
         if (searchSelect.equals("출판사")) {
-            SQL = "select ISBN, book_name, book_img, book_publisher_name\n" +
-                    "from books\n" +
-                    "where book_publisher_name LIKE ?\n" +
-                    "and book_state = 0;";
+            SQL += " and book_publisher_name LIKE ?";
         }
         if (searchSelect.equals("제목")) {
-            SQL = "select ISBN, book_name, book_img, book_publisher_name\n" +
-                    "from books\n" +
-                    "where book_name LIKE ?\n" +
-                    "and book_state = 0;";
+            SQL += " and book_name LIKE ?";
         }
         if (searchSelect.equals("작가")) {
-            SQL = "select ISBN, book_name, book_img, book_publisher_name\n" +
-                    "from books\n" +
-                    "where book_author_name LIKE ?\n" +
-                    "and book_state = 0;";
+            SQL += " and book_author_name LIKE ?";
         }
         if (searchSelect.equals("전체")) {
-            SQL = "select ISBN, book_name, book_img, book_publisher_name\n" +
-                    "from books\n" +
-                    "where concat(book_publisher_name, book_name, book_author_name) LIKE ?\n" +
-                    "and book_state = 0;";
+            SQL += " and concat(book_publisher_name, book_name, book_author_name) LIKE ?";
         }
+
+        SQL += " order by book_upload_date desc limit 12 offset 0;";
 
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
             pstmt.setString(1, "%" + searchKeyword + "%");
-            System.out.println("CHECK SEARCH QUERY : " + pstmt);
+//            System.out.println("CHECK SEARCH QUERY : " + pstmt);
+            log.debug("CHECK SEARCH QUERY : {}", pstmt);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -561,7 +556,7 @@ public class BookDAO {
                 bookDTO.setISBN(rs.getString("ISBN"));
                 bookDTO.setBookName(rs.getString("book_name"));
                 bookDTO.setBookImg(rs.getString("book_img"));
-                bookDTO.setBookPublisherName(rs.getString("book_publisher_name"));
+                bookDTO.setBookAuthorName(rs.getString("book_author_name"));
                 books.add(bookDTO);
             }
 
@@ -574,15 +569,19 @@ public class BookDAO {
         return books;
     }
 
-    public List<BookDTO> SortBooks(String sortWord, String searchSelect, String searchKeyword, String genre, String page) {
+    public List<BookDTO> sortBooks(String sortWord, String searchSelect, String searchKeyword, String genre, int page) {
 
         List<BookDTO> books = new ArrayList<>();
 
-        String SQL = "select books.ISBN, book_name, book_img, book_publisher_name\n" +
+        String SQL = "select distinct books.ISBN, book_name, book_img, book_author_name, book_views, book_upload_date\n" +
                 "from books\n" +
                 "join book_category\n" +
                 "on book_category.ISBN = books.ISBN\n" +
                 "where book_state = 0 \n";
+
+        String SQLView = "order by book_views desc ";
+
+        String SQLDate = "order by book_upload_date desc ";
 
         if (!genre.isEmpty()) {
             SQL += "and book_category.category_name LIKE ?";
@@ -590,64 +589,56 @@ public class BookDAO {
 
         if (searchSelect.equals("출판사")) {
 
-            SQL += "and book_publisher_name LIKE ?\n";
+            SQL += "and book_publisher_name LIKE ? ";
 
             if (sortWord.equals("인기순")) {
-                SQL += "order by book_views desc\n";
+                SQL += SQLView;
             }
-            if (sortWord.equals("최신순")) {
-                SQL += "order by book_upload_date desc\n";
+            else  {
+                SQL += SQLDate;
             }
+//            if (sortWord.equals("최신순")) {
+//                SQL += SQLDate;
+//            }
         }
         if (searchSelect.equals("제목")) {
 
-            SQL += "and book_name LIKE ?\n";
+            SQL += "and book_name LIKE ? ";
 
             if (sortWord.equals("인기순")) {
-                SQL += "order by book_views desc\n";
+                SQL += SQLView;
             }
-            if (sortWord.equals("최신순")) {
-                SQL += "order by book_upload_date desc\n";
+            else {
+                SQL += SQLDate;
             }
         }
         if (searchSelect.equals("작가")) {
 
-            SQL += "and book_author_name LIKE ?\n";
+            SQL += "and book_author_name LIKE ? ";
 
             if (sortWord.equals("인기순")) {
-                SQL += "order by book_views desc\n";
+                SQL += SQLView;
             }
-            if (sortWord.equals("최신순")) {
-                SQL += "order by book_upload_date desc\n";
+            else {
+                SQL += SQLDate;
             }
         }
         if (searchSelect.equals("전체")) {
 
-            SQL += "and concat(book_publisher_name, book_name, book_author_name) LIKE ?\n";
+            SQL += "and concat(book_publisher_name, book_name, book_author_name) LIKE ? ";
 
             if (sortWord.equals("인기순")) {
-                System.out.println("CHECK CHECK");
-                SQL += "order by book_views desc\n";
+                SQL += SQLView;
             }
-            if (sortWord.equals("최신순")) {
-                SQL += "order by book_upload_date desc\n";
+            else {
+                SQL += SQLDate;
             }
         }
 
-        SQL += "limit ?, ?;";
+        SQL += "limit 12 offset ?;";
 
-        int pageNum = 0;
 
-        try {
-            pageNum = Integer.parseInt(page);
-            // pageNum을 사용한 나머지 코드
-        } catch (NumberFormatException e) {
-            // 예외 처리 코드
-            e.printStackTrace(); // 예외 정보 출력
-            // 또는 다른 대체 처리
-        }
-
-        System.out.println("CHECK PAGE NUM : " + pageNum);
+        System.out.println("CHECK PAGE NUM : " + page);
 
         try {
             conn = DBUtil.getConnection();
@@ -655,17 +646,17 @@ public class BookDAO {
 
             if (genre.isEmpty()){
                 pstmt.setString(1, "%" + searchKeyword + "%");
-                pstmt.setInt(2, pageNum);
-                pstmt.setInt(3, pageNum + 12);
+                pstmt.setInt(2, page);
+//                pstmt.setInt(3, pageNum);
             }
             if (!genre.isEmpty()) {
                 pstmt.setString(1, "%" + genre + "%");
                 pstmt.setString(2, "%" + searchKeyword + "%");
-                pstmt.setInt(3, pageNum);
-                pstmt.setInt(4, pageNum + 12);
+                pstmt.setInt(3, page);
+//                pstmt.setInt(4, pageNum);
             }
 
-            System.out.println("CHECK SEARCH QUERY : " + pstmt);
+            System.out.println("CHECK SEARCH RESULT QUERY : " + pstmt);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -673,7 +664,7 @@ public class BookDAO {
                 bookDTO.setISBN(rs.getString("ISBN"));
                 bookDTO.setBookName(rs.getString("book_name"));
                 bookDTO.setBookImg(rs.getString("book_img"));
-                bookDTO.setBookPublisherName(rs.getString("book_publisher_name"));
+                bookDTO.setBookAuthorName(rs.getString("book_author_name"));
                 books.add(bookDTO);
             }
 
@@ -682,8 +673,7 @@ public class BookDAO {
         } finally {
             DBUtil.close(rs, pstmt, conn);
         }
-
-
+        System.out.println("END OF SORT : " + books);
         return books;
     }
 }

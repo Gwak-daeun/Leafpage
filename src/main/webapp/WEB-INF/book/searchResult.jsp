@@ -47,7 +47,7 @@
             <li><a href="/sortBooks.do?sortWord=최신순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=학술논문">학술논문</a></li>
         </ul>
     </div>
-    <div class="book-box">
+    <div id="book-box" class="book-box">
         <ul id="searchResultUl" class="book-ul list-group list-group-horizontal">
             <c:forEach var="searchBook" items="${books}">
                 <li>
@@ -59,19 +59,22 @@
                         </div>
                     </a>
                 </li>
-
             </c:forEach>
-
-
         </ul>
+        <div class="d-flex justify-content-center">
+            <div id="spinner" class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
     </div>
+
 </div>
 
 <script>
     let searchKeyword = "${searchKeyword}";
     let searchSelect = "${searchSelect}";
     let genre = "${genre}";
-    let page = "${page}";
+    let page = ${page};
     let sortWord = "${sortWord}";
 </script>
 
