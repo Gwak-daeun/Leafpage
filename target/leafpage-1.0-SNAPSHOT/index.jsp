@@ -13,9 +13,6 @@
 <body>
 <%@include file="./WEB-INF/component/header.jsp"%>
 
-<%
-    session.setAttribute("userNo", 1L);
-%>
 
 <div class="container">
     <div class="title">
@@ -40,7 +37,6 @@
                         <div class="book-author">${book.bookAuthorName}</div>
                     </div>
                 </a>
-
             </li>
             </c:forEach>
         </ul>
