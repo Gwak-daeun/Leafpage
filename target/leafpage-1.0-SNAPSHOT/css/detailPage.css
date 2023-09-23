@@ -118,7 +118,7 @@ section {
     height: 450px;
 }
 
-.rental, .my-page {
+.rental, .move-page {
     background-color: #066466;
     color: white;
     &:hover {
