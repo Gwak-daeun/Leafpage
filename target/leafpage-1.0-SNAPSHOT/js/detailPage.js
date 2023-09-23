@@ -13,6 +13,7 @@ $(document).ready(function () {
           .siblings(".tab-content")
           .removeClass("on");
     });
+
     if (errorMsg === "리뷰 삭제에 실패했어요.") {
         alert(errorMsg);
     }
