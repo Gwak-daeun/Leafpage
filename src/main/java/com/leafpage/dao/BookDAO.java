@@ -578,4 +578,30 @@ public class BookDAO {
         return result ;
     }
 
+    public boolean duplicationISBN(String ISBN){
+
+
+        try {
+            conn = DBUtil.getConnection();
+            String sql = "select isbn from books where ISBN = ? ";
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,ISBN);
+
+            rs = pstmt.executeQuery();
+
+            if(rs.next()) {
+               return true;
+            }
+
+            DBUtil.close(rs ,pstmt, conn);
+
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        return false;
+    }
+
 }
