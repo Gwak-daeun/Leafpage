@@ -147,4 +147,6 @@ function rent(ISBN) {
             console.log('Error: ' + textStatus);
         }
     });
+
 }
+
