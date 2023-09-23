@@ -131,7 +131,6 @@
                     <h3 class="modal-title">대여에 성공했습니다!</h3>
                     <p class="scheduled-return-date"></p>
                 </div>
-
                 <div class="form-footer">
                     <button class="btn close" onclick="closeModal('#rental')">돌아가기</button>
                     <button class="btn move-page" onclick="location.href='mypageInfo.do'">마이페이지로 이동</button>
