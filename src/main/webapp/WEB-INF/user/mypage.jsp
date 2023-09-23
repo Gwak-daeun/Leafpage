@@ -9,8 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>LeafPage</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/mypage.css">
 
 </head>
@@ -41,9 +40,37 @@
 
         <div class="bottom_content on">
             <ul class="flex rent_book">
-                <c:forEach var="book" items="${books}" begin="0" end="4" step="1" >
-                    <li id="bookLi" >
-                        <div onclick="openViewer(${book.rentalNo}, ${book.scrollY}, ${book.modalWidth})" class="card" >
+
+                <li class="listH">
+                    <div class="card">
+                        <img src="image/마주.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">dfsdfsdfsf</h5>
+                            <p class="card-author">dfsdfsdfsf</p>
+                            <p class="card-period">반납일 : dfsdfsdfsf</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn1 btn-sm">
+                        반납하기
+                    </button>
+                </li>
+                <li class="listH">
+                    <div class="card">
+                        <img src="image/마주.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">dfsdfsdfsf</h5>
+                            <p class="card-author">dfsdfsdfsf</p>
+                            <p class="card-period">반납일 : dfsdfsdfsf</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn1 btn-sm">
+                        반납하기
+                    </button>
+                </li>
+
+               <c:forEach var="book" items="${books}" begin="0" end="4" step="1" >
+                   <li id="bookLi" >
+                       <div onclick="openViewer(${book.rentalNo}, ${book.scrollY}, ${book.modalWidth})" class="card" >
                             <img src="image/마주.png" class="card-img-top" alt="..." />
                             <c:if test="${book.modalWidth eq 321}">
                                 <img class="device-icon" src="../css/icons/phone_iphone.png" />
@@ -55,13 +82,10 @@
                                 <h5 class="card-title">${book.bookName}</h5>
                                 <p class="card-author">${book.bookAuthorName}</p>
                                 <p class="card-period">${book.rentalDate} ~ ${book.scheduledReturnDate}</p>
-                            </div>
-                        </div>
-                        <button type="button" class="btn1 btn-sm"
-                                onclick="returnCheck(`${book.bookName}`, ${book.rentalNo})">
-                            반납하기
-                        </button>
-                    </li>
+                              </div>
+                       </div>
+                    <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
+                   </li>
 
                     <%--책 뷰어--%>
                     <%@include file="../component/bookModal.jsp"%>
@@ -84,6 +108,7 @@
                                 <p class="card-period">반납일 : ${userReturnedBook.actualReturnDate}</p>
                             </div>
                         </div>
+                        <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
                     </li>
                 </c:forEach>
 

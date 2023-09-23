@@ -188,7 +188,10 @@ h5 {
     width: 80px;
     height: 20px;
     font-size: 10px;
-    margin : 0 auto;
+    display: flex;
+    margin-left: 40px;
+    justify-content: center;
+    padding: 0 19px;
 }
 
 .mp_container .bottom_content.on {
@@ -205,6 +208,12 @@ h5 {
     width: 150px;
     border: 0;
     margin-bottom: 10px;
+    text-align: center;
+}
+
+.listH {
+    height: 250px;
+    justify-content: center;
 }
 
 .mp_container .rent_book .card{
@@ -276,11 +285,25 @@ h5 {
         width: 100%;
         display: flex;
         flex-direction: column;
+        align-items: center;
         padding: 0;
+    }
+    .listH {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     .mp_container .bottom_content li {
         width: 80%;
         margin-top: 30px;
+    }
+    .mp_container .bottom_content li button{
+        width: 80px;
+        height: 20px;
+        font-size: 10px;
+        align-items: center;
+        padding: 0 20px;
+        margin-left: unset;
     }
     .mp_container .card {
         width: 150px;
