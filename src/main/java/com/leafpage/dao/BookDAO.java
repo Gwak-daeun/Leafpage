@@ -338,6 +338,8 @@ public class BookDAO {
             pstmt.setString(1, authorName);
             rs = pstmt.executeQuery();
 
+
+
             while (rs.next()) {
                 BookDTO sameAuthorBook = new BookDTO();
                 sameAuthorBook.setBookName(rs.getString("book_name"));
@@ -383,11 +385,11 @@ public class BookDAO {
         return authorName;
     }
 
-    public List<MypageBooksDTO> getUserLendingBook(int userNo) throws IOException {
+    public List<MypageBooksDTO> getUserLendingBook(Long userNo) throws IOException {
 
         List<MypageBooksDTO> userBookList = new ArrayList<>();
 
-        String SQL = "select b.book_name, b.book_author_name, r.scheduled_return_date, r.rental_date, r.rental_no, r.scroll_y, r.modal_width, b.book_content \n" +
+        String SQL = "select b.book_img, b.book_name, b.book_author_name, r.scheduled_return_date, r.rental_date, r.rental_no, r.scroll_y, r.modal_width, b.book_content \n" +
                 "from users u \n" +
                 "join book_rental r\n" +
                 "on u.user_no = r.user_no\n" +
@@ -400,7 +402,7 @@ public class BookDAO {
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setInt(1, userNo);
+            pstmt.setLong(1, userNo);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -413,6 +415,7 @@ public class BookDAO {
                 books.setScrollY(rs.getInt("scroll_y"));
                 books.setModalWidth(rs.getInt("modal_width"));
                 books.setBookContent(rs.getString("book_content"));
+                books.setBookImg(rs.getString("book_img"));
 
                 userBookList.add(books);
             }
@@ -425,11 +428,11 @@ public class BookDAO {
         return userBookList;
     }
 
-    public List<MypageReturnedBooksDTO> getUserReturnedBook(int userNo) {
+    public List<MypageReturnedBooksDTO> getUserReturnedBook(Long userNo) {
 
         ArrayList<MypageReturnedBooksDTO> userReturnedBookList = new ArrayList<>();
 
-        String SQL = "select b.book_name, b.book_author_name, r.actual_return_date\n" +
+        String SQL = "select b.book_name, b.book_author_name, b.book_img, r.actual_return_date\n" +
                 "from users u \n" +
                 "join book_rental r\n" +
                 "on u.user_no = r.user_no\n" +
@@ -442,13 +445,14 @@ public class BookDAO {
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setInt(1, userNo);
+            pstmt.setLong(1, userNo);
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 MypageReturnedBooksDTO books = new MypageReturnedBooksDTO();
                 books.setBookName(rs.getString("book_name"));
                 books.setBookAuthorName(rs.getString("book_author_name"));
                 books.setActualReturnDate(rs.getString("actual_return_date"));
+                books.setBookImg(rs.getString("book_img"));
                 userReturnedBookList.add(books);
             }
         } catch (Exception e) {
@@ -515,6 +519,70 @@ public class BookDAO {
         return mainBooks;
 
     }
+
+    public List<BookDTO> booksearchlist(int pageNum, int amount, String keyword){
+
+
+        List<BookDTO> bookDTOList= new ArrayList<>();
+        try {
+            conn = DBUtil.getConnection();
+            String sql = " SELECT B.isbn, B.book_name, B.book_publisher_name, B.book_author_name " +
+                    "FROM (SELECT ROW_NUMBER() OVER (ORDER BY book_name) AS rn, isbn, book_name,book_author_name, book_publisher_name " +
+                    "from books WHERE concat(isbn, book_name, book_author_name, book_publisher_name ) LIKE ? ) B WHERE rn > ? AND rn <= ?;";
+
+            pstmt  = conn.prepareStatement(sql);
+            pstmt.setString(1,"%" + keyword + "%");
+            pstmt.setInt(2, ((pageNum - 1)* amount));
+            pstmt.setInt(3, (pageNum * amount));
+            rs = pstmt.executeQuery();
+            while (rs.next()){
+                BookDTO bookDTO = new BookDTO();
+                bookDTO.setISBN(rs.getString("isbn"));
+                bookDTO.setBookName(rs.getString("book_name"));
+                bookDTO.setBookPublisherName(rs.getString("book_publisher_name"));
+                bookDTO.setBookAuthorName(rs.getString("book_author_name"));
+                bookDTO.setCategories(findCategories(conn, bookDTO.getISBN()));
+
+
+                bookDTOList.add(bookDTO);
+            }
+            DBUtil.close(rs ,pstmt, conn);
+
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return bookDTOList;
+    }
+
+    public int  getsearchTotal(String keyword){
+        int result  = 0;
+
+        try {
+            conn = DBUtil.getConnection();
+            String sql = "SELECT count(*) as total" +
+                    " FROM (SELECT ROW_NUMBER() OVER (ORDER BY book_name) AS rn, isbn, book_name,book_author_name, book_publisher_name " +
+                    "from books WHERE concat(isbn, book_name, book_author_name, book_publisher_name ) LIKE ? ) B;";
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,"%" + keyword + "%");
+
+            rs = pstmt.executeQuery();
+
+            if(rs.next()) {
+                result = rs.getInt("total");
+            }
+
+            DBUtil.close(rs ,pstmt, conn);
+
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        return result ;
+    }
+
 
     public List<BookDTO> searchBooks(String searchSelect, String searchKeyword, String page) {
 
@@ -668,7 +736,7 @@ public class BookDAO {
         log.debug("END OF SORT : {} " + books);
         return books;
     }
-  
+
     public List<BookDTO> booksearchlist(int pageNum, int amount, String keyword){
 
 

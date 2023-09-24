@@ -10,6 +10,7 @@ public class MypageBooksDTO {
     private String scheduledReturnDate;
     private String rentalDate;
     private String rentalNo;
+    private String bookImg;
     private int scrollY;
     private int modalWidth;
     private String bookContent;
