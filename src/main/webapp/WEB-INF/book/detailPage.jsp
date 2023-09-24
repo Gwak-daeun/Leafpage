@@ -9,8 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <title>LeafPage</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="../../css/detailPage.css">
     <script src="https://kit.fontawesome.com/1db70bd877.js" crossorigin="anonymous"></script>
 </head>
@@ -30,7 +29,7 @@
                 <div class="small">${bookDetail.categories} | ${bookDetail.bookPublisherName} | 발행일: ${bookDetail.bookPubDate}</div>
                 <div class="bottom-mg inline">
                     <button class="btn rental" onclick="rent(${bookDetail.ISBN})">대여하기</button>
-<%--                    <button class="btn preview">미리보기</button>   &lt;%&ndash; 로그인 해야 볼 수 있음&ndash;%&gt;--%>
+<%--                <button class="btn preview">미리보기</button>   &lt;%&ndash; 로그인 해야 볼 수 있음&ndash;%&gt;--%>
 
                     <c:if test="${heartSelect == 1}">
                         <img id="fullH" style="width: 20px; margin-left: 5px;" src="../../css/icons/full.png"
@@ -68,12 +67,16 @@
                         <button class="btn rental " data-toggle="modal" href="#reviewenroll">등록하기</button>
                     </div>
                     <ul class="review-content">
-                        <c:forEach var="review" items="${reviews}">
-                            <li>
-                                <div class="card">
-                                    <div class="card-header">
-                                        <div class="row">
-                                            <div class="card-title">
+                        <c:if test="${review eq null}">
+                            <h4 style="margin-top: 50px">아직 댓글을 작성한 사람이 없습니다 ㅠ.,ㅠ</h4>
+                        </c:if>
+                        <c:if test="${review != null}">
+                            <c:forEach var="review" items="${reviews}">
+                                <li>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="row">
+                                                <div class="card-title">
                                             <span>
                                                 <c:if test="${review.reviewRating eq 5}">
                                                     <span class="star">⭐</span>
@@ -102,7 +105,7 @@
                                                 </c:if>
 
                                             </span>
-                                                <span class="review-top-right">
+                                            <span class="review-top-right">
                                                 <p>작성일&nbsp; ${review.reviewDate}</p>
                                             </span>
                                             </div>
@@ -214,7 +217,6 @@
                     <h3 class="modal-title">로그인 후 이용가능합니다.</h3>
                     <p>로그인 페이지로 이동하시겠습니까?</p>
                 </div>
-
                 <div class="form-footer">
                     <button class="btn close" onclick="closeModal('#required-login')">돌아가기</button>
                     <button class="btn move-page" onclick="location.href='loginView.do'">로그인페이지로 이동</button>

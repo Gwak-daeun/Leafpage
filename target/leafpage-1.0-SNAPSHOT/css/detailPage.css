@@ -455,6 +455,7 @@ a {
     }
 
     .tabmenu {
+        width: 95%;
         min-width: 300px;
     }
 

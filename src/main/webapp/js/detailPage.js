@@ -91,6 +91,8 @@ $(document).ready(function () {
 
         $('.scheduled-return-date').text(`대여기한 : ${year}-${month}-${date}`);
     });
+
+
 });
 
 //하트 채워지고 비워지는 기능

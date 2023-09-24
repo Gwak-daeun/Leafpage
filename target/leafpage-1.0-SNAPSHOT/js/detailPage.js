@@ -124,7 +124,6 @@ function likeCheck(isbn) {
 
 // 도서 대여
 function rent(ISBN) {
-    console.log(userNo)
 
     if (userNo === "") {
         $('#required-login').modal('show');

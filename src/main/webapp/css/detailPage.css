@@ -333,7 +333,6 @@ a {
     /*width: 460px;*/
     justify-content: center;
     margin-left: 10px;
-    /*display: flex;*/
     justify-content: center;
 }
 .review-content .review-top-right {
@@ -455,6 +454,7 @@ a {
     }
 
     .tabmenu {
+        width: 95%;
         min-width: 300px;
     }
 
