@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/updateMyInfoView.do","/mypageInfo.do"})
+@WebFilter(urlPatterns = {"/updateMyInfoView.do","/mypageInfo.do", "/detailPageView.do"})
 public class LoginAuthenticationFilter extends HttpFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
