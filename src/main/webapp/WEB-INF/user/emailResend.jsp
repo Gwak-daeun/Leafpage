@@ -11,10 +11,11 @@
 
 <section class="container mt-3" style="max-width:560px;">
     <div class="alert alert-success mt-4" role="alert">
-        이메일 주소를 인증해주세요.
+        이메일 주소 인증을 진행해주세요.
         <button onclick="location.href='sendEmail.do'">인증메일 받기</button>
     </div>
 </section>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../../js/alertMsg.js"></script>
 </body>
 </html>

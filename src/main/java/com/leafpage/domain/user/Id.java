@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 @Getter
 public class Id {
     private static final int MIN_ID_LENGTH = 6;
-    private static final int MAX_ID_LENGTH = 32;
+    private static final int MAX_ID_LENGTH = 12;
 
     private final String userId;
 
@@ -27,13 +27,7 @@ public class Id {
             throw new IllegalArgumentException("아이디는 영어와 숫자만 가능합니다.");
         }
         if (isInValidIdMINLength(userId)) {
-            throw new IllegalArgumentException("아이디는 6자 이상입니다.");
-        }
-        if (isInValidIdMAXLength(userId)) {
-            throw new IllegalArgumentException("아이디가 너무 깁니다. 다른 아이디를 입력해주세요.");
-        }
-        if(isDuplicateId(userId)) {
-            throw new IllegalArgumentException("이미 가입된 아이디입니다. 다른 아이디를 입력해주세요.");
+            throw new IllegalArgumentException("아이디는 6자 이상 12자 미만입니다.");
         }
     }
 
@@ -42,11 +36,7 @@ public class Id {
     }
 
     private boolean isInValidIdMINLength(String userId) {
-        return userId.length() < MIN_ID_LENGTH;
-    }
-
-    private boolean isInValidIdMAXLength(String userId) {
-        return userId.length() > MAX_ID_LENGTH;
+        return userId.length() < MIN_ID_LENGTH || userId.length() > MAX_ID_LENGTH;
     }
 
     private boolean isInValidId(String userId) {
@@ -54,9 +44,5 @@ public class Id {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(userId);
         return !matcher.matches();
-    }
-
-    private boolean isDuplicateId(String userId) {
-        return new UserDAO().findUserById(userId) == 1;
     }
 }

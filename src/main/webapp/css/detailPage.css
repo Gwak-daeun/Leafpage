@@ -3,6 +3,71 @@ body {
     font-family: 'Noto Sans KR', sans-serif;
 }
 
+
+
+.book-list{
+    position: relative;
+    background-color: #f1e3dc;
+    width: fit-content;
+    height: 210px;
+    margin: 10px 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0); /* 초기 그림자 없음 */
+    transition: box-shadow 300ms ease-in-out, transform 300ms ease-in-out;
+
+}
+
+.book-list:hover{
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 300ms ease-in-out, transform 300ms ease-in-out;
+}
+
+ul{
+    list-style: none;
+    display: flex;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.book-box > ul{
+    display: flex;
+    text-align: center;
+    flex-wrap: wrap;
+
+}
+
+li{
+    display: inline-block;
+}
+
+.book-cover{
+    /* position: absolute; */
+    display: inline-block;
+    margin-top: 10px;
+    /* margin-right: 50px; */
+    width: 108px;
+    height: 150px;
+}
+
+.book-title {
+    margin-top: 4px;
+    font-size: 14px;
+    width: 125px;
+    margin-left: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+}
+
+.book-author{
+    font-size: 12px;
+}
+
+
+
+
+
 .index-nav{
     background-color: #066466;
     color: white;
@@ -14,7 +79,7 @@ body {
 
 a {
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 .navbar{
@@ -59,7 +124,7 @@ section {
     height: 450px;
 }
 
-.rental {
+.rental, .move-page {
     background-color: #066466;
     color: white;
     &:hover {
@@ -68,7 +133,7 @@ section {
     }
 }
 
-.preview {
+.preview, .close {
     background-color: #468B8C;
     color: white;
     &:hover {
@@ -103,7 +168,6 @@ h2 {
 .mg {
     margin: 40px 20px;
 }
-
 
 .modal{
     /* margin-top: var(--window-width) * 20; */
@@ -187,8 +251,8 @@ a {
 }
 
 .tab-content {
-    padding : 30px;
-    width: auto;
+    padding: 30px;
+    width: 700px;
     height: 560px;
     background-color: white;
     display: none;
@@ -200,10 +264,10 @@ a {
 }
 
 
-.tab-content::-webkit-scrollbar-track {
-    background-color: rgba(0, 8, 212, 0.5);
-    border-radius: 5px;
-}
+/*.tab-content::-webkit-scrollbar-track {*/
+/*    background-color: rgba(0, 8, 212, 0.5);*/
+/*    border-radius: 5px;*/
+/*}*/
 
 .contexth {
     height : 480px;
@@ -242,7 +306,7 @@ a {
 }
 
 .review-content .card {
-    width: 87%;
+    width: 350px;
     text-align: left;
     background-color: #f8f5f3;
 }
@@ -261,16 +325,14 @@ a {
 
 .review-content {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding : 0px;
-    height: 460px;
+    overflow-y: scroll;
 }
 
 .review-content li {
     margin-bottom: 10px;
-    width: 100%;
-    display:flex;
+    /*width: 460px;*/
+    justify-content: center;
+    margin-left: 10px;
     justify-content: center;
 }
 .review-content .review-top-right {
@@ -326,13 +388,13 @@ a {
 
 /* =================================== */
 
-@media (min-width: 701px) and (max-width: 1180px){
-    .tabmenu {
-        width: 430px;
-    }
-}
+/*@media (min-width: 501px) and (max-width: 1180px){*/
+/*    .tabmenu {*/
+/*        width: 430px;*/
+/*    }*/
+/*}*/
 
-@media (max-width: 700px) {
+@media (max-width: 400px) {
     .btn1 {
         font-size: 12px;
     }
@@ -372,7 +434,9 @@ a {
         margin-bottom: 50px;
     }
 
-
+    .tab-content {
+        width: 375px;
+    }
     
 
     .container {
@@ -399,9 +463,6 @@ a {
         line-height: 25px;
     }
 
-    .mg {
-        margin: 0px;
-    }
 
     .modal {
         width: 90%;
@@ -429,10 +490,12 @@ a {
 
     .review-content .card-body {
         font-size: 12px;
+        overflow-y: scroll;
     }
 
     .review-content .card {
-        width: 90%;
+        width: 250px;
+        height: 180px;
         text-align: left;
         background-color: #f8f5f3;
     }

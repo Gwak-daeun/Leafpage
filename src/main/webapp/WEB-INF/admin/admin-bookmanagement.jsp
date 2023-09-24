@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="/css/admin-page-style.css" />
 </head>
 
+<input type="hidden" id="msg" value="${msg}">
+
 <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="editBook" aria-hidden="true">
     <div class="modal-dialog modal-xl" >
@@ -43,19 +45,19 @@
         <aside class="side-bar">
             <ul>
                 <li>
-                    <a href="/WEB-INF/admin/admin-usermanagement.jsp">유저</a>
+                    <a href="/userlistview.do">유저</a>
                 </li>
                 <li>
-                    <a href="/WEB-INF/admin/admin-bookmanagement.jsp">도서</a>
+                    <a href="/booklistView.do">도서</a>
                 </li>
             </ul>
         </aside>
     </aside>
     <div class="container">
-        <form action="books.do" method="post">
+        <form action="adminbooksearch.do" method="post">
             <div class="top">
                 <div class="float-end">
-                    <input class="search" type="text" placeholder="검색어 입력" />
+                    <input class="search" name="keyword" type="text" placeholder="검색어 입력" />
                     <input class="search-btn" type="submit" value="검색" />
                 </div>
             </div>
@@ -100,9 +102,41 @@
                                         #${category} </c:forEach></li>
                         </ul>
                         </c:forEach>
-
-
                 </div>
+            </div>
+            <hr />
+            <div class="list-footer">
+                <ul class="pagination justify-content-center">
+                    <c:choose>
+                    <c:when test="${pageDTO.prev }">
+                        <li class="page-item">
+                            <a class="page-link" href="booklistView.do?pageNum=${pageDTO.startPage - 1 }">이전</a>
+                        </li>
+                    </c:when>
+                        <c:otherwise>
+                        <li class="page-item disabled">
+                            <a class="page-link" href="booklistView.do?pageNum=${pageDTO.startPage - 1 }">이전</a>
+                        </li>
+                         </c:otherwise>
+                    </c:choose>
+                    <c:forEach var="num" begin="${pageDTO.startPage }" end="${pageDTO.endPage }">
+                        <li class="page-item">
+                            <a class="${pageDTO.pageNum eq num ? 'active' : '' } page-link" href="booklistView.do?pageNum=${num }">${num }</a>
+                        </li>
+                    </c:forEach>
+                    <c:choose>
+                    <c:when test="${pageDTO.next }">
+                        <li class="page-item">
+                            <a class="page-link" href="booklistView.do?pageNum=${pageDTO.endPage + 1 }">다음</a>
+                        </li>
+                    </c:when>
+                        <c:otherwise>
+                            <li class="page-item disabled">
+                                <a class="page-link" href="booklistView.do?pageNum=${pageDTO.endPage + 1 }">다음</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </ul>
             </div>
         </div>
     </div>
@@ -115,5 +149,6 @@
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/alertMsg.js"></script>
 <script src="/js/admin-management.js"></script>
 </html>

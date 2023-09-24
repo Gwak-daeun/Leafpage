@@ -14,9 +14,13 @@ public class MakeReviewController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        int userNum = 1;
+        HttpSession session = request.getSession();
 
-        String ISBN = "040501813854";
+        //Todo: 세션에 있는 로그인 사용자 값으로 바꿔야 함
+        Long userNo = ((Integer) session.getAttribute("userNo")).longValue();
+
+        //Todo: 리퀘스트에 있는 ISBN 값으로 바꿔야 함
+        String isbn = request.getParameter("isbn");
 
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -27,18 +31,23 @@ public class MakeReviewController implements Controller {
 
         String reviewContent = request.getParameter("content");
 
-        System.out.println("CHECK REVIEW VALUES : " + reviewContent + ", " + reviewRating);
-
-        int result = new ReviewDAO().makeReview(userNum, ISBN, reviewDate, reviewContent, reviewRating);
-
-        HttpSession session = request.getSession();
-
-        if (result != 1) {
-            session.setAttribute("failed", "리뷰 등록에 실패했어요.");
+        if (reviewContent.isEmpty() || reviewRating == 0) {
+            System.out.println("REVIEW FAILED");
+            request.setAttribute("failed", "앗, 리뷰 별점과 내용을 작성해주세요.");
             return "/detailPageView.do";
         }
 
-        session.setAttribute("failed", "");
+        System.out.println("CHECK REVIEW VALUES : " + reviewContent + ", " + reviewRating);
+
+        int result = new ReviewDAO().makeReview(userNo, isbn, reviewDate, reviewContent, reviewRating);
+
+        if (result != 1) {
+            System.out.println("REVIEW FAILED");
+            request.setAttribute("failed", "리뷰 등록에 실패했어요.");
+            return "/detailPageView.do";
+        }
+
+        request.setAttribute("failed", "");
 
         return "/detailPageView.do";
     }

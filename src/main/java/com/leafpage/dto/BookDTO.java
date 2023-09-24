@@ -1,16 +1,12 @@
 package com.leafpage.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 
 @Setter
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
 public class BookDTO {
     private String ISBN;
     private String bookName;
@@ -23,5 +19,4 @@ public class BookDTO {
     private String bookContent;
     private String bookImg;
     private String bookImgFullPath;
-
 }
