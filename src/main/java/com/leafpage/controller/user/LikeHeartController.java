@@ -26,16 +26,16 @@ public class LikeHeartController implements Controller {
 
         int checkLike = leeLikeyDAO.checkLike(userNo, isbn);
 
-        if(checkLike == 1) {
-            int deleteLike = leeLikeyDAO.deleteLike(userNo,isbn);
-            if(deleteLike == 1) {
+        if (checkLike == 1) {
+            int deleteLike = leeLikeyDAO.deleteLike(userNo, isbn);
+            if (deleteLike == 1) {
                 System.out.println("좋아요 삭제");
                 out.print(0);
                 out.close();
             }
         } else {
-            int insertLike = leeLikeyDAO.insertLike(userNo,isbn);
-            if(insertLike == 1) {
+            int insertLike = leeLikeyDAO.insertLike(userNo, isbn);
+            if (insertLike == 1) {
                 System.out.println("좋아요 추가");
                 out.print(1);
                 out.close();

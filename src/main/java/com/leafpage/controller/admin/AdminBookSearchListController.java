@@ -22,21 +22,19 @@ public class AdminBookSearchListController implements Controller {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         int pageNum = 1;
         int amount = 10;
-        if(request.getParameter("pageNum") != null) {
+        if (request.getParameter("pageNum") != null) {
             pageNum = Integer.parseInt(request.getParameter("pageNum"));
         }
         String keyword = request.getParameter("keyword");
         HttpSession session = request.getSession();
 
-        if(keyword == null || keyword.isEmpty() && session.getAttribute("keyword") != null){
+        if (keyword == null || keyword.isEmpty() && session.getAttribute("keyword") != null) {
             keyword = (String) session.getAttribute("keyword");
         }
 
-        if(keyword.isEmpty() && session.getAttribute("keyword") == null){
+        if (keyword.isEmpty() && session.getAttribute("keyword") == null) {
             return "/booklistView.do";
-        }
-
-        else {
+        } else {
             session.setAttribute("keyword", keyword);
         }
 
@@ -54,12 +52,10 @@ public class AdminBookSearchListController implements Controller {
         pageUtil.listpage(pageDTO);
 
 
-
-
         // 3. 페이지네이션을 화면에 전달
         request.setAttribute("pageDTO", pageDTO);
 
-        request.setAttribute("bookList" ,bookList);
+        request.setAttribute("bookList", bookList);
 
 
         return "admin/admin-bookmanagementsearchlist";

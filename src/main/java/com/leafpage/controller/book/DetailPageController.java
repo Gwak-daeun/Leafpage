@@ -19,19 +19,19 @@ public class DetailPageController implements Controller {
 
         HttpSession session = request.getSession();
         long userNo = (long) session.getAttribute("userNo");
-        System.out.println("userNo"+userNo);
+        System.out.println("userNo" + userNo);
         String isbn = request.getParameter("isbn");
 
         BookDAO bookDAO = new BookDAO();
         BookDTO bookDetail = new BookDAO().getBookDetails(isbn);
-        List<ReviewDTO>  reviews = new ReviewDAO().findReviews(isbn);
+        List<ReviewDTO> reviews = new ReviewDAO().findReviews(isbn);
 
         List<BookDTO> sameAuthorBooks = bookDAO.findSameAuthorBooks(isbn);
 
         LeeLikeyDAO leeLikeyDAO = new LeeLikeyDAO();
         int checkLike = leeLikeyDAO.checkLike(userNo, isbn);
         int heartCount = leeLikeyDAO.likeCount(isbn);
-        System.out.println("CHECKLIKE"+checkLike);
+        System.out.println("CHECKLIKE" + checkLike);
 
         request.setAttribute("bookDetail", bookDetail);
 

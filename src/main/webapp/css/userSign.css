@@ -54,10 +54,7 @@ body {
 
 .form-label {
     margin-right: 10px;
-}
-
-.checkIdSpan {
-    font-size: 8px;
+    margin-bottom: 0;
 }
 
 .navbar{
@@ -89,6 +86,14 @@ h3{
     width: 30%;
     height: 100%;
     margin-left: 34%;
+}
+
+.checkText {
+    margin-top: 5px;
+    margin-bottom: 7px;
+    color: #FF7C7C;
+    font-size: 9px;
+    line-height: 8px;
 }
 
 @media (max-width: 458px) {

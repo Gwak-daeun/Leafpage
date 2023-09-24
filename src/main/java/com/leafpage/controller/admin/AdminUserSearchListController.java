@@ -20,26 +20,24 @@ public class AdminUserSearchListController implements Controller {
         int amount = 10;
 
         // 페이지번호를 클릭하는 경우
-        if(request.getParameter("pageNum") != null) {
+        if (request.getParameter("pageNum") != null) {
             pageNum = Integer.parseInt(request.getParameter("pageNum"));
         }
 
         String keyword = request.getParameter("keyword");
         HttpSession session = request.getSession();
 
-        if(keyword == null || keyword.isEmpty() && session.getAttribute("keyword") != null){
+        if (keyword == null || keyword.isEmpty() && session.getAttribute("keyword") != null) {
             keyword = (String) session.getAttribute("keyword");
         }
 
-        if(keyword.isEmpty() && session.getAttribute("keyword") == null){
+        if (keyword.isEmpty() && session.getAttribute("keyword") == null) {
             return "userlistview.do";
-        }
-
-        else {
+        } else {
             session.setAttribute("keyword", keyword);
         }
 
-        UserDAO dao =new UserDAO();
+        UserDAO dao = new UserDAO();
 
         List<UserDTO> userList = dao.userSearchList(pageNum, amount, keyword);
         int total = dao.getSearchTotal(keyword);
@@ -53,7 +51,7 @@ public class AdminUserSearchListController implements Controller {
 
         request.setAttribute("pageDTO", pageDTO);
 
-        request.setAttribute("userList" ,userList);
+        request.setAttribute("userList", userList);
 
 
         return "admin/admin-usermanagementsearchlist";
