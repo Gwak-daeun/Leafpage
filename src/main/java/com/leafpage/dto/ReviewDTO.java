@@ -6,6 +6,7 @@ import lombok.*;
 @Setter
 public class ReviewDTO {
     private String reviewNo;
+    private String userNo;
     private String ISBN;
     private String reviewDate;
     private String reviewContent;

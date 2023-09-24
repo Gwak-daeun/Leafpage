@@ -18,12 +18,11 @@ public class DetailPageController implements Controller {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         HttpSession session = request.getSession();
-        long userNo = (long) session.getAttribute("userNo");
+        Long userNo = ((Integer) session.getAttribute("userNo")).longValue();
         System.out.println("userNo"+userNo);
         String isbn = request.getParameter("isbn");
 
         BookDAO bookDAO = new BookDAO();
-        BookDTO bookDetail = new BookDAO().getBookDetails(isbn);
         List<ReviewDTO>  reviews = new ReviewDAO().findReviews(isbn);
 
         List<BookDTO> sameAuthorBooks = bookDAO.findSameAuthorBooks(isbn);
@@ -32,6 +31,13 @@ public class DetailPageController implements Controller {
         int checkLike = leeLikeyDAO.checkLike(userNo, isbn);
         int heartCount = leeLikeyDAO.likeCount(isbn);
         System.out.println("CHECKLIKE"+checkLike);
+
+
+        BookDTO bookDetail = bookDAO.getBookDetails(isbn);
+
+        if (bookDetail.getISBN() == null) {
+            return "notFoundPageView.do";
+        }
 
         request.setAttribute("bookDetail", bookDetail);
 

@@ -16,7 +16,7 @@
     </div>
 
     <div class="modal-right-div" id = "modalContent">
-        <input type="text" name="ISBN" class="normal-input" required aria-required="true" placeholder="ISBN" value="${book.ISBN}">
+        <input type="number" name="ISBN" class="normal-input" required aria-required="true" placeholder="ISBN" value="${book.ISBN}">
         <input type="text" name="bookname" class="normal-input" required aria-required="true" placeholder="도서명" value="${book.bookName}">
         <input type="text" name="auther" class="normal-input" required aria-required="true" placeholder="저자명" value="${book.bookAuthorName}">
         <input type="text" name="publisher" class="normal-input" required aria-required="true" placeholder="출판사" value="${book.bookPublisherName}">

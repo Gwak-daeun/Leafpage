@@ -15,6 +15,7 @@
         <button onclick="location.href='index.jsp'">메인페이지로 이동</button>
     </div>
 </section>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../../js/alertMsg.js"></script>
 </body>
 </html>

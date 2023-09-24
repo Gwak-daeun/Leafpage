@@ -15,12 +15,9 @@ public class LoginViewController implements Controller {
         String userId = (String) request.getAttribute("userId");
 
         if (userId != null) {
-            PrintWriter script = response.getWriter();
-            script.println("<script>");
-            script.println("alert('이미 로그인 상태입니다.');");
-            script.println("history.back();");
-            script.println("</script>");
-            script.close();
+            HttpSession session = request.getSession();
+            session.setAttribute("msg", "이미 로그인 상태입니다.");
+            return "index";
         }
         System.out.println("로그인화면으로 이동");
         return "user/login";

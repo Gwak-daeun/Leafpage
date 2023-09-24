@@ -1,6 +1,5 @@
 package com.leafpage.domain.user;
 
-import com.leafpage.dao.UserDAO;
 import lombok.Getter;
 
 import java.util.regex.Matcher;
@@ -52,5 +51,4 @@ public class Tel {
         Matcher matcher = pattern.matcher(userTel);
         return !matcher.matches();
     }
-
 }

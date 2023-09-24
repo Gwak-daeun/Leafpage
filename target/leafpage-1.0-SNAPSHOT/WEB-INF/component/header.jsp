@@ -4,7 +4,7 @@
 <header>
     <nav class="navbar index-nav">
         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1"><img src="css/icons/nest_eco_leaf.png" onclick="location.href='index.jsp'"/> </span>
+            <span class="navbar-brand mb-0 h1"><img src="css/icons/nest_eco_leaf.png" onclick="location.href='/indexInfo.do'"/> </span>
             <span>
                 <c:if test="${userId != null}">
                     <span>${userId}님, 환영합니다.</span>
@@ -19,10 +19,12 @@
                     <a ><button type="button" class=" btn1 btn-sm" onclick="location.href='loginView.do'">로그인</button></a>
                 </c:if>
                 <c:if test="${userId != null}">
-                    <button type="button" class="btn2 btn-sm" onclick="location.href='myPageView.do'">마이페이지</button>
+                    <button type="button" class="btn2 btn-sm" onclick="location.href='mypageInfo.do'">마이페이지</button>
                     <button type="button" class="btn1 btn-sm" onclick="location.href='logout.do'">로그아웃</button>
                 </c:if>
             </span>
         </div>
     </nav>
 </header>
+
+<input type="hidden" id="msg" value="${msg}">

@@ -8,5 +8,4 @@ import lombok.*;
 public class LeeLikeyDTO {
     Long userNo;
     String ISBN;
-
 }

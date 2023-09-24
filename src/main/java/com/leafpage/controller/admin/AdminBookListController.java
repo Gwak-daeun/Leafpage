@@ -5,7 +5,7 @@ import com.leafpage.dao.BookDAO;
 //import com.leafpage.dto.AdminBookListPageDTO;
 import com.leafpage.dto.AdminBookListPageDTO;
 import com.leafpage.dto.BookDTO;
-import com.leafpage.util.BookListPageUtil;
+import com.leafpage.util.ListPageUtil;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +22,6 @@ public class AdminBookListController implements Controller {
         int pageNum = 1;
         int amount = 10;
 
-        System.out.println(request.getParameter("pageNum"));
         // 페이지번호를 클릭하는 경우
         if(request.getParameter("pageNum") != null) {
             pageNum = Integer.parseInt(request.getParameter("pageNum"));
@@ -30,8 +29,6 @@ public class AdminBookListController implements Controller {
 
         BookDAO dao = new BookDAO();
          // 전체게시글수
-        System.out.println(pageNum);
-        System.out.println(amount);
         List<BookDTO> bookList = dao.booklist(pageNum, amount);
         int total = dao.getTotal();
 
@@ -39,8 +36,8 @@ public class AdminBookListController implements Controller {
         pageDTO.setPageNum(pageNum);
         pageDTO.setAmount(amount);
         pageDTO.setTotal(total);
-        BookListPageUtil pageUtil = new BookListPageUtil();
-        pageUtil.booklistpage(pageDTO);
+        ListPageUtil pageUtil = new ListPageUtil();
+        pageUtil.listpage(pageDTO);
 
 
 

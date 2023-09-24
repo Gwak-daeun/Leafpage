@@ -20,7 +20,7 @@
     <div class="top">
         <div class="top_box">
             <h5 class="top_box_title">Guest</h5>
-            <button type="button" class="btn1 btn-sm"><a href="myInfoView.do">내 정보 수정</a></button>
+            <button type="button" class="btn1 btn-sm"><a href="updateMyInfoView.do">내 정보 수정</a></button>
         </div>
         <div class="top_box">
             <h5 class="top_box_title">현재 대여 권수</h5>
@@ -47,7 +47,7 @@
                     <c:forEach var="book" items="${books}" begin="0" end="4" step="1" >
                         <li id="bookLi" >
                             <div onclick="openViewer(${book.rentalNo}, ${book.scrollY}, ${book.modalWidth})" class="card" >
-                                <img src="image/마주.png" class="card-img-top" alt="..." />
+                                <img src="${book.bookImg}" class="card-img-top" alt="..." />
                                 <c:if test="${book.modalWidth eq 321}">
                                     <img class="device-icon" src="../css/icons/phone_iphone.png" />
                                 </c:if>
@@ -60,7 +60,10 @@
                                     <p class="card-period">${book.rentalDate} ~ ${book.scheduledReturnDate}</p>
                                 </div>
                             </div>
-                            <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
+                            <button type="button" class="btn1 btn-sm"
+                                    onclick="returnCheck(`${book.bookName}`, ${book.rentalNo})">
+                                반납하기
+                            </button>
                         </li>
 
                         <%--책 뷰어--%>
@@ -82,14 +85,13 @@
                     <c:forEach var="userReturnedBook" items="${userReturnedBooks}">
                         <li>
                             <div class="card">
-                                <img src="image/마주.png" class="card-img-top" alt="..." />
+                                <img src="${userReturnedBook.bookImg}" class="card-img-top" alt="..." />
                                 <div class="card-body">
                                     <h5 class="card-title">${userReturnedBook.bookName}</h5>
                                     <p class="card-author">${userReturnedBook.bookAuthorName}</p>
                                     <p class="card-period">반납일 : ${userReturnedBook.actualReturnDate}</p>
                                 </div>
                             </div>
-                            <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
                         </li>
                     </c:forEach>
                 </c:if>
@@ -99,8 +101,10 @@
 </section>
 
 <!-- 제이쿼리 자바스크립트 추가하기 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="../js/mypage.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script src="../js/mypage.js"></script>
+<script type="text/javascript" src="../../js/alertMsg.js"></script>
 </body>
 </html>

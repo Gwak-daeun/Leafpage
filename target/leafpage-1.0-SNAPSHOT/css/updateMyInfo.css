@@ -101,13 +101,27 @@ body {
     color: #999999;
 }
 
+.my-info-form form button {
+    margin-left: auto;
+    width: 100px;
+    height: 40px;
+    font-size: 15px;
+    line-height: 15px;
+}
+
 .my-info-form form button:nth-child(1) {
     margin-right: auto;
     width: 100px;
     height: 40px;
 }
 
-.my-info-form form button:nth-child(2) {
+.my-info-form button:nth-child(1) {
+    margin-right: auto;
+    width: 100px;
+    height: 40px;
+}
+
+.my-info-form button:nth-child(2) {
     margin-left: auto;
     width: 100px;
     height: 40px;

@@ -2,9 +2,9 @@ package com.leafpage.util;
 
 import com.leafpage.dto.AdminBookListPageDTO;
 
-public class BookListPageUtil {
+public class ListPageUtil {
 
-    public void booklistpage(AdminBookListPageDTO pageDTO){
+    public void listpage(AdminBookListPageDTO pageDTO){
         // 1. endPage결정
 //		 ex) 조회하는 페이지 1 -> 끝번호 10
 //		 ex) 조회하는 페이지 9 -> 끝번호 10
@@ -39,8 +39,6 @@ public class BookListPageUtil {
 //		 11 클릭시 endPage = 14 , realEnd = 14 -> 다음버튼 false
         pageDTO.setNext(pageDTO.getEndPage() < realEnd);
 
-        // 확인
-        System.out.println("시작페이지:" + pageDTO.getStartPage() + ", 끝페이지:" + pageDTO.getEndPage());
 
         // GetListService에서 페이지VO 계산처리 코드작성.
 
