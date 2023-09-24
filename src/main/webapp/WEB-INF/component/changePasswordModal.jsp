@@ -19,7 +19,7 @@
                         <label for="confirmNewPassword">비밀번호 확인</label>
                         <input type="password" id="confirmNewPassword" name="confirmNewPassword" class="form-control" maxlength="30">
                     </div>
-                    <div id="checkSpan"></div>
+                    <p class="checkPasswordText"></p>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                         <button type="button" class="btn btn-success" onclick="newPasswordCheck()">변경하기</button>

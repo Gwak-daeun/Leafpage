@@ -21,7 +21,6 @@ $(document).ready(function () {
         alert(failed);
     }
 
-
     //별점 표시
     $('.starRev span').click(function(){
         $(this).parent().children('span').removeClass('on');

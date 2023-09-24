@@ -40,7 +40,7 @@ public class DetailPageController implements Controller {
         LeeLikeyDAO leeLikeyDAO = new LeeLikeyDAO();
         int checkLike = leeLikeyDAO.checkLike(userNo, isbn);
         int heartCount = leeLikeyDAO.likeCount(isbn);
-        System.out.println("CHECKLIKE"+checkLike);
+        System.out.println("CHECKLIKE" + checkLike);
 
 
         BookDTO bookDetail = bookDAO.getBookDetails(isbn);

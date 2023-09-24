@@ -22,14 +22,14 @@ public class AdminBookDeleteController implements Controller {
         BookDAO dao = new BookDAO();
         int count = dao.bookDelete(dto);
 
-        if(count == 1){
+        if (count == 1) {
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();
             out.println("<script>");
             out.println("alert('삭제성공')");
             out.println("</script>");
             return "booklistView.do";
-        }else {
+        } else {
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();
             out.println("<script>");

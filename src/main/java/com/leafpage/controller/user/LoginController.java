@@ -61,17 +61,19 @@ public class LoginController implements Controller {
                 session.setAttribute("userId", userId);
                 session.setAttribute("userEmailChecked", userEmailChecked);
                 session.setAttribute("userNo", userNo);
-
-                return "indexInfo.do";
+                response.sendRedirect("indexInfo.do");
+                break;
 
             case 2:  //[2]휴면회원 로그인
-                session.setAttribute("msg", "휴면회원입니다. 다시 이메일 인증을 수행하여 주세요.");
                 session.setAttribute("inactiveIdForActive", userId);
-                return "emailResendView.do";
+                session.setAttribute("msg", "휴면회원입니다. 다시 이메일 인증을 수행하여 주세요.");
+                response.sendRedirect("indexInfo.do");
+                break;
 
             case 3:  //[3]블랙회원 로그인
                 session.setAttribute("msg", "서비스를 이용하실 수 없습니다. 자세한 내용은 운영자에게 문의하십시오.");
-                return "indexInfo.do";
+                response.sendRedirect("indexInfo.do");
+                break;
 
             case 4:  //[4]탈퇴회원 로그인
                 session.setAttribute("msg", "탈퇴하신 회원입니다. 재가입을 환영합니다.");
@@ -81,5 +83,6 @@ public class LoginController implements Controller {
                 session.setAttribute("msg", "[Error] 알 수 없는 오류가 발생했습니다.");
                 return "loginView.do";
         }
+        return "none";
     }
 }

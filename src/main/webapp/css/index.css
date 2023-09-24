@@ -21,6 +21,11 @@ body {
     font-family: 'Noto Sans KR', sans-serif;
 }
 
+.welcome {
+    color:antiquewhite;
+    font-size:15px;
+}
+
 a {
     text-decoration: none;
     color: black;
@@ -204,6 +209,10 @@ li{
 }
 
 @media(max-width: 390px){
+    .welcome {
+        font-size:10px;
+    }
+
     .container{
         justify-content: center; /* 가로 중앙 정렬 */
         align-items: center;

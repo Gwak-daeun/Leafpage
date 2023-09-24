@@ -25,7 +25,7 @@ public class SecurityQuestion {
 
     private void validate(String userSecurityQuestion) {
         if (isInvalidSecurityQuestion(userSecurityQuestion)) {
-            throw new IllegalArgumentException("유효하지 않은 인증 질문입니다..");
+            throw new IllegalArgumentException("유효하지 않은 인증 질문입니다.");
         }
     }
 
