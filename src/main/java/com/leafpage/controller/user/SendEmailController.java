@@ -16,24 +16,28 @@ import java.util.Properties;
 public class SendEmailController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("SendEmailController진입");
         UserDAO userDAO = new UserDAO();
         HttpSession session = request.getSession();
         String userId  = (String)session.getAttribute("userId");
+
+        if(userId == null) {
+            userId = (String) session.getAttribute("inactiveIdForActive");
+            System.out.println("new:"+ userId);
+        }
+
         boolean emailChecked = userDAO.getUserEmailChecked(userId);
 
         if(emailChecked) {
-            PrintWriter script = response.getWriter();
-            script.println("<script>");
-            script.println("alert('이미 이메일 인증이 완료되었습니다. 정상적인 서비스 이용이 가능합니다.');");
-            script.println("location.href='index.jsp'");
-            script.println("</script>");
-            script.close();
+            session.setAttribute("msg", "이미 이메일 인증이 완료되었습니다. 정상적인 서비스 이용이 가능합니다.");
+            return "index";
         }
 
         //구글 smtp가 기본적으로 제공하는 양식을 그대로 사용
         String host = "http://localhost:8080/";
         String from = "TESTsjh8924@gmail.com";  //보내는 사람
         String to = userDAO.getUserEmail(userId);  //받는 사람
+        System.out.println("to:"+ to);
         String subject = "LeafPage 이메일 인증";
         String content = "다음 링크에 접속하시면 이메일 인증이 완료됩니다." +
                 "<a href='" + host + "checkEmail.do?code=" + new com.leafpage.util.SHA256().getSHA256(to) + "'>이메일 인증하기</a>";
@@ -51,8 +55,10 @@ public class SendEmailController implements Controller {
         p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         p.put("mail.smtp.socketFactory.fallback", "false");
 
+        System.out.println("여기111!");
         //인증메일 발송하기
         try {
+            System.out.println("여기222222!");
             Authenticator auth = new com.leafpage.util.Gmail();
             Session ses = Session.getInstance(p, auth);  //구글 계정으로 Gmail 인증 수행
             ses.setDebug(true);  //디버깅 설정
@@ -62,16 +68,12 @@ public class SendEmailController implements Controller {
             msg.setFrom(fromAddr);  //보내는 사람 정보 넣기
             Address toAddr = new InternetAddress(to);
             msg.addRecipient(Message.RecipientType.TO, toAddr);  //받는 사람 정보 넣기
-            msg.setContent(content, "text/html;charset=UTF8");  //메일 내용 (UTF8 인코딩으로 전송)
+            msg.setContent(content, "text/html; charset=UTF8");  //메일 내용 (UTF8 인코딩으로 전송)
             Transport.send(msg);  //메일 전송
         } catch (Exception e) {
             e.printStackTrace();
-            PrintWriter script = response.getWriter();
-            script.println("<script>");
-            script.println("alert('오류가 발생했습니다.');");
-            script.println("location.href='signupView.do';");
-            script.println("</script>");
-            script.close();
+            session.setAttribute("msg", "[Error] 오류가 발생했습니다.");
+            return "emailResendView.do";
         }
         return "sendEmailView.do"; //화면이동
     }

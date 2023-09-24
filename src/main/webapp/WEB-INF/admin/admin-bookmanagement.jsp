@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="/css/admin-page-style.css" />
 </head>
 
+<input type="hidden" id="msg" value="${msg}">
+
 <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="editBook" aria-hidden="true">
     <div class="modal-dialog modal-xl" >
@@ -52,10 +54,10 @@
         </aside>
     </aside>
     <div class="container">
-        <form action="books.do" method="post">
+        <form action="adminbooksearch.do" method="post">
             <div class="top">
                 <div class="float-end">
-                    <input class="search" type="text" placeholder="검색어 입력" />
+                    <input class="search" name="keyword" type="text" placeholder="검색어 입력" />
                     <input class="search-btn" type="submit" value="검색" />
                 </div>
             </div>
@@ -147,5 +149,6 @@
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/alertMsg.js"></script>
 <script src="/js/admin-management.js"></script>
 </html>

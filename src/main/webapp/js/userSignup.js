@@ -1,5 +1,5 @@
 //프론트단 회원가입 유효성 검사
-const idCheckRule = /^(?=.*?[a-z,A-Z])(?=.*?[0-9]).{6,}$/;
+const idCheckRule = /^(?=.*?[a-z,A-Z])(?=.*?[0-9]).{6,12}$/;
 const passwordCheckRule = /^(?=.*?[a-z,A-Z])(?=.*?[0-9])(?=.*?[~?!@#$%^&*_-]).{8,}$/;
 const emailCheckRule = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 const phoneCheckRule = /^(01[016789]{1})[0-9]{3,4}[0-9]{4}$/;
@@ -25,7 +25,7 @@ function duplicateIdCheck() {
         return
     } //아이디가 Rule에 맞지 않는다면
     else if (!idCheckRule.test(userId.val())) {
-        $('.checkId').after("<span class='checkIdSpan' style='color:red'>※아이디는 영문자+숫자 조합으로 6자 이상입니다.</span>");
+        $('.checkId').after("<span class='checkIdSpan' style='color:red'>※아이디는 영문자+숫자 조합으로 6자 이상 12자 이하입니다.</span>");
         userId.focus();
         return false;
     }
@@ -69,51 +69,59 @@ function signupCheck() {
         userId.focus();
         return false;
     } else if (!idCheckRule.test(userId.val())) {
-        alert("아이디는 영문자+숫자 조합으로 6자 이상입니다.");
+        alert("아이디는 영문자+숫자 조합으로 6자 이상 12자 이하입니다.");
         userId.focus();
         return false;
     }
 
     if(!passwordCheckRule.test(userPassword.val())) {
-        alert('비밀번호는 영문자+숫자+특수문자 조합으로 8자리 이상입니다.');
+        $('.checkPasswordSpan').remove();
+        $('.checkPassword').after("<span class='checkPasswordSpan' style='color:red'>비밀번호는 영문자+숫자+특수문자 조합으로 8자리 이상입니다.</span>");
         userPassword.focus();
         return false;
     }
 
     if(userPassword.val() !== userPasswordConfirm.val()) {
-        alert('비밀번호가 일치하지 않습니다.')
+        $('.checkPasswordConfirmSpan').remove();
+        $('.checkPasswordConfirm').after("<span class='checkPasswordConfirmSpan' style='color:red'>비밀번호가 일치하지 않습니다.</span>");
         userPasswordConfirm.focus();
         return false;
     }
 
     if (userEmail.val() == "") {
-        alert('이메일 주소를 입력하세요.');
+        $('.checkEmailSpan').remove();
+        $('.checkEmail').after("<span class='checkEmailSpan' style='color:red'>이메일 주소를 입력하세요.</span>");
         userEmail.focus();
         return false;
     } else if (!emailCheckRule.test(userEmail.val())) {
-        alert('이메일 형식이 올바르지 않습니다.')
+        $('.checkEmailSpan').remove();
+        $('.checkEmail').after("<span class='checkEmailSpan' style='color:red'>이메일 형식이 올바르지 않습니다.</span>");
         userEmail.focus();
         return false;
     }
 
     if(userTel.val() == "") {
-        alert('휴대전화번호를 입력하세요.');
+        $('.checkTelSpan').remove();
+        $('.checkTel').after("<span class='checkTelSpan' style='color:red'>휴대전화번호를 입력하세요.</span>");
         userTel.focus();
         return false;
     } else if (!phoneCheckRule.test(userTel.val())) {
-        alert('휴대전화번호가 올바르지 않습니다.');
+        $('.checkTelSpan').remove();
+        $('.checkTel').after("<span class='checkTelSpan' style='color:red'>휴대전화번호가 올바르지 않습니다.</span>");
         userTel.focus();
         return false;
     }
 
     if (userSecurityQuestion.val() == "") {
-        alert('비밀번호찾기 질문이 선택되지 않았습니다.');
+        $('.checkSecurityQuestionSpan').remove();
+        $('.checkSecurityQuestion').after("<span class='checkSecurityQuestionSpan' style='color:red'>비밀번호 찾기 질문을 선택해주세요.</span>");
         userSecurityQuestion.focus();
         return false;
     }
 
     if (userSecurityAnswer.val() == "") {
-        alert('비밀번호 찾기 답을 입력하세요.');
+        $('.checkSecurityAnswerSpan').remove();
+        $('.checkSecurityAnswer').after("<span class='checkSecurityAnswerSpan' style='color:red'>비밀번호 찾기 답을 입력하세요.</span>");
         userSecurityAnswer.focus();
         return false;
     }
@@ -129,12 +137,56 @@ function signupCheck() {
         alert("아이디 중복체크를 해주세요.");
         userId.focus();
     }else if(status === "false"){
-        alert("다른 아이디를 입력해주세요.")
+        alert("다른 아이디를 입력해주세요.");
         userId.focus();
     }else if(status === "true"){
-        console.log("수많은 난관을 뚫고 가입한 것을 축하드립니다.");
-        alert("가입이 완료되었습니다. 잠시후 이메일에 인증하시면 서비스 이용이 가능합니다.")
-        $("form[name=signup_form]").submit();
+        signupSubmit(userId.val(), userPassword.val(), userEmail.val(), userTel.val(), userSecurityQuestion.val(), userSecurityAnswer.val());
     }
 }
 
+function signupSubmit(userId, userPassword, userEmail, userTel, userSecurityQuestion, userSecurityAnswer) {
+    $.ajax({
+        url: 'signup.do',
+        type: 'POST',
+        async: true,
+        data: {
+            userId: userId,
+            userPassword: userPassword,
+            userEmail: userEmail,
+            userTel: userTel,
+            userSecurityQuestion: userSecurityQuestion,
+            userSecurityAnswer: userSecurityAnswer
+        },
+        dataType: 'text',
+        success: function (data) {
+            let responseMsg = JSON.parse(data);
+            console.log(data);
+            if (responseMsg.duplicateIdError != null) {
+                alert(responseMsg.duplicateIdError);
+                return false;
+            }
+            if (responseMsg.duplicateTelError != null) {
+                $('.checkTelSpan').remove();
+                $('.checkTel').after("<span class='checkTelSpan' style='color:red'></span>");
+                $('.checkTelSpan').text(responseMsg.duplicateTelError);
+                return false;
+            }
+            if (responseMsg.duplicateEmailError != null) {
+                $('.checkEmailSpan').remove();
+                $('.checkEmail').after("<span class='checkEmailSpan' style='color:red'></span>");
+                $('.checkEmailSpan').text(responseMsg.duplicateEmailError);
+                return false;
+            }
+            if (responseMsg.failError != null) {
+                alert(responseMsg.failError);
+                return false;
+            }
+            if (responseMsg.success != null) {
+                location.href = "sendEmail.do";
+            }
+        },
+        error: function (e) {
+            alert("오류가 발생했습니다.");
+        }
+    })
+}

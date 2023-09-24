@@ -5,7 +5,6 @@ import lombok.*;
 @Getter
 @Setter
 public class MypageBooksDTO {
-
     private String bookName;
     private String bookAuthorName;
     private String scheduledReturnDate;
