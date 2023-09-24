@@ -22,15 +22,14 @@
     <c:set var="failed" value="${failed}"/>
     <div class="inline">
         <div class="mg big-book">
-            <img src="image/bookcover.png" class="imgstyle">
+            <img src="${bookDetail.bookImg}" class="imgstyle">
             <div class="center">
                 <span class="in-block"><h2>${bookDetail.bookName}</h2></span>
-                <span>${bookDetail.bookAuthorName}</span>
-                <div class="small">${bookDetail.categories} | ${bookDetail.bookPublisherName} |
-                    발행일: ${bookDetail.bookPubDate}</div>
+                <span >${bookDetail.bookAuthorName}</span>
+                <div class="small">${bookDetail.categories} | ${bookDetail.bookPublisherName} | 발행일: ${bookDetail.bookPubDate}</div>
                 <div class="bottom-mg inline">
-                    <button class="btn rental" onclick="rent(`${bookDetail.ISBN}`)">대여하기</button>
-                    <button class="btn preview">미리보기</button>
+                    <button class="btn rental" onclick="rent(${bookDetail.ISBN})">대여하기</button>
+<%--                    <button class="btn preview">미리보기</button>   &lt;%&ndash; 로그인 해야 볼 수 있음&ndash;%&gt;--%>
 
                     <c:if test="${heartSelect == 1}">
                         <img id="fullH" style="width: 20px; margin-left: 5px;" src="../../css/icons/full.png"
@@ -75,7 +74,7 @@
                                         <div class="row">
                                             <div class="card-title">
                                             <span>
-                                                    ${review.reviewRating}
+                                                ${review.reviewRating}
                                             </span>
                                                 <span class="review-top-right">
                                                 <p>작성일&nbsp; ${review.reviewDate}</p>
@@ -86,7 +85,7 @@
                                     <!--강의명 밑 내용과 추천-->
                                     <div class="card-body">
                                         <p class="card-text">
-                                                ${review.reviewContent}
+                                            ${review.reviewContent}
                                         </p>
                                         <div class="row">
                                             <div class="col-9 text-left">
@@ -115,6 +114,7 @@
                                     </div>
                                 </a>
                             </li>
+
                         </c:forEach>
                     </ul>
                 </div>
@@ -130,6 +130,7 @@
                     <h3 class="modal-title">대여에 성공했습니다!</h3>
                     <p class="scheduled-return-date"></p>
                 </div>
+
                 <div class="form-footer">
                     <button class="btn close" onclick="closeModal('#rental')">돌아가기</button>
                     <button class="btn move-page" onclick="location.href='mypageInfo.do'">마이페이지로 이동</button>
@@ -196,7 +197,7 @@
     let failed = "${failed}";
 </script>
 
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script src="../../js/detailPage.js"></script>

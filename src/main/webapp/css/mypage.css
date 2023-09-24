@@ -216,8 +216,8 @@ h5 {
 }
 
 .card-img-top {
-    width: 70%;
-    height: 70%;
+    width: 108px;
+    height: 150px;
     margin: 10px auto 10px;
 }
 
@@ -345,9 +345,10 @@ h5 {
 .modal-body {
     overflow-y: scroll;
     height: 750px;
-    white-space: normal;
+    white-space: initial;
     text-align: left;
     line-height: 30px;
+    word-break: break-word;
 }
 
 .modal-footer{

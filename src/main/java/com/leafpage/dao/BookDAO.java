@@ -385,11 +385,11 @@ public class BookDAO {
         return authorName;
     }
 
-    public List<MypageBooksDTO> getUserLendingBook(int userNo) throws IOException {
+    public List<MypageBooksDTO> getUserLendingBook(Long userNo) throws IOException {
 
         List<MypageBooksDTO> userBookList = new ArrayList<>();
 
-        String SQL = "select b.book_name, b.book_author_name, r.scheduled_return_date, r.rental_date, r.rental_no, r.scroll_y, r.modal_width, b.book_content \n" +
+        String SQL = "select b.book_img, b.book_name, b.book_author_name, r.scheduled_return_date, r.rental_date, r.rental_no, r.scroll_y, r.modal_width, b.book_content \n" +
                 "from users u \n" +
                 "join book_rental r\n" +
                 "on u.user_no = r.user_no\n" +
@@ -402,7 +402,7 @@ public class BookDAO {
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setInt(1, userNo);
+            pstmt.setLong(1, userNo);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -415,6 +415,7 @@ public class BookDAO {
                 books.setScrollY(rs.getInt("scroll_y"));
                 books.setModalWidth(rs.getInt("modal_width"));
                 books.setBookContent(rs.getString("book_content"));
+                books.setBookImg(rs.getString("book_img"));
 
                 userBookList.add(books);
             }
@@ -427,11 +428,11 @@ public class BookDAO {
         return userBookList;
     }
 
-    public List<MypageReturnedBooksDTO> getUserReturnedBook(int userNo) {
+    public List<MypageReturnedBooksDTO> getUserReturnedBook(Long userNo) {
 
         ArrayList<MypageReturnedBooksDTO> userReturnedBookList = new ArrayList<>();
 
-        String SQL = "select b.book_name, b.book_author_name, r.actual_return_date\n" +
+        String SQL = "select b.book_name, b.book_author_name, b.book_img, r.actual_return_date\n" +
                 "from users u \n" +
                 "join book_rental r\n" +
                 "on u.user_no = r.user_no\n" +
@@ -444,13 +445,14 @@ public class BookDAO {
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setInt(1, userNo);
+            pstmt.setLong(1, userNo);
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 MypageReturnedBooksDTO books = new MypageReturnedBooksDTO();
                 books.setBookName(rs.getString("book_name"));
                 books.setBookAuthorName(rs.getString("book_author_name"));
                 books.setActualReturnDate(rs.getString("actual_return_date"));
+                books.setBookImg(rs.getString("book_img"));
                 userReturnedBookList.add(books);
             }
         } catch (Exception e) {
