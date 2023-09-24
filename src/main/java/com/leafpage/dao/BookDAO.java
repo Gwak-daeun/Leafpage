@@ -4,6 +4,7 @@ import com.leafpage.dto.BookDTO;
 import com.leafpage.dto.MypageBooksDTO;
 import com.leafpage.dto.MypageReturnedBooksDTO;
 import com.leafpage.util.DBUtil;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -13,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public class BookDAO {
     PreparedStatement pstmt = null;
     ResultSet rs = null;
@@ -336,8 +338,6 @@ public class BookDAO {
             pstmt.setString(1, authorName);
             rs = pstmt.executeQuery();
 
-
-
             while (rs.next()) {
                 BookDTO sameAuthorBook = new BookDTO();
                 sameAuthorBook.setBookName(rs.getString("book_name"));
@@ -470,7 +470,7 @@ public class BookDAO {
             pstmt.setInt(1, modalY);
             pstmt.setInt(2, modalWidth);
             pstmt.setInt(3, rentalNo);
-            System.out.println("CHECK SAVE Y : " + pstmt);
+            log.debug("CHECK SAVE Y : {} " + pstmt);
             return pstmt.executeUpdate();
 
         } catch (Exception e) {
@@ -515,6 +515,160 @@ public class BookDAO {
         return mainBooks;
 
     }
+
+    public List<BookDTO> searchBooks(String searchSelect, String searchKeyword, String page) {
+
+        List<BookDTO> books = new ArrayList<>();
+
+        String SQL = "select ISBN, book_name, book_img, book_author_name, book_views, book_upload_date\n" +
+                "from books\n" +
+                "where book_state = 0\n";
+
+        if (searchSelect.equals("출판사")) {
+            SQL += " and book_publisher_name LIKE ?";
+        }
+        if (searchSelect.equals("제목")) {
+            SQL += " and book_name LIKE ?";
+        }
+        if (searchSelect.equals("작가")) {
+            SQL += " and book_author_name LIKE ?";
+        }
+        if (searchSelect.equals("전체")) {
+            SQL += " and concat(book_publisher_name, book_name, book_author_name) LIKE ?";
+        }
+
+        SQL += " order by book_upload_date desc limit 12 offset 0;";
+
+        try {
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1, "%" + searchKeyword + "%");
+            log.debug("CHECK SEARCH QUERY : {}", pstmt);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                BookDTO bookDTO = new BookDTO();
+                bookDTO.setISBN(rs.getString("ISBN"));
+                bookDTO.setBookName(rs.getString("book_name"));
+                bookDTO.setBookImg(rs.getString("book_img"));
+                bookDTO.setBookAuthorName(rs.getString("book_author_name"));
+                books.add(bookDTO);
+            }
+
+        }  catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+
+        return books;
+    }
+
+    public List<BookDTO> sortBooks(String sortWord, String searchSelect, String searchKeyword, String genre, int page) {
+
+        List<BookDTO> books = new ArrayList<>();
+
+        String SQL = "select distinct books.ISBN, book_name, book_img, book_author_name, book_views, book_upload_date\n" +
+                "from books\n" +
+                "join book_category\n" +
+                "on book_category.ISBN = books.ISBN\n" +
+                "where book_state = 0 \n";
+
+        String SQLView = "order by book_views desc ";
+
+        String SQLDate = "order by book_upload_date desc ";
+
+        if (!genre.isEmpty()) {
+            SQL += "and book_category.category_name LIKE ?";
+        }
+
+        if (searchSelect.equals("출판사")) {
+
+            SQL += "and book_publisher_name LIKE ? ";
+
+            if (sortWord.equals("인기순")) {
+                SQL += SQLView;
+            }
+            else  {
+                SQL += SQLDate;
+            }
+        }
+        if (searchSelect.equals("제목")) {
+
+            SQL += "and book_name LIKE ? ";
+
+            if (sortWord.equals("인기순")) {
+                SQL += SQLView;
+            }
+            else {
+                SQL += SQLDate;
+            }
+        }
+        if (searchSelect.equals("작가")) {
+
+            SQL += "and book_author_name LIKE ? ";
+
+            if (sortWord.equals("인기순")) {
+                SQL += SQLView;
+            }
+            else {
+                SQL += SQLDate;
+            }
+        }
+        if (searchSelect.equals("전체")) {
+
+            SQL += "and concat(book_publisher_name, book_name, book_author_name) LIKE ? ";
+
+            if (sortWord.equals("인기순")) {
+                SQL += SQLView;
+            }
+            else {
+                SQL += SQLDate;
+            }
+        }
+
+        SQL += "limit 12 offset ?;";
+
+
+        System.out.println("CHECK PAGE NUM : " + page);
+
+        try {
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(SQL);
+
+            if (genre.isEmpty()){
+                pstmt.setString(1, "%" + searchKeyword + "%");
+                pstmt.setInt(2, page);
+//                pstmt.setInt(3, pageNum);
+            }
+            if (!genre.isEmpty()) {
+                pstmt.setString(1, "%" + genre + "%");
+                pstmt.setString(2, "%" + searchKeyword + "%");
+                pstmt.setInt(3, page);
+//                pstmt.setInt(4, pageNum);
+            }
+
+            log.debug("CHECK SEARCH RESULT QUERY : {} " + pstmt);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                BookDTO bookDTO = new BookDTO();
+                bookDTO.setISBN(rs.getString("ISBN"));
+                bookDTO.setBookName(rs.getString("book_name"));
+                bookDTO.setBookImg(rs.getString("book_img"));
+                bookDTO.setBookAuthorName(rs.getString("book_author_name"));
+                books.add(bookDTO);
+            }
+
+        }  catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+        log.debug("END OF SORT : {} " + books);
+        return books;
+    }
+  
     public List<BookDTO> booksearchlist(int pageNum, int amount, String keyword){
 
 
@@ -603,5 +757,4 @@ public class BookDAO {
 
         return false;
     }
-
 }

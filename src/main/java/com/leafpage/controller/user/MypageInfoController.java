@@ -33,6 +33,6 @@ public class MypageInfoController implements Controller {
 
         request.setAttribute("userReturnedBooks", userReturnedBooks);
 
-        return "/user/mypage";
+        return "user/mypage";
     }
 }
