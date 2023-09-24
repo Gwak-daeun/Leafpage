@@ -1,6 +1,8 @@
 package com.leafpage.controller.user;
 
 import com.leafpage.controller.Controller;
+import com.leafpage.dao.BookDAO;
+import com.leafpage.dao.RentalDAO;
 import com.leafpage.dao.UserDAO;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,6 +63,16 @@ public class LoginController implements Controller {
                 session.setAttribute("userId", userId);
                 session.setAttribute("userEmailChecked", userEmailChecked);
                 session.setAttribute("userNo", userNo);
+
+                List<String> returnedBooksISBN = new RentalDAO().returnOverdueBooks(userNo);
+
+                if (!returnedBooksISBN.isEmpty()) {
+                    List<String> returnedBooksName = new BookDAO().findReturnedBooksName(returnedBooksISBN);
+                    request.setAttribute("returnedBooksName", returnedBooksName);
+                }
+
+
+
 
                 return "indexInfo.do";
 
