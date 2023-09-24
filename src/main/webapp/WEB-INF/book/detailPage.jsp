@@ -22,14 +22,14 @@
     <c:set var="failed" value="${failed}"/>
     <div class="inline">
         <div class="mg big-book">
-            <img src="image/bookcover.png" class="imgstyle">
+            <img src="${bookDetail.bookImg}" class="imgstyle">
             <div class="center">
                 <span class="in-block"><h2>${bookDetail.bookName}</h2></span>
                 <span >${bookDetail.bookAuthorName}</span>
                 <div class="small">${bookDetail.categories} | ${bookDetail.bookPublisherName} | 발행일: ${bookDetail.bookPubDate}</div>
                 <div class="bottom-mg inline">
                     <button class="btn rental" onclick="rent(${bookDetail.ISBN})">대여하기</button>
-                    <button class="btn preview">미리보기</button>   <%-- 로그인 해야 볼 수 있음--%>
+<%--                    <button class="btn preview">미리보기</button>   &lt;%&ndash; 로그인 해야 볼 수 있음&ndash;%&gt;--%>
 
                     <c:if test="${heartSelect == 1}">
                         <img id="fullH" style="width: 20px; height: 20px; margin-left: 5px;" src="../../css/icons/full.png" onclick="likeCheck()">
@@ -179,7 +179,7 @@
     let failed = "${failed}";
 </script>
 
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script src="../../js/detailPage.js"></script>

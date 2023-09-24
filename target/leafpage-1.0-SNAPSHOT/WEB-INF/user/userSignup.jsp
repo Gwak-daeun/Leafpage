@@ -69,7 +69,7 @@
     </form>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js" crossorigin="anonymous"></script>
 <script src="../../js/userSignup.js"></script>
 <script src="../../js/alertMsg.js"></script>
 </body>

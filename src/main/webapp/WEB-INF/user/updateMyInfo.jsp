@@ -64,7 +64,7 @@
 
 <!-- 제이쿼리 자바스크립트 추가하기 -->
 
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="../../js/updateMyInfo.js"></script>
 <script type="text/javascript" src="../../js/findPw.js"></script>
