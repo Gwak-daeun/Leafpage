@@ -16,7 +16,7 @@ public class ReviewDAO {
     private ResultSet rs = null;
     String SQL = "";
 
-    public int makeReview(int userNum, String ISBN, String reviewDate, String reviewContent, int reviewRating) {
+    public int makeReview(Long userNo, String isbn, String reviewDate, String reviewContent, int reviewRating) {
 
         SQL = "INSERT INTO reviews ( user_no, ISBN, review_date, review_content, review_rating ) \n" +
                 "VALUES ( ?, ?, ?, ?, ?);";
@@ -25,8 +25,8 @@ public class ReviewDAO {
 
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setInt(1, userNum);
-            pstmt.setString(2, ISBN);
+            pstmt.setLong(1, userNo);
+            pstmt.setString(2, isbn);
             pstmt.setString(3, reviewDate);
             pstmt.setString(4, reviewContent);
             pstmt.setInt(5, reviewRating);
@@ -46,7 +46,7 @@ public class ReviewDAO {
 
         List<ReviewDTO> bookReviews = new ArrayList<>();
 
-        SQL = "select review_no, ISBN, review_date, review_content, review_rating\n" +
+        SQL = "select review_no, user_no, ISBN, review_date, review_content, review_rating\n" +
                 "from reviews\n" +
                 "where ISBN = ?\n" +
                 "order by review_date desc;";
@@ -60,6 +60,7 @@ public class ReviewDAO {
             while (rs.next()) {
                 ReviewDTO review = new ReviewDTO();
                 review.setReviewNo(rs.getString("review_no"));
+                review.setUserNo(rs.getString("user_no"));
                 review.setISBN(rs.getString("ISBN"));
                 review.setReviewDate(rs.getString("review_date"));
                 review.setReviewContent(rs.getString("review_content"));
@@ -76,7 +77,7 @@ public class ReviewDAO {
         return bookReviews;
     }
 
-    public int removeReview(int reviewNo) {
+    public int removeReview(String reviewNo) {
 
         SQL = "delete from reviews\n" +
                 "where review_no = ?;";
@@ -85,7 +86,7 @@ public class ReviewDAO {
 
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setInt(1, reviewNo);
+            pstmt.setString(1, reviewNo);
 
             return pstmt.executeUpdate();
 
