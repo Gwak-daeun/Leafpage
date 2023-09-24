@@ -98,6 +98,22 @@ public class AdminBookUploadController implements Controller  {
         System.out.println(bookimgFullPath);*/
         List<String> categorieslist = new ArrayList<>();
 
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html; charset=UTF-8");
+
+        if(ISBN.length() != 13){
+            out.println("<script>");
+            out.println("alert('ISBN은 13자리입니다')");
+            out.println("history.back()");
+            out.println("</script>");
+            return null;
+        } else if (dao.duplicationISBN(ISBN)) {
+            out.println("<script>");
+            out.println("alert('존재하는 ISBN입니다')");
+            out.println("history.back()");
+            out.println("</script>");
+
+        }
 
         String[] categorie = categories.split(",");
         for(int i = 0;  i < categorie.length; i++){
@@ -105,12 +121,12 @@ public class AdminBookUploadController implements Controller  {
             if(categorie[i].equals("만화")|| categorie[i].equals("생활")||categorie[i].equals("소설")|| categorie[i].equals("에세이")||categorie[i].equals("학술논문")){
                 categorieslist.add(categorie[i]);
             }else {
-                response.setContentType("text/html; charset=UTF-8");
-                PrintWriter out = response.getWriter();
+
                 out.println("<script>");
                 out.println("alert('카테고리는 만화,생활,소설,에세이,학술논문만 있습니다')");
                 out.println("history.back()");
                 out.println("</script>");
+                return null;
             }
         }
 
@@ -136,23 +152,20 @@ public class AdminBookUploadController implements Controller  {
         System.out.println(count);
 
         if(count == 1){
-            response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = response.getWriter();
+
             out.println("<script>");
             out.println("alert('등록성공')");
             out.println("</script>");
             return "booklistView.do";
         }else {
-            response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = response.getWriter();
             out.println("<script>");
             out.println("alert('등록실패')");
             out.println("history.back()");
             out.println("</script>");
+            return null;
         }
 
 
-       return null;
     }
 
 }

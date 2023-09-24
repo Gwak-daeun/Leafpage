@@ -21,6 +21,10 @@ public class LeeLikeyDAO {
 
         String SQL = "SELECT * FROM likey WHERE user_no = ? AND ISBN = ?";
 
+        if (userNo == null) {
+            return 0;
+        }
+
         try {
             conn = DBUtil.getConnection();
             pstmp = conn.prepareStatement(SQL);

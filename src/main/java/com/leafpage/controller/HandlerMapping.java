@@ -72,11 +72,16 @@ public class HandlerMapping {
 
         mappings.put("/rentBook.do", new RentalController());
         mappings.put("/returnBook.do", new ReturnController());
-
-
+        mappings.put("/notFoundPageView.do", new NotFoundPageViewController());
     }
 
     public Controller getController(String path) {
-        return mappings.get(path);
+        Controller controller = mappings.get(path);
+
+        if (controller == null) {
+            return mappings.get("/notFoundPageView.do");
+        }
+
+        return controller;
     }
 }
