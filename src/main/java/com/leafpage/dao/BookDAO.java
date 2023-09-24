@@ -493,6 +493,7 @@ public class BookDAO {
 
         String SQL = "select ISBN , book_name, book_img, book_author_name, book_views\n" +
                 "from books\n" +
+                "where book_state = 0\n" +
                 "order by book_views desc\n" +
                 "limit 8;";
 
@@ -697,9 +698,6 @@ public class BookDAO {
 
         SQL += "limit 12 offset ?;";
 
-
-        System.out.println("CHECK PAGE NUM : " + page);
-
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
@@ -736,6 +734,36 @@ public class BookDAO {
         log.debug("END OF SORT : {} " + books);
         return books;
     }
+
+
+    public boolean isISBNZero(String isbn) {
+
+        String SQL = "select ISBN\n" +
+                "from books\n" +
+                "where ISBN = ?\n" +
+                "and book_state = 0;";
+
+        try {
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1, isbn);
+            System.out.println("CHECK QUERY : " + pstmt);
+
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+
+        return false;
+    }
+
 
 //    public List<BookDTO> booksearchlist(int pageNum, int amount, String keyword){
 //
