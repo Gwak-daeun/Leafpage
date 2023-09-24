@@ -3,6 +3,7 @@ package com.leafpage.dao;
 import com.leafpage.dto.BookDTO;
 import com.leafpage.dto.MypageBooksDTO;
 import com.leafpage.dto.MypageReturnedBooksDTO;
+import com.leafpage.dto.RentalDTO;
 import com.leafpage.util.DBUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -11,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -762,6 +764,56 @@ public class BookDAO {
         }
 
         return false;
+    }
+
+    public List<RentalDTO> stealOverdueBooks(int userNo) {
+
+        List<RentalDTO> overdueBooks = new ArrayList<>();
+
+        String SQL = "select user_no, rental_no, scheduled_return_date, actual_return_date\n" +
+                "from book_rental\n" +
+                "where user_no = ?\n" +
+                "and actual_return_date is null;";
+
+        LocalDate today = LocalDate.now();
+
+        try {
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setInt(1, userNo);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                RentalDTO rentalDTO = new RentalDTO();
+                rentalDTO.setScheduledReturnDate(rs.getDate("scheduled_return_date").toLocalDate());
+                rentalDTO.setRentalNo(rs.getLong("rental_no"));
+                rentalDTO.setUserNo(rs.getLong("user_no"));
+
+                LocalDate scheduledReturnDate = rentalDTO.getScheduledReturnDate();
+
+                if (today.isAfter(scheduledReturnDate)) {
+                    overdueBooks.add(rentalDTO);
+                }
+            }
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+
+        return overdueBooks;
+    }
+
+
+    //Todo: RentalDAO로 옮겨야 함
+    public void returnOverdueBooks() {
+        String SQL = "update book_rental set actual_return_date = DATE(NOW()) where user_no = ? \n"
+                        + "and scheduled_return_date"
+
+
     }
 
 
