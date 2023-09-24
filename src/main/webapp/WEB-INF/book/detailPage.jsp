@@ -194,6 +194,7 @@
 <script>
     let errorMsg = "${errorMsg}";
     let failed = "${failed}";
+    let userNo = "${userNo}";
 </script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
