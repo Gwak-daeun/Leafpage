@@ -28,3 +28,4 @@
 </header>
 
 <input type="hidden" id="msg" value="${msg}">
+<input type="hidden" id="returnedBooks" value="${returnedBooksName}">

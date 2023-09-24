@@ -9,6 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 public class RentalDAO {
@@ -172,5 +175,19 @@ public class RentalDAO {
             log.error("{}", ex.getMessage());
             throw new RollbackException(className, methodName);
         }
+    }
+
+    public List<String> returnOverdueBooks(int userNo) {
+
+        List<String> returnedBooksISBN = new ArrayList<>();
+
+        List<RentalDTO> overdueBooks = new BookDAO().findOverdueBooks(userNo);
+
+        for (RentalDTO overdueBook : overdueBooks) {
+            returnBook(overdueBook);
+            returnedBooksISBN.add(overdueBook.getIsbn());
+        }
+
+        return returnedBooksISBN;
     }
 }
