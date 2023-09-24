@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- Modal -->
-<div class="modal fade" id="${book.rentalNo}" aria-hidden="true">
+<div class="modal fade" id="${book.rentalNo}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,7 +9,6 @@
                     <img class="light-icon" src="../css/icons/light_mode.png" />
                     <img class="dark-icon" src="../css/icons/dark_mode.png" />
                 </a>
-                <%--                <button class="select-mode">모드</button>--%>
             </div>
             <div class="modal-body">
                 ${book.bookContent}

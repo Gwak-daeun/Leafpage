@@ -12,58 +12,74 @@
 </head>
 <body>
 <%@include file="../component/header.jsp"%>
+<c:set var="searchKeyword" value="${searchKeyword}"/>
+<c:set var="searchSelect" value="${searchSelect}"/>
+<c:set var="genre" value="${genre}"/>
+<c:set var="page" value="${page}"/>
+<c:set var="sortWord" value="${sortWord}"/>
 
 <div class="container">
     <div class="title">
         <h1>LeafPage</h1>
     </div>
-    <div class="toggle">
-        <label class="switch">
-            <input type="checkbox" class="switch-input">
-            <span class="switch-label" data-on="최신순" data-off="인기순"></span>
-            <span class="switch-handle"></span>
-        </label>
-
-    </div>
-    <div class="search-bar">
-        <select class="book-select">
-            <option class="book-option">국내도서</option>
-            <option class="book-option">해외도서</option>
-        </select>
-        <input class="search-input" placeholder="둘러보기" />
-        <img class="search-lens" src="../../css/icons/search.png" />
-    </div>
+    <form method="get" action="search.do">
+        <div class="toggle">
+            <a href="/sortBooks.do?sortWord=최신순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=${genre}"><div id="select1">최신순</div></a>
+            <a href="/sortBooks.do?sortWord=인기순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=${genre}"><div id="select2">인기순</div></a>
+        </div>
+        <div class="search-bar">
+            <select id="selectBox" name="searchSelect" class="book-select">
+                <option value="전체" class="book-option">전체</option>
+                <option value="출판사" class="book-option">출판사</option>
+                <option value="제목" class="book-option">제목</option>
+                <option value="작가" class="book-option">작가</option>
+            </select>
+            <input type="text" id="search" name="searchKeyword" value="${searchKeyword}" class="search-input" placeholder="둘러보기" />
+            <img class="search-lens" src="../../css/icons/search.png" />
+        </div>
+    </form>
     <div class="search-keywords">
         <ul>
-            <li>에세이</li>
-            <li>소설</li>
-            <li>만화</li>
-            <li>생활</li>
-            <li>학술논문</li>
+            <li><a href="/sortBooks.do?sortWord=최신순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=에세이">에세이</a></li>
+            <li><a href="/sortBooks.do?sortWord=최신순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=소설">소설</a></li>
+            <li><a href="/sortBooks.do?sortWord=최신순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=만화">만화</a></li>
+            <li><a href="/sortBooks.do?sortWord=최신순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=생활">생활</a></li>
+            <li><a href="/sortBooks.do?sortWord=최신순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=학술논문">학술논문</a></li>
         </ul>
     </div>
-    <div class="book-box">
-        <ul class="book-ul list-group list-group-horizontal">
-            <li >
-                <div class="book-list">
-                    <img class="book-cover" src="../../image/4.jpg" />
-                    <div class="book-title">나를 지키는 관계...</div>
-                    <div class="book-author">안젤라 센</div>
-                </div>
-            </li>
-            <li><div class="book-list"></div></li>
-            <li><div class="book-list"></div></li>
-            <li><div class="book-list"></div></li>
-            <li><div class="book-list"></div></li>
-            <li><div class="book-list"></div></li>
-            <li><div class="book-list"></div></li>
-            <li><div class="book-list"></div></li>
+    <div id="book-box" class="book-box">
+        <ul id="searchResultUl" class="book-ul list-group list-group-horizontal">
+            <c:forEach var="searchBook" items="${books}">
+                <li>
+                    <a href="/detailPageView.do?isbn=${searchBook.ISBN}">
+                        <div class="book-list">
+                            <img class="book-cover" src="${searchBook.bookImg}" />
+                            <div class="book-title">${searchBook.bookName}</div>
+                            <div class="book-author">${searchBook.bookAuthorName}</div>
+                        </div>
+                    </a>
+                </li>
+            </c:forEach>
         </ul>
+        <div class="d-flex justify-content-center">
+            <div id="spinner" class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
     </div>
+
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    let searchKeyword = "${searchKeyword}";
+    let searchSelect = "${searchSelect}";
+    let genre = "${genre}";
+    let page = ${page};
+    let sortWord = "${sortWord}";
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script></body>
+<script src="../js/searchResult.js"></script>
 <script src="../../js/alertMsg.js"></script>
 </body>
 </html>

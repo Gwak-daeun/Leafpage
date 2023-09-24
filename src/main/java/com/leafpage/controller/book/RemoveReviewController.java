@@ -14,12 +14,8 @@ public class RemoveReviewController implements Controller {
 
         int result = 0;
 
-        try {
-            int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
-            result = new ReviewDAO().removeReview(reviewNo);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
+            String reviewNo = request.getParameter("reviewNo");
+             result = new ReviewDAO().removeReview(reviewNo);
 
         if (result == -1) {
             request.setAttribute("errorMsg", "리뷰 삭제에 실패했어요.");

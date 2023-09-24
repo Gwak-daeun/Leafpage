@@ -50,7 +50,7 @@ public class LoginController implements Controller {
                 return "loginView.do";
 
             case 0:  // [0]관리자 로그인
-                session.setAttribute("msg", "관리자계정으로 확인됩니다. 관리자 페이지로 이동합니다.");
+//                session.setAttribute("msg", "관리자계정으로 확인됩니다. 관리자 페이지로 이동합니다.");
                 session.setAttribute("userId", userId);
                 session.setAttribute("userEmailChecked", true);
                 session.setAttribute("userNo", userNo);

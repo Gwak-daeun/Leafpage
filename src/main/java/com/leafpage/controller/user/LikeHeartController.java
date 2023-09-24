@@ -17,7 +17,7 @@ public class LikeHeartController implements Controller {
 
         //1. 사용자 정보 입력 추출
         HttpSession session = request.getSession();
-        long userNo = (long) session.getAttribute("userNo");
+        Long userNo = (Long) session.getAttribute("userNo");
         String isbn = request.getParameter("isbn");
 
         //2. DB 연동 처리

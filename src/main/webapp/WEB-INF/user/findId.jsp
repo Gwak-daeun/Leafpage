@@ -37,7 +37,7 @@
     </div>
 
 </form>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="../../js/select.js"></script>
 <script type="text/javascript" src="../../js/findId.js"></script>
 <script type="text/javascript" src="../../js/alertMsg.js"></script>

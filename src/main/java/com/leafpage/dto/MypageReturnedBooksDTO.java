@@ -5,7 +5,8 @@ import lombok.*;
 @Getter
 @Setter
 public class MypageReturnedBooksDTO {
-    String bookName;
-    String bookAuthorName;
-    String actualReturnDate;
+    private String bookName;
+    private String bookAuthorName;
+    private String actualReturnDate;
+    private String bookImg;
 }

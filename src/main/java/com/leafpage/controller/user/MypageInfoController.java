@@ -22,8 +22,9 @@ public class MypageInfoController implements Controller {
 
         BookDAO bookDAO = new BookDAO();
 
-        //Todo: 이후 로그인한 유저에서 받아오는 파라미터 값으로 바꿔야 함
-        int userNo = 1;
+        HttpSession session = request.getSession();
+
+        Long userNo = ((Integer) session.getAttribute("userNo")).longValue();
 
         userBooks = bookDAO.getUserLendingBook(userNo);
 
@@ -33,6 +34,6 @@ public class MypageInfoController implements Controller {
 
         request.setAttribute("userReturnedBooks", userReturnedBooks);
 
-        return "/user/mypage";
+        return "user/mypage";
     }
 }
