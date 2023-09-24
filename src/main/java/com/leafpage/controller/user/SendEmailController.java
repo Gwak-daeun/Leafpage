@@ -19,25 +19,25 @@ public class SendEmailController implements Controller {
         System.out.println("SendEmailController진입");
         UserDAO userDAO = new UserDAO();
         HttpSession session = request.getSession();
-        String userId  = (String)session.getAttribute("userId");
+        String userId = (String) session.getAttribute("userId");
 
-        if(userId == null) {
+        if (userId == null) {
             userId = (String) session.getAttribute("inactiveIdForActive");
-            System.out.println("new:"+ userId);
+            System.out.println("new:" + userId);
         }
 
         boolean emailChecked = userDAO.getUserEmailChecked(userId);
 
-        if(emailChecked) {
+        if (emailChecked) {
             session.setAttribute("msg", "이미 이메일 인증이 완료되었습니다. 정상적인 서비스 이용이 가능합니다.");
-            return "index";
+            response.sendRedirect("indexInfo.do");
         }
 
         //구글 smtp가 기본적으로 제공하는 양식을 그대로 사용
-        String host = "http://localhost:8080/";
+        String host = "http://cloud.swdev.kr:4006/";
         String from = "TESTsjh8924@gmail.com";  //보내는 사람
         String to = userDAO.getUserEmail(userId);  //받는 사람
-        System.out.println("to:"+ to);
+        System.out.println("to:" + to);
         String subject = "LeafPage 이메일 인증";
         String content = "다음 링크에 접속하시면 이메일 인증이 완료됩니다." +
                 "<a href='" + host + "checkEmail.do?code=" + new com.leafpage.util.SHA256().getSHA256(to) + "'>이메일 인증하기</a>";

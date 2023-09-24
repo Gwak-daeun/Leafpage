@@ -1,15 +1,13 @@
 package com.leafpage.domain.book;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+@Getter
 @Slf4j
 public class ISBN {
     private static final int ISBN_LENGTH = 13;
     private final String ISBN;
-
-    public String getISBN() {
-        return ISBN;
-    }
 
     public ISBN(String isbn) {
         validate(isbn);

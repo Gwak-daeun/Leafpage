@@ -28,28 +28,33 @@
             <div class="form-group mt-3">
                 <label for="current_user_tel">휴대전화번호</label>
                 <input type="number" id="current_user_tel" name="TelForUpdate" class="form-control" placeholder="기존 전화번호" value="${userTel}" data-user-tel="${userTel}">
-                <div class="redtext" id="checkSpan_for_tel_update"></div>
+                <div class="checkText" id="checkSpan_for_tel_update"></div>
             </div>
 
             <div class="form-group mt-3">
                 <label for="current_user_email">이메일 주소</label>
                 <input type="email" id="current_user_email" name="EmailForUpdate" class="form-control" placeholder="기존 이메일" value="${userEmail}" data-user-email="${userEmail}">
-                <div class="redtext" id="checkSpan_for_email_update"></div>
+                <div class="checkText" id="checkSpan_for_email_update"></div>
             </div>
 
             <div class="form-group mt-3">
                 <label for="password_for_update">정보를 변경하시려면 비밀번호를 입력하세요.</label>
                 <input type="password" id="password_for_update" name="passwordForUpdate" class="form-control" placeholder="현재 비밀번호">
-                <div class="redtext" id="checkSpan_password_for_update"></div>
+                <div class="checkText" id="checkSpan_password_for_update"></div>
             </div>
             <div class="redtext"> 정보를 변경한 후에는 이메일 인증을 다시 진행해주세요. </div>
             <div class="btn-flex-group">
                 <button type="button" class="btn btn-success btn3 mt-3" onclick="updateMyInfo()" >수정하기</button>
             </div>
+
         </form>
-        <button id='checkWithdrawal' data-bs-toggle='modal' data-bs-target='#withdrawalCheckModal' class='btn btn-danger mt-3'>탈퇴하기</button>
-        <button class='btn btn-success mt-3' onclick="inactive()">휴면전환</button>
-        <button data-bs-toggle='modal' data-bs-target='#newPasswordModal' class='btn btn-success mt-3'>비밀번호<br>변경</button>
+        <hr style="margin: 20px 0 5px 0">
+        <div class="bottom-btn">
+            <button class='btn btn-success mt-3' onclick="inactive()">휴면전환</button>
+            <button data-bs-toggle='modal' data-bs-target='#newPasswordModal' class='btn btn-success mt-3'>비밀번호변경</button>
+            <button id='checkWithdrawal' data-bs-toggle='modal' data-bs-target='#withdrawalCheckModal' class='btn btn-danger mt-3'>탈퇴</button>
+        </div>
+
 
     </div>
 </section>

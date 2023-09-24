@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class DuplicateIdCheckController implements Controller{
+public class DuplicateIdCheckController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if (request.getParameter("signupUserId") != null) {
@@ -25,6 +25,6 @@ public class DuplicateIdCheckController implements Controller{
                 e.printStackTrace();
             }
         }
-        return null;
+        return "none";
     }
 }

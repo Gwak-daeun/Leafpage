@@ -16,7 +16,7 @@ public class RemoveReviewController implements Controller {
 
         try {
             int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
-             result = new ReviewDAO().removeReview(reviewNo);
+            result = new ReviewDAO().removeReview(reviewNo);
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }

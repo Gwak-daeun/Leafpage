@@ -18,7 +18,7 @@ public class AdminUserStateChangeController implements Controller {
         String state = request.getParameter("state");
         dto.setUserId(userId);
 
-        if(state.equals("black")){
+        if (state.equals("black")) {
             state = "블랙회원";
         }
         if (state.equals("dormant")) {
@@ -30,13 +30,10 @@ public class AdminUserStateChangeController implements Controller {
 
         if (state.equals("delete")) {
             dao.deletesearchUser(dto);
-        }
-        else {
+        } else {
             dto.setUserState(state);
             dao.stateUpDate(dto);
         }
-
-
 
 
         return "/userlistview.do";

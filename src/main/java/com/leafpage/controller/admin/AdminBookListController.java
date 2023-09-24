@@ -23,12 +23,12 @@ public class AdminBookListController implements Controller {
         int amount = 10;
 
         // 페이지번호를 클릭하는 경우
-        if(request.getParameter("pageNum") != null) {
+        if (request.getParameter("pageNum") != null) {
             pageNum = Integer.parseInt(request.getParameter("pageNum"));
         }
 
         BookDAO dao = new BookDAO();
-         // 전체게시글수
+        // 전체게시글수
         List<BookDTO> bookList = dao.booklist(pageNum, amount);
         int total = dao.getTotal();
 
@@ -40,17 +40,14 @@ public class AdminBookListController implements Controller {
         pageUtil.listpage(pageDTO);
 
 
-
-
         // 3. 페이지네이션을 화면에 전달
         request.setAttribute("pageDTO", pageDTO);
 
-        request.setAttribute("bookList" ,bookList);
+        request.setAttribute("bookList", bookList);
 
 
         return "admin/admin-bookmanagement";
     }
-
 
 
 }

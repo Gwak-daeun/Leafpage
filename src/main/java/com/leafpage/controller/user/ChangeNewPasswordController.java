@@ -15,15 +15,15 @@ public class ChangeNewPasswordController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         System.out.println("changeNewPasswordController진입");
-        System.out.println("새로운비밀번호:"+request.getParameter("newPassword"));
+        System.out.println("새로운비밀번호:" + request.getParameter("newPassword"));
 
         int changePasswordSuccess = 0;
         Password newPassword = null;
-        if(request.getParameter("newPassword")!=null) {
+        if (request.getParameter("newPassword") != null) {
             newPassword = new Password(request.getParameter("newPassword"));
         }
 
-        if(newPassword != null) {
+        if (newPassword != null) {
             HttpSession session = request.getSession();
             String userId = (String) session.getAttribute("userId");
             if (userId != null) {
