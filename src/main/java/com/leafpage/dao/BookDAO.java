@@ -3,6 +3,7 @@ package com.leafpage.dao;
 import com.leafpage.dto.BookDTO;
 import com.leafpage.dto.MypageBooksDTO;
 import com.leafpage.dto.MypageReturnedBooksDTO;
+import com.leafpage.dto.RentalDTO;
 import com.leafpage.util.DBUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -11,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -621,7 +623,7 @@ public class BookDAO {
                 books.add(bookDTO);
             }
 
-        }  catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             DBUtil.close(rs, pstmt, conn);
@@ -654,8 +656,7 @@ public class BookDAO {
 
             if (sortWord.equals("인기순")) {
                 SQL += SQLView;
-            }
-            else  {
+            } else {
                 SQL += SQLDate;
             }
         }
@@ -665,8 +666,7 @@ public class BookDAO {
 
             if (sortWord.equals("인기순")) {
                 SQL += SQLView;
-            }
-            else {
+            } else {
                 SQL += SQLDate;
             }
         }
@@ -676,8 +676,7 @@ public class BookDAO {
 
             if (sortWord.equals("인기순")) {
                 SQL += SQLView;
-            }
-            else {
+            } else {
                 SQL += SQLDate;
             }
         }
@@ -687,8 +686,7 @@ public class BookDAO {
 
             if (sortWord.equals("인기순")) {
                 SQL += SQLView;
-            }
-            else {
+            } else {
                 SQL += SQLDate;
             }
         }
@@ -699,7 +697,7 @@ public class BookDAO {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
 
-            if (genre.isEmpty()){
+            if (genre.isEmpty()) {
                 pstmt.setString(1, "%" + searchKeyword + "%");
                 pstmt.setInt(2, page);
 //                pstmt.setInt(3, pageNum);
@@ -723,7 +721,7 @@ public class BookDAO {
                 books.add(bookDTO);
             }
 
-        }  catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             DBUtil.close(rs, pstmt, conn);
@@ -744,7 +742,8 @@ public class BookDAO {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
             pstmt.setString(1, isbn);
-            System.out.println("CHECK QUERY : " + pstmt);
+
+            log.debug("CHECK ISBN IS ZERO : {} " + pstmt);
 
             rs = pstmt.executeQuery();
 
@@ -759,6 +758,78 @@ public class BookDAO {
         }
 
         return false;
+    }
+
+    public List<RentalDTO> findOverdueBooks(int userNo) {
+
+        List<RentalDTO> overdueBooks = new ArrayList<>();
+
+        String SQL = "select ISBN, user_no, rental_no, scheduled_return_date, actual_return_date\n" +
+                "from book_rental\n" +
+                "where user_no = ?\n" +
+                "and actual_return_date is null\n" +
+                "and scheduled_return_date < now();";
+
+        try {
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setInt(1, userNo);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                RentalDTO rentalDTO = new RentalDTO();
+                rentalDTO.setScheduledReturnDate(rs.getDate("scheduled_return_date").toLocalDate());
+                rentalDTO.setRentalNo(rs.getLong("rental_no"));
+                rentalDTO.setUserNo(rs.getLong("user_no"));
+                rentalDTO.setIsbn(rs.getString("ISBN"));
+
+                overdueBooks.add(rentalDTO);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+
+        return overdueBooks;
+    }
+
+    public List<String> findReturnedBooksName(List<String> returnedBooksISBN) {
+
+        List<String> returnedBooksName = new ArrayList<>();
+
+        String SQL = "select book_name\n" +
+                "from books\n" +
+                "where ISBN = ?";
+
+        try {
+
+            conn = DBUtil.getConnection();
+
+            pstmt = conn.prepareStatement(SQL);
+
+            for (String returnedBookISBN : returnedBooksISBN) {
+                pstmt.setString(1, returnedBookISBN);
+
+                rs = pstmt.executeQuery();
+
+                while (rs.next()) {
+                    BookDTO bookDTO = new BookDTO();
+                    bookDTO.setBookName(rs.getString("book_name"));
+                    returnedBooksName.add(bookDTO.getBookName());
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+
+        return returnedBooksName;
+
     }
 
 
@@ -825,7 +896,7 @@ public class BookDAO {
 //        return result ;
 //    }
 
-    public boolean duplicationISBN(String ISBN){
+    public boolean duplicationISBN(String ISBN) {
 
 
         try {
@@ -833,18 +904,18 @@ public class BookDAO {
             String sql = "select isbn from books where ISBN = ? ";
 
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,ISBN);
+            pstmt.setString(1, ISBN);
 
             rs = pstmt.executeQuery();
 
-            if(rs.next()) {
-               return true;
+            if (rs.next()) {
+                return true;
             }
 
-            DBUtil.close(rs ,pstmt, conn);
+            DBUtil.close(rs, pstmt, conn);
 
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 

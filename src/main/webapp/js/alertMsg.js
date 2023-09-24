@@ -1,17 +1,22 @@
-$(document).ready(function(){
-    let msg = $('#msg').val();
+$(document).ready(function () {
 
-    if(msg !== "") {
-        console.log("index alert: "+msg);
+    const returnedBooksName = $('#returnedBooks').val();
+    if (returnedBooksName) {
+        alert("기한이 지나 도서가 반납되었습니다. \n \n반납된 도서 : " + returnedBooksName);
+    }
+
+    let msg = $('#msg').val();
+    if (msg !== "") {
+        console.log("index alert: " + msg);
         alert(msg);
         $.ajax({
             url: 'clearMsg.do',
             type: 'POST',
             async: true,
-            success: function(response) {
+            success: function (response) {
                 console.log("msg session 초기화됨");
             },
-            error: function(e) {
+            error: function (e) {
                 console.log("msg session 초기화 중에 오류발생");
             }
         });
