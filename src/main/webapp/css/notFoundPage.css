@@ -1,0 +1,35 @@
+body {
+    background-color: #F9F3F0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.index-nav {
+    background-color: #056365;
+}
+
+.btn1 {
+    background-color: #71CB9F;
+    border-radius: 5px;
+    border-color: transparent;
+}
+
+.navbar {
+    height: 50px;
+}
+
+.container-fluid {
+    top: 50%;
+    margin-top: -5px;
+}
+
+h1 {
+    color: #679292;
+    margin-bottom: 35px;
+    font-size: 65pt;
+    font-weight:600;
+}
