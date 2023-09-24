@@ -76,6 +76,12 @@ public class HandlerMapping {
     }
 
     public Controller getController(String path) {
-        return mappings.get(path);
+        Controller controller = mappings.get(path);
+
+        if (controller == null) {
+            return mappings.get("/notFoundPageView.do");
+        }
+
+        return controller;
     }
 }
