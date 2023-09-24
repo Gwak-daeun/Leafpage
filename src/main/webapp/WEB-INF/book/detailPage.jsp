@@ -31,7 +31,6 @@
                 <div class="bottom-mg inline">
                     <button class="btn rental" onclick="rent(`${bookDetail.ISBN}`)">대여하기</button>
                     <button class="btn preview">미리보기</button>
-                    <%-- 로그인 해야 볼 수 있음--%>
 
                     <c:if test="${heartSelect == 1}">
                         <img id="fullH" style="width: 20px; margin-left: 5px;" src="../../css/icons/full.png"
@@ -175,7 +174,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade show" id="required-login" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content"> <!--모달 안에 들어가 있는 내용 정의-->
@@ -192,17 +190,16 @@
             </div>
         </div>
     </div>
-</div>
 
 <script>
     let errorMsg = "${errorMsg}";
     let failed = "${failed}";
-    let userNo = "${userNo}"
 </script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script src="../../js/detailPage.js"></script>
+<script src="../../js/alertMsg.js"></script>
 </body>
 </html>

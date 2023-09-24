@@ -21,7 +21,7 @@
     <div class="top">
         <div class="top_box">
             <h5 class="top_box_title">Guest</h5>
-            <button type="button" class="btn1 btn-sm"><a href="myInfoView.do">내 정보 수정</a></button>
+          <button type="button" class="btn1 btn-sm"><a href="updateMyInfoView.do">내 정보 수정</a></button>
         </div>
         <div class="top_box">
             <h5 class="top_box_title">현재 대여 권수</h5>
@@ -93,8 +93,10 @@
 </section>
 
 <!-- 제이쿼리 자바스크립트 추가하기 -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="../js/mypage.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script src="../js/mypage.js"></script>
+<script type="text/javascript" src="../../js/alertMsg.js"></script>
 </body>
 </html>
