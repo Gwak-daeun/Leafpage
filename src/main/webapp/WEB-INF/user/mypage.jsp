@@ -27,8 +27,8 @@
             <p class="top_box_content">${books.size()}/5</p>
         </div>
         <div class="top_box">
-            <h5 class="top_box_title">전체 대여 권수</h5>
-            <p class="top_box_content">${books.size()}</p>
+            <h5 class="top_box_title">누적 대여 권수</h5>
+            <p class="top_box_content">${books.size() + userReturnedBooks.size()}</p>
         </div>
     </div>
 
@@ -40,160 +40,67 @@
 
         <div class="bottom_content on">
             <ul class="flex rent_book">
+                <c:if test="${book eq null}">
+                    <h4 style="margin-top: 20px" class="not-book">대여중인 도서가 없습니다 ㅠ,.ㅠ</h4>
+                </c:if>
+                <c:if test="${book != null}">
+                    <c:forEach var="book" items="${books}" begin="0" end="4" step="1" >
+                        <li id="bookLi" >
+                            <div onclick="openViewer(${book.rentalNo}, ${book.scrollY}, ${book.modalWidth})" class="card" >
+                                <img src="image/마주.png" class="card-img-top" alt="..." />
+                                <c:if test="${book.modalWidth eq 321}">
+                                    <img class="device-icon" src="../css/icons/phone_iphone.png" />
+                                </c:if>
+                                <c:if test="${book.modalWidth ne 321}">
+                                    <img class="device-icon" src="../css/icons/desktop_windows.png" />
+                                </c:if>
+                                <div class="card-body">
+                                    <h5 class="card-title">${book.bookName}</h5>
+                                    <p class="card-author">${book.bookAuthorName}</p>
+                                    <p class="card-period">${book.rentalDate} ~ ${book.scheduledReturnDate}</p>
+                                </div>
+                            </div>
+                            <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
+                        </li>
 
-                <li class="listH">
-                    <div class="card">
-                        <img src="image/마주.png" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title">dfsdfsdfsf</h5>
-                            <p class="card-author">dfsdfsdfsf</p>
-                            <p class="card-period">반납일 : dfsdfsdfsf</p>
-                        </div>
-                    </div>
-                    <button type="button" class="btn1 btn-sm">
-                        반납하기
-                    </button>
-                </li>
-                <li class="listH">
-                    <div class="card">
-                        <img src="image/마주.png" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title">dfsdfsdfsf</h5>
-                            <p class="card-author">dfsdfsdfsf</p>
-                            <p class="card-period">반납일 : dfsdfsdfsf</p>
-                        </div>
-                    </div>
-                    <button type="button" class="btn1 btn-sm">
-                        반납하기
-                    </button>
-                </li>
+                        <%--책 뷰어--%>
+                        <%@include file="../component/bookModal.jsp"%>
 
-               <c:forEach var="book" items="${books}" begin="0" end="4" step="1" >
-                   <li id="bookLi" >
-                       <div onclick="openViewer(${book.rentalNo}, ${book.scrollY}, ${book.modalWidth})" class="card" >
-                            <img src="image/마주.png" class="card-img-top" alt="..." />
-                           <c:if test="${book.modalWidth eq 321}">
-                               <img class="device-icon" src="../css/icons/phone_iphone.png" />
-                           </c:if>
-                           <c:if test="${book.modalWidth ne 321}">
-                               <img class="device-icon" src="../css/icons/desktop_windows.png" />
-                           </c:if>
-                              <div class="card-body">
-                                <h5 class="card-title">${book.bookName}</h5>
-                                <p class="card-author">${book.bookAuthorName}</p>
-                                <p class="card-period">${book.rentalDate} ~ ${book.scheduledReturnDate}</p>
-                              </div>
-                       </div>
-                    <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
-                   </li>
+                    </c:forEach>
+                </c:if>
 
-                    <%--책 뷰어--%>
-                   <div class="modal fade" id="${book.rentalNo}" aria-hidden="true">
-                       <div class="modal-dialog modal-xl">
-                           <div class="modal-content">
-                               <div class="modal-header">
-                                   <h1 class="modal-title fs-5" id="staticBackdropLabel">${book.bookName}</h1>
-                                   <a class="select-mode">
-                                       <img class="light-icon" src="../css/icons/light_mode.png" />
-                                       <img class="dark-icon" src="../css/icons/dark_mode.png" />
-                                   </a>
-                                       <%--                <button class="select-mode">모드</button>--%>
-                               </div>
-                               <div class="modal-body">
-                                   ${book.bookContent}
-                               </div>
-                               <div class="modal-footer">
-                                   <button onclick="sendY(${book.rentalNo})" id="closeBtn" type="button" class="modal-close" data-bs-dismiss="modal">여기까지 보기</button>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-
-               </c:forEach>
 
             </ul>
         </div>
 
         <div class="bottom_content">
             <ul class="flex return_book">
-                <c:forEach var="userReturnedBook" items="${userReturnedBooks}">
-                    <li>
-                        <div class="card">
-                            <img src="image/마주.png" class="card-img-top" alt="..." />
-                            <div class="card-body">
-                                <h5 class="card-title">${userReturnedBook.bookName}</h5>
-                                <p class="card-author">${userReturnedBook.bookAuthorName}</p>
-                                <p class="card-period">반납일 : ${userReturnedBook.actualReturnDate}</p>
+                <c:if test="${userReturnedBook eq null}">
+                    <h4 style="margin-top: 20px" class="not-book">그냥 도서가 없습니다 ㅠ,.ㅠ</h4>
+                </c:if>
+                <c:if test="${userReturnedBook != null}">
+                    <c:forEach var="userReturnedBook" items="${userReturnedBooks}">
+                        <li>
+                            <div class="card">
+                                <img src="image/마주.png" class="card-img-top" alt="..." />
+                                <div class="card-body">
+                                    <h5 class="card-title">${userReturnedBook.bookName}</h5>
+                                    <p class="card-author">${userReturnedBook.bookAuthorName}</p>
+                                    <p class="card-period">반납일 : ${userReturnedBook.actualReturnDate}</p>
+                                </div>
                             </div>
-                        </div>
-                        <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
-                    </li>
-                </c:forEach>
-
+                            <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
+                        </li>
+                    </c:forEach>
+                </c:if>
             </ul>
         </div>
     </div>
 </section>
 
-<script>
-    function openViewer(rentalNo, dbScrollY, dbModalWidth) {
-
-        let modalBody = $(`#` + rentalNo).find(".modal-body"); // 해당 모달 창의 .modal-body 요소 선택
-
-        console.log("와이축 : ", dbScrollY, "폭 : ", dbModalWidth, ", 번호 : ", rentalNo);
-
-        $(`#` + rentalNo).modal('show');
-
-        $(`#` + rentalNo).on('shown.bs.modal', function () {
-
-            let truncatedWidth = Math.floor(modalBody.width());
-            if (dbModalWidth === truncatedWidth || dbScrollY === 0) {
-                modalBody.scrollTop(dbScrollY);
-                console.log("작동3 : ", dbModalWidth);
-            }
-            if (dbModalWidth > truncatedWidth) {
-                modalBody.scrollTop((dbScrollY * 666) / 321 );
-                console.log("작동1 : ", dbModalWidth);
-            }
-            if (dbModalWidth < truncatedWidth) {
-                modalBody.scrollTop((dbScrollY * 321) / 666 );
-                console.log("작동2 : ", dbModalWidth);
-            }
-        });
-    }
-
-
-    function sendY(rentalNo) {
-
-        let modalY = $(".modal-body").scrollTop();
-
-        let modalWidth = $(".modal-body").width();
-
-            console.log("Y축: " + modalY + "너비 : " + modalWidth, ", 유저 넘버 : ", rentalNo);
-
-        $.ajax({
-            url: "/saveUserBookY.do",
-            type: "POST",
-            data: {
-                modalY : modalY,
-                modalWidth: modalWidth,
-                rentalNo : rentalNo
-            },
-            success: function (response) {
-                // console.log("서버 응답: ", response);
-                location.reload();
-            },
-            error: function (error) {
-                console.error("에러 발생: ", error);
-            }
-        });
-    }
-</script>
-
 <!-- 제이쿼리 자바스크립트 추가하기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="../js/mypage.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-
 </body>
 </html>

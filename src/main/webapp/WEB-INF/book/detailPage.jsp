@@ -64,38 +64,44 @@
                         <button class="btn rental " data-toggle="modal" href="#reviewenroll">등록하기</button>
                     </div>
                     <ul class="review-content">
-                        <c:forEach var="review" items="${reviews}">
-                            <li>
-                                <div class="card">
-                                    <div class="card-header">
-                                        <div class="row">
-                                            <div class="card-title">
+                        <c:if test="${review eq null}">
+                            <h4 style="margin-top: 50px">아직 댓글을 작성한 사람이 없습니다 ㅠ.,ㅠ</h4>
+                        </c:if>
+                        <c:if test="${review != null}">
+                            <c:forEach var="review" items="${reviews}">
+                                <li>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="row">
+                                                <div class="card-title">
                                             <span>
-                                                ${review.reviewRating}
+                                                    ${review.reviewRating}
                                             </span>
-                                            <span class="review-top-right">
+                                                    <span class="review-top-right">
                                                 <p>작성일&nbsp; ${review.reviewDate}</p>
                                             </span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!--강의명 밑 내용과 추천-->
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                            ${review.reviewContent}
-                                        </p>
-                                        <div class="row">
-                                            <div class="col-9 text-left">
-                                            </div>
+                                        <!--강의명 밑 내용과 추천-->
+                                        <div class="card-body">
+                                            <p class="card-text">
+                                                    ${review.reviewContent}
+                                            </p>
+                                            <div class="row">
+                                                <div class="col-9 text-left">
+                                                </div>
 
-                                            <div class="col-3 text-right">
-                                                <a onclick="return confirm('삭제하시겠습니까?')" href="/removeReview.do?reviewNo=${review.reviewNo}">삭제</a>
+                                                <div class="col-3 text-right">
+                                                    <a onclick="return confirm('삭제하시겠습니까?')" href="/removeReview.do?reviewNo=${review.reviewNo}">삭제</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        </c:forEach>
+                                </li>
+                            </c:forEach>
+                        </c:if>
+
                     </ul>
                 </div>
                 <div class="tab-content">
