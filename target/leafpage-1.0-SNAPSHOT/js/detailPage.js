@@ -91,6 +91,8 @@ $(document).ready(function () {
 
         $('.scheduled-return-date').text(`대여기한 : ${year}-${month}-${date}`);
     });
+
+
 });
 
 //하트 채워지고 비워지는 기능
@@ -124,6 +126,7 @@ function likeCheck(isbn) {
 
 // 도서 대여
 function rent(ISBN) {
+    console.log(userNo)
 
     if (userNo === "") {
         $('#required-login').modal('show');
