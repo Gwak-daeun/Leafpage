@@ -61,6 +61,7 @@ public class LoginController implements Controller {
                 session.setAttribute("userId", userId);
                 session.setAttribute("userEmailChecked", userEmailChecked);
                 session.setAttribute("userNo", userNo);
+
                 return "indexInfo.do";
 
             case 2:  //[2]휴면회원 로그인

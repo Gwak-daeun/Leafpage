@@ -330,8 +330,10 @@ a {
 
 .review-content li {
     margin-bottom: 10px;
-    width: 460px;
-    display:flex;
+    /*width: 460px;*/
+    justify-content: center;
+    margin-left: 10px;
+    /*display: flex;*/
     justify-content: center;
 }
 .review-content .review-top-right {
@@ -488,10 +490,12 @@ a {
 
     .review-content .card-body {
         font-size: 12px;
+        overflow-y: scroll;
     }
 
     .review-content .card {
-        width: 90%;
+        width: 250px;
+        height: 180px;
         text-align: left;
         background-color: #f8f5f3;
     }

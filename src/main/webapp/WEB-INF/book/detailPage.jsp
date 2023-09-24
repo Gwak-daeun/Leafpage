@@ -20,6 +20,7 @@
 <section>
     <c:set var="errorMsg" value="${errorMsg}"/>
     <c:set var="failed" value="${failed}"/>
+    <c:set var="isbn" value="${bookDetail.ISBN}"/>
     <div class="inline">
         <div class="mg big-book">
             <img src="${bookDetail.bookImg}" class="imgstyle">
@@ -74,7 +75,32 @@
                                         <div class="row">
                                             <div class="card-title">
                                             <span>
-                                                ${review.reviewRating}
+                                                <c:if test="${review.reviewRating eq 5}">
+                                                    <span class="star">⭐</span>
+                                                    <span class="star">⭐</span>
+                                                    <span class="star">⭐</span>
+                                                    <span class="star">⭐</span>
+                                                    <span class="star">⭐</span>
+                                                </c:if>
+                                                <c:if test="${review.reviewRating eq 4}">
+                                                    <span class="star">⭐</span>
+                                                    <span class="star">⭐</span>
+                                                    <span class="star">⭐</span>
+                                                    <span class="star">⭐</span>
+                                                </c:if>
+                                                <c:if test="${review.reviewRating eq 3}">
+                                                    <span class="star">⭐</span>
+                                                    <span class="star">⭐</span>
+                                                    <span class="star">⭐</span>
+                                                </c:if>
+                                                <c:if test="${review.reviewRating eq 2}">
+                                                    <span class="star">⭐</span>
+                                                    <span class="star">⭐</span>
+                                                </c:if>
+                                                <c:if test="${review.reviewRating eq 1}">
+                                                    <span class="star">⭐</span>
+                                                </c:if>
+
                                             </span>
                                                 <span class="review-top-right">
                                                 <p>작성일&nbsp; ${review.reviewDate}</p>
@@ -92,8 +118,15 @@
                                             </div>
 
                                             <div class="col-3 text-right">
+                                                    <c:set var="userNoStr" value="${userNo}" />
+                                                    <c:set var="reviewNoStr" value="${review.userNo}" />
+                                                    <c:if test="${userNoStr eq reviewNoStr}">
                                                 <a onclick="return confirm('삭제하시겠습니까?')"
-                                                   href="/removeReview.do?reviewNo=${review.reviewNo}">삭제</a>
+                                                   href="/removeReview.do?reviewNo=${review.reviewNo}&isbn=${bookDetail.ISBN}"
+                                                >
+                                                    삭제
+                                                </a>
+                                                </c:if>
                                             </div>
                                         </div>
                                     </div>
@@ -162,9 +195,7 @@
                 </div>
                 <div class="form-group">
                     <label>내용</label>
-                    <textarea name="reviewContent" class="form-control" maxlength="2048" style="height: 180px">
-
-                    </textarea>
+                    <textarea name="reviewContent" class="form-control" maxlength="2048" style="height: 180px"></textarea>
                 </div>
                 <div class="form-footer">
                     <button id="reviewClose" type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
@@ -191,10 +222,11 @@
             </div>
         </div>
     </div>
-
+</div>
 <script>
     let errorMsg = "${errorMsg}";
     let failed = "${failed}";
+    const isbn = "${isbn}";
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js" crossorigin="anonymous"></script>

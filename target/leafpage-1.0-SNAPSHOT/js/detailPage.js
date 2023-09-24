@@ -55,7 +55,8 @@ $(document).ready(function () {
                 url: '/makeReview.do',
                 data: {
                     rating: selectedRating,
-                    content: reviewContent
+                    content: reviewContent,
+                    isbn: isbn
                 },
                 success: function(response) {
                     if (failed) {
