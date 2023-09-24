@@ -40,78 +40,59 @@
 
         <div class="bottom_content on">
             <ul class="flex rent_book">
+                <c:if test="${book eq null}">
+                    <h4 style="margin-top: 20px" class="not-book">대여중인 도서가 없습니다 ㅠ,.ㅠ</h4>
+                </c:if>
+                <c:if test="${book != null}">
+                    <c:forEach var="book" items="${books}" begin="0" end="4" step="1" >
+                        <li id="bookLi" >
+                            <div onclick="openViewer(${book.rentalNo}, ${book.scrollY}, ${book.modalWidth})" class="card" >
+                                <img src="image/마주.png" class="card-img-top" alt="..." />
+                                <c:if test="${book.modalWidth eq 321}">
+                                    <img class="device-icon" src="../css/icons/phone_iphone.png" />
+                                </c:if>
+                                <c:if test="${book.modalWidth ne 321}">
+                                    <img class="device-icon" src="../css/icons/desktop_windows.png" />
+                                </c:if>
+                                <div class="card-body">
+                                    <h5 class="card-title">${book.bookName}</h5>
+                                    <p class="card-author">${book.bookAuthorName}</p>
+                                    <p class="card-period">${book.rentalDate} ~ ${book.scheduledReturnDate}</p>
+                                </div>
+                            </div>
+                            <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
+                        </li>
 
-                <li class="listH">
-                    <div class="card">
-                        <img src="image/마주.png" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title">dfsdfsdfsf</h5>
-                            <p class="card-author">dfsdfsdfsf</p>
-                            <p class="card-period">반납일 : dfsdfsdfsf</p>
-                        </div>
-                    </div>
-                    <button type="button" class="btn1 btn-sm">
-                        반납하기
-                    </button>
-                </li>
-                <li class="listH">
-                    <div class="card">
-                        <img src="image/마주.png" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title">dfsdfsdfsf</h5>
-                            <p class="card-author">dfsdfsdfsf</p>
-                            <p class="card-period">반납일 : dfsdfsdfsf</p>
-                        </div>
-                    </div>
-                    <button type="button" class="btn1 btn-sm">
-                        반납하기
-                    </button>
-                </li>
+                        <%--책 뷰어--%>
+                        <%@include file="../component/bookModal.jsp"%>
 
-               <c:forEach var="book" items="${books}" begin="0" end="4" step="1" >
-                   <li id="bookLi" >
-                       <div onclick="openViewer(${book.rentalNo}, ${book.scrollY}, ${book.modalWidth})" class="card" >
-                            <img src="image/마주.png" class="card-img-top" alt="..." />
-                            <c:if test="${book.modalWidth eq 321}">
-                                <img class="device-icon" src="../css/icons/phone_iphone.png" />
-                            </c:if>
-                            <c:if test="${book.modalWidth ne 321}">
-                                <img class="device-icon" src="../css/icons/desktop_windows.png" />
-                            </c:if>
-                            <div class="card-body">
-                                <h5 class="card-title">${book.bookName}</h5>
-                                <p class="card-author">${book.bookAuthorName}</p>
-                                <p class="card-period">${book.rentalDate} ~ ${book.scheduledReturnDate}</p>
-                              </div>
-                       </div>
-                    <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
-                   </li>
+                    </c:forEach>
+                </c:if>
 
-                    <%--책 뷰어--%>
-                    <%@include file="../component/bookModal.jsp"%>
-
-
-                </c:forEach>
 
             </ul>
         </div>
 
         <div class="bottom_content">
             <ul class="flex return_book">
-                <c:forEach var="userReturnedBook" items="${userReturnedBooks}">
-                    <li>
-                        <div class="card">
-                            <img src="image/마주.png" class="card-img-top" alt="..." />
-                            <div class="card-body">
-                                <h5 class="card-title">${userReturnedBook.bookName}</h5>
-                                <p class="card-author">${userReturnedBook.bookAuthorName}</p>
-                                <p class="card-period">반납일 : ${userReturnedBook.actualReturnDate}</p>
+                <c:if test="${userReturnedBook eq null}">
+                    <h4 style="margin-top: 20px" class="not-book">그냥 도서가 없습니다 ㅠ,.ㅠ</h4>
+                </c:if>
+                <c:if test="${userReturnedBook != null}">
+                    <c:forEach var="userReturnedBook" items="${userReturnedBooks}">
+                        <li>
+                            <div class="card">
+                                <img src="image/마주.png" class="card-img-top" alt="..." />
+                                <div class="card-body">
+                                    <h5 class="card-title">${userReturnedBook.bookName}</h5>
+                                    <p class="card-author">${userReturnedBook.bookAuthorName}</p>
+                                    <p class="card-period">반납일 : ${userReturnedBook.actualReturnDate}</p>
+                                </div>
                             </div>
-                        </div>
-                        <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
-                    </li>
-                </c:forEach>
-
+                            <button type="button" class="btn1 btn-sm" href="#">반납하기</button>
+                        </li>
+                    </c:forEach>
+                </c:if>
             </ul>
         </div>
     </div>
