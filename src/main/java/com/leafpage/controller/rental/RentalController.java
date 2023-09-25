@@ -24,7 +24,7 @@ public class RentalController implements Controller {
         RentalDAO rentalDAO = RentalDAO.getInstance();
 
         String isbn = request.getParameter("ISBN");
-        Long userNo = (Long) session.getAttribute("userNo");
+        Long userNo = ((Integer) session.getAttribute("userNo")).longValue();
         log.debug("userNo = {}", userNo);
         log.debug("ISBN = {}", isbn);
 

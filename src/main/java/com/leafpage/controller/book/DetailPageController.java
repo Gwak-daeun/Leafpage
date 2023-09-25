@@ -19,7 +19,7 @@ public class DetailPageController implements Controller {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         HttpSession session = request.getSession();
-        Long userNo = (Long) session.getAttribute("userNo");
+        Long userNo = ((Integer) session.getAttribute("userNo")).longValue();
         System.out.println("userNo"+userNo);
         String isbn = request.getParameter("isbn");
 

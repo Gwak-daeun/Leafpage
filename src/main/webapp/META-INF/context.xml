@@ -5,7 +5,7 @@
             type="javax.sql.DataSource"
             auth="Container"
             driverClassName="com.mysql.cj.jdbc.Driver"
-            url="jdbc:mysql://cloud.swdev.kr:4005/leafpage"
+            url="jdbc:mysql://cloud.swdev.kr:4005/test2"
             username="user1"
             password="12345"
             maxTotal="500"

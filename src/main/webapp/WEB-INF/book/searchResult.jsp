@@ -23,7 +23,7 @@
         <h1>LeafPage</h1>
     </div>
     <form method="get" action="search.do">
-        <div class="toggle">
+        <div class="sort-select">
             <a href="/sortBooks.do?sortWord=최신순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=${genre}"><div id="select1">최신순</div></a>
             <a href="/sortBooks.do?sortWord=인기순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=${genre}"><div id="select2">인기순</div></a>
         </div>
