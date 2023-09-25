@@ -9,8 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <title>LeafPage</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="../../css/detailPage.css">
     <script src="https://kit.fontawesome.com/1db70bd877.js" crossorigin="anonymous"></script>
 </head>
@@ -39,10 +38,10 @@
                              onclick="likeCheck(`${bookDetail.ISBN}`)">
                     </c:if>
                     <c:if test="${heartSelect == 0}">
-                        <img id="emptyH" style="width: 20px; margin-left: 5px;"
+                        <img id="emptyH" style="width: 20px; height: 20px; margin-left: 5px; margin-bottom: 5px"
                              src="<c:url value="/css/icons/empty.png"/>" onclick="likeCheck(`${bookDetail.ISBN}`)">
                     </c:if>
-                    <span style="margin-top: 10px">${ heartCount }</span>
+                    <span style="margin-top: 8px">${ heartCount }</span>
 
                 </div>
             </div>
