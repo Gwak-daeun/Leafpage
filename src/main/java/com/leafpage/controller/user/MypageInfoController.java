@@ -24,7 +24,7 @@ public class MypageInfoController implements Controller {
 
         HttpSession session = request.getSession();
 
-        Long userNo = ((Integer) session.getAttribute("userNo")).longValue();
+        Long userNo = (Long) session.getAttribute("userNo");
 
         userBooks = bookDAO.getUserLendingBook(userNo);
 
