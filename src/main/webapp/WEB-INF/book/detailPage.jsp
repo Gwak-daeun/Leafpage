@@ -32,14 +32,14 @@
 <%--                <button class="btn preview">미리보기</button>   &lt;%&ndash; 로그인 해야 볼 수 있음&ndash;%&gt;--%>
 
                     <c:if test="${heartSelect == 1}">
-                        <img id="fullH" style="width: 20px; height: 20px; margin-left: 5px;" src="../../css/icons/full.png"
+                        <img id="fullH" style="width: 20px; height: 20px; margin-left: 5px; margin-bottom: 5px;" src="../../css/icons/full.png"
                              onclick="likeCheck(`${bookDetail.ISBN}`)">
                     </c:if>
                     <c:if test="${heartSelect == 0}">
-                        <img id="emptyH" style="width: 20px; height: 20px; margin-left: 5px;"
+                        <img id="emptyH" style="width: 20px; height: 20px; margin-left: 5px; margin-bottom: 5px"
                              src="<c:url value="/css/icons/empty.png"/>" onclick="likeCheck(`${bookDetail.ISBN}`)">
                     </c:if>
-                    <span style="margin-top: 10px">${ heartCount }</span>
+                    <span style="margin-top: 8px">${ heartCount }</span>
 
                 </div>
             </div>
