@@ -31,7 +31,7 @@ public class UpdateUserInfoController implements Controller {
 
         Map<String, Object> jsonResponse = new HashMap<>();
 
-        UserDAO userDAO = new UserDAO();
+        UserDAO userDAO = UserDAO.getInstance();
         if (request.getParameter("passwordForUpdate") != null) {
             passwordForUpdate = SHA256.getSHA256(request.getParameter("passwordForUpdate"));
         }
@@ -80,10 +80,10 @@ public class UpdateUserInfoController implements Controller {
     }
 
     private boolean isDuplicatedTel(String userTel) {
-        return new UserDAO().findUserByEmail(userTel) == 1;
+        return UserDAO.getInstance().findUserByEmail(userTel) == 1;
     }
 
     private boolean isDuplicatedEmail(String userEmail) {
-        return new UserDAO().findUserByEmail(userEmail) == 1;
+        return UserDAO.getInstance().findUserByEmail(userEmail) == 1;
     }
 }

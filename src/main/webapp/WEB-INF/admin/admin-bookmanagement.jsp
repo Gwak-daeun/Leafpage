@@ -88,7 +88,9 @@
                 </div>
                 <div class="list-body">
                     <c:forEach var="book" items="${bookList}">
-                        <ul class="list-rows">
+                            <c:choose>
+                            <c:when test="${book.bookstate == 0}">
+                            <ul class="list-rows">
                             <li class="table-value" >
                                 <a href="javascript:void(0)" onclick="modalOn(`${book.ISBN}`, )" class="openModalLink" data-isbn="${book.ISBN}" data-bs-toggle="modal" data-bs-target="#editModal"><span class="isbn"> ${book.ISBN}</span></a></li>
                             <li><span class="v-line"></span></li>
@@ -100,7 +102,24 @@
                             <li><span class="v-line"></span></li>
                             <li class="table-value"><c:forEach var="category" items="${book.categories}">
                                         #${category} </c:forEach></li>
-                        </ul>
+                            </ul>
+                            </c:when>
+                                <c:otherwise>
+                                    <ul class="list-rows2">
+                                    <li class="table-value" >
+                                        <a href="javascript:void(0)" onclick="modalOn(`${book.ISBN}`, )" class="openModalLink" data-isbn="${book.ISBN}" data-bs-toggle="modal" data-bs-target="#editModal"><span class="isbn"> ${book.ISBN}</span></a></li>
+                                    <li><span class="v-line"></span></li>
+                                    <li class="table-value">${book.bookName}</li>
+                                    <li><span class="v-line"></span></li>
+                                    <li class="table-value">${book.bookAuthorName}</li>
+                                    <li><span class="v-line"></span></li>
+                                    <li class="table-value">${book.bookPublisherName}</li>
+                                    <li><span class="v-line"></span></li>
+                                    <li class="table-value"><c:forEach var="category" items="${book.categories}">
+                                        #${category} </c:forEach></li>
+                                    </ul>
+                                </c:otherwise>
+                            </c:choose>
                         </c:forEach>
                 </div>
             </div>

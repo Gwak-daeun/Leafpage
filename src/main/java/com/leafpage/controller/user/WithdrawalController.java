@@ -19,7 +19,7 @@ public class WithdrawalController implements Controller {
             passwordForWithdrawal = SHA256.getSHA256(request.getParameter("checkPassword"));
         }
         if (passwordForWithdrawal != null) {
-            UserDAO userDAO = new UserDAO();
+            UserDAO userDAO = UserDAO.getInstance();
             HttpSession session = request.getSession();
             String userId = (String) session.getAttribute("userId");
             int userWithdrawal = userDAO.setUserStateWithdrawal(userId, passwordForWithdrawal, "탈퇴회원");

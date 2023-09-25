@@ -37,7 +37,7 @@ public class AdminUserSearchListController implements Controller {
             session.setAttribute("keyword", keyword);
         }
 
-        UserDAO dao = new UserDAO();
+        UserDAO dao = UserDAO.getInstance();
 
         List<UserDTO> userList = dao.userSearchList(pageNum, amount, keyword);
         int total = dao.getSearchTotal(keyword);

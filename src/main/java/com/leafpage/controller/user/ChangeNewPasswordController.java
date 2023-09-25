@@ -27,14 +27,14 @@ public class ChangeNewPasswordController implements Controller {
             HttpSession session = request.getSession();
             String userId = (String) session.getAttribute("userId");
             if (userId != null) {
-                UserDAO userDAO = new UserDAO();
+                UserDAO userDAO = UserDAO.getInstance();
                 changePasswordSuccess = userDAO.changeNewPassword(newPassword.getUserPassword(), userId);
             }
             if (userId == null) {
                 int passwordChangeAccess = (Integer) session.getAttribute("passwordChangeAccess");
                 String inputIdForNewPw = (String) session.getAttribute("inputIdForNewPw");
                 if (passwordChangeAccess == 1) {
-                    UserDAO userDAO = new UserDAO();
+                    UserDAO userDAO = UserDAO.getInstance();
                     changePasswordSuccess = userDAO.changeNewPassword(newPassword.getUserPassword(), inputIdForNewPw);
                     session.removeAttribute("passwordChangeAccess");
                     session.removeAttribute("inputIdForNewPw");

@@ -226,8 +226,13 @@ li{
 }
 
 .book-title{
+    width: 110px;
     margin-top: 4px;
     font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: 8px;
 }
 
 .book-author{

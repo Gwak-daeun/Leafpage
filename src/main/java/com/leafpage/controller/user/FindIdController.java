@@ -31,7 +31,7 @@ public class FindIdController implements Controller {
             session.setAttribute("msg", "[Error] 비정상적인 접근입니다.");
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "비정상적인 접근입니다.");
         } else {
-            String foundUserId = new UserDAO().findIdByEmailOrTel(inputEmail, inputTel);
+            String foundUserId = UserDAO.getInstance().findIdByEmailOrTel(inputEmail, inputTel);
             System.out.println("##" + foundUserId);
             response.setContentType("application/json"); // JSON 형식으로 응답을 전달함을 설정
             PrintWriter out = response.getWriter();

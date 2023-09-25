@@ -21,7 +21,7 @@ public class LikeHeartController implements Controller {
         String isbn = request.getParameter("isbn");
 
         //2. DB 연동 처리
-        LeeLikeyDAO leeLikeyDAO = new LeeLikeyDAO();
+        LeeLikeyDAO leeLikeyDAO = LeeLikeyDAO.getInstance();
         PrintWriter out = response.getWriter();
 
         int checkLike = leeLikeyDAO.checkLike(userNo, isbn);

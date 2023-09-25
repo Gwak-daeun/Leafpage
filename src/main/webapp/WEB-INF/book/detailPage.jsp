@@ -132,8 +132,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                </li>
-                            </c:forEach>
+                                </div>
+                            </li>
+                        </c:forEach>
                         </c:if>
                     </ul>
                 </div>
@@ -155,7 +156,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </section>
 
 <div class="modal fade show" id="rental" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
@@ -229,6 +229,7 @@
     let errorMsg = "${errorMsg}";
     let failed = "${failed}";
     const isbn = "${isbn}";
+    const userNo = "${userNo}"
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js" crossorigin="anonymous"></script>

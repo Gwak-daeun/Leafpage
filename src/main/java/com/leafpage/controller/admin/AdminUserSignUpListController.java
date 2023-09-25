@@ -22,7 +22,7 @@ public class AdminUserSignUpListController implements Controller {
         if (request.getParameter("pageNum") != null) {
             pageNum = Integer.parseInt(request.getParameter("pageNum"));
         }
-        UserDAO dao = new UserDAO();
+        UserDAO dao = UserDAO.getInstance();
 
         List<UserDTO> userList = dao.userList(pageNum, amount);
         int total = dao.getTotal();

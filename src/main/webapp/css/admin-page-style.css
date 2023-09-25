@@ -217,12 +217,21 @@ input[type="date"]::-webkit-datetime-edit-year-field {
   display: flex;
   min-height: 25px;
 }
+.list-rows2 {
+  margin-bottom: 5px;
+  padding: 0;
+  display: flex;
+  min-height: 25px;
+  background-color: rgba(208, 236, 60, 0.57);
+}
 
 .table-value {
   width: 100%;
   min-width: 215px;
   text-align: center;
 }
+
+
 
 .form-state {
   display: flex;
@@ -253,9 +262,10 @@ input[type="date"]::-webkit-datetime-edit-year-field {
 }
 
 .isbn {
-  color: #71cb9f;
+  color: #00693d;
   cursor: pointer;
 }
+
 
 .isbn:hover {
   background-color: #056365;
