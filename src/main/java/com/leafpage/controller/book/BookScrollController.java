@@ -58,7 +58,7 @@ public class BookScrollController implements Controller {
 
         request.setAttribute("sortWord", sortWord);
 
-        request.setAttribute("page", pageNum + 12);
+        request.setAttribute("page", pageNum + 10);
 
         response.setContentType("application/json");
 
