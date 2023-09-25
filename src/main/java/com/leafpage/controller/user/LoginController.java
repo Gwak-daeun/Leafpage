@@ -69,9 +69,11 @@ public class LoginController implements Controller {
                 if (!returnedBooksISBN.isEmpty()) {
                     List<String> returnedBooksName = new BookDAO().findReturnedBooksName(returnedBooksISBN);
                     request.setAttribute("returnedBooksName", returnedBooksName);
+                    session.setAttribute("msg", "로그인 되었습니다. 기한이 지나 도서가 반납되었습니다. \n \n반납된 도서 : " + returnedBooksName);
                 }
 
-                return "indexInfo.do";
+                response.sendRedirect("indexInfo.do");
+                break;
 
             case 2:  //[2]휴면회원 로그인
                 session.setAttribute("inactiveIdForActive", userId);

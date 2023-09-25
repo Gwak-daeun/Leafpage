@@ -1,9 +1,9 @@
 $(document).ready(function () {
-
-    const returnedBooksName = $('#returnedBooks').val();
-    if (returnedBooksName) {
-        alert("기한이 지나 도서가 반납되었습니다. \n \n반납된 도서 : " + returnedBooksName);
-    }
+    //
+    // const returnedBooksName = $('#returnedBooks').val();
+    // if (returnedBooksName) {
+    //     alert("로그인 되었습니다. 기한이 지나 도서가 반납되었습니다. \n \n반납된 도서 : " + returnedBooksName);
+    // }
 
     let msg = $('#msg').val();
     if (msg !== "") {
