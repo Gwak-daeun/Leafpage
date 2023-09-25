@@ -165,6 +165,8 @@ function rent(ISBN) {
 function openReview() {
     if (userNo === "") {
         $('#required-login').modal('show');
+    } else if (userEmailChecked) {
+        $('#required-auth').modal('show');
     }
 }
 

@@ -66,12 +66,12 @@
                     </div>
                 </div>
                 <div class="tab-content">
-                    <c:if test="${userNo == null}">
+                    <c:if test="${userNo == null || userEmailChecked eq false}">
                         <div class="enroll-right">
                             <button onclick="openReview()" class="btn rental ">등록하기</button>
                         </div>
                     </c:if>
-                    <c:if test="${userNo != null}">
+                    <c:if test="${userNo != null && userEmailChecked eq true}">
                         <div class="enroll-right">
                             <button onclick="openReview()" class="btn rental" data-toggle="modal" href="#reviewenroll">등록하기</button>
                         </div>
