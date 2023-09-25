@@ -9,7 +9,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <title>LeafPage</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          crossorigin="anonymous">
     <link rel="stylesheet" href="../../css/detailPage.css">
     <script src="https://kit.fontawesome.com/1db70bd877.js" crossorigin="anonymous"></script>
 </head>
@@ -25,14 +26,16 @@
             <img src="${bookDetail.bookImg}" class="imgstyle">
             <div class="center">
                 <span class="in-block"><h3>${bookDetail.bookName}</h3></span>
-                <span >${bookDetail.bookAuthorName}</span>
-                <div class="small">${bookDetail.categories} | ${bookDetail.bookPublisherName} | 발행일: ${bookDetail.bookPubDate}</div>
+                <span>${bookDetail.bookAuthorName}</span>
+                <div class="small">${bookDetail.categories} | ${bookDetail.bookPublisherName} |
+                    발행일: ${bookDetail.bookPubDate}</div>
                 <div class="bottom-mg inline">
                     <button class="btn rental" onclick="rent(${bookDetail.ISBN})">대여하기</button>
-<%--                <button class="btn preview">미리보기</button>   &lt;%&ndash; 로그인 해야 볼 수 있음&ndash;%&gt;--%>
+                    <%--                <button class="btn preview">미리보기</button>   &lt;%&ndash; 로그인 해야 볼 수 있음&ndash;%&gt;--%>
 
                     <c:if test="${heartSelect == 1}">
-                        <img id="fullH" style="width: 20px; height: 20px; margin-left: 5px;" src="../../css/icons/full.png"
+                        <img id="fullH" style="width: 20px; height: 20px; margin-left: 5px;"
+                             src="../../css/icons/full.png"
                              onclick="likeCheck(`${bookDetail.ISBN}`)">
                     </c:if>
                     <c:if test="${heartSelect == 0}">
@@ -63,78 +66,86 @@
                     </div>
                 </div>
                 <div class="tab-content">
-                    <div class="enroll-right">
-                        <button class="btn rental " data-toggle="modal" href="#reviewenroll">등록하기</button>
-                    </div>
+                    <c:if test="${userNo == null}">
+                        <div class="enroll-right">
+                            <button onclick="openReview()" class="btn rental ">등록하기</button>
+                        </div>
+                    </c:if>
+                    <c:if test="${userNo != null}">
+                        <div class="enroll-right">
+                            <button onclick="openReview()" class="btn rental" data-toggle="modal" href="#reviewenroll">등록하기</button>
+                        </div>
+                    </c:if>
+
                     <ul class="review-content">
-                        <c:if test="${review eq null}">
+                        <c:if test="${reviews.size() eq 0}">
                             <h4 style="margin-top: 50px">아직 댓글을 작성한 사람이 없습니다.</h4>
                         </c:if>
-                        <c:if test="${review != null}">
+                        <c:if test="${reviews.size() > 0}">
                             <c:forEach var="review" items="${reviews}">
                                 <li>
                                     <div class="card">
                                         <div class="card-header">
                                             <div class="row">
                                                 <div class="card-title">
-                                            <span>
-                                                <c:if test="${review.reviewRating eq 5}">
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                </c:if>
-                                                <c:if test="${review.reviewRating eq 4}">
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                </c:if>
-                                                <c:if test="${review.reviewRating eq 3}">
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                </c:if>
-                                                <c:if test="${review.reviewRating eq 2}">
-                                                    <span class="star">⭐</span>
-                                                    <span class="star">⭐</span>
-                                                </c:if>
-                                                <c:if test="${review.reviewRating eq 1}">
-                                                    <span class="star">⭐</span>
-                                                </c:if>
+                                                <span>
+                                                    <c:if test="${review.reviewRating eq 5}">
+                                                        <span class="star">⭐</span>
+                                                        <span class="star">⭐</span>
+                                                        <span class="star">⭐</span>
+                                                        <span class="star">⭐</span>
+                                                        <span class="star">⭐</span>
+                                                    </c:if>
+                                                    <c:if test="${review.reviewRating eq 4}">
+                                                        <span class="star">⭐</span>
+                                                        <span class="star">⭐</span>
+                                                        <span class="star">⭐</span>
+                                                        <span class="star">⭐</span>
+                                                    </c:if>
+                                                    <c:if test="${review.reviewRating eq 3}">
+                                                        <span class="star">⭐</span>
+                                                        <span class="star">⭐</span>
+                                                        <span class="star">⭐</span>
+                                                    </c:if>
+                                                    <c:if test="${review.reviewRating eq 2}">
+                                                        <span class="star">⭐</span>
+                                                        <span class="star">⭐</span>
+                                                    </c:if>
+                                                    <c:if test="${review.reviewRating eq 1}">
+                                                        <span class="star">⭐</span>
+                                                    </c:if>
 
-                                            </span>
-                                            <span class="review-top-right">
-                                                <p>작성일&nbsp; ${review.reviewDate}</p>
-                                            </span>
+                                                </span>
+                                                    <span class="review-top-right">
+                                                    <p>작성일&nbsp; ${review.reviewDate}</p>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--강의명 밑 내용과 추천-->
+                                        <div class="card-body">
+                                            <p class="card-text">
+                                                    ${review.reviewContent}
+                                            </p>
+                                            <div class="row">
+                                                <div class="col-9 text-left">
+                                                </div>
+
+                                                <div class="col-3 text-right">
+                                                    <c:set var="userNoStr" value="${userNo}"/>
+                                                    <c:set var="reviewNoStr" value="${review.userNo}"/>
+                                                    <c:if test="${userNoStr eq reviewNoStr}">
+                                                        <a onclick="return confirm('삭제하시겠습니까?')"
+                                                           href="/removeReview.do?reviewNo=${review.reviewNo}&isbn=${bookDetail.ISBN}"
+                                                        >삭제
+                                                        </a>
+                                                    </c:if>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!--강의명 밑 내용과 추천-->
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                            ${review.reviewContent}
-                                        </p>
-                                        <div class="row">
-                                            <div class="col-9 text-left">
-                                            </div>
-
-                                            <div class="col-3 text-right">
-                                                <c:set var="userNoStr" value="${userNo}" />
-                                                <c:set var="reviewNoStr" value="${review.userNo}" />
-                                                <c:if test="${userNoStr eq reviewNoStr}">
-                                                    <a onclick="return confirm('삭제하시겠습니까?')"
-                                                        href="/removeReview.do?reviewNo=${review.reviewNo}&isbn=${bookDetail.ISBN}"
-                                                    >삭제
-                                                    </a>
-                                                </c:if>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </c:forEach>
+                                </li>
+                            </c:forEach>
                         </c:if>
                     </ul>
                 </div>
@@ -198,7 +209,8 @@
                 </div>
                 <div class="form-group">
                     <label>내용</label>
-                    <textarea name="reviewContent" class="form-control" maxlength="2048" style="height: 180px"></textarea>
+                    <textarea name="reviewContent" class="form-control" maxlength="2048"
+                              style="height: 180px"></textarea>
                 </div>
                 <div class="form-footer">
                     <button id="reviewClose" type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>

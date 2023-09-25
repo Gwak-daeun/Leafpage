@@ -23,19 +23,27 @@
         <h1>LeafPage</h1>
     </div>
     <form method="get" action="search.do">
-        <div class="toggle">
+        <div class="sort-select">
             <a href="/sortBooks.do?sortWord=최신순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=${genre}"><div id="select1">최신순</div></a>
             <a href="/sortBooks.do?sortWord=인기순&searchKeyword=${searchKeyword}&searchSelect=${searchSelect}&genre=${genre}"><div id="select2">인기순</div></a>
         </div>
         <div class="search-bar">
-            <select id="selectBox" name="searchSelect" class="book-select">
-                <option value="전체" class="book-option">전체</option>
-                <option value="출판사" class="book-option">출판사</option>
-                <option value="제목" class="book-option">제목</option>
-                <option value="작가" class="book-option">작가</option>
-            </select>
-            <input type="text" id="search" name="searchKeyword" value="${searchKeyword}" class="search-input" placeholder="둘러보기" />
-            <img class="search-lens" src="../../css/icons/search.png" />
+            <span>
+                <select id="selectBox" name="searchSelect" class="book-select">
+                    <option value="전체" class="book-option">전체</option>
+                    <option value="출판사" class="book-option">출판사</option>
+                    <option value="제목" class="book-option">제목</option>
+                    <option value="작가" class="book-option">작가</option>
+                </select>
+            </span>
+            <span class="search-box">
+                <input type="text" id="search" name="searchKeyword" value="${searchKeyword}" class="search-input" placeholder="둘러보기" />
+            </span>
+            <span>
+                <button type="submit" style="border: none; background: none; cursor: pointer;">
+                    <img class="search-lens" src="../../css/icons/search.png" />
+                </button>
+            </span>
         </div>
     </form>
     <div class="search-keywords">
