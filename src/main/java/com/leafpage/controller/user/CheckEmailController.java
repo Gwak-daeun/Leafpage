@@ -24,7 +24,7 @@ public class CheckEmailController implements Controller {
             System.out.println("check:" + userId);
         }
 
-        UserDAO userDAO = new UserDAO();
+        UserDAO userDAO = UserDAO.getInstance();
         String userEmail = userDAO.getUserEmail(userId);
         boolean isRight = new SHA256().getSHA256(userEmail).equals(code);
         if (isRight) {

@@ -24,7 +24,7 @@ public class LoginCheckController implements Controller {
 
         if (loginUserId != null && loginUserPassword != null) {
             try {
-                UserDAO userDAO = new UserDAO();
+                UserDAO userDAO = UserDAO.getInstance();
                 int result = userDAO.login(loginUserId, loginUserPassword);
                 System.out.println(result);
                 PrintWriter out = response.getWriter();

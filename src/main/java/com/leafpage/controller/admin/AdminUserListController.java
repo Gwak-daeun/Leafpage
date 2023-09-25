@@ -23,7 +23,7 @@ public class AdminUserListController implements Controller {
         if (request.getParameter("pageNum") != null) {
             pageNum = Integer.parseInt(request.getParameter("pageNum"));
         }
-        UserDAO dao = new UserDAO();
+        UserDAO dao = UserDAO.getInstance();
 
         List<UserDTO> userList = dao.userrentelList(pageNum, amount);
         int total = dao.getTotal();

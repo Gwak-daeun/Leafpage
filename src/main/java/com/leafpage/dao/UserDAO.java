@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
+
+    private static UserDAO instance;
     String loginSQL = "SELECT user_password, user_role, user_state FROM users WHERE user_id = ?";
     String signupSQL = "INSERT INTO users VALUES (NULL,?,?,?,?,NOW(),?,?,?,?,?,false)";
     // no/id/password/email/tel/date/state/role/question/answer/hash/checked
@@ -32,6 +34,15 @@ public class UserDAO {
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
+
+    private UserDAO() {}
+
+    public static synchronized UserDAO getInstance() {
+        if (instance == null) {
+            instance = new UserDAO();
+        }
+        return instance;
+    }
 
     public int login(String userId, String userPassword) {
         try {

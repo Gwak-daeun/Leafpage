@@ -32,7 +32,7 @@ public class LoginController implements Controller {
             return "loginView.do";
         }
 
-        UserDAO userDAO = new UserDAO();
+        UserDAO userDAO = UserDAO.getInstance();
         int result = userDAO.login(userId, userPassword);
         boolean userEmailChecked = userDAO.getUserEmailChecked(userId);
         Long userNo = userDAO.getUserNo(userId);
@@ -63,10 +63,10 @@ public class LoginController implements Controller {
                 session.setAttribute("userEmailChecked", userEmailChecked);
                 session.setAttribute("userNo", userNo);
 
-                List<String> returnedBooksISBN = new RentalDAO().returnOverdueBooks(userNo);
+                List<String> returnedBooksISBN = RentalDAO.getInstance().returnOverdueBooks(userNo);
 
                 if (!returnedBooksISBN.isEmpty()) {
-                    List<String> returnedBooksName = new BookDAO().findReturnedBooksName(returnedBooksISBN);
+                    List<String> returnedBooksName = BookDAO.getInstance().findReturnedBooksName(returnedBooksISBN);
                     request.setAttribute("returnedBooksName", returnedBooksName);
                 }
 

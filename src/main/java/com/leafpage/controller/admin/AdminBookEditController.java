@@ -19,7 +19,7 @@ public class AdminBookEditController implements Controller {
         System.out.println("나여기");
 
 
-        BookDAO dao = new BookDAO();
+        BookDAO dao = BookDAO.getInstance();
 
         request.setCharacterEncoding("UTF-8");
         String ISBN = null;

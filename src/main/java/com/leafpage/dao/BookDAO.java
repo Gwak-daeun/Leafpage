@@ -17,9 +17,20 @@ import java.util.List;
 
 @Slf4j
 public class BookDAO {
+    private static BookDAO instance;
+
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     Connection conn = null;
+
+    private BookDAO() {}
+
+    public static synchronized BookDAO getInstance() {
+        if (instance == null) {
+            instance = new BookDAO();
+        }
+        return instance;
+    }
 
 
     public List<BookDTO> booklist(int pageNum, int amount) {

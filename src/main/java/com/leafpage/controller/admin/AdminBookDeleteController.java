@@ -19,7 +19,7 @@ public class AdminBookDeleteController implements Controller {
 
         BookDTO dto = new BookDTO();
         dto.setISBN(ISBN);
-        BookDAO dao = new BookDAO();
+        BookDAO dao = BookDAO.getInstance();
         int count = dao.bookDelete(dto);
 
         if (count == 1) {

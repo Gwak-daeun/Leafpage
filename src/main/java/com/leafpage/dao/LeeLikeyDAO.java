@@ -8,10 +8,20 @@ import java.sql.ResultSet;
 
 public class LeeLikeyDAO {
 
+    private static LeeLikeyDAO instance;
+
     private Connection conn = null;
     PreparedStatement pstmp = null;
     private ResultSet rs = null;
 
+    private LeeLikeyDAO() {}
+
+    public static synchronized LeeLikeyDAO getInstance() {
+        if (instance == null) {
+            instance = new LeeLikeyDAO();
+        }
+        return instance;
+    }
     //좋아요 누른건지 조회 select
     //좋아요 취소 delete
     //좋아요 하는 insert

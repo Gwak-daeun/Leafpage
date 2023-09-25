@@ -17,7 +17,7 @@ public class IndexController implements Controller {
 
         List<BookDTO> mainBookList = new ArrayList<>();
 
-        mainBookList = new BookDAO().findMainBooks();
+        mainBookList = BookDAO.getInstance().findMainBooks();
 
         request.setAttribute("mainBooks", mainBookList);
 
