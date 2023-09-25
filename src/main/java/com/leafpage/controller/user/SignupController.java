@@ -56,9 +56,6 @@ public class SignupController implements Controller {
             return "signupView.do";
         }
 
-        UserDAO userDAO = UserDAO.getInstance();
-        UserDTO userDTO = new UserDTO();
-
         if (isDuplicateId(userId)) {
             jsonResponse.put("duplicateIdError", "이미 가입된 아이디가 있습니다.");
         } else if (isDuplicatedTel(userTel)) {
@@ -66,24 +63,15 @@ public class SignupController implements Controller {
         } else if (isDuplicatedEmail(userEmail)) {
             jsonResponse.put("duplicateEmailError", "이미 가입된 이메일이 있습니다.");
         } else {
-            userDTO.setUserId(userId);
-            userDTO.setUserPassword(userPassword);
-            userDTO.setUserEmail(userEmail);
-            userDTO.setUserTel(userTel);
-            userDTO.setUserState("일반회원");
-            userDTO.setUserRole("회원");
-            userDTO.setUserSecurityQuestion(userSecurityQuestion);
-            userDTO.setUserSecurityAnswer(userSecurityAnswer);
-            userDTO.setUserEmailHash(SHA256.getSHA256(userEmail));
-
-            int result = userDAO.signup(userDTO);
+            UserDTO signupUserDTO = getSignupUserDTO(userId, userPassword, userEmail, userTel, userSecurityQuestion, userSecurityAnswer);
+            int result = UserDAO.getInstance().signup(signupUserDTO);
             if (result == -1) {
                 jsonResponse.put("failError", "회원가입에 실패했습니다.");
             } else {
                 session.setAttribute("msg", "회원가입에 성공했습니다. 이메일 인증을 완료해주세요.");
                 session.setAttribute("userId", userId);  //가입 성공 시 바로 로그인상태로
                 session.setAttribute("userEmailChecked", false);
-                session.setAttribute("userNo", userDTO.getUserNo());
+                session.setAttribute("userNo", signupUserDTO.getUserNo());
                 jsonResponse.put("success", "회원가입에 성공했습니다.");
             }
         }
@@ -93,6 +81,21 @@ public class SignupController implements Controller {
         out.close();
         System.out.println(json);
         return "none";
+    }
+
+    private UserDTO getSignupUserDTO(String userId, String userPassword, String userEmail, String userTel,
+                               String userSecurityQuestion, String userSecurityAnswer) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUserId(userId);
+        userDTO.setUserPassword(userPassword);
+        userDTO.setUserEmail(userEmail);
+        userDTO.setUserTel(userTel);
+        userDTO.setUserState("일반회원");
+        userDTO.setUserRole("회원");
+        userDTO.setUserSecurityQuestion(userSecurityQuestion);
+        userDTO.setUserSecurityAnswer(userSecurityAnswer);
+        userDTO.setUserEmailHash(SHA256.getSHA256(userEmail));
+        return userDTO;
     }
 
     private boolean isDuplicateId(String userId) {

@@ -52,9 +52,9 @@
         <div class="input-group">
             <select class="form-select" name="userSecurityQuestion" id="userSecurityQuestion" aria-label="select">
                 <option selected>나의 보물 1호는?</option>
-                <option value="1">출생지는 어디인가요?</option>
-                <option value="2">첫 번째 자동차 모델은 무엇인가요?</option>
-                <option value="3">초등학교 이름은 무엇인가요?</option>
+                <option>출생지는 어디인가요?</option>
+                <option>첫 번째 자동차 모델은 무엇인가요?</option>
+                <option>초등학교 이름은 무엇인가요?</option>
             </select>
         </div>
 

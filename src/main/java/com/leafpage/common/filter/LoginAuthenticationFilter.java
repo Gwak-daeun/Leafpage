@@ -8,7 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/withdrawal.do","/mypageInfo.do","/Logout.do","/updateMyInfoView.do"})
+@WebFilter(urlPatterns = {
+        "/withdrawal.do", "/mypageInfo.do", "/Logout.do",
+        "/updateMyInfoView.do", "/booklistView.do", "/getBook.do",
+        "/books/edit.do", "/bookupload.do", "/remove.do",
+        "/edit.do", "/adminbooksearch.do", "/adminusersearch.do",
+        "/userlistview.do", "/userlistsignupView.do", "/userstatechange.do",
+        "/removeReview.do", "/makeReview.do", "/LikeHeart.do",
+        "/saveUserBookY.do", "/rentBook.do", "/returnBook.do"
+})
 public class LoginAuthenticationFilter extends HttpFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

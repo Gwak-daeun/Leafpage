@@ -79,6 +79,7 @@ public class UpdateUserInfoController implements Controller {
         return "none";
     }
 
+
     private boolean isDuplicatedTel(String userTel) {
         return UserDAO.getInstance().findUserByEmail(userTel) == 1;
     }

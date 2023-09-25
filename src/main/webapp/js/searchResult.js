@@ -21,7 +21,7 @@ $(document).ready(function () {
                 return false;
             } else {
                 console.log("스크롤 데이터 요청");
-                curPage += 12;
+                curPage += 10;
                 loadMoreData();
             }
         }
@@ -56,7 +56,7 @@ function loadMoreData() {
                 const $dataList = $('#searchResultUl');
                 data.books.forEach(item => {
                     $dataList.append(` <li>
-                            <a href="/detailPageView.do?isbn=${item.ISBN}">
+                            <a href="/detailPageView.do?isbn=${item.isbn}">
                                 <div class="book-list">
                                     <img class="book-cover" src="${item.bookImg}" />
                                     <div class="book-title">${item.bookName}</div>
@@ -69,7 +69,7 @@ function loadMoreData() {
 
                 isLoading = false;
 
-                page += 12;
+                page += 10;
             }
 
             $("#spinner").hide();
