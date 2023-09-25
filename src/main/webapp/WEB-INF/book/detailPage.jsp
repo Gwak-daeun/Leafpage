@@ -36,7 +36,7 @@
                              onclick="likeCheck(`${bookDetail.ISBN}`)">
                     </c:if>
                     <c:if test="${heartSelect == 0}">
-                        <img id="emptyH" style="width: 20px; margin-left: 5px;"
+                        <img id="emptyH" style="width: 20px; height: 20px; margin-left: 5px;"
                              src="<c:url value="/css/icons/empty.png"/>" onclick="likeCheck(`${bookDetail.ISBN}`)">
                     </c:if>
                     <span style="margin-top: 10px">${ heartCount }</span>
