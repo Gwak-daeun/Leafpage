@@ -25,8 +25,8 @@
     border-radius: 5px;
     box-shadow: 1px 1px 1px black;
     transition-duration: 0.3s;
-    display: inline-block;
-    margin-left: 540px;
+    /*display: inline-block;*/
+    margin-left: 630px;
     font-size: 13px;
     margin-top: 3px;
     color: white;
@@ -325,10 +325,10 @@ li{
         font-size: 12px;
     }
     #select1{
-        margin-left: 225px;
+        margin-left: 195px;
     }
     #select2{
-        margin-left: 170px;
+        margin-left: 250px;
     }
 
 }

@@ -715,6 +715,7 @@ public class BookDAO {
             while (rs.next()) {
                 BookDTO bookDTO = new BookDTO();
                 bookDTO.setISBN(rs.getString("ISBN"));
+                System.out.println("CHECK RESULT ISBN : " + bookDTO.getISBN());
                 bookDTO.setBookName(rs.getString("book_name"));
                 bookDTO.setBookImg(rs.getString("book_img"));
                 bookDTO.setBookAuthorName(rs.getString("book_author_name"));
