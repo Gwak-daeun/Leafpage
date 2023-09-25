@@ -29,8 +29,8 @@ public class BookDAO {
         List<BookDTO> bookDTOList = new ArrayList<>();
         try {
             conn = DBUtil.getConnection();
-            String sql = "SELECT B.isbn, B.book_name, B.book_publisher_name, B.book_author_name " +
-                    "FROM (SELECT ROW_NUMBER() OVER (ORDER BY b.book_name) AS rn, b.isbn, b.book_name, b.book_publisher_name, b.book_author_name FROM books b) B " +
+            String sql = "SELECT B.isbn, B.book_name, B.book_publisher_name, B.book_author_name, B.book_state " +
+                    "FROM (SELECT ROW_NUMBER() OVER (ORDER BY b.book_name) AS rn, b.isbn, b.book_name, b.book_publisher_name, b.book_author_name, b.book_state FROM books b) B " +
                     "WHERE rn > ? AND rn <= ?";
 
             pstmt = conn.prepareStatement(sql);
@@ -44,7 +44,7 @@ public class BookDAO {
                 bookDTO.setBookPublisherName(rs.getString("book_publisher_name"));
                 bookDTO.setBookAuthorName(rs.getString("book_author_name"));
                 bookDTO.setCategories(findCategories(conn, bookDTO.getISBN()));
-
+                bookDTO.setBookstate(rs.getString("book_state"));
 
                 bookDTOList.add(bookDTO);
             }
