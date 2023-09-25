@@ -19,7 +19,7 @@ import java.util.List;
         maxFileSize = 1024 * 1024 * 5,
         maxRequestSize = 1024 * 1024 * 50
 )
-public class AdminBookUploadController implements Controller  {
+public class AdminBookUploadController implements Controller {
 
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         System.out.println("들어오니?");
@@ -43,16 +43,15 @@ public class AdminBookUploadController implements Controller  {
         String savePath = "C:\\Users\\user\\Desktop\\beanstalk\\Leafpage\\src\\main\\webapp\\image";
         String dbPath = "\\image";
 
-        int sizeLimit = 1024*1024*15;
+        int sizeLimit = 1024 * 1024 * 15;
 
         MultipartRequest multi = new MultipartRequest(request, savePath, sizeLimit, "utf-8", new DefaultFileRenamePolicy());
 
-        if (multi.getFilesystemName("bookimg")== (null)){
+        if (multi.getFilesystemName("bookimg") == (null)) {
             bookimg = "iconmonstr-book-26-240.png";
-        }else {
+        } else {
             bookimg = multi.getFilesystemName("bookimg");
         }
-
 
 
         String bookimgFullPath = dbPath + "\\" + bookimg;
@@ -116,12 +115,11 @@ public class AdminBookUploadController implements Controller  {
         }
 
         String[] categorie = categories.split(",");
-        for(int i = 0;  i < categorie.length; i++){
+        for (int i = 0; i < categorie.length; i++) {
             categorie[i] = categorie[i].trim();
-            if(categorie[i].equals("만화")|| categorie[i].equals("생활")||categorie[i].equals("소설")|| categorie[i].equals("에세이")||categorie[i].equals("학술논문")){
+            if (categorie[i].equals("만화") || categorie[i].equals("생활") || categorie[i].equals("소설") || categorie[i].equals("에세이") || categorie[i].equals("학술논문")) {
                 categorieslist.add(categorie[i]);
             }else {
-
                 out.println("<script>");
                 out.println("alert('카테고리는 만화,생활,소설,에세이,학술논문만 있습니다')");
                 out.println("history.back()");
@@ -129,7 +127,6 @@ public class AdminBookUploadController implements Controller  {
                 return null;
             }
         }
-
 
 
         System.out.println(bookimgFullPath);
@@ -152,7 +149,6 @@ public class AdminBookUploadController implements Controller  {
         System.out.println(count);
 
         if(count == 1){
-
             out.println("<script>");
             out.println("alert('등록성공')");
             out.println("</script>");
@@ -164,8 +160,6 @@ public class AdminBookUploadController implements Controller  {
             out.println("</script>");
             return null;
         }
-
-
     }
 
 }

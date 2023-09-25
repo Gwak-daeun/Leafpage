@@ -8,16 +8,28 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/updateMyInfoView.do","/mypageInfo.do"})
+@WebFilter(urlPatterns = {"/withdrawal.do","/mypageInfo.do","/Logout.do","/updateMyInfoView.do", "/detailPageView.do"})
 public class LoginAuthenticationFilter extends HttpFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
+        String userId = null;
+        Boolean userEmailChecked = false;
         HttpSession session = req.getSession();
-        if(session.getAttribute("userId") == null) {
-            res.sendRedirect("/loginView.do");
+        userId = (String) session.getAttribute("userId");
+        userEmailChecked = (Boolean) session.getAttribute("userEmailChecked");
+
+        if (userId == null) {
+            //로그인을 하지 않은 사용자가 로그인을 해야만 이용할 수 있는 서비스에 접근했을 경우
+            session.setAttribute("msg", "로그인 후 이용하실 수 있습니다.");
+            res.sendRedirect("loginView.do");
+        } else if (userEmailChecked == null || !userEmailChecked.booleanValue()) {
+            //로그인은 했는데 이메일 인증을 하지 않은 사용자가 서비스에 접근했을 경우
+            session.setAttribute("msg", "서비스를 이용하시려면 이메일인증을 해주세요.");
+            res.sendRedirect("emailResendView.do");
         } else {
+            // 나머지 경우에는 필터 체인 계속 진행
             chain.doFilter(request, response);
         }
     }

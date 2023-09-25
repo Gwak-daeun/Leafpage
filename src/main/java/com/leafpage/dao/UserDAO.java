@@ -13,7 +13,8 @@ import java.util.List;
 
 public class UserDAO {
     String loginSQL = "SELECT user_password, user_role, user_state FROM users WHERE user_id = ?";
-    String signupSQL = "INSERT INTO users VALUES (NULL,?,?,?,?,?,?,?,?,?,false,NOW())";
+    String signupSQL = "INSERT INTO users VALUES (NULL,?,?,?,?,NOW(),?,?,?,?,?,false)";
+    // no/id/password/email/tel/date/state/role/question/answer/hash/checked
     String findUserByIdSQL = "SELECT user_id FROM users WHERE user_id = ?";
     String findIdByEmailOrTelSQL = "SELECT user_id FROM users WHERE user_email = ? OR user_tel = ?";
     String findPwByEmailOrTelSQL = "SELECT user_security_question, user_security_answer FROM users WHERE (user_email = ? OR user_tel =?) AND (user_id = ?)";
@@ -42,12 +43,24 @@ public class UserDAO {
             if (rs.next()) {
                 if (rs.getString(1).equals(SHA256.getSHA256(userPassword))) {
                     if (rs.getString(2).equals("회원")) {
-                        if (rs.getString(3).equals("일반회원")) {return 1;}  //회원 로그인 성공
-                        else if (rs.getString(3).equals("휴면회원")) {return 2;}  //휴면회원 로그인시도
-                        else if (rs.getString(3).equals("블랙회원")) {return 3;}  //블랙회원 로그인시도
-                        else if (rs.getString(3).equals("탈퇴회원")) {return 4;}  //탈퇴회원 로그인시도
-                    } else if (rs.getString(2).equals("관리자")) {return 0;}  //관리자 로그인 성공
-                } else {return -1;}  //비밀번호 틀림
+                        if (rs.getString(3).equals("일반회원")) {
+                            return 1;
+                        }  //회원 로그인 성공
+                        else if (rs.getString(3).equals("휴면회원")) {
+                            return 2;
+                        }  //휴면회원 로그인시도
+                        else if (rs.getString(3).equals("블랙회원")) {
+                            return 3;
+                        }  //블랙회원 로그인시도
+                        else if (rs.getString(3).equals("탈퇴회원")) {
+                            return 4;
+                        }  //탈퇴회원 로그인시도
+                    } else if (rs.getString(2).equals("관리자")) {
+                        return 0;
+                    }  //관리자 로그인 성공
+                } else {
+                    return -1;
+                }  //비밀번호 틀림
             }
             return -2;  //아이디 없음
         } catch (Exception e) {
@@ -61,7 +74,6 @@ public class UserDAO {
 
     //회원가입
     public int signup(UserDTO user) {
-        //no,id,pw,email,tel,state,role,securityq,securityan
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(signupSQL);
@@ -148,7 +160,7 @@ public class UserDAO {
     }
 
     //새 비밀번호 변경
-    public int changeNewPassword (String newPassword, String userId) {
+    public int changeNewPassword(String newPassword, String userId) {
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(changeNewPasswordSQL);
@@ -240,7 +252,7 @@ public class UserDAO {
     }
 
     //사용자가 현재 Email 인증이 되었는지 확인
-    public boolean getUserEmailChecked (String userId) {
+    public boolean getUserEmailChecked(String userId) {
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(getUserEmailCheckedSQL);
@@ -258,7 +270,7 @@ public class UserDAO {
     }
 
     //회원번호 가져오기
-    public int getUserNo (String userId) {
+    public int getUserNo(String userId) {
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(getUserNoSQL);
@@ -276,7 +288,7 @@ public class UserDAO {
     }
 
     //특정한 사용자의 Email 인증을 수행
-    public boolean setUserEmailChecked (String userId) {
+    public boolean setUserEmailChecked(String userId) {
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(setUserEmailCheckedSQL);
@@ -342,8 +354,8 @@ public class UserDAO {
         return -1;  // 데이터베이스 오류
     }
 
-    public List<UserDTO> userList(int pageNum, int amount){
-        List<UserDTO> userDTOList= new ArrayList<>();
+    public List<UserDTO> userList(int pageNum, int amount) {
+        List<UserDTO> userDTOList = new ArrayList<>();
         try {
             conn = DBUtil.getConnection();
             String sql = " select U.user_id, U.user_joining_date, U.user_email, U.user_tel, U.user_state " +
@@ -352,11 +364,11 @@ public class UserDAO {
                     "from users u) U " +
                     "WHERE rn > ? AND rn <= ?;";
 
-            pstmt  = conn.prepareStatement(sql);
-            pstmt.setInt(1, ((pageNum - 1)* amount));
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, ((pageNum - 1) * amount));
             pstmt.setInt(2, (pageNum * amount));
             rs = pstmt.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 UserDTO UserDTO = new UserDTO();
                 UserDTO.setUserId(rs.getString("user_id"));
                 UserDTO.setUserJoiningDate(rs.getString("user_joining_date"));
@@ -365,18 +377,18 @@ public class UserDAO {
                 UserDTO.setUserState(rs.getString("user_state"));
                 userDTOList.add(UserDTO);
             }
-            DBUtil.close(rs ,pstmt, conn);
+            DBUtil.close(rs, pstmt, conn);
 
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return userDTOList;
 
     }
 
-    public List<UserDTO> userrentelList(int pageNum, int amount){
-        List<UserDTO> userDTOList= new ArrayList<>();
+    public List<UserDTO> userrentelList(int pageNum, int amount) {
+        List<UserDTO> userDTOList = new ArrayList<>();
         try {
             conn = DBUtil.getConnection();
             String sql = "SELECT U.user_id, U.user_joining_date, U.user_email, U.user_tel, U.user_state\n" +
@@ -405,11 +417,11 @@ public class UserDAO {
                     ") U\n" +
                     "WHERE rn > ? AND rn <= ?";
 
-            pstmt  = conn.prepareStatement(sql);
-            pstmt.setInt(1, ((pageNum - 1)* amount));
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, ((pageNum - 1) * amount));
             pstmt.setInt(2, (pageNum * amount));
             rs = pstmt.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 UserDTO UserDTO = new UserDTO();
                 UserDTO.setUserId(rs.getString("user_id"));
                 UserDTO.setUserJoiningDate(rs.getString("user_joining_date"));
@@ -418,18 +430,18 @@ public class UserDAO {
                 UserDTO.setUserState(rs.getString("user_state"));
                 userDTOList.add(UserDTO);
             }
-            DBUtil.close(rs ,pstmt, conn);
+            DBUtil.close(rs, pstmt, conn);
 
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return userDTOList;
 
     }
 
-    public int  getTotal(){
-        int result  = 0;
+    public int getTotal() {
+        int result = 0;
 
         try {
             conn = DBUtil.getConnection();
@@ -439,22 +451,22 @@ public class UserDAO {
 
             rs = pstmt.executeQuery();
 
-            if(rs.next()) {
+            if (rs.next()) {
                 result = rs.getInt("total");
             }
 
-            DBUtil.close(rs ,pstmt, conn);
+            DBUtil.close(rs, pstmt, conn);
 
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
-        return result ;
+        return result;
     }
 
-    public int  stateUpDate(UserDTO dto){
-        int result  = 0;
+    public int stateUpDate(UserDTO dto) {
+        int result = 0;
         String state = null;
 
 
@@ -464,141 +476,129 @@ public class UserDAO {
 
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, dto.getUserState());
-            pstmt.setString(2,dto.getUserId());
+            pstmt.setString(2, dto.getUserId());
             pstmt.executeUpdate();
 
 
-
-
-
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }finally {
-            DBUtil.close(rs ,pstmt, conn);
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
         }
 
-        return result ;
+        return result;
     }
 
-    public int  deletesearchUser(UserDTO dto){
-        int result  = 0;
+    public int deletesearchUser(UserDTO dto) {
+        int result = 0;
         try {
             conn = DBUtil.getConnection();
             String sql = "select user_no from users where user_id = ? ";
-                pstmt = conn.prepareStatement(sql);
-                pstmt.setString(1,dto.getUserId());
-                 rs = pstmt.executeQuery();
-                 if(rs.next()) {
-                     dto.setUserNo(rs.getInt("user_no"));
-                 }
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, dto.getUserId());
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                dto.setUserNo(rs.getInt("user_no"));
+            }
 
 
-            deleteLikeyUser(conn,dto);
-            deleteReviewsUser(conn,dto);
-            deleteRentalUser(conn,dto);
-            deleteUser(conn,dto);
+            deleteLikeyUser(conn, dto);
+            deleteReviewsUser(conn, dto);
+            deleteRentalUser(conn, dto);
+            deleteUser(conn, dto);
 
 
-
-
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
-            DBUtil.close(rs ,pstmt, conn);
+            DBUtil.close(rs, pstmt, conn);
         }
 
-        return result ;
+        return result;
     }
 
 
-    public void  deleteLikeyUser(Connection conn, UserDTO dto){
-        int result  = 0;
+    public void deleteLikeyUser(Connection conn, UserDTO dto) {
+        int result = 0;
         try {
             String sql = "DELETE FROM likey WHERE  user_no = ? ";
 
-                pstmt = this.conn.prepareStatement(sql);
-                pstmt.setInt(1,dto.getUserNo());
-                pstmt.executeUpdate();
+            pstmt = this.conn.prepareStatement(sql);
+            pstmt.setInt(1, dto.getUserNo());
+            pstmt.executeUpdate();
 
 
-
-
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
     }
 
-    public void  deleteReviewsUser(Connection conn, UserDTO dto){
+    public void deleteReviewsUser(Connection conn, UserDTO dto) {
         try {
             this.conn = DBUtil.getConnection();
             String sql = "DELETE FROM reviews WHERE  user_no = ?";
 
-                pstmt = this.conn.prepareStatement(sql);
-                pstmt.setInt(1,dto.getUserNo());
-                pstmt.executeUpdate();
+            pstmt = this.conn.prepareStatement(sql);
+            pstmt.setInt(1, dto.getUserNo());
+            pstmt.executeUpdate();
 
 
-
-
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
     }
 
-    public void  deleteRentalUser(Connection conn, UserDTO dto){
-        int result  = 0;
+    public void deleteRentalUser(Connection conn, UserDTO dto) {
+        int result = 0;
         try {
             this.conn = DBUtil.getConnection();
             String sql = "DELETE FROM book_rental WHERE  user_no = ? ";
 
-                pstmt = this.conn.prepareStatement(sql);
-                pstmt.setInt(1,dto.getUserNo());
-                pstmt.executeUpdate();
+            pstmt = this.conn.prepareStatement(sql);
+            pstmt.setInt(1, dto.getUserNo());
+            pstmt.executeUpdate();
 
 
-
-
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
     }
-    public void  deleteUser(Connection conn, UserDTO dto){
-        int result  = 0;
+
+    public void deleteUser(Connection conn, UserDTO dto) {
+        int result = 0;
         try {
             this.conn = DBUtil.getConnection();
             String sql = "DELETE FROM users WHERE  user_no = ? ";
 
-                pstmt = this.conn.prepareStatement(sql);
-                pstmt.setInt(1,dto.getUserNo());
-                pstmt.executeUpdate();
+            pstmt = this.conn.prepareStatement(sql);
+            pstmt.setInt(1, dto.getUserNo());
+            pstmt.executeUpdate();
 
 
-
-
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public List<UserDTO> userSearchList(int pageNum, int amount, String keyword){
-        List<UserDTO> userDTOList= new ArrayList<>();
+    public List<UserDTO> userSearchList(int pageNum, int amount, String keyword) {
+        List<UserDTO> userDTOList = new ArrayList<>();
         try {
             conn = DBUtil.getConnection();
-            String sql ="  SELECT B.user_id, B.user_joining_date, B.user_email, B.user_tel, B.user_state" +
+            String sql = "  SELECT B.user_id, B.user_joining_date, B.user_email, B.user_tel, B.user_state" +
                     " FROM (SELECT ROW_NUMBER() OVER (ORDER BY user_joining_date) AS rn, user_id, user_joining_date, user_email, user_tel, user_state" +
                     " from users " +
                     " where concat(user_id, user_email, user_tel) LIKE ? ) B" +
                     " WHERE rn > ? AND rn <= ? ";
 
-            pstmt  = conn.prepareStatement(sql);
+            pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, "%" + keyword + "%");
-            pstmt.setInt(2, ((pageNum - 1)* amount));
+            pstmt.setInt(2, ((pageNum - 1) * amount));
             pstmt.setInt(3, (pageNum * amount));
             rs = pstmt.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 UserDTO UserDTO = new UserDTO();
                 UserDTO.setUserId(rs.getString("user_id"));
                 UserDTO.setUserJoiningDate(rs.getString("user_joining_date"));
@@ -607,18 +607,18 @@ public class UserDAO {
                 UserDTO.setUserState(rs.getString("user_state"));
                 userDTOList.add(UserDTO);
             }
-            DBUtil.close(rs ,pstmt, conn);
+            DBUtil.close(rs, pstmt, conn);
 
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return userDTOList;
 
     }
 
-    public int  getSearchTotal(String keyword){
-        int result  = 0;
+    public int getSearchTotal(String keyword) {
+        int result = 0;
 
         try {
             conn = DBUtil.getConnection();
@@ -632,18 +632,18 @@ public class UserDAO {
 
             rs = pstmt.executeQuery();
 
-            if(rs.next()) {
+            if (rs.next()) {
                 result = rs.getInt("total");
             }
 
-            DBUtil.close(rs ,pstmt, conn);
+            DBUtil.close(rs, pstmt, conn);
 
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
-        return result ;
+        return result;
     }
 
 }

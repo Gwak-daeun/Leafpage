@@ -16,6 +16,7 @@ import java.io.PrintWriter;
 @Slf4j
 public class RentalController implements Controller {
     private static final int MAX_RENTAL_COUNT = 5;
+
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -35,8 +36,7 @@ public class RentalController implements Controller {
         if (rentalDAO.findRentalCount(dto) >= MAX_RENTAL_COUNT) {
             writer.print("overRentCount");
             log.debug("회원의 도서 대여 수가 5권입니다. 더 이상 대여하실 수 없습니다.");
-        }
-        else if (rentalDAO.findRenting(dto)) {
+        } else if (rentalDAO.findRenting(dto)) {
             writer.print("renting");
             log.debug("현재 도서가 대여 중 입니다.");
         } else {

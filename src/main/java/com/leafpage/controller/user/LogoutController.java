@@ -13,6 +13,9 @@ public class LogoutController implements Controller {
         System.out.println("로그아웃 처리");
         HttpSession session = request.getSession();
         session.invalidate();
-        return "index";
+        HttpSession newSession = request.getSession();
+        newSession.setAttribute("msg", "로그아웃 되었습니다.");
+        response.sendRedirect("indexInfo.do");
+        return "none";
     }
 }

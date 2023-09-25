@@ -5,6 +5,7 @@ pom.xml에 외부라이브러리 넣기 (dependency)
 - javamail 1.4.7
 - javabeans activation framework(JAF) 1.1.1
  */
+
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 

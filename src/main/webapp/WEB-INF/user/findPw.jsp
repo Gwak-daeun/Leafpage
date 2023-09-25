@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>LeafPage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="../../css/findpw.css">
 </head>
@@ -49,6 +50,7 @@
     <div class="alert alert-success mt-4" role="alert" id="update_pw"></div>
 
     <div class="form-floating mb-4">
+        <p class='checkText'></p>
         <input type="button" id="find_pw_btn" class="btn3 btn btn-success" value="비밀번호 찾기" onclick="checkNullPw()">
     </div>
 

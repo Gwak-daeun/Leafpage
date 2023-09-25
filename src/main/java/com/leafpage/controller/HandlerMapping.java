@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HandlerMapping {
-    private Map<String, Controller> mappings;
+    private final Map<String, Controller> mappings;
 
     public HandlerMapping() {
 
@@ -24,7 +24,7 @@ public class HandlerMapping {
         mappings.put("/bookScroll.do", new BookScrollController());
 
         mappings.put("/indexInfo.do", new IndexController());
-        mappings.put("/LikeHeart.do",new LikeHeartController());
+        mappings.put("/LikeHeart.do", new LikeHeartController());
         mappings.put("/detailPageView.do", new DetailPageController());
         mappings.put("/clearMsg.do", new ClearMsgController());
 

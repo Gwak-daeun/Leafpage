@@ -33,13 +33,12 @@ public class LeeLikeyDAO {
             rs = pstmp.executeQuery();
             System.out.println(rs);
 
-            if(rs.next()) {
+            if (rs.next()) {
                 return 1;           //값이 있으면 1 반환
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             DBUtil.close(rs, pstmp, conn);
         }
         return 0;
@@ -101,7 +100,7 @@ public class LeeLikeyDAO {
             pstmp.setString(1, isbn);
             rs = pstmp.executeQuery();
 
-            if(rs.next()) {
+            if (rs.next()) {
                 heartCount = rs.getInt("LIKECOUNT");
                 return heartCount;
             }

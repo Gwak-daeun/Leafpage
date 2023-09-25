@@ -19,16 +19,16 @@ public class FindIdController implements Controller {
         String inputEmail = null;
         String inputTel = null;
 
-        if(request.getParameter("inputEmail") != null) {
+        if (request.getParameter("inputEmail") != null) {
             inputEmail = request.getParameter("inputEmail");
         }
-        if(request.getParameter("inputTel") != null) {
+        if (request.getParameter("inputTel") != null) {
             inputTel = request.getParameter("inputTel");
         }
 
         HttpSession session = request.getSession();
-        if(inputEmail == null && inputTel == null) {
-            session.setAttribute("msg","[Error] 비정상적인 접근입니다.");
+        if (inputEmail == null && inputTel == null) {
+            session.setAttribute("msg", "[Error] 비정상적인 접근입니다.");
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "비정상적인 접근입니다.");
         } else {
             String foundUserId = new UserDAO().findIdByEmailOrTel(inputEmail, inputTel);
