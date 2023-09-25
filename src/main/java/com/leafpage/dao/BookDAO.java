@@ -615,7 +615,7 @@ public class BookDAO {
             SQL += " and concat(book_publisher_name, book_name, book_author_name) LIKE ?";
         }
 
-        SQL += " order by book_upload_date desc limit 12 offset 0;";
+        SQL += " order by book_upload_date desc limit 0, 10;";
 
         try {
             conn = DBUtil.getConnection();
@@ -701,7 +701,7 @@ public class BookDAO {
             }
         }
 
-        SQL += "limit 12 offset ?;";
+        SQL += "limit ?, ?;";
 
         try {
             conn = DBUtil.getConnection();
@@ -710,13 +710,13 @@ public class BookDAO {
             if (genre.isEmpty()) {
                 pstmt.setString(1, "%" + searchKeyword + "%");
                 pstmt.setInt(2, page);
-//                pstmt.setInt(3, pageNum);
+                pstmt.setInt(3, 10);
             }
             if (!genre.isEmpty()) {
                 pstmt.setString(1, "%" + genre + "%");
                 pstmt.setString(2, "%" + searchKeyword + "%");
                 pstmt.setInt(3, page);
-//                pstmt.setInt(4, pageNum);
+                pstmt.setInt(4, 10);
             }
 
             log.debug("CHECK SEARCH RESULT QUERY : {} " + pstmt);
@@ -725,7 +725,7 @@ public class BookDAO {
             while (rs.next()) {
                 BookDTO bookDTO = new BookDTO();
                 bookDTO.setISBN(rs.getString("ISBN"));
-                System.out.println("CHECK RESULT ISBN : " + bookDTO.getISBN());
+//                System.out.println("CHECK RESULT ISBN : " + bookDTO.getISBN());
                 bookDTO.setBookName(rs.getString("book_name"));
                 bookDTO.setBookImg(rs.getString("book_img"));
                 bookDTO.setBookAuthorName(rs.getString("book_author_name"));

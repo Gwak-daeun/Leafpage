@@ -9,14 +9,13 @@ import java.util.List;
 @Getter
 public class SecurityQuestion {
 
-    List<String> validSecurityQuestions = new ArrayList<>(Arrays.asList(
+    private final String userSecurityQuestion;
+    private final List<String> validSecurityQuestions = new ArrayList<>(Arrays.asList(
             "나의 보물 1호는?",
             "출생지는 어디인가요?",
             "첫 번째 자동차 모델은 무엇인가요?",
             "초등학교 이름은 무엇인가요?"
     ));
-
-    private final String userSecurityQuestion;
 
     public SecurityQuestion(String userSecurityQuestion) {
         validate(userSecurityQuestion);

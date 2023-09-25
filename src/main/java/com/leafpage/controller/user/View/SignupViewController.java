@@ -11,13 +11,23 @@ import java.io.PrintWriter;
 public class SignupViewController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("회원가입 화면으로 이동");
         HttpSession session = request.getSession();
-        if (session.getAttribute("userId") != null) {
-            session.setAttribute("msg", "이미 로그인 상태입니다.");
-            response.sendRedirect("indexInfo.do");
+
+        if (isUserLoggedIn(session)) {
+            redirectToIndexPageWithMessage(session, response, "이미 로그인 상태입니다.");
         }
 
-        System.out.println("회원가입 화면으로 이동");
         return "user/userSignup";
     }
+
+    private boolean isUserLoggedIn(HttpSession session) {
+        return session.getAttribute("userId") != null;
+    }
+
+    private void redirectToIndexPageWithMessage(HttpSession session, HttpServletResponse response, String message) throws IOException {
+        session.setAttribute("msg", message);
+        response.sendRedirect("indexInfo.do");
+    }
+
 }
