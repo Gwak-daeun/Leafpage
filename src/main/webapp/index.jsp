@@ -12,9 +12,6 @@
 </head>
 <body>
 <%@include file="./WEB-INF/component/header.jsp"%>
-<%
-    session.setAttribute("userNo",2L);
-%>
 
 <div class="container">
     <div class="title">
