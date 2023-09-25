@@ -1,106 +1,194 @@
 
-    body {
-        background-color: #F9F3F0;
+body {
+    background-color: #F9F3F0;
+}
+
+.index-nav {
+    background-color: #056365;
+}
+
+.btn1 {
+    background-color: #71CB9F;
+    border-radius: 5px;
+    border-color: transparent;
+}
+
+.btn2 {
+    background-color: #FDF3A7;
+    border-radius: 5px;
+    border-color: transparent;
+    margin-right: 5px;
+}
+
+
+.navbar {
+    height: 50px;
+}
+
+.container-fluid {
+    top: 50%;
+    margin-top: -5px;
+}
+
+
+.main {
+    width: 400px;
+    height: 50%;
+    margin-top: 50px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+h3 {
+    color: #679292;
+    margin-bottom: 35px;
+    font-size: 65pt;
+    font-weight:600;
+}
+
+.idInput {
+    width: 350px;
+    height: 40px;
+    background-color: white;
+    border-radius: 18px;
+    margin-left: 10px;
+    margin-bottom: 30px;
+    outline: none;
+    border: none;
+    background-repeat: no-repeat;
+}
+
+.idInput::-webkit-input-placeholder {
+    background-image: url(/css/icons/account_circle.png);
+    background-size: contain;
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    text-indent: 40px;
+}
+
+
+.pwInput {
+    width: 350px;
+    height: 40px;
+    background-color: white;
+    border-radius: 18px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    outline: none;
+    border: none;
+    background-repeat: no-repeat;
+}
+
+.pwInput::-webkit-input-placeholder {
+    background-image: url(/css/icons/lock.png);
+    background-size: contain;
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    text-indent: 40px;
+}
+
+.inputBox {
+    margin-left: 5px;
+    margin-top: 8px;
+    width: 280px;
+    line-height: 22px;
+    overflow-x: hidden;
+    border: 1px solid white;
+}
+
+.inputBox:focus {
+    outline: none;
+}
+
+.login {
+    background-color: #056365;
+    width: 40%;
+    height: 100%;
+    margin-left: 30%;
+    margin-top: 30px;
+    &:hover{background-color: #044b4d;}
+}
+
+.findid {
+    margin-left: 190px;
+    width: 20px;
+    height: 10px;
+    display: inline;
+    text-decoration: none;
+    color: black;
+    font-size: 12px;
+}
+
+p {
+    width: 20px;
+    height: 10px;
+    display: inline
+}
+
+.findpw {
+    width: 20px;
+    height: 10px;
+    display: inline;
+    text-decoration: none;
+    color: black;
+    font-size: 12px;
+}
+
+.signup {
+    width: 350px;
+    height: 60px;
+    margin-top: 60px;
+    outline: none;
+    border: none;
+    background: url("icons/Group 95.png") no-repeat;
+    background-size: contain;
+
+}
+
+.checkText {
+    margin-top:50px;
+    color: #FF7C7C;
+    font-size: 13px;
+}
+
+@media (max-width: 458px) {
+    .main{
+        width: 300px;
     }
 
-    .index-nav {
-        background-color: #056365;
+    h3{
+        font-size: 50pt;
     }
-
-    .btn1 {
-        background-color: #71CB9F;
-        border-radius: 5px;
-        border-color: transparent;
-    }
-
-    .btn2 {
-        background-color: #FDF3A7;
-        border-radius: 5px;
-        border-color: transparent;
-        margin-right: 5px;
-    }
-
-
-    .navbar {
-        height: 50px;
-    }
-
-    .container-fluid {
-        top: 50%;
-        margin-top: -5px;
-    }
-
-
-    .main {
-        width: 400px;
-        height: 50%;
-        margin-top: 50px;
-        font-family: 'Noto Sans KR', sans-serif;
-    }
-
-    h3 {
-        color: #679292;
-        margin-bottom: 35px;
-        font-size: 65pt;
-        font-weight:600;
-    }
-
     .idInput {
-        width: 350px;
-        height: 40px;
-        border-radius: 18px;
+        width: 280px;
+        height: 35px;
         margin-left: 10px;
-        margin-bottom: 30px;
-        outline: none;
-        border: none;
-        background-repeat: no-repeat;
+        margin-bottom: 15px;
     }
-
-    .idInput::-webkit-input-placeholder {
-        background-image: url(/css/icons/account_circle.png);
-        background-size: contain;
-        background-position: 10px center;
-        background-repeat: no-repeat;
-        text-indent: 40px;
-    }
-
 
     .pwInput {
-        width: 350px;
-        height: 40px;
-        border-radius: 18px;
+        width: 280px;
+        height: 35px;
         margin-left: 10px;
         margin-bottom: 10px;
-        outline: none;
-        border: none;
-        background-repeat: no-repeat;
     }
 
-    .pwInput::-webkit-input-placeholder {
-        background-image: url(/css/icons/lock.png);
-        background-size: contain;
-        background-position: 10px center;
-        background-repeat: no-repeat;
-        text-indent: 40px;
+    .inputBox {
+        width: 200px;
+        margin-top: 5px;
     }
+
 
     .login {
         background-color: #056365;
-        width: 40%;
-        height: 100%;
-        margin-left: 30%;
-        margin-top: 30px;
-        &:hover{background-color: #044b4d;}
+        width: 30%;
+        height: 60%;
+        margin-left: 35%;
+        margin-top: 15px;
     }
 
     .findid {
-        margin-left: 190px;
-        width: 20px;
-        height: 10px;
-        display: inline;
-        text-decoration: none;
-        color: black;
-        font-size: 12px;
+        margin-left: 142px;
+        font-size: 8px;
     }
 
     p {
@@ -110,16 +198,11 @@
     }
 
     .findpw {
-        width: 20px;
-        height: 10px;
-        display: inline;
-        text-decoration: none;
-        color: black;
-        font-size: 12px;
+        font-size: 8px;
     }
 
     .signup {
-        width: 350px;
+        width: 300px;
         height: 60px;
         margin-top: 60px;
         outline: none;
@@ -129,71 +212,8 @@
 
     }
 
-    .checkText {
-        margin-top:50px;
-        color: #FF7C7C;
-        font-size: 13px;
+    .container-fluid button{
+        font-size: 12px;
     }
 
-    @media (max-width: 458px) {
-        .main{
-            width: 300px;
-        }
-
-        h3{
-            font-size: 50pt;
-        }
-        .idInput {
-            width: 280px;
-            height: 35px;
-            margin-left: 10px;
-            margin-bottom: 15px;
-        }
-
-        .pwInput {
-            width: 280px;
-            height: 35px;
-            margin-left: 10px;
-            margin-bottom: 10px;
-        }
-
-
-        .login {
-            background-color: #056365;
-            width: 30%;
-            height: 60%;
-            margin-left: 35%;
-            margin-top: 15px;
-        }
-
-        .findid {
-            margin-left: 142px;
-            font-size: 8px;
-        }
-
-        p {
-            width: 20px;
-            height: 10px;
-            display: inline
-        }
-
-        .findpw {
-            font-size: 8px;
-        }
-
-        .signup {
-            width: 300px;
-            height: 60px;
-            margin-top: 60px;
-            outline: none;
-            border: none;
-            background: url("icons/Group 95.png") no-repeat;
-            background-size: contain;
-
-        }
-
-        .container-fluid button{
-            font-size: 12px;
-        }
-
-    }
+}
