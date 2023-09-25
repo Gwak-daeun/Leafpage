@@ -2,6 +2,7 @@ package com.leafpage.controller.user;
 
 import com.leafpage.controller.Controller;
 import com.leafpage.dao.UserDAO;
+import com.leafpage.util.SHA256;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -17,64 +18,87 @@ public class SendEmailController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         System.out.println("SendEmailController진입");
-        UserDAO userDAO = new UserDAO();
-        HttpSession session = request.getSession();
-        String userId = (String) session.getAttribute("userId");
 
-        if (userId == null) {
-            userId = (String) session.getAttribute("inactiveIdForActive");
-            System.out.println("new:" + userId);
+        HttpSession session = request.getSession();
+        UserDAO userDAO = new UserDAO();
+        String userId = null;
+        String inactiveUserId = null;
+
+        //일반+휴면회원이라면
+        if(session.getAttribute("userId") != null) {
+            userId = (String) session.getAttribute("userId");
+        }
+        //휴면회원이라면
+        if(session.getAttribute("inactiveUserId") != null) {
+            inactiveUserId = (String) session.getAttribute("inactiveUserId");
         }
 
         boolean emailChecked = userDAO.getUserEmailChecked(userId);
-
         if (emailChecked) {
             session.setAttribute("msg", "이미 이메일 인증이 완료되었습니다. 정상적인 서비스 이용이 가능합니다.");
             response.sendRedirect("indexInfo.do");
         }
 
-        //구글 smtp가 기본적으로 제공하는 양식을 그대로 사용
-        String host = "http://cloud.swdev.kr:4006/";
-        String from = "TESTsjh8924@gmail.com";  //보내는 사람
-        String to = userDAO.getUserEmail(userId);  //받는 사람
-        System.out.println("to:" + to);
-        String subject = "LeafPage 이메일 인증";
-        String content = "다음 링크에 접속하시면 이메일 인증이 완료됩니다." +
-                "<a href='" + host + "checkEmail.do?code=" + new com.leafpage.util.SHA256().getSHA256(to) + "'>이메일 인증하기</a>";
+        String to = userDAO.getUserEmail(userId);
+        String host = "http://localhost:8080/";
+//        String host = "http://cloud.swdev.kr:4006/";
+        String subject = userId + "님, LeafPage 계정 인증 메일입니다.";
+        String content = generateEmailContent(host, to, userId, inactiveUserId);
+        boolean isEmailSent = sendEmail("TESTsjh8924@gmail.com", to, subject, content);
 
-        //구글 smtp서버를 이용하기 위해서 정보 설정하기
-        //SMTP 서버 이용하기(22.05.30~) : 구글 2단계인증 > 앱비밀번호 생성(Gmail SMTP) > 앱 비밀번호 16자리를 Gmail 비밀번호로 사용
-        Properties p = new Properties();
-        p.put("mail.smtp.user", from);  //나의 구글 이메일 계정
-        p.put("mail.smtp.host", "smtp.googlemail.com");  //구글에서 제공하는 smtp 서버
-        p.put("mail.smtp.port", "465");  //465번 포트 사용 (정해져있음 - 구글서비스가 제공)
-        p.put("mail.smtp.starttls.enable", "true");  //starttls의 사용 가능 => true로 설정
-        p.put("mail.smtp.auth", "true");
-        p.put("mail.smtp.debug", "true");
-        p.put("mail.smtp.socketFactory.port", "465");
-        p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        p.put("mail.smtp.socketFactory.fallback", "false");
+        if (isEmailSent) {
+            return "sendEmailView.do"; // 화면 이동
+        } else {
+            session.setAttribute("msg", "[Error] 오류가 발생했습니다.");
+            response.sendRedirect("emailResendView.do");
+        }
 
-        System.out.println("여기111!");
-        //인증메일 발송하기
+        return "none";
+    }
+
+    private String generateEmailContent(String host, String to, String userId, String inactiveUserId) {
+        String sendCodeToURL = "checkEmail.do?code=" + new SHA256().getSHA256(to);
+        String sendUserID =  "&userId=" + userId;
+        String sendInactiveUserId = "";
+        String styleForURL = "style=''";
+        if(inactiveUserId != null) {
+            sendInactiveUserId = "&inactiveUserId=" + inactiveUserId;
+        }
+        return "다음 링크에 접속하시면 이메일 인증이 완료됩니다." +
+                "<br><a href='" + host + sendCodeToURL + sendUserID + sendInactiveUserId + "'><strong style='font-size: 20px;'>이메일 인증하기</strong></a>";
+    }
+    private boolean sendEmail(String from, String to, String subject, String content) {
         try {
-            System.out.println("여기222222!");
+            Properties properties = getMailProperties();
             Authenticator auth = new com.leafpage.util.Gmail();
-            Session ses = Session.getInstance(p, auth);  //구글 계정으로 Gmail 인증 수행
-            ses.setDebug(true);  //디버깅 설정
-            MimeMessage msg = new MimeMessage(ses);  //MimeMesssage 객체로 실제로 메일을 보낼 수 있게 함
-            msg.setSubject(subject);  //메일 제목
+            Session ses = Session.getInstance(properties, auth);
+            ses.setDebug(true);
+            MimeMessage msg = new MimeMessage(ses);
+            msg.setSubject(subject);
             Address fromAddr = new InternetAddress(from);
-            msg.setFrom(fromAddr);  //보내는 사람 정보 넣기
+            msg.setFrom(fromAddr);
             Address toAddr = new InternetAddress(to);
-            msg.addRecipient(Message.RecipientType.TO, toAddr);  //받는 사람 정보 넣기
-            msg.setContent(content, "text/html; charset=UTF8");  //메일 내용 (UTF8 인코딩으로 전송)
-            Transport.send(msg);  //메일 전송
+            msg.addRecipient(Message.RecipientType.TO, toAddr);
+            msg.setContent(content, "text/html; charset=UTF8");
+            Transport.send(msg);
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
-            session.setAttribute("msg", "[Error] 오류가 발생했습니다.");
-            return "emailResendView.do";
+            return false;
         }
-        return "sendEmailView.do"; //화면이동
+    }
+
+    private Properties getMailProperties() {
+        Properties properties = new Properties();
+        properties.put("mail.smtp.user", "TESTsjh8924@gmail.com");
+        properties.put("mail.smtp.host", "smtp.googlemail.com");
+        properties.put("mail.smtp.port", "465");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.debug", "true");
+        properties.put("mail.smtp.socketFactory.port", "465");
+        properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        properties.put("mail.smtp.socketFactory.fallback", "false");
+        return properties;
     }
 }

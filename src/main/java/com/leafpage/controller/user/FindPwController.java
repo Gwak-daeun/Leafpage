@@ -59,6 +59,7 @@ public class FindPwController implements Controller {
                 out.close();
             }
         }
-        return null;
+        return "none";
     }
+
 }

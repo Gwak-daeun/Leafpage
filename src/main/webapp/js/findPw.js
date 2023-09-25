@@ -67,7 +67,6 @@ function findPw(inputIdValue, inputEmailValue, inputTelValue, selectQuestionValu
                 updatePw.text("비밀번호 찾기 인증이 성공하였습니다. 이제 새 비밀번호를 설정할 수 있습니다.");
                 updatePw.append(passwordChangeAccess);
             }
-            updatePw.show();
         },
         error: function(e){
             alert("오류가 발생했습니다.");
@@ -100,7 +99,6 @@ function newPasswordCheck() {
         return false;
     }
     else {
-        checkPasswordText.text("");
         console.log("※새 비밀번호로 변경 중입니다.");
         $("form[name=new_pw_form]").submit();
     }
