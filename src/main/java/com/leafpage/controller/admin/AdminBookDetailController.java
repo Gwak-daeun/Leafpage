@@ -12,7 +12,7 @@ public class AdminBookDetailController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String ISBN = request.getParameter("ISBN");
-        BookDAO dao = new BookDAO();
+        BookDAO dao = BookDAO.getInstance();
         if (ISBN == null) {
             BookDTO book = dao.detailBook(ISBN);
             System.out.println(book.getBookImgFullPath());

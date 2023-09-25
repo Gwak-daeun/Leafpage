@@ -12,7 +12,7 @@ import java.io.IOException;
 public class AdminUserStateChangeController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        UserDAO dao = new UserDAO();
+        UserDAO dao = UserDAO.getInstance();
         UserDTO dto = new UserDTO();
         String userId = request.getParameter("userId");
         String state = request.getParameter("state");

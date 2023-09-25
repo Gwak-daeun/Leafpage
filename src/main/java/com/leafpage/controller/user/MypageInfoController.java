@@ -20,7 +20,7 @@ public class MypageInfoController implements Controller {
         List<MypageBooksDTO> userBooks = new ArrayList<>();
         List<MypageReturnedBooksDTO> userReturnedBooks = new ArrayList<>();
 
-        BookDAO bookDAO = new BookDAO();
+        BookDAO bookDAO = BookDAO.getInstance();
 
         HttpSession session = request.getSession();
 

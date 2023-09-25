@@ -12,7 +12,7 @@ public class UpdateMypageInfoViewController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         System.out.println("내정보수정으로 이동");
-        UserDAO userDAO = new UserDAO();
+        UserDAO userDAO = UserDAO.getInstance();
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
         session.setAttribute("userTel", userDAO.getUserTel(userId));

@@ -12,15 +12,25 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
 public class BookDAO {
+    private static BookDAO instance;
+
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     Connection conn = null;
+
+    private BookDAO() {}
+
+    public static synchronized BookDAO getInstance() {
+        if (instance == null) {
+            instance = new BookDAO();
+        }
+        return instance;
+    }
 
 
     public List<BookDTO> booklist(int pageNum, int amount) {
@@ -29,8 +39,8 @@ public class BookDAO {
         List<BookDTO> bookDTOList = new ArrayList<>();
         try {
             conn = DBUtil.getConnection();
-            String sql = "SELECT B.isbn, B.book_name, B.book_publisher_name, B.book_author_name " +
-                    "FROM (SELECT ROW_NUMBER() OVER (ORDER BY b.book_name) AS rn, b.isbn, b.book_name, b.book_publisher_name, b.book_author_name FROM books b) B " +
+            String sql = "SELECT B.isbn, B.book_name, B.book_publisher_name, B.book_author_name, B.book_state " +
+                    "FROM (SELECT ROW_NUMBER() OVER (ORDER BY b.book_name) AS rn, b.isbn, b.book_name, b.book_publisher_name, b.book_author_name, b.book_state FROM books b) B " +
                     "WHERE rn > ? AND rn <= ?";
 
             pstmt = conn.prepareStatement(sql);
@@ -44,7 +54,7 @@ public class BookDAO {
                 bookDTO.setBookPublisherName(rs.getString("book_publisher_name"));
                 bookDTO.setBookAuthorName(rs.getString("book_author_name"));
                 bookDTO.setCategories(findCategories(conn, bookDTO.getISBN()));
-
+                bookDTO.setBookstate(rs.getString("book_state"));
 
                 bookDTOList.add(bookDTO);
             }
@@ -760,7 +770,7 @@ public class BookDAO {
         return false;
     }
 
-    public List<RentalDTO> findOverdueBooks(int userNo) {
+    public List<RentalDTO> findOverdueBooks(Long userNo) {
 
         List<RentalDTO> overdueBooks = new ArrayList<>();
 
@@ -773,7 +783,7 @@ public class BookDAO {
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setInt(1, userNo);
+            pstmt.setLong(1, userNo);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {

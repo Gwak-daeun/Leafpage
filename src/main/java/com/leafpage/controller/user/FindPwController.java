@@ -46,7 +46,7 @@ public class FindPwController implements Controller {
             session.setAttribute("msg", "[Error] 이메일이나 전화번호가 정상적으로 입력되지 않았습니다.");
             return "findPwView.do";
         } else {
-            int passwordChangeAccess = new UserDAO().findPwByEmailOrTel(inputId, inputEmail, inputTel, selectQuestion, inputAnswer);
+            int passwordChangeAccess = UserDAO.getInstance().findPwByEmailOrTel(inputId, inputEmail, inputTel, selectQuestion, inputAnswer);
             if (passwordChangeAccess == 1) {
                 session.setAttribute("passwordChangeAccess", passwordChangeAccess);
                 session.setAttribute("inputIdForNewPw", inputId);

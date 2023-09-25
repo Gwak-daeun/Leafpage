@@ -19,7 +19,7 @@ public class AdminBookEditController implements Controller {
         System.out.println("나여기");
 
 
-        BookDAO dao = new BookDAO();
+        BookDAO dao = BookDAO.getInstance();
 
         request.setCharacterEncoding("UTF-8");
         String ISBN = null;
@@ -34,7 +34,7 @@ public class AdminBookEditController implements Controller {
         String bookimg = null;
 
 
-        String savePath = "C:\\Users\\user\\Desktop\\beanstalk\\Leafpage\\src\\main\\webapp\\image";
+        String savePath = "/usr/local/tomcat/webapps/ROOT/image";
         String dbPath = "\\image";
 
         int sizeLimit = 1024 * 1024 * 15;

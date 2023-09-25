@@ -6,7 +6,7 @@ import lombok.*;
 @Getter
 @Setter
 public class UserDTO {
-    private int userNo;
+    private Long userNo;
     private Id userId;
     private Password userPassword;
     private Email userEmail;
