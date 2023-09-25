@@ -92,7 +92,12 @@ $(document).ready(function () {
         $('.scheduled-return-date').text(`대여기한 : ${year}-${month}-${date}`);
     });
 
-
+    window.onpageshow = function(event) {
+        if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+            $('#required-login').modal('hide');
+            $('#required-auth').modal('hide');
+        }
+    }
 });
 
 //하트 채워지고 비워지는 기능
@@ -117,7 +122,6 @@ function likeCheck(isbn) {
             },
             success: function (data) {
                 console.log(data);
-
                 location.reload();
             },
             error: function () {
