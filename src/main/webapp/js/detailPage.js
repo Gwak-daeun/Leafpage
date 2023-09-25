@@ -157,6 +157,12 @@ function rent(ISBN) {
     }
 }
 
+function openReview() {
+    if (userNo === "") {
+        $('#required-login').modal('show');
+    }
+}
+
 function closeModal(modalId) {
     $(modalId).modal('hide');
 }

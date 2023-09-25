@@ -66,9 +66,14 @@
                     </div>
                 </div>
                 <div class="tab-content">
+                    <c:if test="${userNo == null}">
+                        <div class="enroll-right">
+                            <button onclick="openReview()" class="btn rental ">등록하기</button>
+                        </div>
+                    </c:if>
                     <c:if test="${userNo != null}">
                         <div class="enroll-right">
-                            <button class="btn rental " data-toggle="modal" href="#reviewenroll">등록하기</button>
+                            <button onclick="openReview()" class="btn rental" data-toggle="modal" href="#reviewenroll">등록하기</button>
                         </div>
                     </c:if>
 
