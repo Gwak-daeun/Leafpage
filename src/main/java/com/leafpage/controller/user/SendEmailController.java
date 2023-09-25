@@ -20,7 +20,7 @@ public class SendEmailController implements Controller {
         System.out.println("SendEmailController진입");
 
         HttpSession session = request.getSession();
-        UserDAO userDAO = new UserDAO();
+        UserDAO userDAO = UserDAO.getInstance();
         String userId = null;
         String inactiveUserId = null;
 
@@ -60,13 +60,13 @@ public class SendEmailController implements Controller {
         String sendCodeToURL = "checkEmail.do?code=" + new SHA256().getSHA256(to);
         String sendUserID =  "&userId=" + userId;
         String sendInactiveUserId = "";
-        String styleForURL = "style=''";
         if(inactiveUserId != null) {
             sendInactiveUserId = "&inactiveUserId=" + inactiveUserId;
         }
         return "다음 링크에 접속하시면 이메일 인증이 완료됩니다." +
                 "<br><a href='" + host + sendCodeToURL + sendUserID + sendInactiveUserId + "'><strong style='font-size: 20px;'>이메일 인증하기</strong></a>";
     }
+
     private boolean sendEmail(String from, String to, String subject, String content) {
         try {
             Properties properties = getMailProperties();

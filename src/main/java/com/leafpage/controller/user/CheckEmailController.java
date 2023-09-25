@@ -13,7 +13,7 @@ import java.util.Objects;
 public class CheckEmailController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        UserDAO userDAO = new UserDAO();
+        UserDAO userDAO = UserDAO.getInstance();
         String code = request.getParameter("code");
         String userId = request.getParameter("userId");
         String inactiveUserId = request.getParameter("inactiveUserId");
@@ -39,7 +39,7 @@ public class CheckEmailController implements Controller {
 
 
     private void handleCorrectCode(String userId, String inactiveUserId, HttpSession session, HttpServletResponse response) throws IOException {
-        UserDAO userDAO = new UserDAO();
+        UserDAO userDAO = UserDAO.getInstance();
         //다른 세션에서 인증을 시도했을 시를 위한 로그인
         session.setAttribute("userId", userId);
         session.setAttribute("userNo", userDAO.getUserNo(userId));
@@ -52,8 +52,9 @@ public class CheckEmailController implements Controller {
     }
 
     private void sendMessageForActive (String inactiveUserId, String userId, HttpSession session) {
+        UserDAO userDAO = UserDAO.getInstance();
         if (inactiveUserId != null) {
-            int userInactive = new UserDAO().setUserState(userId, "일반회원");
+            int userInactive = userDAO.setUserState(userId, "일반회원");
             if (userInactive == 1) {
                 session.setAttribute("msg", "휴면상태가 정상적으로 해제되었습니다.");
             } else {

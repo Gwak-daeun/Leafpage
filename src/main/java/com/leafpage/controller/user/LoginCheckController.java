@@ -30,9 +30,8 @@ public class LoginCheckController implements Controller {
 
     private void respondLogin(String loginUserId, String loginUserPassword, HttpServletResponse response) {
         try {
-            UserDAO userDAO = new UserDAO();
+            UserDAO userDAO = UserDAO.getInstance();
             int result = userDAO.login(loginUserId, loginUserPassword);
-            System.out.println(result);
             PrintWriter out = response.getWriter();
             out.print(result);
             out.close();

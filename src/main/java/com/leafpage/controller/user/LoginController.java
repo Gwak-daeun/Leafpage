@@ -29,15 +29,15 @@ public class LoginController implements Controller {
             sendRedirect(response, "loginView.do");
         }
 
-        UserDAO userDAO = new UserDAO();
+        UserDAO userDAO = UserDAO.getInstance();
         int result = userDAO.login(userId, userPassword);
         boolean userEmailChecked = userDAO.getUserEmailChecked(userId);
-        int userNo = userDAO.getUserNo(userId);
+        long userNo = userDAO.getUserNo(userId);
 
         return handleLoginResult(result, session, userId, userEmailChecked, userNo, response);
     }
 
-    private String handleLoginResult(int result, HttpSession session, String userId, boolean userEmailChecked, int userNo, HttpServletResponse response) {
+    private String handleLoginResult(int result, HttpSession session, String userId, boolean userEmailChecked, long userNo, HttpServletResponse response) {
         switch (result) {
             case -3:
                 return handleDatabaseError(session);
@@ -82,7 +82,7 @@ public class LoginController implements Controller {
         return "loginView.do";
     }
 
-    private void handleAdminLogin(HttpSession session, String userId, int userNo, HttpServletResponse response) {
+    private void handleAdminLogin(HttpSession session, String userId, long userNo, HttpServletResponse response) {
         session.setAttribute("msg", "관리자 계정입니다. 관리자 페이지로 이동합니다.");
         session.setAttribute("userId", userId);
         session.setAttribute("userEmailChecked", true);
@@ -90,7 +90,7 @@ public class LoginController implements Controller {
         sendRedirect(response, "booklistView.do");
     }
 
-    private void handleUserLogin(HttpSession session, String userId, boolean userEmailChecked, int userNo, HttpServletResponse response) {
+    private void handleUserLogin(HttpSession session, String userId, boolean userEmailChecked, long userNo, HttpServletResponse response) {
         session.setAttribute("msg", "로그인에 성공하였습니다.");
         session.setAttribute("userId", userId);
         session.setAttribute("userEmailChecked", userEmailChecked);
@@ -98,8 +98,8 @@ public class LoginController implements Controller {
         sendRedirect(response, "indexInfo.do");
     }
 
-    private void handleInactiveUserLogin(HttpSession session, String userId, boolean userEmailChecked, int userNo, HttpServletResponse response) {
-        int userInactive = new UserDAO().setUserState(userId, "휴면회원");
+    private void handleInactiveUserLogin(HttpSession session, String userId, boolean userEmailChecked, long userNo, HttpServletResponse response) {
+        int userInactive = UserDAO.getInstance().setUserState(userId, "휴면회원");
         if(userInactive == 1) {
             session.setAttribute("inactiveUserId", userId);
             session.setAttribute("userId", userId);

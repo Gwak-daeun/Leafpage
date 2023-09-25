@@ -58,7 +58,7 @@ public class FindIdController implements Controller {
     }
 
     private String getFoundUserId(String inputEmail, String inputTel) {
-        return new UserDAO().findIdByEmailOrTel(inputEmail, inputTel);
+        return UserDAO.getInstance().findIdByEmailOrTel(inputEmail, inputTel);
     }
 
     private boolean isNullTelAndEmail(String inputEmail, String inputTel) {

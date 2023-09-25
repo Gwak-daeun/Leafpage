@@ -64,7 +64,7 @@ public class SignupController implements Controller {
             jsonResponse.put("duplicateEmailError", "이미 가입된 이메일이 있습니다.");
         } else {
             UserDTO signupUserDTO = getSignupUserDTO(userId, userPassword, userEmail, userTel, userSecurityQuestion, userSecurityAnswer);
-            int result = new UserDAO().signup(signupUserDTO);
+            int result = UserDAO.getInstance().signup(signupUserDTO);
             if (result == -1) {
                 jsonResponse.put("failError", "회원가입에 실패했습니다.");
             } else {
@@ -99,14 +99,14 @@ public class SignupController implements Controller {
     }
 
     private boolean isDuplicateId(String userId) {
-        return new UserDAO().findUserById(userId) == 1;
+        return UserDAO.getInstance().findUserById(userId) == 1;
     }
 
     private boolean isDuplicatedTel(String userTel) {
-        return new UserDAO().findUserByEmail(userTel) == 1;
+        return UserDAO.getInstance().findUserByEmail(userTel) == 1;
     }
 
     private boolean isDuplicatedEmail(String userEmail) {
-        return new UserDAO().findUserByEmail(userEmail) == 1;
+        return UserDAO.getInstance().findUserByEmail(userEmail) == 1;
     }
 }
