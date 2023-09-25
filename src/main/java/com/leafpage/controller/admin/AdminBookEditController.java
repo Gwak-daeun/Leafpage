@@ -79,19 +79,9 @@ public class AdminBookEditController implements Controller {
             bookcontent = multi.getParameter("bookcontent");
         }
 
-       /* System.out.println(ISBN);
-        System.out.println(bookname);
-        System.out.println(auther);
-        System.out.println(publisher);
-        System.out.println(pubdate);
-        System.out.println(categories);
-        System.out.println(bookinfo);
-        System.out.println(bookchapter);
-        System.out.println(bookcontent);
-        System.out.println(bookimgFullPath);*/
         List<String> categorieslist = new ArrayList<>();
 
-
+        categories = categories.replace("[", "").replace("]", "");
         String[] categorie = categories.split(",");
         for (int i = 0; i < categorie.length; i++) {
             categorie[i] = categorie[i].trim();
