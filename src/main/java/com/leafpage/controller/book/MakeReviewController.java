@@ -16,10 +16,8 @@ public class MakeReviewController implements Controller {
 
         HttpSession session = request.getSession();
 
-        //Todo: 세션에 있는 로그인 사용자 값으로 바꿔야 함
-        Long userNo = ((Integer) session.getAttribute("userNo")).longValue();
+        Long userNo = (Long) session.getAttribute("userNo");
 
-        //Todo: 리퀘스트에 있는 ISBN 값으로 바꿔야 함
         String isbn = request.getParameter("isbn");
 
         Date date = new Date();
@@ -39,7 +37,7 @@ public class MakeReviewController implements Controller {
 
         System.out.println("CHECK REVIEW VALUES : " + reviewContent + ", " + reviewRating);
 
-        int result = new ReviewDAO().makeReview(userNo, isbn, reviewDate, reviewContent, reviewRating);
+        int result = ReviewDAO.getInstance().makeReview(userNo, isbn, reviewDate, reviewContent, reviewRating);
 
         if (result != 1) {
             System.out.println("REVIEW FAILED");

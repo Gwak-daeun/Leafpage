@@ -15,7 +15,7 @@ public class RemoveReviewController implements Controller {
         int result = 0;
 
             String reviewNo = request.getParameter("reviewNo");
-             result = new ReviewDAO().removeReview(reviewNo);
+             result = ReviewDAO.getInstance().removeReview(reviewNo);
 
         if (result == -1) {
             request.setAttribute("errorMsg", "리뷰 삭제에 실패했어요.");

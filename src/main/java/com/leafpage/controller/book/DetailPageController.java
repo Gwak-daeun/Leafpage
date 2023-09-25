@@ -23,7 +23,7 @@ public class DetailPageController implements Controller {
         System.out.println("userNo"+userNo);
         String isbn = request.getParameter("isbn");
 
-        BookDAO bookDAO = new BookDAO();
+        BookDAO bookDAO = BookDAO.getInstance();
 
         boolean isBookAvailable = bookDAO.isISBNZero(isbn);
 
@@ -33,11 +33,11 @@ public class DetailPageController implements Controller {
             return "notFoundPageView.do";
         }
 
-        List<ReviewDTO>  reviews = new ReviewDAO().findReviews(isbn);
+        List<ReviewDTO>  reviews = ReviewDAO.getInstance().findReviews(isbn);
 
         List<BookDTO> sameAuthorBooks = bookDAO.findSameAuthorBooks(isbn);
 
-        LeeLikeyDAO leeLikeyDAO = new LeeLikeyDAO();
+        LeeLikeyDAO leeLikeyDAO = LeeLikeyDAO.getInstance();
         int checkLike = leeLikeyDAO.checkLike(userNo, isbn);
         int heartCount = leeLikeyDAO.likeCount(isbn);
         System.out.println("CHECKLIKE" + checkLike);

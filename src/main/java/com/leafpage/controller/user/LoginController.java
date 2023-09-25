@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 // 로그인 인증 처리를 담당하는 컨트롤러
@@ -33,10 +32,10 @@ public class LoginController implements Controller {
             return "loginView.do";
         }
 
-        UserDAO userDAO = new UserDAO();
+        UserDAO userDAO = UserDAO.getInstance();
         int result = userDAO.login(userId, userPassword);
         boolean userEmailChecked = userDAO.getUserEmailChecked(userId);
-        int userNo = userDAO.getUserNo(userId);
+        Long userNo = userDAO.getUserNo(userId);
 
         switch (result) {
             case -3:   //[-3]데이터베이스 오류
@@ -64,10 +63,10 @@ public class LoginController implements Controller {
                 session.setAttribute("userEmailChecked", userEmailChecked);
                 session.setAttribute("userNo", userNo);
 
-                List<String> returnedBooksISBN = new RentalDAO().returnOverdueBooks(userNo);
+                List<String> returnedBooksISBN = RentalDAO.getInstance().returnOverdueBooks(userNo);
 
                 if (!returnedBooksISBN.isEmpty()) {
-                    List<String> returnedBooksName = new BookDAO().findReturnedBooksName(returnedBooksISBN);
+                    List<String> returnedBooksName = BookDAO.getInstance().findReturnedBooksName(returnedBooksISBN);
                     request.setAttribute("returnedBooksName", returnedBooksName);
                     session.setAttribute("msg", "로그인 되었습니다. 기한이 지나 도서가 반납되었습니다. \n \n반납된 도서 : " + returnedBooksName);
                 }

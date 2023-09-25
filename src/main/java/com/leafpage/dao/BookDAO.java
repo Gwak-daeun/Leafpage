@@ -12,15 +12,25 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
 public class BookDAO {
+    private static BookDAO instance;
+
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     Connection conn = null;
+
+    private BookDAO() {}
+
+    public static synchronized BookDAO getInstance() {
+        if (instance == null) {
+            instance = new BookDAO();
+        }
+        return instance;
+    }
 
 
     public List<BookDTO> booklist(int pageNum, int amount) {
@@ -760,7 +770,7 @@ public class BookDAO {
         return false;
     }
 
-    public List<RentalDTO> findOverdueBooks(int userNo) {
+    public List<RentalDTO> findOverdueBooks(Long userNo) {
 
         List<RentalDTO> overdueBooks = new ArrayList<>();
 
@@ -773,7 +783,7 @@ public class BookDAO {
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setInt(1, userNo);
+            pstmt.setLong(1, userNo);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {

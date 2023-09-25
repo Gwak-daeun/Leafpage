@@ -17,7 +17,7 @@ public class SendEmailController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         System.out.println("SendEmailController진입");
-        UserDAO userDAO = new UserDAO();
+        UserDAO userDAO = UserDAO.getInstance();
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
 
