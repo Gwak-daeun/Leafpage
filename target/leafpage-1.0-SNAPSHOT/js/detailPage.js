@@ -98,9 +98,12 @@ $(document).ready(function () {
 //하트 채워지고 비워지는 기능
 function likeCheck(isbn) {
     console.log(userNo);
+    console.log(userEmailChecked);
 
     if (userNo === "") {
         $('#required-login').modal('show');
+    } else if (userEmailChecked) {
+        $('#required-auth').modal('show');
     } else {
         /*웹페이지 열었을 때*/
         $.ajax({
@@ -130,6 +133,8 @@ function rent(ISBN) {
 
     if (userNo === "") {
         $('#required-login').modal('show');
+    } else if (userEmailChecked) {
+        $('#required-auth').modal('show');
     } else {
         $.ajax({
             url: 'rentBook.do',

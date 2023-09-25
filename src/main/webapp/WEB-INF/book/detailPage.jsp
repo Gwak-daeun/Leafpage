@@ -225,11 +225,28 @@
         </div>
     </div>
 </div>
+<div class="modal fade show" id="required-auth" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content"> <!--모달 안에 들어가 있는 내용 정의-->
+            <div class="modal-body">
+                <div class="form-group">
+                    <h3 class="modal-title">이메일 인증 후 이용가능합니다.</h3>
+                    <p>이메일 인증 하시겠습니까?</p>
+                </div>
+                <div class="form-footer">
+                    <button class="btn close" onclick="closeModal('#required-auth')">돌아가기</button>
+                    <button class="btn move-page" onclick="location.href='emailResendView.do'">인증 페이지로 이동</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     let errorMsg = "${errorMsg}";
     let failed = "${failed}";
     const isbn = "${isbn}";
-    const userNo = "${userNo}"
+    const userNo = "${userNo}";
+    const userEmailChecked = "${userEmailChecked}";
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js" crossorigin="anonymous"></script>

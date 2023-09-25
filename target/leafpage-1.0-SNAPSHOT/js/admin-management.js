@@ -58,15 +58,17 @@ function closeModal() {
   $("#background_modal").css("display","none");
 }
 
-function confirmAndSubmit() {
-  var userStateSelect = document.getElementById("userStateSelect");
+function confirmAndSubmit(event) {
+  var userStateSelect = event.target.querySelector(".select-user-state-modify");
   var selectedValue = userStateSelect.value;
 
   if (selectedValue === 'black') {
     var confirmed = window.confirm('정말로 이 유저를 블랙 처리 하시겠습니까?');
     if (!confirmed) {
-      return false; // 확인하지 않으면 폼 제출을 중지
+      event.preventDefault(); // 폼 제출을 중지
+      return false;
     }
   }
   return true; // 폼 제출 계속
 }
+
