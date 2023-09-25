@@ -41,7 +41,7 @@
         <div class="bottom_content on">
             <ul class="flex rent_book">
                 <c:if test="${book eq null}">
-                    <h4 style="margin-top: 20px" class="not-book">대여중인 도서가 없습니다 ㅠ,.ㅠ</h4>
+                    <h4 style="margin-top: 20px" class="not-book">대여중인 도서가 없습니다.</h4>
                 </c:if>
                 <c:if test="${book != null}">
                     <c:forEach var="book" items="${books}" begin="0" end="4" step="1" >
@@ -71,15 +71,13 @@
 
                     </c:forEach>
                 </c:if>
-
-
             </ul>
         </div>
 
         <div class="bottom_content">
             <ul class="flex return_book">
                 <c:if test="${userReturnedBook eq null}">
-                    <h4 style="margin-top: 20px" class="not-book">그냥 도서가 없습니다 ㅠ,.ㅠ</h4>
+                    <h4 style="margin-top: 20px" class="not-book">그냥 도서가 없습니다.</h4>
                 </c:if>
                 <c:if test="${userReturnedBook != null}">
                     <c:forEach var="userReturnedBook" items="${userReturnedBooks}">

@@ -24,7 +24,7 @@
         <div class="mg big-book">
             <img src="${bookDetail.bookImg}" class="imgstyle">
             <div class="center">
-                <span class="in-block"><h2>${bookDetail.bookName}</h2></span>
+                <span class="in-block"><h3>${bookDetail.bookName}</h3></span>
                 <span >${bookDetail.bookAuthorName}</span>
                 <div class="small">${bookDetail.categories} | ${bookDetail.bookPublisherName} | 발행일: ${bookDetail.bookPubDate}</div>
                 <div class="bottom-mg inline">
@@ -32,7 +32,7 @@
 <%--                <button class="btn preview">미리보기</button>   &lt;%&ndash; 로그인 해야 볼 수 있음&ndash;%&gt;--%>
 
                     <c:if test="${heartSelect == 1}">
-                        <img id="fullH" style="width: 20px; margin-left: 5px;" src="../../css/icons/full.png"
+                        <img id="fullH" style="width: 20px; height: 20px; margin-left: 5px;" src="../../css/icons/full.png"
                              onclick="likeCheck(`${bookDetail.ISBN}`)">
                     </c:if>
                     <c:if test="${heartSelect == 0}">
@@ -68,7 +68,7 @@
                     </div>
                     <ul class="review-content">
                         <c:if test="${review eq null}">
-                            <h4 style="margin-top: 50px">아직 댓글을 작성한 사람이 없습니다 ㅠ.,ㅠ</h4>
+                            <h4 style="margin-top: 50px">아직 댓글을 작성한 사람이 없습니다.</h4>
                         </c:if>
                         <c:if test="${review != null}">
                             <c:forEach var="review" items="${reviews}">
@@ -121,21 +121,20 @@
                                             </div>
 
                                             <div class="col-3 text-right">
-                                                    <c:set var="userNoStr" value="${userNo}" />
-                                                    <c:set var="reviewNoStr" value="${review.userNo}" />
-                                                    <c:if test="${userNoStr eq reviewNoStr}">
-                                                <a onclick="return confirm('삭제하시겠습니까?')"
-                                                   href="/removeReview.do?reviewNo=${review.reviewNo}&isbn=${bookDetail.ISBN}"
-                                                >
-                                                    삭제
-                                                </a>
+                                                <c:set var="userNoStr" value="${userNo}" />
+                                                <c:set var="reviewNoStr" value="${review.userNo}" />
+                                                <c:if test="${userNoStr eq reviewNoStr}">
+                                                    <a onclick="return confirm('삭제하시겠습니까?')"
+                                                        href="/removeReview.do?reviewNo=${review.reviewNo}&isbn=${bookDetail.ISBN}"
+                                                    >삭제
+                                                    </a>
                                                 </c:if>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        </c:forEach>
+                                </li>
+                            </c:forEach>
+                        </c:if>
                     </ul>
                 </div>
                 <div class="tab-content">
@@ -156,6 +155,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </section>
 
 <div class="modal fade show" id="rental" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
