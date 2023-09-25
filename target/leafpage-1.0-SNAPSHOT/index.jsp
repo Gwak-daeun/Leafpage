@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,41 +14,49 @@
 <body>
 <%@include file="./WEB-INF/component/header.jsp"%>
 
-<%
-    session.setAttribute("userNo", 1L);
-%>
-
 <div class="container">
     <div class="title">
         <h1>LeafPage</h1>
     </div>
-    <div class="search-bar">
-        <select class="book-select">
-            <option class="book-option">국내도서</option>
-            <option class="book-option">해외도서</option>
-        </select>
-        <input class="search-input" placeholder="둘러보기" />
-        <img class="search-lens" src="./css/icons/search.png" />
-    </div>
-    <div class="book-box">
-        <ul class="book-ul ">
-            <c:forEach var="book" items="${mainBooks}">
-            <li>
-                <a href="/detailPageView.do?isbn=${book.ISBN}">
-                    <div class="book-list">
-                        <img class="book-cover" src="${book.bookImg}" />
-                        <div class="book-title">${book.bookName}</div>
-                        <div class="book-author">${book.bookAuthorName}</div>
-                    </div>
-                </a>
+    <form method="get" action="search.do">
+        <div class="search-bar">
+            <span>
+                <select id="selectBox" name="searchSelect" class="book-select">
+                <option value="전체" class="book-option">전체</option>
+                <option value="출판사" class="book-option">출판사</option>
+                <option value="제목" class="book-option">제목</option>
+                <option value="작가" class="book-option">작가</option>
+                </select>
+            </span>
+            <span style="width: 530px;">
+                <input type="text" id="search" name="searchKeyword" class="search-input" placeholder="둘러보기" />
+            </span>
+            <span>
+                <button type="submit" style="border: none; background: none; padding: 0; cursor: pointer;">
+                    <img id="searchLens" class="search-lens" style="width: 40px; height: 40px; margin-right: 5px; margin-top: 3px;" src="./css/icons/search.png" />
+                </button>
+            </span>
 
-            </li>
+        </div>
+    </form>
+
+    <div class="book-box">
+        <ul class="book-ul">
+            <c:forEach var="book" items="${mainBooks}">
+                <li>
+                    <a href="/detailPageView.do?isbn=${book.ISBN}">
+                        <div class="book-list">
+                            <img class="book-cover" src="${book.bookImg}" />
+                            <div class="book-title">${book.bookName}</div>
+                            <div class="book-author">${book.bookAuthorName}</div>
+                        </div>
+                    </a>
+                </li>
             </c:forEach>
         </ul>
     </div>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script type="text/javascript" src="../../js/alertMsg.js"></script>
 

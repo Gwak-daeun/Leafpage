@@ -56,6 +56,7 @@ a {
     background-color: #71cb9f;
     border-radius: 5px;
     border-color: transparent;
+    margin-top : 5px;
     margin-right: 8px;
 }
 
@@ -188,7 +189,10 @@ h5 {
     width: 80px;
     height: 20px;
     font-size: 10px;
-    margin : 0 auto;
+    display: flex;
+    margin-left: 40px;
+    justify-content: center;
+    padding: 0 19px;
 }
 
 .mp_container .bottom_content.on {
@@ -205,6 +209,12 @@ h5 {
     width: 150px;
     border: 0;
     margin-bottom: 10px;
+    text-align: center;
+}
+
+.listH {
+    height: 250px;
+    justify-content: center;
 }
 
 .mp_container .rent_book .card{
@@ -216,8 +226,8 @@ h5 {
 }
 
 .card-img-top {
-    width: 70%;
-    height: 70%;
+    width: 108px;
+    height: 150px;
     margin: 10px auto 10px;
 }
 
@@ -276,11 +286,25 @@ h5 {
         width: 100%;
         display: flex;
         flex-direction: column;
+        align-items: center;
         padding: 0;
+    }
+    .listH {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     .mp_container .bottom_content li {
         width: 80%;
         margin-top: 30px;
+    }
+    .mp_container .bottom_content li button{
+        width: 80px;
+        height: 20px;
+        font-size: 10px;
+        align-items: center;
+        padding: 0 20px;
+        margin-left: unset;
     }
     .mp_container .card {
         width: 150px;
@@ -345,9 +369,10 @@ h5 {
 .modal-body {
     overflow-y: scroll;
     height: 750px;
-    white-space: normal;
+    white-space: initial;
     text-align: left;
     line-height: 30px;
+    word-break: break-word;
 }
 
 .modal-footer{
@@ -366,11 +391,25 @@ h5 {
     width: 700px;
 }
 
+.not-book {
+    font-size: 50px;
+    margin-top: 80px;
+    margin-left: 50px;
+}
+
 @media(max-height: 750px) {
     .modal-body{
         height: 530px;
     }
 
+}
+
+@media (max-width: 550px) {
+    .not-book {
+        font-size: 20px;
+        margin-left: unset;
+        margin-top: unset;
+    }
 }
 
 @media (max-width: 400px) {

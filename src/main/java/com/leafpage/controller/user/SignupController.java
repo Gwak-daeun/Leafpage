@@ -50,7 +50,7 @@ public class SignupController implements Controller {
         PrintWriter out = response.getWriter();
         Map<String, Object> jsonResponse = new HashMap<>();
 
-        if (userId == null || userPassword == null  || userEmail == null || userTel == null
+        if (userId == null || userPassword == null || userEmail == null || userTel == null
                 || userSecurityQuestion == null || userSecurityAnswer == null) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "비정상적인 접근입니다.");
             return "signupView.do";
@@ -66,7 +66,6 @@ public class SignupController implements Controller {
         } else if (isDuplicatedEmail(userEmail)) {
             jsonResponse.put("duplicateEmailError", "이미 가입된 이메일이 있습니다.");
         } else {
-            userDTO.setUserNo(0);
             userDTO.setUserId(userId);
             userDTO.setUserPassword(userPassword);
             userDTO.setUserEmail(userEmail);
@@ -76,7 +75,6 @@ public class SignupController implements Controller {
             userDTO.setUserSecurityQuestion(userSecurityQuestion);
             userDTO.setUserSecurityAnswer(userSecurityAnswer);
             userDTO.setUserEmailHash(SHA256.getSHA256(userEmail));
-            userDTO.setUserEmailChecked(false);
 
             int result = userDAO.signup(userDTO);
             if (result == -1) {
@@ -94,15 +92,17 @@ public class SignupController implements Controller {
         out.print(json);
         out.close();
         System.out.println(json);
-        return null;
+        return "none";
     }
 
     private boolean isDuplicateId(String userId) {
         return new UserDAO().findUserById(userId) == 1;
     }
+
     private boolean isDuplicatedTel(String userTel) {
         return new UserDAO().findUserByEmail(userTel) == 1;
     }
+
     private boolean isDuplicatedEmail(String userEmail) {
         return new UserDAO().findUserByEmail(userEmail) == 1;
     }

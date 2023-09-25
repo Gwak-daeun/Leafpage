@@ -20,10 +20,10 @@ public class AdminUserListController implements Controller {
         int amount = 10;
 
         // 페이지번호를 클릭하는 경우
-        if(request.getParameter("pageNum") != null) {
+        if (request.getParameter("pageNum") != null) {
             pageNum = Integer.parseInt(request.getParameter("pageNum"));
         }
-        UserDAO dao =new UserDAO();
+        UserDAO dao = new UserDAO();
 
         List<UserDTO> userList = dao.userrentelList(pageNum, amount);
         int total = dao.getTotal();
@@ -37,7 +37,7 @@ public class AdminUserListController implements Controller {
 
         request.setAttribute("pageDTO", pageDTO);
 
-        request.setAttribute("userList" ,userList);
+        request.setAttribute("userList", userList);
 
 
         return "admin/admin-usermanagementrentallist";

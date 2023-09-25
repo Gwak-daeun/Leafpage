@@ -24,7 +24,7 @@ public class Email {
             throw new IllegalArgumentException("이메일을 입력하지 않았습니다.");
         }
         if (isInValidEmailMINLength(userEmail)) {
-            throw new IllegalArgumentException("이메일은 "+MIN_EMAIL_LENGTH+"자 이상입니다.");
+            throw new IllegalArgumentException("이메일은 " + MIN_EMAIL_LENGTH + "자 이상입니다.");
         }
         if (isInValidEmailMAXLength(userEmail)) {
             throw new IllegalArgumentException("이메일이 너무 깁니다. 다른 이메일을 입력해주세요.");

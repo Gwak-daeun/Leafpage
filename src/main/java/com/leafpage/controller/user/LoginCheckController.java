@@ -30,10 +30,10 @@ public class LoginCheckController implements Controller {
                 PrintWriter out = response.getWriter();
                 out.print(result);
                 out.close();
-            } catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return null;
+        return "none";
     }
 }

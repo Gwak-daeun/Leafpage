@@ -52,6 +52,11 @@ body {
     margin-right: 5px;
 }
 
+.checkText {
+    margin-top:20px;
+    color: #FF7C7C;
+    font-size: 15px;
+}
 
 
 .navbar{
