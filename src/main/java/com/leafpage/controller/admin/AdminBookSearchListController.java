@@ -39,7 +39,7 @@ public class AdminBookSearchListController implements Controller {
         }
 
 
-        BookDAO dao = new BookDAO();
+        BookDAO dao = BookDAO.getInstance();
         // 전체게시글수
         List<BookDTO> bookList = dao.booksearchlist(pageNum, amount, keyword);
         int total = dao.getsearchTotal(keyword);

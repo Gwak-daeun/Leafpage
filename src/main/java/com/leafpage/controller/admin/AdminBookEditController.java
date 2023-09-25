@@ -19,7 +19,7 @@ public class AdminBookEditController implements Controller {
         System.out.println("나여기");
 
 
-        BookDAO dao = new BookDAO();
+        BookDAO dao = BookDAO.getInstance();
 
         request.setCharacterEncoding("UTF-8");
         String ISBN = null;
@@ -34,7 +34,7 @@ public class AdminBookEditController implements Controller {
         String bookimg = null;
 
 
-        String savePath = "C:\\Users\\user\\Desktop\\beanstalk\\Leafpage\\src\\main\\webapp\\image";
+        String savePath = "/usr/local/tomcat/webapps/ROOT/image";
         String dbPath = "\\image";
 
         int sizeLimit = 1024 * 1024 * 15;
@@ -79,19 +79,9 @@ public class AdminBookEditController implements Controller {
             bookcontent = multi.getParameter("bookcontent");
         }
 
-       /* System.out.println(ISBN);
-        System.out.println(bookname);
-        System.out.println(auther);
-        System.out.println(publisher);
-        System.out.println(pubdate);
-        System.out.println(categories);
-        System.out.println(bookinfo);
-        System.out.println(bookchapter);
-        System.out.println(bookcontent);
-        System.out.println(bookimgFullPath);*/
         List<String> categorieslist = new ArrayList<>();
 
-
+        categories = categories.replace("[", "").replace("]", "");
         String[] categorie = categories.split(",");
         for (int i = 0; i < categorie.length; i++) {
             categorie[i] = categorie[i].trim();

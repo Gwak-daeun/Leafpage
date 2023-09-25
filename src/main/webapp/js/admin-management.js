@@ -28,27 +28,6 @@ function changeTabMenu() {
 }
 
 
-/*
-function showModal(ISBN) {
-    $.ajax({
-    type : 'get', // 타입 (get, post, put 등등)
-    url : 'getBook.do', // 요청할 서버url
-    async : true, // 비동기화 여부 (default : true)
-    dataType : 'text', // 데이터 타입 (html, xml, json, text 등등)
-    data : { // 보낼 데이터 (Object , String, Array)
-    "ISBN" : ISBN
-  },
-    success : function(result) { // 결과 성공 콜백함수
-      console.log(result)
-      $("#editModal").html(result);
-  },
-    error : function(request, status, error) { // 결과 에러 콜백함수
-    console.log(error)
-  }
-  })
-}*/
-
-
 
 function modalOn(ISBN) {
 
@@ -79,15 +58,17 @@ function closeModal() {
   $("#background_modal").css("display","none");
 }
 
-function confirmAndSubmit() {
-  var userStateSelect = document.getElementById("userStateSelect");
+function confirmAndSubmit(event) {
+  var userStateSelect = event.target.querySelector(".select-user-state-modify");
   var selectedValue = userStateSelect.value;
 
   if (selectedValue === 'black') {
     var confirmed = window.confirm('정말로 이 유저를 블랙 처리 하시겠습니까?');
     if (!confirmed) {
-      return false; // 확인하지 않으면 폼 제출을 중지
+      event.preventDefault(); // 폼 제출을 중지
+      return false;
     }
   }
   return true; // 폼 제출 계속
 }
+

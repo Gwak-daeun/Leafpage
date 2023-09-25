@@ -13,9 +13,15 @@
 <div class="main container-fluid">
     <h3>LeafPage</h3>
     <form name="login_form" method="post" action="login.do">
-        <input class="idInput" name="userId" id="loginUserId" type="text" placeholder="ID">
+        <div class="idInput">
+            <img style="height: 25px; width: 25px; margin-left: 8px; margin-bottom: 5px;" src="../../css/icons/account_circle.png">
+            <input class="inputBox" name="userId" id="loginUserId" type="text" placeholder="ID">
+        </div>
 
-        <input class="pwInput" name="userPassword" id="loginUserPassword" type="password" placeholder="Password">
+        <div class="pwInput">
+            <img style="height: 20px; width: 18px; margin-left: 12px; margin-bottom: 5px; margin-right: 3px;" src="../../css/icons/lock.png">
+            <input class="inputBox" name="userPassword" id="loginUserPassword" type="password" placeholder="Password">
+        </div>
         <a class="findid" href="findIdView.do">아이디 찾기</a> <p>|</p> <a class="findpw" href="findPwView.do">비밀번호 찾기</a>
         <div>
             <span class='login_check checkText'></span>

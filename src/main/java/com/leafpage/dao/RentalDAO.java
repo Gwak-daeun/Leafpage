@@ -9,6 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 public class RentalDAO {
@@ -34,9 +37,20 @@ public class RentalDAO {
                     "WHERE USER_NO = ? AND RENTAL_NO = ? AND ACTUAL_RETURN_DATE IS NULL";
     private static final String UPDATE_RENTAL =
             "UPDATE book_rental SET ACTUAL_RETURN_DATE = CURRENT_DATE WHERE USER_NO = ? AND RENTAL_NO = ?";
+    private static RentalDAO instance;
+
     private Connection connection = null;
     private PreparedStatement statement = null;
     private ResultSet resultSet = null;
+
+    private RentalDAO() {}
+
+    public static synchronized RentalDAO getInstance() {
+        if (instance == null) {
+            instance = new RentalDAO();
+        }
+        return instance;
+    }
 
     public void rentBook(RentalDTO dto) {
         try {
@@ -172,5 +186,19 @@ public class RentalDAO {
             log.error("{}", ex.getMessage());
             throw new RollbackException(className, methodName);
         }
+    }
+
+    public List<String> returnOverdueBooks(Long userNo) {
+
+        List<String> returnedBooksISBN = new ArrayList<>();
+
+        List<RentalDTO> overdueBooks = BookDAO.getInstance().findOverdueBooks(userNo);
+
+        for (RentalDTO overdueBook : overdueBooks) {
+            returnBook(overdueBook);
+            returnedBooksISBN.add(overdueBook.getIsbn());
+        }
+
+        return returnedBooksISBN;
     }
 }

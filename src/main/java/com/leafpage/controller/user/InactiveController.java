@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 public class InactiveController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        UserDAO userDAO = new UserDAO();
+        UserDAO userDAO = UserDAO.getInstance();
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
 

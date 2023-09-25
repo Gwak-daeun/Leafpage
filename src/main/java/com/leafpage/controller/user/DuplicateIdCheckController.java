@@ -16,7 +16,7 @@ public class DuplicateIdCheckController implements Controller {
         if (request.getParameter("signupUserId") != null) {
             try {
                 String userId = request.getParameter("signupUserId");
-                int isDuplicate = new UserDAO().findUserById(userId);
+                int isDuplicate = UserDAO.getInstance().findUserById(userId);
                 System.out.println(isDuplicate);
                 PrintWriter out = response.getWriter();
                 out.print(isDuplicate);

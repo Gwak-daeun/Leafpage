@@ -27,7 +27,7 @@ public class AdminBookListController implements Controller {
             pageNum = Integer.parseInt(request.getParameter("pageNum"));
         }
 
-        BookDAO dao = new BookDAO();
+        BookDAO dao = BookDAO.getInstance();
         // 전체게시글수
         List<BookDTO> bookList = dao.booklist(pageNum, amount);
         int total = dao.getTotal();

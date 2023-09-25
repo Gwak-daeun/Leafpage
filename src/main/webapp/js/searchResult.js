@@ -56,7 +56,7 @@ function loadMoreData() {
                 const $dataList = $('#searchResultUl');
                 data.books.forEach(item => {
                     $dataList.append(` <li>
-                            <a href="/detailPageView.do?isbn=${item.ISBN}">
+                            <a href="/detailPageView.do?isbn=${item.isbn}">
                                 <div class="book-list">
                                     <img class="book-cover" src="${item.bookImg}" />
                                     <div class="book-title">${item.bookName}</div>

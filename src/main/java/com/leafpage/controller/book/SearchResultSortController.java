@@ -46,7 +46,7 @@ public class SearchResultSortController implements Controller {
 
         log.debug("CHECK SEARCH RESULT PAGE : {} " + page);
 
-        List<BookDTO> books = new BookDAO().sortBooks(sortWord, searchSelect, searchKeyword, genre, pageNum);
+        List<BookDTO> books = BookDAO.getInstance().sortBooks(sortWord, searchSelect, searchKeyword, genre, pageNum);
 
         request.setAttribute("page", pageNum + 12);
 
