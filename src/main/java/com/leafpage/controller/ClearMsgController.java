@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class ClearMsgController implements Controller{
+public class ClearMsgController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
@@ -15,6 +15,6 @@ public class ClearMsgController implements Controller{
         PrintWriter out = response.getWriter();
         out.print("success");
         out.close();
-        return null;
+        return "none";
     }
 }

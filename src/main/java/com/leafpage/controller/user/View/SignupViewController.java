@@ -12,9 +12,9 @@ public class SignupViewController implements Controller {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
-        if(session.getAttribute("userId") != null) {
+        if (session.getAttribute("userId") != null) {
             session.setAttribute("msg", "이미 로그인 상태입니다.");
-            return "index";
+            response.sendRedirect("indexInfo.do");
         }
 
         System.out.println("회원가입 화면으로 이동");

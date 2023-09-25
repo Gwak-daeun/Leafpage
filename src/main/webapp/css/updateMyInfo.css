@@ -90,8 +90,16 @@ body {
 
 .my-info-form .redtext {
     color: #FF7C7C;
-    font-size: 12px;
+    font-size: 13px;
     margin:0;
+}
+
+.checkText {
+    margin-top: 5px;
+    margin-bottom: 7px;
+    color: #FF7C7C;
+    font-size: 10px;
+    line-height: 8px;
 }
 
 .my-info-form .btn-flex-group {
@@ -109,25 +117,34 @@ body {
     line-height: 15px;
 }
 
+.my-info-form .bottom-btn {
+    display: flex;
+}
+
 .my-info-form form button:nth-child(1) {
     margin-right: auto;
     width: 100px;
     height: 40px;
 }
 
-.my-info-form button:nth-child(1) {
-    margin-right: auto;
+.my-info-form .bottom-btn button:nth-child(1) {
     width: 100px;
     height: 40px;
+    margin-right: 10px;
 }
-
-.my-info-form button:nth-child(2) {
-    margin-left: auto;
-    width: 100px;
+.my-info-form .bottom-btn button:nth-child(2) {
+    margin-right: auto;
+    height: 40px;
+}
+.my-info-form .bottom-btn button:nth-child(3) {
     height: 40px;
 }
 
 @media (max-width: 458px) {
+    .my-info-form label {
+        font-size: 13px;
+    }
+
     .my-info-form {
         width: 80%;
     }
@@ -135,18 +152,22 @@ body {
         height: 35px;
     }
 
-    .my-info-form .btn-flex-group button {
+    .my-info-form button {
         height: 35px;
         font-size: 13px;
-        line-height: 13px;
+        line-height: 15px;
     }
+
     .my-info-form h4 {
         font-size: 20px;
     }
     .my-info-form input::placeholder {
         font-size: 12px;
     }
-    .container-fluid span button {
-        font-size: 12px;
+
+    .my-info-form .checkPasswordText {
+        margin-top:40px;
+        color: #FF7C7C;
+        font-size: 15px;
     }
 }

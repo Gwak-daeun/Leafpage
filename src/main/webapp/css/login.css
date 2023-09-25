@@ -129,6 +129,12 @@
 
     }
 
+    .checkText {
+        margin-top:50px;
+        color: #FF7C7C;
+        font-size: 13px;
+    }
+
     @media (max-width: 458px) {
         .main{
             width: 300px;

@@ -10,13 +10,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBUtil {
-    private static DataSource DATA_SOURCE;
+    private static final DataSource DATA_SOURCE;
 
     static {
         Context init = null;
         try {
             init = new InitialContext();
-            DATA_SOURCE = (DataSource)init.lookup("java:comp/env/jdbc/mysql");
+            DATA_SOURCE = (DataSource) init.lookup("java:comp/env/jdbc/mysql");
 
         } catch (NamingException e) {
             throw new IllegalArgumentException("데이터베이스를 찾을 수 없습니다.");

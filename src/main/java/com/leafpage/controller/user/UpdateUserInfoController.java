@@ -46,10 +46,10 @@ public class UpdateUserInfoController implements Controller {
             String newUserTel = telForUpdate.getUserTel();
             String newUserEmail = emailForUpdate.getUserEmail();
 
-            if(!newUserTel.equals(currentTel) && isDuplicatedTel(newUserTel)) {
+            if (!newUserTel.equals(currentTel) && isDuplicatedTel(newUserTel)) {
                 System.out.println("이미 가입된 전화번호가 있습니다.");
                 jsonResponse.put("duplicateTelError", "이미 가입된 전화번호가 있습니다.");
-            } else if(!newUserEmail.equals(currentEmail) && isDuplicatedEmail(newUserEmail)) {
+            } else if (!newUserEmail.equals(currentEmail) && isDuplicatedEmail(newUserEmail)) {
                 System.out.println("이미 가입된 이메일이 있습니다.");
                 jsonResponse.put("duplicateEmailError", "이미 가입된 이메일이 있습니다.");
             } else {
@@ -66,7 +66,7 @@ public class UpdateUserInfoController implements Controller {
                     jsonResponse.put("passwordError", "비밀번호가 틀렸습니다.");
                 }
             }
-        }else {
+        } else {
             System.out.println("값이 오지 않았음");
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "알 수 없는 오류가 발생했습니다.");
         }
@@ -76,7 +76,7 @@ public class UpdateUserInfoController implements Controller {
         out.print(json);
         out.close();
         System.out.println(json);
-        return null;
+        return "none";
     }
 
     private boolean isDuplicatedTel(String userTel) {

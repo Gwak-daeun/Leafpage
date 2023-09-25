@@ -13,15 +13,15 @@ public class AdminBookDetailController implements Controller {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String ISBN = request.getParameter("ISBN");
         BookDAO dao = new BookDAO();
-        if(ISBN==null){
+        if (ISBN == null) {
             BookDTO book = dao.detailBook(ISBN);
             System.out.println(book.getBookImgFullPath());
-            request.setAttribute("book" ,book);
+            request.setAttribute("book", book);
             return "admin/bookmodal";
-        }else{
+        } else {
             BookDTO book = dao.detailBook(ISBN);
             System.out.println(book.getBookImgFullPath());
-            request.setAttribute("book" ,book);
+            request.setAttribute("book", book);
 
             return "admin/bookmodaledit";
         }

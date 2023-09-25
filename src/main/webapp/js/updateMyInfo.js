@@ -15,22 +15,22 @@ function updateMyInfo() {
     }
     if(current_user_tel.val() !== currentTel) {
         if (current_user_tel.val() === "") {
-            checkSpan_for_tel_update.html('휴대전화번호를 입력하세요.');
+            checkSpan_for_tel_update.text('※휴대전화번호를 입력하세요.');
             current_user_tel.focus();
             return false;
         } else if (!phoneCheckRule.test(current_user_tel.val())) {
-            checkSpan_for_tel_update.html('휴대전화번호가 올바르지 않습니다.');
+            checkSpan_for_tel_update.text('※휴대전화번호가 올바르지 않습니다.');
             current_user_tel.focus();
             return false;
         }
     }
     if(current_user_email.val() !== currentEmail) {
         if(current_user_email.val() === "") {
-            checkSpan_for_email_update.html('이메일을 입력하세요.');
+            checkSpan_for_email_update.text('※이메일을 입력하세요.');
             current_user_email.focus();
             return false;
         } else if (!emailCheckRule.test(current_user_email.val())) {
-            checkSpan_for_email_update.html('이메일이 올바르지 않습니다.');
+            checkSpan_for_email_update.text('※이메일이 올바르지 않습니다.');
             current_user_email.focus();
             return false;
         }
@@ -41,15 +41,15 @@ function updateMyInfo() {
         console.log(password_for_update.val());
         updateFormSubmit(current_user_tel.val(), current_user_email.val(), password_for_update.val());
     } else {
-        checkSpan_password_for_update.html("현재 비밀번호를 입력해주세요.");
+        checkSpan_password_for_update.text("※현재 비밀번호를 입력해주세요.");
     }
 
 }
 
 function updateFormSubmit(userTel, userEmail, userPassword) {
-    checkSpan_for_tel_update.html("");
-    checkSpan_for_email_update.html("");
-    checkSpan_password_for_update.html("");
+    checkSpan_for_tel_update.text("");
+    checkSpan_for_email_update.text("");
+    checkSpan_password_for_update.text("");
     $.ajax({
         url: 'updateUserInfo.do',
         type: 'POST',
@@ -63,20 +63,19 @@ function updateFormSubmit(userTel, userEmail, userPassword) {
         success: function(data) {
             let responseMsg = JSON.parse(data);
             if (responseMsg.duplicateTelError != null) {
-                checkSpan_for_tel_update.html(responseMsg.duplicateTelError);
+                checkSpan_for_tel_update.text("※"+responseMsg.duplicateTelError);
                 return false;
             }
             if (responseMsg.duplicateEmailError != null) {
-                checkSpan_for_email_update.html(responseMsg.duplicateEmailError);
+                checkSpan_for_email_update.text("※"+responseMsg.duplicateEmailError);
                 return false;
             }
             if (responseMsg.passwordError != null) {
-                checkSpan_password_for_update.html(responseMsg.passwordError);
+                checkSpan_password_for_update.text("※"+responseMsg.passwordError);
                 return false;
             }
             if (responseMsg.success != null) {
-                // alert("정보변경이 완료되었습니다. 이메일 재인증이 필요합니다.");
-                location.href = "index.jsp";
+                location.href = "emailResendView.do";
             }
         },
         error: function(e){
@@ -101,7 +100,7 @@ function withdrawal() {
         dataType: 'text',
         success: function(data){
             if(data === "0") {
-                checkSpanForWithdrawal.html("입력하신 정보가 맞지 않습니다.");
+                checkSpanForWithdrawal.text("입력하신 정보가 맞지 않습니다.");
             }
             else if(data === "1") {
                 location.href = "index.jsp";

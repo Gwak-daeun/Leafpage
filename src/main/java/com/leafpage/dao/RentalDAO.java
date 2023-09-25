@@ -9,6 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 public class RentalDAO {
@@ -52,7 +55,8 @@ public class RentalDAO {
 
             connection.commit();
         } catch (SQLException e) {
-            String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
+            String methodName = new Object() {
+            }.getClass().getEnclosingMethod().getName();
             rollback(methodName, e.getMessage());
         } finally {
             DBUtil.close(resultSet, statement, connection);
@@ -81,7 +85,8 @@ public class RentalDAO {
             }
 
         } catch (SQLException e) {
-            String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
+            String methodName = new Object() {
+            }.getClass().getEnclosingMethod().getName();
             rollback(methodName, e.getMessage());
         } finally {
             DBUtil.close(resultSet, statement, connection);
@@ -101,7 +106,8 @@ public class RentalDAO {
 
             result = resultSet.next();
         } catch (SQLException e) {
-            String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
+            String methodName = new Object() {
+            }.getClass().getEnclosingMethod().getName();
             rollback(methodName, e.getMessage());
         } finally {
             DBUtil.close(resultSet, statement, connection);
@@ -121,7 +127,8 @@ public class RentalDAO {
 
             connection.commit();
         } catch (SQLException e) {
-            String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
+            String methodName = new Object() {
+            }.getClass().getEnclosingMethod().getName();
             rollback(methodName, e.getMessage());
         } finally {
             DBUtil.close(resultSet, statement, connection);
@@ -141,7 +148,8 @@ public class RentalDAO {
 
             canReturn = resultSet.next();
         } catch (SQLException e) {
-            String methodName = new Object(){}.getClass().getEnclosingMethod().getName();
+            String methodName = new Object() {
+            }.getClass().getEnclosingMethod().getName();
             rollback(methodName, e.getMessage());
         } finally {
             DBUtil.close(resultSet, statement, connection);
@@ -155,7 +163,8 @@ public class RentalDAO {
     }
 
     private void rollback(String methodName, String errorMessage) {
-        String className = new Object(){}.getClass().getEnclosingClass().getName();
+        String className = new Object() {
+        }.getClass().getEnclosingClass().getName();
 
         try {
             log.error("{}의 {} 실패", className, methodName);
@@ -166,5 +175,19 @@ public class RentalDAO {
             log.error("{}", ex.getMessage());
             throw new RollbackException(className, methodName);
         }
+    }
+
+    public List<String> returnOverdueBooks(int userNo) {
+
+        List<String> returnedBooksISBN = new ArrayList<>();
+
+        List<RentalDTO> overdueBooks = new BookDAO().findOverdueBooks(userNo);
+
+        for (RentalDTO overdueBook : overdueBooks) {
+            returnBook(overdueBook);
+            returnedBooksISBN.add(overdueBook.getIsbn());
+        }
+
+        return returnedBooksISBN;
     }
 }

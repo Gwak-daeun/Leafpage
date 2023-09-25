@@ -4,13 +4,13 @@ import com.leafpage.dto.AdminBookListPageDTO;
 
 public class ListPageUtil {
 
-    public void listpage(AdminBookListPageDTO pageDTO){
+    public void listpage(AdminBookListPageDTO pageDTO) {
         // 1. endPage결정
 //		 ex) 조회하는 페이지 1 -> 끝번호 10
 //		 ex) 조회하는 페이지 9 -> 끝번호 10
 //		 ex) 조회하는 페이지 11 -> 끝번호 20
 //		 공식 = (int)Math.ceil(페이지번호 / 페이지네이션개수) * 페이지네이션개수
-         pageDTO.setEndPage((int) Math.ceil(pageDTO.getPageNum() * 0.1) * 10);
+        pageDTO.setEndPage((int) Math.ceil(pageDTO.getPageNum() * 0.1) * 10);
 
         // 2. startPage결정
         // 공식 = 끝페이지 - 페이지네이션개수 + 1
