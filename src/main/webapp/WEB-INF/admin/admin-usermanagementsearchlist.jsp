@@ -68,7 +68,7 @@
                         <li class="table-value">${user.userState}</li>
                         <li><span class="v-line"></span></li>
                         <li class="table-value">
-                            <form class="form-state" action="/userstatechange.do?userId=${user.userId}" method="post" onsubmit="return confirmAndSubmit();">
+                            <form class="form-state" action="/userstatechange.do?userId=${user.userId}" method="post" onsubmit="return confirmAndSubmit(event);">
                                 <select class="select-user-state-modify" name="state" id="userStateSelect">
                                     <option value="black">블랙</option>
                                     <option value="dormant">휴면</option>
