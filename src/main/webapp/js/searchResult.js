@@ -21,7 +21,7 @@ $(document).ready(function () {
                 return false;
             } else {
                 console.log("스크롤 데이터 요청");
-                curPage += 12;
+                curPage += 10;
                 loadMoreData();
             }
         }
@@ -69,7 +69,7 @@ function loadMoreData() {
 
                 isLoading = false;
 
-                page += 12;
+                page += 10;
             }
 
             $("#spinner").hide();
