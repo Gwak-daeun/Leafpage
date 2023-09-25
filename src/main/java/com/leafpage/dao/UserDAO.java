@@ -16,13 +16,13 @@ public class UserDAO {
     private static UserDAO instance;
     String loginSQL = "SELECT user_password, user_role, user_state FROM users WHERE user_id = ?";
     String signupSQL = "INSERT INTO users VALUES (NULL,?,?,?,?,NOW(),?,?,?,?,?,false)";
-    // no/id/password/email/tel/date/state/role/question/answer/hash/checked
     String findUserByIdSQL = "SELECT user_id FROM users WHERE user_id = ?";
     String findIdByEmailOrTelSQL = "SELECT user_id FROM users WHERE user_email = ? OR user_tel = ?";
     String findPwByEmailOrTelSQL = "SELECT user_security_question, user_security_answer FROM users WHERE (user_email = ? OR user_tel =?) AND (user_id = ?)";
     String findUserByEmailSQL = "SELECT user_email FROM users WHERE user_email = ?";
     String findUserByTelSQL = "SELECT user_tel FROM users WHERE user_tel = ?";
     String getUserEmailSQL = "SELECT user_email FROM users WHERE user_id = ?";
+    String getUserEmailHashSQL = "SELECT user_email_hash FROM users WHERE user_id = ?";
     String getUserTelSQL = "SELECT user_tel FROM users WHERE user_id = ?";
     String getUserEmailCheckedSQL = "SELECT user_email_checked FROM users WHERE user_id = ?";
     String getUserNoSQL = "SELECT user_no FROM users WHERE user_id = ?";
@@ -262,6 +262,26 @@ public class UserDAO {
         return null;  // 데이터베이스 오류
     }
 
+    // 사용자의 ID 값을 받아서 userEmailHash을 반환
+    public String getUserEmailHash(String userId) {
+        try {
+            System.out.println("getUserEmailHash 1: "+userId);
+            conn = DBUtil.getConnection();
+            pstmt = conn.prepareStatement(getUserEmailHashSQL);
+            pstmt.setString(1, userId);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                System.out.println("getUserEmailHash 2: "+rs.getString(1));
+                return rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+        return null;  // 데이터베이스 오류
+    }
+
     //사용자가 현재 Email 인증이 되었는지 확인
     public boolean getUserEmailChecked(String userId) {
         try {
@@ -331,8 +351,8 @@ public class UserDAO {
         return -1;  // 데이터베이스 오류
     }
 
-    //휴면기능
-    public int setUserStateInactive(String userId, String userState) {
+    //상태변경
+    public int setUserState(String userId, String userState) {
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(setUserStateInactiveSQL);

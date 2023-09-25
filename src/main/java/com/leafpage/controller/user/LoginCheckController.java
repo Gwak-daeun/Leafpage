@@ -23,17 +23,20 @@ public class LoginCheckController implements Controller {
         }
 
         if (loginUserId != null && loginUserPassword != null) {
-            try {
-                UserDAO userDAO = UserDAO.getInstance();
-                int result = userDAO.login(loginUserId, loginUserPassword);
-                System.out.println(result);
-                PrintWriter out = response.getWriter();
-                out.print(result);
-                out.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            respondLogin(loginUserId, loginUserPassword, response);
         }
         return "none";
+    }
+
+    private void respondLogin(String loginUserId, String loginUserPassword, HttpServletResponse response) {
+        try {
+            UserDAO userDAO = UserDAO.getInstance();
+            int result = userDAO.login(loginUserId, loginUserPassword);
+            PrintWriter out = response.getWriter();
+            out.print(result);
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

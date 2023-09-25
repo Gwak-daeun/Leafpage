@@ -17,42 +17,53 @@ public class ChangeNewPasswordController implements Controller {
         System.out.println("changeNewPasswordController진입");
         System.out.println("새로운비밀번호:" + request.getParameter("newPassword"));
 
-        int changePasswordSuccess = 0;
         Password newPassword = null;
         if (request.getParameter("newPassword") != null) {
             newPassword = new Password(request.getParameter("newPassword"));
         }
 
-        if (newPassword != null) {
+        handlePasswordChange(newPassword, request);
+        return "findPwView.do";
+    }
+
+    private void handlePasswordChange(Password newPassword, HttpServletRequest request) {
+        if(newPassword != null) {
             HttpSession session = request.getSession();
             String userId = (String) session.getAttribute("userId");
-            if (userId != null) {
-                UserDAO userDAO = UserDAO.getInstance();
-                changePasswordSuccess = userDAO.changeNewPassword(newPassword.getUserPassword(), userId);
-            }
-            if (userId == null) {
-                int passwordChangeAccess = (Integer) session.getAttribute("passwordChangeAccess");
-                String inputIdForNewPw = (String) session.getAttribute("inputIdForNewPw");
-                if (passwordChangeAccess == 1) {
-                    UserDAO userDAO = UserDAO.getInstance();
-                    changePasswordSuccess = userDAO.changeNewPassword(newPassword.getUserPassword(), inputIdForNewPw);
-                    session.removeAttribute("passwordChangeAccess");
-                    session.removeAttribute("inputIdForNewPw");
-                }
-            }
-
-            if (changePasswordSuccess == 1) {
-                System.out.println("비밀번호 변경에 성공하였습니다.");
-                session.setAttribute("msg", "비밀번호 변경에 성공하였습니다.");
-            }
-            if (changePasswordSuccess == 0) {
-                System.out.println("비밀번호 변경에 실패하였습니다.");
-                session.setAttribute("msg", "[Error] 유효하지 않은 접근입니다.");
-            }
+            int changePasswordSuccess = getChangePasswordSuccess(userId, newPassword, session);
+            sendMessage(changePasswordSuccess, session);
         } else {
-            System.out.println("오류가 발생했습니다.");
+            System.out.println("newPassword==null 임");
         }
-        return "findPwView.do";
+    }
+
+    private int getChangePasswordSuccess(String userId, Password newPassword, HttpSession session) {
+        int changePasswordSuccess = 0;
+        UserDAO userDAO = UserDAO.getInstance();
+        if (userId != null) {
+            changePasswordSuccess = userDAO.changeNewPassword(newPassword.getUserPassword(), userId);
+        }
+        if (userId == null) {
+            int passwordChangeAccess = (Integer) session.getAttribute("passwordChangeAccess");
+            String inputIdForNewPw = (String) session.getAttribute("inputIdForNewPw");
+            if (passwordChangeAccess == 1) {
+                changePasswordSuccess = userDAO.changeNewPassword(newPassword.getUserPassword(), inputIdForNewPw);
+                session.removeAttribute("passwordChangeAccess");
+                session.removeAttribute("inputIdForNewPw");
+            }
+        }
+        return changePasswordSuccess;
+    }
+
+    private void sendMessage(int changePasswordSuccess, HttpSession session) {
+        if (changePasswordSuccess == 1) {
+            System.out.println("비밀번호 변경에 성공하였습니다.");
+            session.setAttribute("msg", "비밀번호 변경에 성공하였습니다.");
+        }
+        if (changePasswordSuccess == 0) {
+            System.out.println("비밀번호 변경에 실패하였습니다.");
+            session.setAttribute("msg", "[Error] 유효하지 않은 접근입니다.");
+        }
     }
 }
 

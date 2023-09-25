@@ -18,7 +18,7 @@ public class InactiveController implements Controller {
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
 
-        int userInactive = userDAO.setUserStateInactive(userId, "휴면회원");
+        int userInactive = userDAO.setUserState(userId, "휴면회원");
         if (userInactive == 1) {
             session.invalidate();
             HttpSession newSession = request.getSession();
