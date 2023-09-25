@@ -124,7 +124,7 @@ public class BookDAO {
             conn = DBUtil.getConnection();
             conn.setAutoCommit(false);
 
-            String sql = "INSERT INTO books(ISBN, book_name, book_author_name, book_img, book_info, book_publisher_name, book_pub_date, book_upload_date, book_content, book_chapter, book_views, book_state)values (?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, 0, 0) ";
+            String sql = "INSERT INTO books(ISBN, book_name, book_author_name, book_img, book_info, book_publisher_name, book_pub_date, book_upload_date, book_chapter, book_content, book_views, book_state)values (?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, 0, 0) ";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, dto.getISBN());
             pstmt.setString(2, dto.getBookName());
@@ -242,7 +242,7 @@ public class BookDAO {
             conn = DBUtil.getConnection();
             conn.setAutoCommit(false);
 
-            String sql = "UPDATE books SET  book_name = ?, book_author_name = ?, book_img = ?, book_info = ?, book_publisher_name = ?, book_pub_date = ?, book_content = ?, book_chapter = ? WHERE ISBN = ?";
+            String sql = "UPDATE books SET  book_name = ?, book_author_name = ?, book_img = ?, book_info = ?, book_publisher_name = ?, book_pub_date = ?, book_chapter = ?, book_content = ? WHERE ISBN = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, dto.getBookName());
             pstmt.setString(2, dto.getBookAuthorName());
