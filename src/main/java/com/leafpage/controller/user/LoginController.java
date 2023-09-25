@@ -1,12 +1,15 @@
 package com.leafpage.controller.user;
 
 import com.leafpage.controller.Controller;
+import com.leafpage.dao.BookDAO;
+import com.leafpage.dao.RentalDAO;
 import com.leafpage.dao.UserDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 // 로그인 인증 처리를 담당하는 컨트롤러
 public class LoginController implements Controller {
@@ -95,6 +98,15 @@ public class LoginController implements Controller {
         session.setAttribute("userId", userId);
         session.setAttribute("userEmailChecked", userEmailChecked);
         session.setAttribute("userNo", userNo);
+
+        List<String> returnedBooksISBN = RentalDAO.getInstance().returnOverdueBooks(userNo);
+
+        if (!returnedBooksISBN.isEmpty()) {
+            List<String> returnedBooksName = BookDAO.getInstance().findReturnedBooksName(returnedBooksISBN);
+            session.setAttribute("msg", "로그인 되었습니다. 기한이 지나 도서가 반납되었습니다. \n \n반납된 도서 : " + returnedBooksName);
+        }
+
+
         sendRedirect(response, "indexInfo.do");
     }
 
