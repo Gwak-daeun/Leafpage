@@ -60,7 +60,7 @@ public class ReviewDAO {
             while (rs.next()) {
                 ReviewDTO review = new ReviewDTO();
                 review.setReviewNo(rs.getString("review_no"));
-                review.setUserNo(rs.getString("user_no"));
+                review.setUserNo(rs.getLong("user_no"));
                 review.setISBN(rs.getString("ISBN"));
                 review.setReviewDate(rs.getString("review_date"));
                 review.setReviewContent(rs.getString("review_content"));

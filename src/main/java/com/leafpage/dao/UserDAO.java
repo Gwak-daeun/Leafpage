@@ -270,21 +270,21 @@ public class UserDAO {
     }
 
     //회원번호 가져오기
-    public int getUserNo(String userId) {
+    public Long getUserNo(String userId) {
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(getUserNoSQL);
             pstmt.setString(1, userId);
             rs = pstmt.executeQuery();
             if (rs.next()) {
-                return rs.getInt(1);
+                return rs.getLong(1);
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             DBUtil.close(rs, pstmt, conn);
         }
-        return -1;  // 데이터베이스 오류
+        return -1L;  // 데이터베이스 오류
     }
 
     //특정한 사용자의 Email 인증을 수행
@@ -498,7 +498,7 @@ public class UserDAO {
             pstmt.setString(1, dto.getUserId());
             rs = pstmt.executeQuery();
             if (rs.next()) {
-                dto.setUserNo(rs.getInt("user_no"));
+                dto.setUserNo(rs.getLong("user_no"));
             }
 
 
@@ -524,7 +524,7 @@ public class UserDAO {
             String sql = "DELETE FROM likey WHERE  user_no = ? ";
 
             pstmt = this.conn.prepareStatement(sql);
-            pstmt.setInt(1, dto.getUserNo());
+            pstmt.setLong(1, dto.getUserNo());
             pstmt.executeUpdate();
 
 
@@ -540,7 +540,7 @@ public class UserDAO {
             String sql = "DELETE FROM reviews WHERE  user_no = ?";
 
             pstmt = this.conn.prepareStatement(sql);
-            pstmt.setInt(1, dto.getUserNo());
+            pstmt.setLong(1, dto.getUserNo());
             pstmt.executeUpdate();
 
 
@@ -557,7 +557,7 @@ public class UserDAO {
             String sql = "DELETE FROM book_rental WHERE  user_no = ? ";
 
             pstmt = this.conn.prepareStatement(sql);
-            pstmt.setInt(1, dto.getUserNo());
+            pstmt.setLong(1, dto.getUserNo());
             pstmt.executeUpdate();
 
 
@@ -574,7 +574,7 @@ public class UserDAO {
             String sql = "DELETE FROM users WHERE  user_no = ? ";
 
             pstmt = this.conn.prepareStatement(sql);
-            pstmt.setInt(1, dto.getUserNo());
+            pstmt.setLong(1, dto.getUserNo());
             pstmt.executeUpdate();
 
 

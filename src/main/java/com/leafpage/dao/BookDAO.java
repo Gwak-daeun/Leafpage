@@ -12,7 +12,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -760,7 +759,7 @@ public class BookDAO {
         return false;
     }
 
-    public List<RentalDTO> findOverdueBooks(int userNo) {
+    public List<RentalDTO> findOverdueBooks(Long userNo) {
 
         List<RentalDTO> overdueBooks = new ArrayList<>();
 
@@ -773,7 +772,7 @@ public class BookDAO {
         try {
             conn = DBUtil.getConnection();
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setInt(1, userNo);
+            pstmt.setLong(1, userNo);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {

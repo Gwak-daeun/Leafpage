@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 // 로그인 인증 처리를 담당하는 컨트롤러
@@ -36,7 +35,7 @@ public class LoginController implements Controller {
         UserDAO userDAO = new UserDAO();
         int result = userDAO.login(userId, userPassword);
         boolean userEmailChecked = userDAO.getUserEmailChecked(userId);
-        int userNo = userDAO.getUserNo(userId);
+        Long userNo = userDAO.getUserNo(userId);
 
         switch (result) {
             case -3:   //[-3]데이터베이스 오류

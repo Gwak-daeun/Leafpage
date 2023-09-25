@@ -177,7 +177,7 @@ public class RentalDAO {
         }
     }
 
-    public List<String> returnOverdueBooks(int userNo) {
+    public List<String> returnOverdueBooks(Long userNo) {
 
         List<String> returnedBooksISBN = new ArrayList<>();
 

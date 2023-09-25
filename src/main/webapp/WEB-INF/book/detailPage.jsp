@@ -136,6 +136,7 @@
                                 </div>
                             </li>
                         </c:forEach>
+                        </c:if>
                     </ul>
                 </div>
                 <div class="tab-content">
@@ -229,6 +230,7 @@
     let errorMsg = "${errorMsg}";
     let failed = "${failed}";
     const isbn = "${isbn}";
+    let userNo = "${userNo}";
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js" crossorigin="anonymous"></script>
