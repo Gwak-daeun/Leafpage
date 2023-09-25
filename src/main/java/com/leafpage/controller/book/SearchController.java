@@ -22,7 +22,7 @@ public class SearchController implements Controller {
 
         System.out.println("CHECK KEYWORDS: " + searchSelect + searchKeyword);
 
-        List<BookDTO> books = new BookDAO().searchBooks(searchSelect, searchKeyword, page);
+        List<BookDTO> books = BookDAO.getInstance().searchBooks(searchSelect, searchKeyword, page);
 
         request.setAttribute("books", books);
 

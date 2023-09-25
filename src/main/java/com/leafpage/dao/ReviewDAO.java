@@ -11,10 +11,21 @@ import java.util.List;
 
 public class ReviewDAO {
 
+    private static ReviewDAO instance;
+
     private Connection conn = null;
     private PreparedStatement pstmt = null;
     private ResultSet rs = null;
     String SQL = "";
+
+    private ReviewDAO() {}
+
+    public static synchronized ReviewDAO getInstance() {
+        if (instance == null) {
+            instance = new ReviewDAO();
+        }
+        return instance;
+    }
 
     public int makeReview(Long userNo, String isbn, String reviewDate, String reviewContent, int reviewRating) {
 
@@ -60,7 +71,7 @@ public class ReviewDAO {
             while (rs.next()) {
                 ReviewDTO review = new ReviewDTO();
                 review.setReviewNo(rs.getString("review_no"));
-                review.setUserNo(rs.getString("user_no"));
+                review.setUserNo(rs.getLong("user_no"));
                 review.setISBN(rs.getString("ISBN"));
                 review.setReviewDate(rs.getString("review_date"));
                 review.setReviewContent(rs.getString("review_content"));

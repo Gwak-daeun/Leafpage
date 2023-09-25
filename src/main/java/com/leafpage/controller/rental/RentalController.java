@@ -21,7 +21,7 @@ public class RentalController implements Controller {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         HttpSession session = request.getSession();
-        RentalDAO rentalDAO = new RentalDAO();
+        RentalDAO rentalDAO = RentalDAO.getInstance();
 
         String isbn = request.getParameter("ISBN");
         Long userNo = (Long) session.getAttribute("userNo");

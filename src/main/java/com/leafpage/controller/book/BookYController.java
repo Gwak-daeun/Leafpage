@@ -25,7 +25,7 @@ public class BookYController implements Controller {
 
         int modalWidth = (int) Double.parseDouble(strModalWidth);
 
-        int result = new BookDAO().saveBookScrollY(modalY, modalWidth, rentalNo);
+        int result = BookDAO.getInstance().saveBookScrollY(modalY, modalWidth, rentalNo);
 
         return "mypageInfo.do";
     }

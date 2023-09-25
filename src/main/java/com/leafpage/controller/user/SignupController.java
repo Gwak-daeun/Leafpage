@@ -56,7 +56,7 @@ public class SignupController implements Controller {
             return "signupView.do";
         }
 
-        UserDAO userDAO = new UserDAO();
+        UserDAO userDAO = UserDAO.getInstance();
         UserDTO userDTO = new UserDTO();
 
         if (isDuplicateId(userId)) {
@@ -96,14 +96,14 @@ public class SignupController implements Controller {
     }
 
     private boolean isDuplicateId(String userId) {
-        return new UserDAO().findUserById(userId) == 1;
+        return UserDAO.getInstance().findUserById(userId) == 1;
     }
 
     private boolean isDuplicatedTel(String userTel) {
-        return new UserDAO().findUserByEmail(userTel) == 1;
+        return UserDAO.getInstance().findUserByEmail(userTel) == 1;
     }
 
     private boolean isDuplicatedEmail(String userEmail) {
-        return new UserDAO().findUserByEmail(userEmail) == 1;
+        return UserDAO.getInstance().findUserByEmail(userEmail) == 1;
     }
 }
