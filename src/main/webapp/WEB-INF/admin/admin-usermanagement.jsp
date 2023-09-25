@@ -22,6 +22,12 @@
         <li>
           <a href="/booklistView.do">도서</a>
         </li>
+        <li>
+          <a href="/indexInfo.do">메인페이지</a>
+        </li>
+        <li>
+          <a href="/logout.do">로그아웃</a>
+        </li>
       </ul>
     </aside>
   </aside>
