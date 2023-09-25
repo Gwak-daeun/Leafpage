@@ -28,12 +28,12 @@
                     <option value="작가" class="book-option">작가</option>
                     </select>
                 </span>
-                <span class="search-box">
+                <span >
                     <input type="text" id="search" name="searchKeyword" class="search-input" placeholder="둘러보기" />
                 </span>
                 <span>
                     <button type="submit" style="border: none; background: none; padding: 0; cursor: pointer;">
-                        <img id="searchLens" class="search-lens" style="width: 40px; height: 40px; margin-right: 5px; margin-top: 3px;" src="./css/icons/search.png" />
+                        <img id="searchLens" class="search-lens" src="./css/icons/search.png" />
                     </button>
                 </span>
 

@@ -36,7 +36,7 @@
                     <option value="작가" class="book-option">작가</option>
                 </select>
             </span>
-            <span class="search-box">
+            <span >
                 <input type="text" id="search" name="searchKeyword" value="${searchKeyword}" class="search-input" placeholder="둘러보기" />
             </span>
             <span>

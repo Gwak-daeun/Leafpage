@@ -5,7 +5,7 @@
     <nav class="navbar index-nav">
         <div class="container-fluid">
             <span class="navbar-brand mb-0 h1"><img src="css/icons/nest_eco_leaf.png" onclick="location.href='indexInfo.do'"/> </span>
-            <div>
+            <div class="welconeUser">
                 <c:if test="${userId != null}">
                     <span class="welcome">${userId}님</span>
                     <c:if test="${userEmailChecked != true}">
