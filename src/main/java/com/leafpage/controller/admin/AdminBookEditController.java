@@ -17,7 +17,8 @@ public class AdminBookEditController implements Controller {
 
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         System.out.println("나여기");
-
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
 
         BookDAO dao = BookDAO.getInstance();
 
@@ -88,8 +89,7 @@ public class AdminBookEditController implements Controller {
             if (categorie[i].equals("만화") || categorie[i].equals("생활") || categorie[i].equals("소설") || categorie[i].equals("에세이") || categorie[i].equals("학술논문")) {
                 categorieslist.add(categorie[i]);
             } else {
-                response.setContentType("text/html; charset=UTF-8");
-                PrintWriter out = response.getWriter();
+
                 out.println("<script>");
                 out.println("alert('카테고리는 만화,생활,소설,에세이,학술논문만 있습니다')");
                 out.println("history.back()");
@@ -117,15 +117,13 @@ public class AdminBookEditController implements Controller {
         System.out.println(count);
 
         if (count == 1) {
-            response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = response.getWriter();
+
             out.println("<script>");
             out.println("alert('수정성공')");
             out.println("</script>");
             return "booklistView.do";
         } else {
-            response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = response.getWriter();
+
             out.println("<script>");
             out.println("alert('수정실패')");
             out.println("history.back()");

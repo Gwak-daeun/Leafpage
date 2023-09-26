@@ -28,7 +28,7 @@ public class UserDAO {
     String getUserNoSQL = "SELECT user_no FROM users WHERE user_id = ?";
     String setUserEmailCheckedSQL = "UPDATE users SET user_email_checked = true WHERE user_id = ?";
     String changeNewPasswordSQL = "UPDATE users SET user_password = ? WHERE user_id = ?";
-    String setUserStateWithdrawalSQL = "UPDATE users SET user_state = ?, user_tel = null, user_email = null, user_email_checked = false WHERE user_id = ? AND user_password = ?";
+    String setUserStateWithdrawalSQL = "UPDATE users SET user_state = ?, user_tel = '01000000000', user_email = 'withdrawal@with.drawal', user_email_checked = false WHERE user_id = ? AND user_password = ?";
     String setUserStateInactiveSQL = "UPDATE users SET user_state = ?, user_email_checked = false WHERE user_id = ?";
     String updateUserInfoSQL = "UPDATE users SET user_tel = ?, user_email=?, user_email_checked=false WHERE user_id = ? AND user_password = ?";
     Connection conn = null;
