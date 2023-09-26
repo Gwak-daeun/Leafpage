@@ -21,6 +21,7 @@ $(document).ready(function () {
         alert(failed);
     }
 
+
     //별점 표시
     $('.starRev span').click(function(){
         $(this).parent().children('span').removeClass('on');
@@ -106,7 +107,7 @@ function likeCheck(isbn) {
 
     if (userNo === "") {
         $('#required-login').modal('show');
-    } else if (userEmailChecked) {
+    } else if (userEmailChecked === "false") {
         $('#required-auth').modal('show');
     } else {
         /*웹페이지 열었을 때*/
@@ -136,7 +137,7 @@ function rent(ISBN) {
 
     if (userNo === "") {
         $('#required-login').modal('show');
-    } else if (userEmailChecked) {
+    } else if (userEmailChecked === "false") {
         $('#required-auth').modal('show');
     } else {
         $.ajax({
@@ -168,7 +169,7 @@ function rent(ISBN) {
 function openReview() {
     if (userNo === "") {
         $('#required-login').modal('show');
-    } else if (userEmailChecked) {
+    } else if (userEmailChecked === "false") {
         $('#required-auth').modal('show');
     }
 }
