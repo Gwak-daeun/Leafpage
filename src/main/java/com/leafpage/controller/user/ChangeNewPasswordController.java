@@ -23,7 +23,8 @@ public class ChangeNewPasswordController implements Controller {
         }
 
         handlePasswordChange(newPassword, request);
-        return "findPwView.do";
+        response.sendRedirect("indexInfo.do");
+        return "none";
     }
 
     private void handlePasswordChange(Password newPassword, HttpServletRequest request) {
