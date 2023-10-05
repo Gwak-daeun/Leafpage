@@ -1,7 +1,7 @@
 package com.leafpage.controller.book;
 
 import com.leafpage.controller.Controller;
-import com.leafpage.dao.LeeLikeyDAO;
+import com.leafpage.dao.LikeyDAO;
 import com.leafpage.dto.BookDTO;
 import com.leafpage.dao.BookDAO;
 import com.leafpage.dao.ReviewDAO;
@@ -10,7 +10,6 @@ import com.leafpage.dto.ReviewDTO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.awt.print.Book;
 import java.io.IOException;
 import java.util.List;
 
@@ -37,9 +36,9 @@ public class DetailPageController implements Controller {
 
         List<BookDTO> sameAuthorBooks = bookDAO.findSameAuthorBooks(isbn);
 
-        LeeLikeyDAO leeLikeyDAO = LeeLikeyDAO.getInstance();
-        int checkLike = leeLikeyDAO.checkLike(userNo, isbn);
-        int heartCount = leeLikeyDAO.likeCount(isbn);
+        LikeyDAO likeyDAO = LikeyDAO.getInstance();
+        int checkLike = likeyDAO.checkLike(userNo, isbn);
+        int heartCount = likeyDAO.likeCount(isbn);
         System.out.println("CHECKLIKE" + checkLike);
 
 

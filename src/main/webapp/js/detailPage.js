@@ -112,7 +112,7 @@ function likeCheck(isbn) {
     } else {
         /*웹페이지 열었을 때*/
         $.ajax({
-            url: "LikeHeart.do",
+            url: "likeHeart.do",
             type: 'POST',
             async: true,
             dataType: 'text',
