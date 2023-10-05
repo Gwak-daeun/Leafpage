@@ -89,7 +89,7 @@
 | :---------: | :----: | :------------: | :----: |
 | 책 대여하기 |  post  |  /rentBook.do  | 김동욱 |
 | 책 반납하기 |  post  | /returnBook.do | 김동욱 |
-| 좋아요 기능 |  post  | /LikeHeart.do | 이수민 |
+| 좋아요 기능 |  post  | /likeHeart.do | 이수민 |
 
 ## 영상
 
