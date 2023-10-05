@@ -6,19 +6,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class LeeLikeyDAO {
+public class LikeyDAO {
 
-    private static LeeLikeyDAO instance;
+    private static LikeyDAO instance;
 
     private Connection conn = null;
     PreparedStatement pstmp = null;
     private ResultSet rs = null;
 
-    private LeeLikeyDAO() {}
+    private LikeyDAO() {}
 
-    public static synchronized LeeLikeyDAO getInstance() {
+    public static synchronized LikeyDAO getInstance() {
         if (instance == null) {
-            instance = new LeeLikeyDAO();
+            instance = new LikeyDAO();
         }
         return instance;
     }

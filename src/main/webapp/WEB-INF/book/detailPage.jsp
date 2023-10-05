@@ -17,6 +17,7 @@
 <%@include file="../component/header.jsp" %>
 
 <section>
+<section>
     <c:set var="errorMsg" value="${errorMsg}"/>
     <c:set var="failed" value="${failed}"/>
     <c:set var="isbn" value="${bookDetail.ISBN}"/>
