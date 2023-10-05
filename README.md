@@ -113,6 +113,8 @@ Leafpage는 유저가 전자책을 대여, 반납을 통해 독서활동을 할 
 | :---------: | :----: | :------------: | :----: |
 | 책 대여하기 |  post  |  /rentBook.do  | 김동욱 |
 | 책 반납하기 |  post  | /returnBook.do | 김동욱 |
+| 좋아요 기능 |  post  | /likeHeart.do | 이수민 |
+| 상세페이지 불러오기 |  post  | /detailPageView.do | 이수민 |
 
 ## 영상
 
