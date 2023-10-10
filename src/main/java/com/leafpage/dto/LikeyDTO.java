@@ -5,7 +5,7 @@ import lombok.*;
 
 @Getter
 @Setter
-public class LeeLikeyDTO {
+public class LikeyDTO {
     Long userNo;
     String ISBN;
 }

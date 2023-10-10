@@ -24,7 +24,7 @@ public class HandlerMapping {
         mappings.put("/bookScroll.do", new BookScrollController());
 
         mappings.put("/indexInfo.do", new IndexController());
-        mappings.put("/LikeHeart.do", new LikeHeartController());
+        mappings.put("/likeHeart.do", new LikeHeartController());
         mappings.put("/detailPageView.do", new DetailPageController());
         mappings.put("/clearMsg.do", new ClearMsgController());
 

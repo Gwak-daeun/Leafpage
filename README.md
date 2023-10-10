@@ -1,10 +1,15 @@
 ![image](https://github.com/Beanstalk-mzc/Leafpage/assets/90694560/ebb89e46-5085-4e4a-a66b-7f1685dd2811)
 
-# Leafpage
-
 전자책 대여 서비스
 
+### 주소 : http://cloud.swdev.kr:4006
+
 ## 프로젝트 설명
+
+Leafpage는 유저가 전자책을 대여, 반납을 통해 독서활동을 할 수 있는 서비스 입니다. <br>
+사용자의 usecase를 고려하여 어떻게 하면 이 서비스를 더 편하고 풍부하게 즐길 수 있을지 고려하며 제작하였습니다. <br>
+관리자는 도서와 유저를 관리하며 서비스 운영을 이어갑니다. <br>
+클라우드 애플리케이션 개발자 양성과정에서의 커리큘럼에 맞춰 프로젝트 개발 기술로 Servlet/JSP를 채택하였습니다.
 
 ## 팀원
 
@@ -34,14 +39,21 @@
 
 ### 곽다은
 
-- 도서 뷰어 담당
-- 유저 도서 검색 기능 담당
-- 마이페이지 담당
-  - 도서 자동 반납 기능
-  - 대여 중 및 반납 완료 도서 조회 기능
-- 상세페이지 기능 담당
-  - 리뷰 등록 삭제 기능
-  - 동일 저자 도서 조회 기능
+- 도서 뷰어
+  - 도서 책갈피
+  - 다크모드
+- 마이페이지
+  - 기한 지난 도서 자동 반납
+  - 대여 중 및 반납 완료 도서 조회
+- 도서 상세페이지
+  - 도서 기본 정보 조회
+  - 리뷰 등록/삭제
+  - 동일 저자 도서 조회
+- 검색
+  - 키워드
+  - 항목별, 카테고리별
+  - 인기순, 최신순 정렬
+  - 무한스크롤
 
 ### 송정희
 
@@ -73,30 +85,39 @@
 
 ### 🧑‍💻 USER
 
-|     Description      | Method |            URI            |  담당  |
-| :------------------: | :----: | :-----------------------: | :----: |
-|    회원가입페이지    |  post  |      /signupView.do       | 송정희 |
-|       회원가입       |  post  |        /signup.do         | 송정희 |
-|      ID중복확인      |  post  |   /duplicateIdCheck.do    | 송정희 |
-|     로그인페이지     |  post  |       /loginView.do       | 송정희 |
-|        로그인        |  post  |         /login.do         | 송정희 |
-|     로그인유효성     |  post  |      /loginCheck.do       | 송정희 |
-|   아이디찾기페이지   |  post  |      /findIdView.do       | 송정희 |
-|      아이디찾기      |  post  |        /findId.do         | 송정희 |
-|  비밀번호찾기페이지  |  post  |      /findPwView.do       | 송정희 |
-|     비밀번호찾기     |  post  |        /findPw.do         | 송정희 |
-|   내정보수정페이지   |  post  |   /updateMyInfoView.do    | 송정희 |
-|      내정보수정      |  post  |    /updateUserInfo.do     | 송정희 |
-|     비밀번호변경     |  post  |   /changeNewPassword.do   | 송정희 |
-|       휴면전환       |  post  |       /inactive.do        | 송정희 |
-|       탈퇴신청       |  post  |      /withdrawal.do       | 송정희 |
-|  인증메일전송페이지  |  post  |     /sendEmailView.do     | 송정희 |
-| 인증메일재전송페이지 |  post  |    /emailResendView.do    | 송정희 |
-|     인증메일전송     |  post  |       /sendEmail.do       | 송정희 |
-|      이메일인증      |  post  |      /checkEmail.do       | 송정희 |
-| 이메일인증성공페이지 |  post  | /successEmailCheckView.do | 송정희 |
-| 이메일인증실패페이지 |  post  |  /failEmailCheckView.do   | 송정희 |
-|       로그아웃       |  post  |        /logout.do         | 송정희 |
+|              Description              | Method |            URI            |  담당  |
+| :-----------------------------------: | :----: | :-----------------------: | :----: |
+|            회원가입페이지             |  POST  |      /signupView.do       | 송정희 |
+|               회원가입                |  POST  |        /signup.do         | 송정희 |
+|              ID중복확인               |  POST  |   /duplicateIdCheck.do    | 송정희 |
+|             로그인페이지              |  POST  |       /loginView.do       | 송정희 |
+|                로그인                 |  POST  |         /login.do         | 송정희 |
+|             로그인유효성              |  POST  |      /loginCheck.do       | 송정희 |
+|           아이디찾기페이지            |  POST  |      /findIdView.do       | 송정희 |
+|              아이디찾기               |  POST  |        /findId.do         | 송정희 |
+|          비밀번호찾기페이지           |  POST  |      /findPwView.do       | 송정희 |
+|             비밀번호찾기              |  POST  |        /findPw.do         | 송정희 |
+|           내정보수정페이지            |  POST  |   /updateMyInfoView.do    | 송정희 |
+|              내정보수정               |  POST  |    /updateUserInfo.do     | 송정희 |
+|             비밀번호변경              |  POST  |   /changeNewPassword.do   | 송정희 |
+|               휴면전환                |  POST  |       /inactive.do        | 송정희 |
+|               탈퇴신청                |  POST  |      /withdrawal.do       | 송정희 |
+|          인증메일전송페이지           |  POST  |     /sendEmailView.do     | 송정희 |
+|         인증메일재전송페이지          |  POST  |    /emailResendView.do    | 송정희 |
+|             인증메일전송              |  POST  |       /sendEmail.do       | 송정희 |
+|              이메일인증               |  POST  |      /checkEmail.do       | 송정희 |
+|         이메일인증성공페이지          |  POST  | /successEmailCheckView.do | 송정희 |
+|         이메일인증실패페이지          |  POST  |  /failEmailCheckView.do   | 송정희 |
+|               로그아웃                |  POST  |        /logout.do         | 송정희 |
+|              마이페이지               |  GET   |      /mypageInfo.do       | 곽다은 |
+|                 검색                  |  GET   |        /search.do         | 곽다은 |
+|      메인페이지에서의 검색 결과       |  GET   |     /searchResult.do      | 곽다은 |
+| 검색 결과 페이지에서의 검색/정렬 결과 |  GET   |       /sortBooks.do       | 곽다은 |
+|         검색 결과 무한스크롤          |  GET   |      /bookScroll.do       | 곽다은 |
+|           도서 상세 페이지            |  GET   |    /detailPageView.do     | 곽다은 |
+|           도서 뷰어 책갈피            |  POST  |     /saveUserBookY.do     | 곽다은 |
+|               리뷰 등록               |  POST  |      /makeReview.do       | 곽다은 |
+|               리뷰 삭제               |  POST  |     /removeReview.do      | 곽다은 |
 
 ### 🧑‍🔧 ADMIN
 
@@ -106,10 +127,12 @@
 
 ### 📖 BOOK
 
-| Description | Method |      URI       |  담당  |
-| :---------: | :----: | :------------: | :----: |
-| 책 대여하기 |  post  |  /rentBook.do  | 김동욱 |
-| 책 반납하기 |  post  | /returnBook.do | 김동욱 |
+|     Description     | Method |        URI         |  담당  |
+| :-----------------: | :----: | :----------------: | :----: |
+|     책 대여하기     |  POST  |    /rentBook.do    | 김동욱 |
+|     책 반납하기     |  POST  |   /returnBook.do   | 김동욱 |
+|     좋아요 기능     |  POST  |   /likeHeart.do    | 이수민 |
+| 상세페이지 불러오기 |  POST  | /detailPageView.do | 이수민 |
 
 ## 영상
 
@@ -166,3 +189,7 @@ https://www.notion.so/3-9-14-27-45de0c9d12f449d4bd566cbb97753734
 ## 회의록
 
 https://www.notion.so/d034fdac023f45ddb5e42a12df867251?v=1588f6e7ec0d4319a17e9ae021878c7f&pvs=4
+
+## 요구사항정의서
+
+❗프로젝트 폴더 안의 `기능 요구서.xlsx` 파일 참고
