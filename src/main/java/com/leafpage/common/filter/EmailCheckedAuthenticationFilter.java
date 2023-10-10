@@ -15,14 +15,16 @@ import java.io.IOException;
         "/userlistview.do", "/userlistsignupView.do", "/userstatechange.do", "/LikeHeart.do",
         "/makeReview.do",  "/removeReview.do", "/saveUserBookY.do", "/rentBook.do", "/returnBook.do"
 })
+
 public class EmailCheckedAuthenticationFilter extends HttpFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession();
-        String userId = (String) session.getAttribute("userId");
+
         boolean userEmailChecked = (Boolean) session.getAttribute("userEmailChecked");
+        String userId = (String) session.getAttribute("userId");
 
         System.out.println(userEmailChecked);
 

@@ -1,8 +1,8 @@
 ![image](https://github.com/Beanstalk-mzc/Leafpage/assets/90694560/ebb89e46-5085-4e4a-a66b-7f1685dd2811)
 
-# Leafpage
-
 전자책 대여 서비스
+
+### 주소 : http://cloud.swdev.kr:4006
 
 ## 프로젝트 설명
 
@@ -59,12 +59,12 @@ Leafpage는 유저가 전자책을 대여, 반납을 통해 독서활동을 할 
 
 - 유저 정보 기능 담당
   - 회원가입 기능
+  - ID/PW 찾기 기능
+  - 로그인/로그아웃 기능
   - 이메일 인증 기능
   - 유저 정보 수정 기능
-  - 로그인/로그아웃 기능
-  - ID/PW 찾기 기능
   - 유효성 검사
-- 유스케이스 담당
+- 유저스토리 담당
 - 보안 담당
 
 ### 이수민
@@ -85,17 +85,39 @@ Leafpage는 유저가 전자책을 대여, 반납을 통해 독서활동을 할 
 
 ### 🧑‍💻 USER
 
-|              Description              | Method |        URI         | 담당 |
-| :-----------------------------------: | :----: | :----------------: | :--: |
-|              마이페이지               |  GET   |   /mypageInfo.do   |      |
-|                 검색                  |  GET   |     /search.do     |      |
-|      메인페이지에서의 검색 결과       |  GET   |  /searchResult.do  |      |
-| 검색 결과 페이지에서의 검색/정렬 결과 |  GET   |   /sortBooks.do    |      |
-|         검색 결과 무한스크롤          |  GET   |   /bookScroll.do   |      |
-|           도서 상세 페이지            |  GET   | /detailPageView.do |      |
-|           도서 뷰어 책갈피            | UPDATE | /saveUserBookY.do  |      |
-|               리뷰 등록               |  POST  |   /makeReview.do   |      |
-|               리뷰 삭제               | DELETE |  /removeReview.do  |      |
+|              Description              | Method |            URI            |  담당  |
+| :-----------------------------------: | :----: | :-----------------------: | :----: |
+|            회원가입페이지             |  GET   |      /signupView.do       | 송정희 |
+|               회원가입                |  POST  |        /signup.do         | 송정희 |
+|              ID중복확인               |  POST  |   /duplicateIdCheck.do    | 송정희 |
+|             로그인페이지              |  GET   |       /loginView.do       | 송정희 |
+|                로그인                 |  POST  |         /login.do         | 송정희 |
+|             로그인유효성              |  POST  |      /loginCheck.do       | 송정희 |
+|           아이디찾기페이지            |  GET   |      /findIdView.do       | 송정희 |
+|              아이디찾기               |  POST  |        /findId.do         | 송정희 |
+|          비밀번호찾기페이지           |  GET   |      /findPwView.do       | 송정희 |
+|             비밀번호찾기              |  POST  |        /findPw.do         | 송정희 |
+|           내정보수정페이지            |  GET   |   /updateMyInfoView.do    | 송정희 |
+|              내정보수정               |  POST  |    /updateUserInfo.do     | 송정희 |
+|             비밀번호변경              |  POST  |   /changeNewPassword.do   | 송정희 |
+|               휴면전환                |  POST  |       /inactive.do        | 송정희 |
+|               탈퇴신청                |  POST  |      /withdrawal.do       | 송정희 |
+|          인증메일전송페이지           |  GET   |     /sendEmailView.do     | 송정희 |
+|         인증메일재전송페이지          |  GET   |    /emailResendView.do    | 송정희 |
+|             인증메일전송              |  POST  |       /sendEmail.do       | 송정희 |
+|              이메일인증               |  POST  |      /checkEmail.do       | 송정희 |
+|         이메일인증성공페이지          |  GET   | /successEmailCheckView.do | 송정희 |
+|         이메일인증실패페이지          |  GET   |  /failEmailCheckView.do   | 송정희 |
+|               로그아웃                |  POST  |        /logout.do         | 송정희 |
+|              마이페이지               |  GET   |      /mypageInfo.do       | 곽다은 |
+|                 검색                  |  GET   |        /search.do         | 곽다은 |
+|      메인페이지에서의 검색 결과       |  GET   |     /searchResult.do      | 곽다은 |
+| 검색 결과 페이지에서의 검색/정렬 결과 |  GET   |       /sortBooks.do       | 곽다은 |
+|         검색 결과 무한스크롤          |  GET   |      /bookScroll.do       | 곽다은 |
+|           도서 상세 페이지            |  GET   |    /detailPageView.do     | 곽다은 |
+|           도서 뷰어 책갈피            |  POST  |     /saveUserBookY.do     | 곽다은 |
+|               리뷰 등록               |  POST  |      /makeReview.do       | 곽다은 |
+|               리뷰 삭제               |  POST  |     /removeReview.do      | 곽다은 |
 
 ### 🧑‍🔧 ADMIN
 
@@ -107,10 +129,10 @@ Leafpage는 유저가 전자책을 대여, 반납을 통해 독서활동을 할 
 
 |     Description     | Method |        URI         |  담당  |
 | :-----------------: | :----: | :----------------: | :----: |
-|     책 대여하기     |  post  |    /rentBook.do    | 김동욱 |
-|     책 반납하기     |  post  |   /returnBook.do   | 김동욱 |
-|     좋아요 기능     |  post  |   /likeHeart.do    | 이수민 |
-| 상세페이지 불러오기 |  post  | /detailPageView.do | 이수민 |
+|     책 대여하기     |  POST  |    /rentBook.do    | 김동욱 |
+|     책 반납하기     |  POST  |   /returnBook.do   | 김동욱 |
+|     좋아요 기능     |  POST  |   /likeHeart.do    | 이수민 |
+| 상세페이지 불러오기 |  POST  | /detailPageView.do | 이수민 |
 
 ## 영상
 
@@ -141,14 +163,14 @@ https://clipchamp.com/watch/XMeyWw9ZM48
   <img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white">
   <img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white">
   <br>
-  
+
   <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">
   <img src="https://img.shields.io/badge/maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white">
   <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
   <img src="https://img.shields.io/badge/tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=black">
   <img src="https://img.shields.io/badge/servlet&jsp-007396?style=for-the-badge&logo=java&logoColor=white">
   <br>
-  
+
   <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 </div>
