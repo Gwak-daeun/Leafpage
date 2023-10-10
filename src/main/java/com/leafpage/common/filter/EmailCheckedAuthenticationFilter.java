@@ -8,13 +8,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/withdrawal.do","/mypageInfo.do","/Logout.do","/updateMyInfoView.do","/booklistView.do", "/getBook.do", "/books/edit.do", "/bookupload.do", "/remove.do", "/edit.do", "/adminbooksearch.do", "/adminusersearch.do", "/userlistview.do", "/userlistsignupView.do", "/userstatechange.do" })
+//로그인은 했지만 이메일인증을 하지 않은 경우
+@WebFilter(urlPatterns = {
+        "/booklistView.do", "/getBook.do", "/books/edit.do", "/bookupload.do",
+        "/remove.do", "/edit.do", "/adminbooksearch.do", "/adminusersearch.do",
+        "/userlistview.do", "/userlistsignupView.do", "/userstatechange.do", "/LikeHeart.do",
+        "/makeReview.do",  "/removeReview.do", "/saveUserBookY.do", "/rentBook.do", "/returnBook.do"
+})
+
 public class EmailCheckedAuthenticationFilter extends HttpFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession();
+
         boolean userEmailChecked = (Boolean) session.getAttribute("userEmailChecked");
         String userId = (String) session.getAttribute("userId");
 
@@ -25,7 +33,6 @@ public class EmailCheckedAuthenticationFilter extends HttpFilter implements Filt
             session.setAttribute("msg", "서비스를 이용하시려면 이메일인증을 해주세요.");
             res.sendRedirect("emailResendView.do");
         } else {
-            // 나머지 경우에는 필터 체인 계속 진행
             chain.doFilter(request, response);
         }
     }

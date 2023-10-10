@@ -24,41 +24,41 @@
 
 - 인프라 담당
 - 관리자 기능 담당
-    - 도서 등록 기능
-    - 도서 수정 기능
-    - 도서 조회 기능
-    - 도서 삭제 기능
-    - 유저 조회 기능
-    - 유저 상태변경 기능
-    - 유저 삭제 기능
+  - 도서 등록 기능
+  - 도서 수정 기능
+  - 도서 조회 기능
+  - 도서 삭제 기능
+  - 유저 조회 기능
+  - 유저 상태변경 기능
+  - 유저 삭제 기능
 
 ### 곽다은
 
 - 도서 뷰어 담당
 - 유저 도서 검색 기능 담당
 - 마이페이지 담당
-    - 도서 자동 반납 기능
-    - 대여 중 및 반납 완료 도서 조회 기능
+  - 도서 자동 반납 기능
+  - 대여 중 및 반납 완료 도서 조회 기능
 - 상세페이지 기능 담당
-    - 리뷰 등록 삭제 기능
-    - 동일 저자 도서 조회 기능
+  - 리뷰 등록 삭제 기능
+  - 동일 저자 도서 조회 기능
 
 ### 송정희
 
 - 유저 정보 기능 담당
-    - 회원가입 기능 
-    - ID/PW 찾기 기능
-    - 로그인/로그아웃 기능
-    - 이메일 인증 기능
-    - 유저 정보 수정 기능
-    - 유효성 검사
+  - 회원가입 기능
+  - ID/PW 찾기 기능
+  - 로그인/로그아웃 기능
+  - 이메일 인증 기능
+  - 유저 정보 수정 기능
+  - 유효성 검사
 - 유저스토리 담당
 - 보안 담당
 
 ### 이수민
 
 - 상세페이지 기능 담당
-    - 좋아요 기능 담당
+  - 좋아요 기능 담당
 - 디자인 담당
 
 ## 인프라
@@ -73,30 +73,30 @@
 
 ### 🧑‍💻 USER
 
-| Description | Method |            URI            | 담당  |
-|:-----------:|:------:|:-------------------------:|:---:|
-|   회원가입페이지   |  post  |      /signupView.do       | 송정희 |
-|    회원가입     |  post  |        /signup.do         | 송정희 |
-|   ID중복확인    |  post  |   /duplicateIdCheck.do    | 송정희 |
-|   로그인페이지    |  post  |       /loginView.do       | 송정희 |
-|     로그인     |  post  |         /login.do         | 송정희 |
-|   로그인유효성    |  post  |      /loginCheck.do       | 송정희 |
-|  아이디찾기페이지   |  post  |      /findIdView.do       | 송정희 |
-|    아이디찾기    |  post  |        /findId.do         | 송정희 |
+|     Description      | Method |            URI            |  담당  |
+| :------------------: | :----: | :-----------------------: | :----: |
+|    회원가입페이지    |  post  |      /signupView.do       | 송정희 |
+|       회원가입       |  post  |        /signup.do         | 송정희 |
+|      ID중복확인      |  post  |   /duplicateIdCheck.do    | 송정희 |
+|     로그인페이지     |  post  |       /loginView.do       | 송정희 |
+|        로그인        |  post  |         /login.do         | 송정희 |
+|     로그인유효성     |  post  |      /loginCheck.do       | 송정희 |
+|   아이디찾기페이지   |  post  |      /findIdView.do       | 송정희 |
+|      아이디찾기      |  post  |        /findId.do         | 송정희 |
 |  비밀번호찾기페이지  |  post  |      /findPwView.do       | 송정희 |
-|   비밀번호찾기    |  post  |        /findPw.do         | 송정희 |
-|  내정보수정페이지   |  post  |   /updateMyInfoView.do    | 송정희 |
-|    내정보수정    |  post  |    /updateUserInfo.do     | 송정희 |
-|   비밀번호변경    |  post  |   /changeNewPassword.do   | 송정희 |
-|    휴면전환     |  post  |       /inactive.do        | 송정희 |
-|    탈퇴신청     |  post  |      /withdrawal.do       | 송정희 |
+|     비밀번호찾기     |  post  |        /findPw.do         | 송정희 |
+|   내정보수정페이지   |  post  |   /updateMyInfoView.do    | 송정희 |
+|      내정보수정      |  post  |    /updateUserInfo.do     | 송정희 |
+|     비밀번호변경     |  post  |   /changeNewPassword.do   | 송정희 |
+|       휴면전환       |  post  |       /inactive.do        | 송정희 |
+|       탈퇴신청       |  post  |      /withdrawal.do       | 송정희 |
 |  인증메일전송페이지  |  post  |     /sendEmailView.do     | 송정희 |
-| 인증메일재전송페이지  |  post  |    /emailResendView.do    | 송정희 |
-|   인증메일전송    |  post  |       /sendEmail.do       | 송정희 |
-|    이메일인증    |  post  |      /checkEmail.do       | 송정희 |
-| 이메일인증성공페이지  |  post  | /successEmailCheckView.do | 송정희 |
-| 이메일인증실패페이지  |  post  |  /failEmailCheckView.do   | 송정희 |
-|    로그아웃     |  post  |        /logout.do         | 송정희 |
+| 인증메일재전송페이지 |  post  |    /emailResendView.do    | 송정희 |
+|     인증메일전송     |  post  |       /sendEmail.do       | 송정희 |
+|      이메일인증      |  post  |      /checkEmail.do       | 송정희 |
+| 이메일인증성공페이지 |  post  | /successEmailCheckView.do | 송정희 |
+| 이메일인증실패페이지 |  post  |  /failEmailCheckView.do   | 송정희 |
+|       로그아웃       |  post  |        /logout.do         | 송정희 |
 
 ### 🧑‍🔧 ADMIN
 

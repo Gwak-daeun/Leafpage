@@ -8,7 +8,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/withdrawal.do","/mypageInfo.do","/Logout.do","/updateMyInfoView.do","/booklistView.do", "/getBook.do", "/books/edit.do", "/bookupload.do", "/remove.do", "/edit.do", "/adminbooksearch.do", "/adminusersearch.do", "/userlistview.do", "/userlistsignupView.do", "/userstatechange.do" })
+//로그인을 안한 경우
+@WebFilter(urlPatterns = {  "/withdrawal.do", "/mypageInfo.do", "/Logout.do",
+        "/updateMyInfoView.do", "/booklistView.do", "/getBook.do",
+        "/books/edit.do", "/bookupload.do", "/remove.do",
+        "/edit.do", "/adminbooksearch.do", "/adminusersearch.do",
+        "/userlistview.do", "/userlistsignupView.do", "/userstatechange.do",
+        "/removeReview.do", "/makeReview.do", "/LikeHeart.do",
+        "/saveUserBookY.do", "/rentBook.do", "/returnBook.do" })
 public class LoginAuthenticationFilter extends HttpFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -22,7 +29,6 @@ public class LoginAuthenticationFilter extends HttpFilter implements Filter {
             session.setAttribute("msg", "로그인 후 이용하실 수 있습니다.");
             res.sendRedirect("loginView.do");
         } else {
-            // 나머지 경우에는 필터 체인 계속 진행
             chain.doFilter(request, response);
         }
     }

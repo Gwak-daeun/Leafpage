@@ -40,8 +40,8 @@ public class SendEmailController implements Controller {
         }
 
         String to = userDAO.getUserEmail(userId);
-        String host = "http://localhost:8080/";
-//        String host = "http://cloud.swdev.kr:4006/";
+        //String host = "http://localhost:8080/";
+        String host = "http://cloud.swdev.kr:4006/";
         String subject = userId + "님, LeafPage 계정 인증 메일입니다.";
         String content = generateEmailContent(host, to, userId, inactiveUserId);
         boolean isEmailSent = sendEmail("TESTsjh8924@gmail.com", to, subject, content);

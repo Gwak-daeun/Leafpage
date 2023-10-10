@@ -14,6 +14,22 @@ body {
     background-color: #f9f3f0;
 }
 
+.welcome {
+    color:antiquewhite;
+    font-size:15px;
+}
+
+.HTEmail {
+    color:antiquewhite;
+}
+
+.container-fluid{
+    top: 50%;
+    margin-top: -5px;
+    flex-wrap: nowrap;
+}
+
+
 a {
     text-decoration-line: none;
     color: black;
@@ -276,6 +292,7 @@ h5 {
 }
 
 @media (max-width: 800px) {
+
     .mp_container .bottom_content {
         height: 84%;
         padding: 15px;
@@ -306,6 +323,7 @@ h5 {
         align-items: center;
         padding: 0 20px;
         margin-left: unset;
+        margin:auto;
     }
     .mp_container .card {
         width: 150px;
@@ -403,6 +421,11 @@ h5 {
         height: 530px;
     }
 
+    .bookLi {
+        flex-direction: column;
+        align-items: center;
+    }
+
 }
 
 @media (max-width: 550px) {
@@ -414,6 +437,52 @@ h5 {
 }
 
 @media (max-width: 400px) {
+    .container-fluid {
+        width: 390px;
+    }
+    .navbar-brand {
+        margin-right: 10px;
+        display: inline-block;
+        height: 70px;
+    }
+    .navbar {
+        min-width: unset;
+        width: 390px;
+        height: 70px;
+    }
+    .leafIMG {
+        margin-top: 10px;
+        width: 25px;
+        height: 28px;
+    }
+    .welcome {
+        font-size:20px;
+    }
+    .HTEmail {
+        font-size: 12px;
+    }
+    .UserInline {
+        width: 220px;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 3px;
+    }
+    .inlineLog {
+        display: flex;
+        flex-direction: column;
+    }
+    .btn2 .btn1 {
+        height: 30px;
+        width: 75px;
+        font-size: 12px;
+    }
+    .btn2 {
+        margin-bottom: 5px;
+    }
+    button {
+        font-size: 12px;
+    }
+
     .mp_container .bottom_content {
         height: 84%;
         padding: 15px;

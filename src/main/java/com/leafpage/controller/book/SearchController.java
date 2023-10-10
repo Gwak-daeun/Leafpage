@@ -20,8 +20,6 @@ public class SearchController implements Controller {
 
         String page = "0";
 
-        System.out.println("CHECK KEYWORDS: " + searchSelect + searchKeyword);
-
         List<BookDTO> books = BookDAO.getInstance().searchBooks(searchSelect, searchKeyword, page);
 
         request.setAttribute("books", books);
@@ -30,7 +28,7 @@ public class SearchController implements Controller {
 
         request.setAttribute("searchKeyword", searchKeyword);
 
-        request.setAttribute("page", 12);
+        request.setAttribute("page", 10);
 
         return "book/searchResult";
     }

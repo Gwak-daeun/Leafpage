@@ -4,16 +4,18 @@
 <header>
     <nav class="navbar index-nav">
         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1"><img src="css/icons/nest_eco_leaf.png" onclick="location.href='indexInfo.do'"/> </span>
-            <div>
+            <div class="navbar-brand mb-0 h1">
+                <img class="leafIMG" src="css/icons/nest_eco_leaf.png" onclick="location.href='indexInfo.do'"/>
+            </div>
+            <div class="UserInline">
                 <c:if test="${userId != null}">
                     <span class="welcome">${userId}님</span>
                     <c:if test="${userEmailChecked != true}">
-                        <span class="welcome">, 서비스를 이용하려면 <a href="emailResendView.do">이메일 인증</a>을 완료해주셔야 합니다.</span>
+                        <span class="HTEmail"> 서비스를 이용하려면 <a href="emailResendView.do">이메일 인증</a>이 필요합니다.</span>
                     </c:if>
                 </c:if>
             </div>
-            <div>
+            <div class="inlineLog">
                 <c:if test="${userId == null}">
                     <button type="button" class=" btn2 btn-sm" onclick="location.href='signupView.do'">회원가입</button>
                     <a ><button type="button" class=" btn1 btn-sm" onclick="location.href='loginView.do'">로그인</button></a>
