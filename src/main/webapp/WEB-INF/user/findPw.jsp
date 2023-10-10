@@ -36,9 +36,9 @@
     <div class="input-group mb-3">
         <select class="form-select" aria-label="select" id="selectQuestion">
             <option selected>나의 보물 1호는?</option>
-            <option value="1">출생지는 어디인가요?</option>
-            <option value="2">첫 번째 자동차 모델은 무엇인가요?</option>
-            <option value="3">초등학교 이름은 무엇인가요?</option>
+            <option>출생지는 어디인가요?</option>
+            <option>첫 번째 자동차 모델은 무엇인가요?</option>
+            <option>초등학교 이름은 무엇인가요?</option>
         </select>
     </div>
 
@@ -59,7 +59,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-
 <script type="text/javascript" src="../../js/alertMsg.js"></script>
 <script type="text/javascript" src="../../js/select.js"></script>
 <script type="text/javascript" src="../../js/findPw.js"></script>

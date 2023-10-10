@@ -41,6 +41,7 @@ function checkNullPw() {
 }
 
 function findPw(inputIdValue, inputEmailValue, inputTelValue, selectQuestionValue, inputAnswerValue) {
+    let updatePw = $("#update_pw");
     $.ajax({
         url: 'findPw.do',
         type: 'POST',
@@ -58,15 +59,16 @@ function findPw(inputIdValue, inputEmailValue, inputTelValue, selectQuestionValu
             //(0)조회는 되는데 질문,대답이 틀림
             //(-1)조회되지 않는 사용자
             if(passwordChangeAccess === "-1") {
-                updatePw.text("입력하신 정보를 다시 한 번 확인해 주세요.");
+                updatePw.html("입력하신 정보를 다시 한 번 확인해 주세요.");
             }
             else if(passwordChangeAccess === "0") {
-                updatePw.text("인증정보가 일치하지 않습니다.");
+                updatePw.html("인증정보가 일치하지 않습니다.");
             }
             else {
-                updatePw.text("비밀번호 찾기 인증이 성공하였습니다. 이제 새 비밀번호를 설정할 수 있습니다.");
+                updatePw.html("비밀번호 찾기 인증이 성공하였습니다. 이제 새 비밀번호를 설정할 수 있습니다.");
                 updatePw.append(passwordChangeAccess);
             }
+            updatePw.show();
         },
         error: function(e){
             alert("오류가 발생했습니다.");
