@@ -1,7 +1,7 @@
 package com.leafpage.controller.user;
 
 import com.leafpage.controller.Controller;
-import com.leafpage.dao.LeeLikeyDAO;
+import com.leafpage.dao.LikeyDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,20 +21,20 @@ public class LikeHeartController implements Controller {
         String isbn = request.getParameter("isbn");
 
         //2. DB 연동 처리
-        LeeLikeyDAO leeLikeyDAO = LeeLikeyDAO.getInstance();
+        LikeyDAO likeyDAO = LikeyDAO.getInstance();
         PrintWriter out = response.getWriter();
 
-        int checkLike = leeLikeyDAO.checkLike(userNo, isbn);
+        int checkLike = likeyDAO.checkLike(userNo, isbn);
 
         if (checkLike == 1) {
-            int deleteLike = leeLikeyDAO.deleteLike(userNo, isbn);
+            int deleteLike = likeyDAO.deleteLike(userNo, isbn);
             if (deleteLike == 1) {
                 System.out.println("좋아요 삭제");
                 out.print(0);
                 out.close();
             }
         } else {
-            int insertLike = leeLikeyDAO.insertLike(userNo, isbn);
+            int insertLike = likeyDAO.insertLike(userNo, isbn);
             if (insertLike == 1) {
                 System.out.println("좋아요 추가");
                 out.print(1);
@@ -42,7 +42,7 @@ public class LikeHeartController implements Controller {
             }
         }
 
-        int heartCount = leeLikeyDAO.likeCount(isbn);
+        int heartCount = likeyDAO.likeCount(isbn);
 
         //3. 화면 이동
 
