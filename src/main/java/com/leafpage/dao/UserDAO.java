@@ -30,7 +30,7 @@ public class UserDAO {
     String changeNewPasswordSQL = "UPDATE users SET user_password = ? WHERE user_id = ?";
     String setUserStateWithdrawalSQL = "UPDATE users SET user_state = ?, user_tel = '01000000000', user_email = 'withdrawal@with.drawal', user_email_checked = false WHERE user_id = ? AND user_password = ?";
     String setUserStateInactiveSQL = "UPDATE users SET user_state = ?, user_email_checked = false WHERE user_id = ?";
-    String updateUserInfoSQL = "UPDATE users SET user_tel = ?, user_email=?, user_email_checked=false WHERE user_id = ? AND user_password = ?";
+    String updateUserInfoSQL = "UPDATE users SET user_tel = ?, user_email=?, user_email_checked=false, user_email_hash=? WHERE user_id = ? AND user_password = ?";
     Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
@@ -374,8 +374,9 @@ public class UserDAO {
             pstmt = conn.prepareStatement(updateUserInfoSQL);
             pstmt.setString(1, userTel);
             pstmt.setString(2, userEmail);
-            pstmt.setString(3, userId);
-            pstmt.setString(4, userPassword);
+            pstmt.setString(3, SHA256.getSHA256(userEmail));
+            pstmt.setString(4, userId);
+            pstmt.setString(5, userPassword);
             return pstmt.executeUpdate();  //성공하면 1, 실패하면 0
         } catch (Exception e) {
             e.printStackTrace();
@@ -390,7 +391,7 @@ public class UserDAO {
         try {
             conn = DBUtil.getConnection();
             String sql = " select U.user_id, U.user_joining_date, U.user_email, U.user_tel, U.user_state " +
-                    "from (SELECT ROW_NUMBER() OVER (ORDER BY user_joining_date) " +
+                    "from (SELECT ROW_NUMBER() OVER (ORDER BY user_joining_date DESC) " +
                     "AS rn, u.user_id, u.user_joining_date, u.user_email, u.user_tel, u.user_state " +
                     "from users u) U " +
                     "WHERE rn > ? AND rn <= ?;";
