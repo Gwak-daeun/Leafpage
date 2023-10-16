@@ -121,9 +121,21 @@ Leafpage는 유저가 전자책을 대여, 반납을 통해 독서활동을 할 
 
 ### 🧑‍🔧 ADMIN
 
-| Description | Method |    URI     | 담당 |
-| :---------: | :----: | :--------: | :--: |
-|             |        | /search.do |      |
+|    Description     | Method |       URI        | 담당  |
+|:------------------:|:------:|:----------------:|:---:|
+|     관리자 페이지 도서     |  GET   | /booklistView.do | 김경욱 |
+|       도서 등록        |  POST  |  /bookupload.do  | 김경욱 |
+|       도서 수정        |  POST  |  /books/edit.do  | 김경욱 |
+|     도서 상세정보조회      |  GET   |   /getBook.do    | 김경욱 |
+|       도서 삭제        |  POST  |    /remove.do    | 김경욱 |
+|       도서 검색        |  POST  |    /adminbooksearch.do    |   김경욱  |
+|    도서목록 페이지네이션     |  POST  |    /booklistView.do    |  김경욱   |
+|     관리자 페이지 유저     |  GET   |    /userlistview.do    |   김경욱  |
+|       유저 삭제        |  POST  |    /userstatechange.do   |   김경욱  |
+| 유저 상태변경 (블랙,휴면,일반) |  POST  |    /userstatechange.do   |  김경욱   |
+| 유저 최근가입,대여 많은순 정렬  |  GET   |    /userlistsignupView.do   |   김경욱  |
+|    유저목록 페이지네이션     |  POST  |    /userlistview.do     |   김경욱  |
+|        유저검색        |  POST  |    /adminusersearch.do  |  김경욱   |
 
 ### 📖 BOOK
 
