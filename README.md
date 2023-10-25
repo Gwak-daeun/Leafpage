@@ -2,30 +2,30 @@
 
 전자책 대여 서비스
 
-### 주소 : http://cloud.swdev.kr:4006
+## 주소 : http://cloud.swdev.kr:4006
 
-## 프로젝트 설명
+# 프로젝트 설명
 
 Leafpage는 유저가 전자책을 대여, 반납을 통해 독서활동을 할 수 있는 서비스 입니다. <br>
 사용자의 usecase를 고려하여 어떻게 하면 이 서비스를 더 편하고 풍부하게 즐길 수 있을지 고려하며 제작하였습니다. <br>
 관리자는 도서와 유저를 관리하며 서비스 운영을 이어갑니다. <br>
 클라우드 애플리케이션 개발자 양성과정에서의 커리큘럼에 맞춰 프로젝트 개발 기술로 Servlet/JSP를 채택하였습니다.
 
-## 팀원
+# 팀원
 
 |                                            팀장                                            |                                           부팀장                                            |                                            팀원                                            |                                            팀원                                             |                                            팀원                                             |
 | :----------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
 | <img src="https://avatars.githubusercontent.com/u/90694560?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/104562141?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/93602351?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/116622194?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/113010528?v=4" width="150" height="150"/> |
 |                           [김동욱](https://github.com/95Donguk)                            |                         [김경욱](https://github.com/Kyoungwookkim)                          |                          [곽다은](https://github.com/Gwak-daeun)                           |                             [송정희](https://github.com/eeheg)                              |                           [이수민](https://github.com/soomin0019)                           |
 
-## 기능
+# 기능
 
-### 김동욱
+## 김동욱
 
 - 도서 대여 및 반납 담당
 - 개발 총괄
 
-### 김경욱
+## 김경욱
 
 - 인프라 담당
 - 관리자 기능 담당
@@ -37,7 +37,7 @@ Leafpage는 유저가 전자책을 대여, 반납을 통해 독서활동을 할 
   - 유저 상태변경 기능
   - 유저 삭제 기능
 
-### 곽다은
+## 곽다은
 
 - 도서 뷰어
   - 도서 책갈피
@@ -55,7 +55,7 @@ Leafpage는 유저가 전자책을 대여, 반납을 통해 독서활동을 할 
   - 인기순, 최신순 정렬
   - 무한스크롤
 
-### 송정희
+## 송정희
 
 - 유저 정보 기능 담당
   - 회원가입 기능
@@ -67,23 +67,23 @@ Leafpage는 유저가 전자책을 대여, 반납을 통해 독서활동을 할 
 - 유저스토리 담당
 - 보안 담당
 
-### 이수민
+## 이수민
 
 - 상세페이지 기능 담당
   - 좋아요 기능 담당
 - 디자인 담당
 
-## 인프라
+# 인프라
 
 ![infra](https://github.com/Beanstalk-mzc/Leafpage/assets/90694560/517af151-58f9-402e-a24b-8472efdba067)
 
-## ERD
+# ERD
 
 ![ERD](https://github.com/Beanstalk-mzc/Leafpage/assets/90694560/a48a3c4c-a363-442d-a73a-f75de1e0e589)
 
-## API
+# API
 
-### 🧑‍💻 USER
+## 🧑‍💻 USER
 
 |              Description              | Method |            URI            |  담당  |
 | :-----------------------------------: | :----: | :-----------------------: | :----: |
@@ -119,7 +119,7 @@ Leafpage는 유저가 전자책을 대여, 반납을 통해 독서활동을 할 
 |               리뷰 등록               |  POST  |      /makeReview.do       | 곽다은 |
 |               리뷰 삭제               |  POST  |     /removeReview.do      | 곽다은 |
 
-### 🧑‍🔧 ADMIN
+## 🧑‍🔧 ADMIN
 
 |    Description     | Method |       URI        | 담당  |
 |:------------------:|:------:|:----------------:|:---:|
@@ -137,7 +137,7 @@ Leafpage는 유저가 전자책을 대여, 반납을 통해 독서활동을 할 
 |    유저목록 페이지네이션     |  POST  |    /userlistview.do     |   김경욱  |
 |        유저검색        |  POST  |    /adminusersearch.do  |  김경욱   |
 
-### 📖 BOOK
+## 📖 BOOK
 
 |     Description     | Method |        URI         |  담당  |
 | :-----------------: | :----: | :----------------: | :----: |
@@ -146,11 +146,11 @@ Leafpage는 유저가 전자책을 대여, 반납을 통해 독서활동을 할 
 |     좋아요 기능     |  POST  |   /likeHeart.do    | 이수민 |
 | 상세페이지 불러오기 |  POST  | /detailPageView.do | 이수민 |
 
-## 영상
+# 영상
 
 https://clipchamp.com/watch/XMeyWw9ZM48
 
-## 모바일 화면
+# 모바일 화면
 
 ![search](https://github.com/Beanstalk-mzc/Leafpage/assets/90694560/ae85dc63-2511-45b9-96af-5bbd141586ab)
 <br>
@@ -164,7 +164,65 @@ https://clipchamp.com/watch/XMeyWw9ZM48
 ![mypage](https://github.com/Beanstalk-mzc/Leafpage/assets/90694560/f638f3f5-49cf-47e9-851a-8b687bf04858)
 <br>
 
-## 트러블슈팅
+# 트러블 슈팅
+
+---
+
+## 동욱
+
+---
+
+### 문제 정의
+
+DB 스트레스 테스트 진행 중 한 기능에 오류를 찾았습니다.
+
+동일한 유저가 한 책의 `좋아요` 버튼을 계속해서 빠르게 클릭을 하게 되면
+`좋아요` 기능이 제대로 동작하지 않는 것을 발견했습니다.
+
+### 사실 수집
+
+상황
+
+1. 좋아요 버튼은 한 개만 있으며 좋아요 버튼 상태가 🤍라면 `좋아요` 행위를 할 수 있고,
+   버튼 상태가 ❤️라면 `좋아요 취소` 행위를 할 수가 있다.
+2. 한 유저가 `좋아요` 버튼을 계속해서 빠르게 클릭한다
+3. 여러 번 `좋아요` 클릭 한 유저의 행위의 쌓여있는 순서대로 좋아요 데이터가 DB에서 정확하게 반영되지 않음을 확인
+4. 로그를 확인해보니 경쟁상태로 인해 데이터의 일관성을 보장해주지 못했음.
+   - `좋아요 → 좋아요 취소 → 좋아요 → 좋아요 취소` 행위가 빠르게 클릭을 하게 되면 중간에 `좋아요 취소` 요청을 보냈음에도 불구하고 `좋아요 취소` 데이터가 실제 DB에 반영되기 전에 `좋아요` 행위로 `좋아요` 데이터를 DB에 insert 하여 중복된 키 값 오류를 발생됨을 확인했습니다.
+
+### 해결
+
+- DAO를 싱글톤 패턴으로 구현함으로써 메모리 오버헤드를 막고 DAO를 getInstance() 메소드를 Synchronized 로 설정해서 동기화 처리로 수 많은 쿼리 호출을 요청해도 데이터의 일관성을 지켜주도록 해결했습니다.
+  - 기존 코드
+  ```
+    public class LikeyDAO {
+
+    private Connection conn = null;
+    PreparedStatement pstmp = null;
+    private ResultSet rs = null;
+
+  ```
+  - 수정 코드
+  ```
+  public class LikeyDAO {
+
+    private static LikeyDAO instance;
+
+    private Connection conn = null;
+    PreparedStatement pstmp = null;
+    private ResultSet rs = null;
+
+    private LikeyDAO() {}
+
+    public static synchronized LikeyDAO getInstance() {
+        if (instance == null) {
+            instance = new LikeyDAO();
+        }
+        return instance;
+    }
+  ```
+
+---
 
 ## 기술 스택
 
